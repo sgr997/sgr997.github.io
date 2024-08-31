@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>nginx转发请求丢失自定义请求头</title>
+      <link href="/posts/3a71ca1d.html"/>
+      <url>/posts/3a71ca1d.html</url>
+      
+        <content type="html"><![CDATA[<div class="note red flat"><p>问题：使用nginx代理请求时，请求头丢失，导致后端无法获取到请求头。</p></div><p>原配置示例</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">location /mp/ &#123;</span><br><span class="line">    proxy_pass              http://127.0.0.1:8080;</span><br><span class="line">    proxy_set_header        Host                    $http_host;</span><br><span class="line">    proxy_set_header        X-Forwarded-Proto       $scheme;</span><br><span class="line">    proxy_set_header        X-Real-IP               $remote_addr;</span><br><span class="line">    proxy_set_header        X-Forwarded-For         $proxy_add_x_forwarded_for;</span><br><span class="line">    proxy_set_header        mp_token                $http_mp_token;</span><br><span class="line"></span><br><span class="line">    proxy_buffering off;</span><br><span class="line">    proxy_cache off;</span><br><span class="line"></span><br><span class="line">    send_timeout 600;</span><br><span class="line">    proxy_connect_timeout 600;</span><br><span class="line">    proxy_send_timeout 600;</span><br><span class="line">    proxy_read_timeout 600;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="note green flat"><p>先说解决方式，nginx.conf配置文件中http配置块下增加<code>underscores_in_headers on;</code>，因为默认情况下，nginx的配置负载均衡器会删除掉带下划线的请求头</p></div><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">    # 增加这个配置</span><br><span class="line">    underscores_in_headers on;</span><br></pre></td></tr></table></figure><p><a href="https://www.nginx-cn.net/blog/scaling-web-applications-nginx-part-load-balancing/">nginx官方文档说明</a></p><ul><li>原文说明如下</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">First, the load balancer will drop any empty headers it gets. </span><br><span class="line">Headers with underscores are dropped as well. </span><br><span class="line">If your upstream web servers are relying on headers that have underscores in them, they’re not going to get them unless you configure your load balancer with the underscores_in_headers directive to make that available.</span><br></pre></td></tr></table></figure><p>翻译</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">首先，负载均衡器将删除它获得的所有空标头。带有下划线的标题也会被删除。</span><br><span class="line">如果您的上游 Web 服务器依赖于其中包含下划线的标头，则除非您使用underscores_in_headers指令配置负载均衡器以使其可用，否则它们将无法获取它们。</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> nginx </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>QuantumultX在访问指定网站时，运行指定脚本</title>
       <link href="/posts/5dd44277.html"/>
       <url>/posts/5dd44277.html</url>

@@ -1,5 +1,6 @@
-https://blog.goku.top/posts/29609.html
 https://blog.goku.top/posts/20e6247.html
+https://blog.goku.top/posts/29609.html
+https://blog.goku.top/posts/3a71ca1d.html
 https://blog.goku.top/posts/8e4397cb.html
 https://blog.goku.top/posts/5dd44277.html
 https://blog.goku.top/link/index.html
@@ -77,6 +78,7 @@ https://blog.goku.top/tags/%E5%AE%89%E5%8D%93/
 https://blog.goku.top/tags/%E5%BD%B1%E9%9F%B3/
 https://blog.goku.top/tags/%E9%A1%B9%E7%9B%AE/
 https://blog.goku.top/tags/macos/
+https://blog.goku.top/tags/nginx/
 https://blog.goku.top/categories/%E5%8D%9A%E5%AE%A2/
 https://blog.goku.top/categories/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/
 https://blog.goku.top/categories/%E5%A8%B1%E4%B9%90/
@@ -101,3 +103,4 @@ https://blog.goku.top/categories/%E5%B7%A5%E5%85%B7/
 https://blog.goku.top/categories/%E9%A1%B9%E7%9B%AE/
 https://blog.goku.top/categories/macos/
 https://blog.goku.top/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/
+https://blog.goku.top/categories/nginx/
