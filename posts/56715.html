@@ -1,0 +1,748 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>（转载）设计模式二三事 | Pei</title><meta name="keywords" content="设计模式"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="（转载）设计模式二三事"><meta name="application-name" content="（转载）设计模式二三事"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="（转载）设计模式二三事"><meta property="og:url" content="https://blog.goku.top/posts/56715.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="本文是转载文（原作者:美团技术团队），讲解的通俗易懂，故转载至自己博客，方便自己随时学习，已获取原作者授权。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/zj_mt.png"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/zj_mt.png"><meta name="description" content="本文是转载文（原作者:美团技术团队），讲解的通俗易懂，故转载至自己博客，方便自己随时学习，已获取原作者授权。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/56715"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: '（转载）设计模式二三事',
+  postAI: '',
+  pageFillDescription: '引言, 奖励的发放策略, 任务模型的设计, 活动的迭代重构, 结语, 参考资料, 作者简介, 说明引言话说这是在程序员世界里一对师徒的对话老师我最近在写代码时总感觉自己的代码很不优雅有什么办法能优化吗嗯可以考虑通过教材系统学习从注释命名方法和异常等多方面实现整洁代码然而我想说的是我的代码是符合各种编码规范的但是从实现上却总是感觉不够简洁而且总是需要反复修改学生小明叹气道老师看了看小明的代码说我明白了这是系统设计上的缺陷总结就是抽象不够可读性低不够健壮对对对那怎么能迅速提高代码的可读性健壮性扩展性呢小明急不可耐地问道老师敲了敲小明的头不要太浮躁没有什么方法能让你立刻成为系统设计专家但是对于你的问题我想设计模式可以帮到你设计模式小明不解是的老师点了点头世上本没有路走的人多了便变成了路在程序员的世界中本没有设计模式写代码是人多了他们便总结出了一套能提高开发和维护效率的套路这就是设计模式设计模式不是什么教条或者范式它可以说是一种在特定场景下普适且可复用的解决方案是一种可以用于提高代码可读性可扩展性可维护性和可测性的最佳实践哦哦我懂了那我应该如何去学习呢不急接下来我来带你慢慢了解设计模式奖励的发放策略第一天老师问小明你知道活动营销吗这我知道活动营销是指企业通过参与社会关注度高的已有活动或整合有效的资源自主策划大型活动从而迅速提高企业及其品牌的知名度美誉度和影响力常见的比如有抽奖红包等老师点点头是的我们假设现在就要做一个营销需要用户参与一个活动然后完成一系列的任务最后可以得到一些奖励作为回报活动的奖励包含美团外卖酒旅和美食等多种品类券现在需要你帮忙设计一套奖励发放方案因为之前有过类似的开发经验拿到需求的小明二话不说开始了编写起了代码外部服务使用对入参的条件判断进行发奖构建入参小明很快写好了然后发给老师看假如我们即将接入新的打车券这是否意味着你必须要修改这部分代码老师问道小明愣了一愣没等反应过来老师又问假如后面美团外卖的发券接口发生了改变或者替换这段逻辑是否必须要同步进行修改小明陷入了思考之中一时间没法回答经验丰富的老师一针见血地指出了这段设计的问题你这段代码有两个主要问题一是不符合开闭原则可以预见如果后续新增品类券的话需要直接修改主干代码而我们提倡代码应该是对修改封闭的二是不符合迪米特法则发奖逻辑和各个下游接口高度耦合这导致接口的改变将直接影响到代码的组织使得代码的可维护性降低小明恍然大悟那我将各个同下游接口交互的功能抽象成单独的服务封装其参数组装及异常处理使得发奖主逻辑与其解耦是否就能更具备扩展性和可维护性这是个不错的思路之前跟你介绍过设计模式这个案例就可以使用策略模式和适配器模式来优化小明借此机会学习了这两个设计模式首先是策略模式策略模式定义了一系列的算法并将每一个算法封装起来使它们可以相互替换策略模式通常包含以下角色抽象策略类定义了一个公共接口各种不同的算法以不同的方式实现这个接口环境角色使用这个接口调用不同的算法一般使用接口或抽象类实现具体策略类实现了抽象策略定义的接口提供具体的算法实现环境类持有一个策略类的引用最终给客户端调用然后是适配器模式适配器模式将一个类的接口转换成客户希望的另外一个接口使得原本由于接口不兼容而不能一起工作的那些类能一起工作适配器模式包含以下主要角色目标接口当前系统业务所期待的接口它可以是抽象类或接口适配者类它是被访问和适配的现存组件库中的组件接口适配器类它是一个转换器通过继承或引用适配者的对象把适配者接口转换成目标接口让客户按目标接口的格式访问适配者结合优化思路小明首先设计出了策略接口并通过适配器的思想将各个下游接口类适配成策略类策略接口外卖策略构建入参酒旅策略美食策略然后小明创建策略模式的环境类并供奖励服务调用使用分支判断获取的策略上下文优化后的策略服务小明的代码经过优化后虽然结构和设计上比之前要复杂不少但考虑到健壮性和拓展性还是非常值得的看我这次优化后的版本是不是很完美小明洋洋得意地说耦合度确实降低了但还能做的更好怎么做小明有点疑惑我问你策略类是有状态的模型吗如果不是是否可以考虑做成单例的的确如此小明似乎明白了还有一点环境类的获取策略方法职责很明确但是你依然没有做到完全对修改封闭经过老师的点拨小明很快也领悟到了要点那我可以将策略类单例化以减少开销并实现自注册的功能彻底解决分支判断小明列出单例模式的要点单例模式设计模式属于创建型模式它提供了一种创建对象的最佳方式这种模式涉及到一个单一的类该类负责创建自己的对象同时确保只有单个对象被创建这个类提供了一种访问其唯一的对象的方式可以直接访问不需要实例化该类的对象最终小明在策略环境类中使用一个注册表来记录各个策略类的注册信息并提供接口供策略类调用进行注册同时使用饿汉式单例模式去优化策略类的设计策略上下文用于管理策略的注册和获取注册策略获取策略抽象策略类类注册方法单例外卖策略构建入参单例酒旅策略单例美食策略最终小明设计完成的结构类图如下如果使用了框架还可以利用的机制来代替上述的部分设计直接使用和注解即可完成单例的创建和注册代码会更加简洁至此经过了多次讨论反思和优化小明终于得到了一套低耦合高内聚同时符合开闭原则的设计老师我开始学会利用设计模式去解决已发现的问题这次我做得怎么样合格但是依然要戒骄戒躁任务模型的设计之前让你设计奖励发放策略你还记得吗老师忽然问道当然记得一个好的设计模式能让工作事半功倍小明答道嗯那会提到了活动营销的组成部分除了奖励之外貌似还有任务吧小明点了点头老师接着说现在我想让你去完成任务模型的设计你需要重点关注状态的流转变更以及状态变更后的消息通知小明欣然接下了老师给的难题他首先定义了一套任务状态的枚举和行为的枚举任务状态枚举初始化进行中暂停中已完成已过期行为枚举开始暂停完成过期然后小明对开始编写状态变更功能任务的默认状态为初始化活动服务任务管理器使用条件分支进行任务更新任务完成后进对外部服务进行通知在上述的实现中小明在方法中完成了个重要的功能接收不同的行为然后更新当前任务的状态当任务过期时通知任务所属的活动和任务管理器诚然随着小明的系统开发能力和代码质量意识的提升他能够认识到这种功能设计存在缺陷老师我的代码还是和之前说的那样不够优雅哦你自己说说看有什么问题第一方法中使用条件判断来控制语句但是当条件复杂或者状态太多时条件判断语句会过于臃肿可读性差且不具备扩展性维护难度也大且增加新的状态时要添加新的语句这违背了开闭原则不利于程序的扩展老师表示同意小明接着说第二任务类不够高内聚它在通知实现中感知了其他领域或模块的模型如活动和任务管理器这样代码的耦合度太高不利于扩展老师赞赏地说道很好你有意识能够自主发现代码问题所在已经是很大的进步了那这个问题应该怎么去解决呢小明继续发问这个同样可以通过设计模式去优化首先是状态流转的控制可以使用状态模式其次任务完成时的通知可以用到观察者模式收到指示后小明马上去学习了状态模式的结构状态模式对有状态的对象把复杂的判断逻辑提取到不同的状态对象中允许状态对象在其内部状态发生改变时改变其行为状态模式包含以下主要角色环境类角色也称为上下文它定义了客户端需要的接口内部维护一个当前状态并负责具体状态的切换抽象状态角色定义一个接口用以封装环境对象中的特定状态所对应的行为可以有一个或多个行为具体状态角色实现抽象状态所对应的行为并且在需要的情况下进行状态切换根据状态模式的定义小明将枚举类扩展成多个状态类并具备完成状态的流转的能力然后优化了任务类的实现任务状态抽象接口默认实现不做任何处理任务初始状态任务进行状态通知任务暂停状态任务完成状态任务过期状态初始化为初始态更新状态小明欣喜地看到经过状态模式处理后的任务类的耦合度得到降低符合开闭原则状态模式的优点在于符合单一职责原则状态类职责明确有利于程序的扩展但是这样设计的代价是状态类的数目增加了因此状态流转逻辑越复杂需要处理的动作越多越有利于状态模式的应用除此之外状态类的自身对于开闭原则的支持并没有足够好如果状态流转逻辑变化频繁那么可能要慎重使用处理完状态后小明又根据老师的指导使用观察者模式去优化任务完成时的通知观察者模式指多个对象间存在一对多的依赖关系当一个对象的状态发生改变时所有依赖于它的对象都得到通知并被自动更新这种模式有时又称作发布订阅模式模型视图模式它是对象行为型模式观察者模式的主要角色如下抽象主题角色也叫抽象目标类它提供了一个用于保存观察者对象的聚集类和增加删除观察者对象的方法以及通知所有观察者的抽象方法具体主题角色也叫具体目标类它实现抽象目标中的通知方法当具体主题的内部状态发生改变时通知所有注册过的观察者对象抽象观察者角色它是一个抽象类或接口它包含了一个更新自己的抽象方法当接到具体主题的更改通知时被调用具体观察者角色实现抽象观察者中定义的抽象方法以便在得到目标的更改通知时更新自身的状态小明首先设计好抽象目标和抽象观察者然后将活动和任务管理器的接收通知功能定制成具体观察者抽象观察者反应抽象目标增加观察者方法删除观察者方法通知观察者方法活动观察者任务管理观察者最后小明将任务进行状态类优化成使用通用的通知方法并在任务初始态执行状态流转时定义任务进行态所需的观察者任务进行状态通知任务初始状态最终小明设计完成的结构类图如下通过观察者模式小明让任务状态和通知方实现松耦合实际上观察者模式还没能做到完全的解耦如果要做进一步的解耦可以考虑学习并使用发布订阅模式这里也不再赘述至此小明成功使用状态模式设计出了高内聚高扩展性单一职责的任务的整个状态机实现以及做到松耦合的符合依赖倒置原则的任务状态变更通知方式老师我逐渐能意识到代码的设计缺陷并学会利用较为复杂的设计模式做优化不错再接再厉活动的迭代重构小明这次又有一个新的任务老师出现在正在认真阅读设计模式的小明的面前好的刚好我已经学习了设计模式的原理终于可以派上用场了之前你设计开发了活动模型现在我们需要在任务型活动的参与方法上增加一层风险控制借此机会我也想重构一下之前的设计活动模型的特点在于其组成部分较多小明原先的活动模型的构建方式是这样的抽象活动接口活动类的构建部分依赖于活动的的构建完全依赖于活动的参与活动任务型活动参与任务型活动更新任务状态为进行中经过自主分析小明发现活动的构造不够合理主要问题表现在活动的构造组件较多导致可以组合的构造函数太多尤其是在模型增加字段时还需要去修改构造函数部分组件的构造存在一定的顺序关系但是当前的实现没有体现顺序导致构造逻辑比较混乱并且存在部分重复的代码发现问题后小明回忆自己的学习成果马上想到可以使用创建型模式中的建造者模式去做重构建造者模式指将一个复杂对象的构造与它的表示分离使同样的构建过程可以创建不同的表示它是将一个复杂的对象分解为多个简单的对象然后一步一步构建而成它将变与不变相分离即产品的组成部分是不变的但每一部分是可以灵活选择的建造者模式的主要角色如下产品角色它是包含多个组成部件的复杂对象由具体建造者来创建其各个零部件抽象建造者它是一个包含创建产品各个子部件的抽象方法的接口通常还包含一个返回复杂产品的方法具体建造者实现接口完成复杂产品的各个部件的具体创建方法指挥者它调用建造者对象中的部件构造与装配方法完成复杂对象的创建在指挥者中不涉及具体产品的信息根据建造者模式的定义上述活动的每个字段都是一个产品于是小明可以通过在活动里面实现静态的建造者类来简易地实现活动类全参构造函数静态建造器类使用奇异递归模板模式允许继承并返回继承建造器类任务型活动全参构造函数参与任务型活动更新任务状态为进行中继承建造器类小明发现上面的建造器没有使用诸如抽象建造器类等完整的实现但是基本是完成了活动各个组件的建造流程使用建造器的模式下可以先按顺序构建字段然后依次构建其他组件最后使用方法获取建造完成的活动这种设计一方面封装性好构建和表示分离另一方面扩展性好各个具体的建造者相互独立有利于系统的解耦可以说是一次比较有价值的重构在实际的应用中如果字段类型多同时各个字段只需要简单的赋值可以直接引用的注解来实现轻量的建造者重构完活动构建的设计后小明开始对参加活动方法增加风控最简单的方式肯定是直接修改目标方法对目标用户做风险控制失败则抛出异常更新任务状态为进行中但是考虑到最好能尽可能避免对旧方法的直接修改同时为方法增加风控也是一类比较常见的功能新增可能会在多处使用老师风险控制会出现在多种活动的参与方法中吗有这个可能性有的活动需要风险控制有的不需要风控像是在适当的时候对参与这个方法的装饰对了装饰器模式小明马上想到用装饰器模式来完成设计装饰器模式的定义指在不改变现有对象结构的情况下动态地给该对象增加一些职责即增加其额外功能的模式它属于对象结构型模式装饰器模式主要包含以下角色抽象构件角色定义一个抽象接口以规范准备接收附加责任的对象具体构件角色实现抽象构件通过装饰角色为其添加一些职责抽象装饰角色继承抽象构件并包含具体构件的实例可以通过其子类扩展具体构件的功能具体装饰角色实现抽象装饰的相关方法并给具体构件对象添加附加的责任小明使用了装饰器模式后新的代码就变成了这样抽象装饰角色能够对活动做风险控制的包装类对目标用户做风险控制失败则抛出异常更新任务状态为进行中最终小明设计完成的结构类图如下最终小明通过自己的思考分析结合学习的设计模式知识完成了活动模型的重构和迭代老师我已经能做到自主分析功能特点并合理应用设计模式去完成程序设计和代码重构了实在太感谢您了设计模式作为一种软件设计的最佳实践你已经很好地理解并应用于实践了非常不错但学海无涯还需持续精进结语本文以三个实际场景为出发点借助小明和老师两个虚拟的人物试图以一种较为诙谐的对话方式来讲述设计模式的应用场景优点和缺点如果大家想要去系统性地了解设计模式也可以通过市面上很多的教材进行学习都介绍了经典的种设计模式的结构和实现不过很多教材的内容即便配合了大量的示例但有时也会让人感到费解主要原因在于一方面很多案例比较脱离实际的应用场景另一方面部分设计模式显然更适用于大型复杂的结构设计而当其应用到简单的场景时仿佛让代码变得更加繁琐冗余因此本文希望通过这种对话代码展示结构类图的方式以一种更易懂的方式来介绍设计模式当然本文只讲述了部分比较常见的设计模式还有其他的设计模式仍然需要同学们去研读经典著作举一反三学以致用我们也希望通过学习设计模式能让更多的同学在系统设计能力上得到提升参考资料设计模式可复用面向对象软件的基础机械工业出版社弗里曼设计模式中国电力出版社设计模式种设计模式全面解析作者简介嘉凯杨柳来自美团金融服务平台联名卡研发团队说明文章来源于美团技术团队微信公众号转载已获取授权文章原链接戳我看原文',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-13 11:35:48',
+  postMainColor: '#486d8c',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>16</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url">设计模式</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>设计模式</span></a></span></div></div><h1 class="post-title" itemprop="name headline">（转载）设计模式二三事</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2022-03-11T02:09:40.000Z" title="发表于 2022-03-11 10:09:40">2022-03-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-12-13T03:35:48.277Z" title="更新于 2024-12-13 11:35:48">2024-12-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/zj_mt.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/56715.html"><header><a class="post-meta-categories" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url">设计模式</a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" tabindex="-1" itemprop="url">设计模式</a><h1 id="CrawlerTitle" itemprop="name headline">（转载）设计模式二三事</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2022-03-11T02:09:40.000Z" title="发表于 2022-03-11 10:09:40">2022-03-11</time><time itemprop="dateCreated datePublished" datetime="2024-12-13T03:35:48.277Z" title="更新于 2024-12-13 11:35:48">2024-12-13</time></header><h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>话说这是在程序员世界里一对师徒的对话：</p>
+<p>“老师，我最近在写代码时总感觉自己的代码很不优雅，有什么办法能优化吗？”</p>
+<p>“嗯，可以考虑通过教材系统学习，从注释、命名、方法和异常等多方面实现整洁代码。”</p>
+<p>“然而，我想说的是，我的代码是符合各种编码规范的，但是从实现上却总是感觉不够简洁，而且总是需要反复修改！”学生小明叹气道。</p>
+<p>老师看了看小明的代码说：“我明白了，这是系统设计上的缺陷。总结就是抽象不够、可读性低、不够健壮。”</p>
+<p>“对对对，那怎么能迅速提高代码的可读性、健壮性、扩展性呢？”小明急不可耐地问道。</p>
+<p>老师敲了敲小明的头：“不要太浮躁，没有什么方法能让你立刻成为系统设计专家。但是对于你的问题，我想设计模式可以帮到你。”</p>
+<p>“设计模式？”小明不解。</p>
+<p>“是的。”老师点了点头，“世上本没有路，走的人多了，便变成了路。在程序员的世界中，本没有设计模式，写代码是人多了，他们便总结出了一套能提高开发和维护效率的套路，这就是设计模式。设计模式不是什么教条或者范式，它可以说是一种在特定场景下普适且可复用的解决方案，是一种可以用于提高代码可读性、可扩展性、可维护性和可测性的最佳实践。”</p>
+<p>“哦哦，我懂了，那我应该如何去学习呢？”</p>
+<p>“不急，接下来我来带你慢慢了解设计模式。”</p>
+<h1 id="奖励的发放策略"><a href="#奖励的发放策略" class="headerlink" title="奖励的发放策略"></a>奖励的发放策略</h1><p>第一天，老师问小明：“你知道活动营销吗？”</p>
+<p>“这我知道，活动营销是指企业通过参与社会关注度高的已有活动，或整合有效的资源自主策划大型活动，从而迅速提高企业及其品牌的知名度、美誉度和影响力，常见的比如有抽奖、红包等。”</p>
+<p>老师点点头：“是的。我们假设现在就要做一个营销，需要用户参与一个活动，然后完成一系列的任务，最后可以得到一些奖励作为回报。活动的奖励包含美团外卖、酒旅和美食等多种品类券，现在需要你帮忙设计一套奖励发放方案。”</p>
+<p>因为之前有过类似的开发经验，拿到需求的小明二话不说开始了编写起了代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RewardService</span> &#123;</span><br><span class="line">    <span class="comment">// 外部服务</span></span><br><span class="line">    <span class="keyword">private</span> WaimaiService waimaiService;</span><br><span class="line">    <span class="keyword">private</span> HotelService hotelService;</span><br><span class="line">    <span class="keyword">private</span> FoodService foodService;</span><br><span class="line">    <span class="comment">// 使用对入参的条件判断进行发奖</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issueReward</span><span class="params">(String rewardType, Object ... params)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;Waimai&quot;</span>.equals(rewardType)) &#123;</span><br><span class="line">            <span class="type">WaimaiRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WaimaiRequest</span>();</span><br><span class="line">            <span class="comment">// 构建入参</span></span><br><span class="line">            request.setWaimaiReq(params);</span><br><span class="line">            waimaiService.issueWaimai(request);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;Hotel&quot;</span>.equals(rewardType)) &#123;</span><br><span class="line">            <span class="type">HotelRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HotelRequest</span>();</span><br><span class="line">            request.addHotelReq(params);</span><br><span class="line">            hotelService.sendPrize(request);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">&quot;Food&quot;</span>.equals(rewardType)) &#123;</span><br><span class="line">            <span class="type">FoodRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FoodRequest</span>(params);</span><br><span class="line">            foodService.getCoupon(request);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;rewardType error!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小明很快写好了Demo，然后发给老师看。</p>
+<p>“假如我们即将接入新的打车券，这是否意味着你必须要修改这部分代码？”老师问道。</p>
+<p>小明愣了一愣，没等反应过来老师又问：”假如后面美团外卖的发券接口发生了改变或者替换，这段逻辑是否必须要同步进行修改？”</p>
+<p>小明陷入了思考之中，一时间没法回答。</p>
+<p>经验丰富的老师一针见血地指出了这段设计的问题：“你这段代码有两个主要问题，一是不符合<strong>开闭原则</strong>，可以预见，如果后续新增品类券的话，需要直接修改主干代码，而我们提倡代码应该是对修改封闭的；二是不符合<strong>迪米特法则</strong>，发奖逻辑和各个下游接口高度耦合，这导致接口的改变将直接影响到代码的组织，使得代码的可维护性降低。”</p>
+<p>小明恍然大悟：“那我将各个同下游接口交互的功能抽象成单独的服务，封装其参数组装及异常处理，使得发奖主逻辑与其解耦，是否就能更具备扩展性和可维护性？”</p>
+<p>“这是个不错的思路。之前跟你介绍过设计模式，这个案例就可以使用<strong>策略模式</strong>和<strong>适配器模式</strong>来优化。”</p>
+<p>小明借此机会学习了这两个设计模式。首先是策略模式：</p>
+<blockquote>
+<p>策略模式定义了一系列的算法，并将每一个算法封装起来，使它们可以相互替换。策略模式通常包含以下角色：</p>
+<ul>
+<li>抽象策略（Strategy）类：定义了一个公共接口，各种不同的算法以不同的方式实现这个接口，环境角色使用这个接口调用不同的算法，一般使用接口或抽象类实现。</li>
+<li>具体策略（Concrete Strategy）类：实现了抽象策略定义的接口，提供具体的算法实现。</li>
+<li>环境（Context）类：持有一个策略类的引用，最终给客户端调用。</li>
+</ul>
+</blockquote>
+<p>然后是适配器模式：</p>
+<blockquote>
+<p>适配器模式：将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。适配器模式包含以下主要角色：</p>
+<ul>
+<li>目标（Target）接口：当前系统业务所期待的接口，它可以是抽象类或接口。</li>
+<li>适配者（Adaptee）类：它是被访问和适配的现存组件库中的组件接口。</li>
+<li>适配器（Adapter）类：它是一个转换器，通过继承或引用适配者的对象，把适配者接口转换成目标接口，让客户按目标接口的格式访问适配者。</li>
+</ul>
+</blockquote>
+<p>结合优化思路，小明首先设计出了策略接口，并通过适配器的思想将各个下游接口类适配成策略类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 策略接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object ... params)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 外卖策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Waimai</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">   <span class="keyword">private</span> WaimaiService waimaiService;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">WaimaiRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WaimaiRequest</span>();</span><br><span class="line">        <span class="comment">// 构建入参</span></span><br><span class="line">        request.setWaimaiReq(params);</span><br><span class="line">        waimaiService.issueWaimai(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 酒旅策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Hotel</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">   <span class="keyword">private</span> HotelService hotelService;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">HotelRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HotelRequest</span>();</span><br><span class="line">        request.addHotelReq(params);</span><br><span class="line">        hotelService.sendPrize(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 美食策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">   <span class="keyword">private</span> FoodService foodService;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">FoodRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FoodRequest</span>(params);</span><br><span class="line">        foodService.payCoupon(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，小明创建策略模式的环境类，并供奖励服务调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用分支判断获取的策略上下文</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StrategyContext</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Strategy <span class="title function_">getStrategy</span><span class="params">(String rewardType)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (rewardType) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Waimai&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Waimai</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Hotel&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Hotel</span>();</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;Food&quot;</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Food</span>();</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;rewardType error!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 优化后的策略服务</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RewardService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issueReward</span><span class="params">(String rewardType, Object ... params)</span> &#123;</span><br><span class="line">        <span class="type">Strategy</span> <span class="variable">strategy</span> <span class="operator">=</span> StrategyContext.getStrategy(rewardType);</span><br><span class="line">        strategy.issue(params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小明的代码经过优化后，虽然结构和设计上比之前要复杂不少，但考虑到健壮性和拓展性，还是非常值得的。</p>
+<p>“看，我这次优化后的版本是不是很完美？”小明洋洋得意地说。</p>
+<p>“耦合度确实降低了，但还能做的更好。”</p>
+<p>“怎么做？”小明有点疑惑。</p>
+<p>“我问你，策略类是有状态的模型吗？如果不是是否可以考虑做成单例的？”</p>
+<p>“的确如此。”小明似乎明白了。</p>
+<p>“还有一点，环境类的获取策略方法职责很明确，但是你依然没有做到完全对修改封闭。”</p>
+<p>经过老师的点拨，小明很快也领悟到了要点：“那我可以将策略类单例化以减少开销，并实现自注册的功能彻底解决分支判断。”</p>
+<p>小明列出单例模式的要点：</p>
+<blockquote>
+<p>单例模式设计模式属于创建型模式，它提供了一种创建对象的最佳方式。</p>
+<p>这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象。</p>
+</blockquote>
+<p>最终，小明在策略环境类中使用一个注册表来记录各个策略类的注册信息，并提供接口供策略类调用进行注册。同时使用<strong>饿汉式单例模式</strong>去优化策略类的设计：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 策略上下文，用于管理策略的注册和获取</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StrategyContext</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;String, Strategy&gt; registerMap = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="comment">// 注册策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">registerStrategy</span><span class="params">(String rewardType, Strategy strategy)</span> &#123;</span><br><span class="line">        registerMap.putIfAbsent(rewardType, strategy);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 获取策略</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Strategy <span class="title function_">getStrategy</span><span class="params">(String rewardType)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> registerMap.get(rewardType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 抽象策略类</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">AbstractStrategy</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="comment">// 类注册方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">register</span><span class="params">()</span> &#123;</span><br><span class="line">        StrategyContext.registerStrategy(getClass().getSimpleName(), <span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 单例外卖策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Waimai</span> <span class="keyword">extends</span> <span class="title class_">AbstractStrategy</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Waimai</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Waimai</span>();</span><br><span class="line">   <span class="keyword">private</span> WaimaiService waimaiService;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Waimai</span><span class="params">()</span> &#123;</span><br><span class="line">        register();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Waimai <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">WaimaiRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WaimaiRequest</span>();</span><br><span class="line">        <span class="comment">// 构建入参</span></span><br><span class="line">        request.setWaimaiReq(params);</span><br><span class="line">        waimaiService.issueWaimai(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 单例酒旅策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Hotel</span> <span class="keyword">extends</span> <span class="title class_">AbstractStrategy</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Hotel</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Hotel</span>();</span><br><span class="line">   <span class="keyword">private</span> HotelService hotelService;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Hotel</span><span class="params">()</span> &#123;</span><br><span class="line">        register();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Hotel <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">HotelRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HotelRequest</span>();</span><br><span class="line">        request.addHotelReq(params);</span><br><span class="line">        hotelService.sendPrize(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 单例美食策略</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span> <span class="keyword">extends</span> <span class="title class_">AbstractStrategy</span> <span class="keyword">implements</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Food</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Food</span>();</span><br><span class="line">   <span class="keyword">private</span> FoodService foodService;</span><br><span class="line">    <span class="keyword">private</span> <span class="title function_">Food</span><span class="params">()</span> &#123;</span><br><span class="line">        register();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Food <span class="title function_">getInstance</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">issue</span><span class="params">(Object... params)</span> &#123;</span><br><span class="line">        <span class="type">FoodRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FoodRequest</span>(params);</span><br><span class="line">        foodService.payCoupon(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终，小明设计完成的结构类图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://upyun.goku.top/blog/error.jpg&quot;" data-lazy-src="https://ghproxy.com/https://raw.githubusercontent.com/sgr997/images/main/zhuanzai/20220311125455.png" alt="奖励发放策略_类图"></p>
+<p>如果使用了Spring框架，还可以利用Spring的Bean机制来代替上述的部分设计，直接使用<code>@Component</code>和<code>@PostConstruct</code>注解即可完成单例的创建和注册，代码会更加简洁。</p>
+<p>至此，经过了多次讨论、反思和优化，小明终于得到了一套低耦合高内聚，同时符合开闭原则的设计。</p>
+<p>“老师，我开始学会利用设计模式去解决已发现的问题。这次我做得怎么样？”</p>
+<p>“合格。但是，依然要戒骄戒躁。”</p>
+<h1 id="任务模型的设计"><a href="#任务模型的设计" class="headerlink" title="任务模型的设计"></a>任务模型的设计</h1><p>“之前让你设计奖励发放策略你还记得吗？”老师忽然问道。</p>
+<p>“当然记得。一个好的设计模式，能让工作事半功倍。”小明答道。</p>
+<p>“嗯，那会提到了活动营销的组成部分，除了奖励之外，貌似还有任务吧。”</p>
+<p>小明点了点头，老师接着说：“现在，我想让你去完成任务模型的设计。你需要重点关注状态的流转变更，以及状态变更后的消息通知。”</p>
+<p>小明欣然接下了老师给的难题。他首先定义了一套任务状态的枚举和行为的枚举：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 任务状态枚举</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">TaskState</span> &#123;</span><br><span class="line">    INIT(<span class="string">&quot;初始化&quot;</span>),</span><br><span class="line">    ONGOING( <span class="string">&quot;进行中&quot;</span>),</span><br><span class="line">    PAUSED(<span class="string">&quot;暂停中&quot;</span>),</span><br><span class="line">    FINISHED(<span class="string">&quot;已完成&quot;</span>),</span><br><span class="line">    EXPIRED(<span class="string">&quot;已过期&quot;</span>)</span><br><span class="line">    ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String message;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 行为枚举</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@Getter</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">ActionType</span> &#123;</span><br><span class="line">    START(<span class="number">1</span>, <span class="string">&quot;开始&quot;</span>),</span><br><span class="line">    STOP(<span class="number">2</span>, <span class="string">&quot;暂停&quot;</span>),</span><br><span class="line">    ACHIEVE(<span class="number">3</span>, <span class="string">&quot;完成&quot;</span>),</span><br><span class="line">    EXPIRE(<span class="number">4</span>, <span class="string">&quot;过期&quot;</span>)</span><br><span class="line">    ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> code;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String message;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，小明对开始编写状态变更功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Task</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long taskId;</span><br><span class="line">    <span class="comment">// 任务的默认状态为初始化</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">TaskState</span> <span class="variable">state</span> <span class="operator">=</span> TaskState.INIT;</span><br><span class="line">    <span class="comment">// 活动服务</span></span><br><span class="line">    <span class="keyword">private</span> ActivityService activityService;</span><br><span class="line">    <span class="comment">// 任务管理器</span></span><br><span class="line">    <span class="keyword">private</span> TaskManager taskManager;</span><br><span class="line">    <span class="comment">// 使用条件分支进行任务更新</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateState</span><span class="params">(ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (state == TaskState.INIT) &#123;</span><br><span class="line">            <span class="keyword">if</span> (actionType == ActionType.START) &#123;</span><br><span class="line">                state = TaskState.ONGOING;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == TaskState.ONGOING) &#123;</span><br><span class="line">            <span class="keyword">if</span> (actionType == ActionType.ACHIEVE) &#123;</span><br><span class="line">                state = TaskState.FINISHED;</span><br><span class="line">                <span class="comment">// 任务完成后进对外部服务进行通知</span></span><br><span class="line">                activityService.notifyFinished(taskId);</span><br><span class="line">                taskManager.release(taskId);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.STOP) &#123;</span><br><span class="line">                state = TaskState.PAUSED;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.EXPIRE) &#123;</span><br><span class="line">                state = TaskState.EXPIRED;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == TaskState.PAUSED) &#123;</span><br><span class="line">            <span class="keyword">if</span> (actionType == ActionType.START) &#123;</span><br><span class="line">                state = TaskState.ONGOING;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.EXPIRE) &#123;</span><br><span class="line">                state = TaskState.EXPIRED;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述的实现中，小明在<code>updateState</code>方法中完成了2个重要的功能：</p>
+<ol>
+<li>接收不同的行为，然后更新当前任务的状态；</li>
+<li>当任务过期时，通知任务所属的活动和任务管理器。</li>
+</ol>
+<p>诚然，随着小明的系统开发能力和代码质量意识的提升，他能够认识到这种功能设计存在缺陷。</p>
+<p>“老师，我的代码还是和之前说的那样，不够优雅。”</p>
+<p>“哦，你自己说说看有什么问题？”</p>
+<p>“第一，方法中使用条件判断来控制语句，但是当条件复杂或者状态太多时，条件判断语句会过于臃肿，可读性差，且不具备扩展性，维护难度也大。且增加新的状态时要添加新的if-else语句，这违背了开闭原则，不利于程序的扩展。”</p>
+<p>老师表示同意，小明接着说：“第二，任务类不够高内聚，它在通知实现中感知了其他领域或模块的模型，如活动和任务管理器，这样代码的耦合度太高，不利于扩展。”</p>
+<p>老师赞赏地说道：“很好，你有意识能够自主发现代码问题所在，已经是很大的进步了。”</p>
+<p>“那这个问题应该怎么去解决呢？”小明继续发问。</p>
+<p>“这个同样可以通过设计模式去优化。首先是状态流转的控制可以使用<strong>状态模式</strong>，其次，任务完成时的通知可以用到<strong>观察者模式</strong>。”</p>
+<p>收到指示后，小明马上去学习了状态模式的结构：</p>
+<blockquote>
+<p>状态模式：对有状态的对象，把复杂的“判断逻辑”提取到不同的状态对象中，允许状态对象在其内部状态发生改变时改变其行为。状态模式包含以下主要角色：</p>
+<ul>
+<li>环境类（Context）角色：也称为上下文，它定义了客户端需要的接口，内部维护一个当前状态，并负责具体状态的切换。</li>
+<li>抽象状态（State）角色：定义一个接口，用以封装环境对象中的特定状态所对应的行为，可以有一个或多个行为。</li>
+<li>具体状态（Concrete State）角色：实现抽象状态所对应的行为，并且在需要的情况下进行状态切换。</li>
+</ul>
+</blockquote>
+<p>根据状态模式的定义，小明将TaskState枚举类扩展成多个状态类，并具备完成状态的流转的能力；然后优化了任务类的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 任务状态抽象接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="comment">// 默认实现，不做任何处理</span></span><br><span class="line">    <span class="keyword">default</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="comment">// do nothing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务初始状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskInit</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>  (actionType == ActionType.START) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskOngoing</span>());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务进行状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskOngoing</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ActivityService activityService;</span><br><span class="line">    <span class="keyword">private</span> TaskManager taskManager; </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (actionType == ActionType.ACHIEVE) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskFinished</span>());</span><br><span class="line">            <span class="comment">// 通知</span></span><br><span class="line">            activityService.notifyFinished(taskId);</span><br><span class="line">            taskManager.release(taskId);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.STOP) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskPaused</span>());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.EXPIRE) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskExpired</span>());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务暂停状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskPaused</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (actionType == ActionType.START) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskOngoing</span>());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.EXPIRE) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskExpired</span>());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务完成状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskFinished</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务过期状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskExpired</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Task</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long taskId;</span><br><span class="line">    <span class="comment">// 初始化为初始态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">State</span> <span class="variable">state</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TaskInit</span>();</span><br><span class="line">    <span class="comment">// 更新状态</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateState</span><span class="params">(ActionType actionType)</span> &#123;</span><br><span class="line">        state.update(<span class="built_in">this</span>, actionType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小明欣喜地看到，经过状态模式处理后的任务类的耦合度得到降低，符合开闭原则。状态模式的优点在于符合单一职责原则，状态类职责明确，有利于程序的扩展。但是这样设计的代价是状态类的数目增加了，因此状态流转逻辑越复杂、需要处理的动作越多，越有利于状态模式的应用。除此之外，状态类的自身对于开闭原则的支持并没有足够好，如果状态流转逻辑变化频繁，那么可能要慎重使用。</p>
+<p>处理完状态后，小明又根据老师的指导使用<strong>观察者模式</strong>去优化任务完成时的通知：</p>
+<blockquote>
+<p>观察者模式：指多个对象间存在一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。这种模式有时又称作发布-订阅模式、模型-视图模式，它是对象行为型模式。观察者模式的主要角色如下。</p>
+<ul>
+<li>抽象主题（Subject）角色：也叫抽象目标类，它提供了一个用于保存观察者对象的聚集类和增加、删除观察者对象的方法，以及通知所有观察者的抽象方法。</li>
+<li>具体主题（Concrete Subject）角色：也叫具体目标类，它实现抽象目标中的通知方法，当具体主题的内部状态发生改变时，通知所有注册过的观察者对象。</li>
+<li>抽象观察者（Observer）角色：它是一个抽象类或接口，它包含了一个更新自己的抽象方法，当接到具体主题的更改通知时被调用。</li>
+<li>具体观察者（Concrete Observer）角色：实现抽象观察者中定义的抽象方法，以便在得到目标的更改通知时更新自身的状态。</li>
+</ul>
+</blockquote>
+<p>小明首先设计好抽象目标和抽象观察者，然后将活动和任务管理器的接收通知功能定制成具体观察者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象观察者</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">response</span><span class="params">(Long taskId)</span>; <span class="comment">// 反应</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 抽象目标</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> List&lt;Observer&gt; observers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Observer&gt;();</span><br><span class="line">    <span class="comment">// 增加观察者方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">        observers.add(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 删除观察者方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">(Observer observer)</span> &#123;</span><br><span class="line">        observers.remove(observer);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 通知观察者方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">notifyObserver</span><span class="params">(Long taskId)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Observer observer : observers) &#123;</span><br><span class="line">            observer.response(taskId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 活动观察者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ActivityObserver</span> <span class="keyword">implements</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> ActivityService activityService;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">response</span><span class="params">(Long taskId)</span> &#123;</span><br><span class="line">        activityService.notifyFinished(taskId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务管理观察者</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskManageObserver</span> <span class="keyword">implements</span> <span class="title class_">Observer</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> TaskManager taskManager;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">response</span><span class="params">(Long taskId)</span> &#123;</span><br><span class="line">        taskManager.release(taskId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，小明将任务进行状态类优化成使用通用的通知方法，并在任务初始态执行状态流转时定义任务进行态所需的观察者：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 任务进行状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskOngoing</span> <span class="keyword">extends</span> <span class="title class_">Subject</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;  </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (actionType == ActionType.ACHIEVE) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskFinished</span>());</span><br><span class="line">            <span class="comment">// 通知</span></span><br><span class="line">            notifyObserver(task.getTaskId());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.STOP) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskPaused</span>());</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (actionType == ActionType.EXPIRE) &#123;</span><br><span class="line">            task.setState(<span class="keyword">new</span> <span class="title class_">TaskExpired</span>());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务初始状态</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskInit</span> <span class="keyword">implements</span> <span class="title class_">State</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Task task, ActionType actionType)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>  (actionType == ActionType.START) &#123;</span><br><span class="line">            <span class="type">TaskOngoing</span> <span class="variable">taskOngoing</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TaskOngoing</span>();</span><br><span class="line">            taskOngoing.add(<span class="keyword">new</span> <span class="title class_">ActivityObserver</span>());</span><br><span class="line">            taskOngoing.add(<span class="keyword">new</span> <span class="title class_">TaskManageObserver</span>());</span><br><span class="line">            task.setState(taskOngoing);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终，小明设计完成的结构类图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://upyun.goku.top/blog/error.jpg&quot;" data-lazy-src="https://ghproxy.com/https://raw.githubusercontent.com/sgr997/images/main/zhuanzai/20220311125604.png" alt="任务模型设计_类图"></p>
+<p>通过观察者模式，小明让任务状态和通知方实现松耦合（实际上观察者模式还没能做到完全的解耦，如果要做进一步的解耦可以考虑学习并使用<strong>发布-订阅模式</strong>，这里也不再赘述）。</p>
+<p>至此，小明成功使用状态模式设计出了高内聚、高扩展性、单一职责的任务的整个状态机实现，以及做到松耦合的、符合依赖倒置原则的任务状态变更通知方式。</p>
+<p>“老师，我逐渐能意识到代码的设计缺陷，并学会利用较为复杂的设计模式做优化。”</p>
+<p>“不错，再接再厉！”</p>
+<h1 id="活动的迭代重构"><a href="#活动的迭代重构" class="headerlink" title="活动的迭代重构"></a>活动的迭代重构</h1><p>“小明，这次又有一个新的任务。”老师出现在正在认真阅读《设计模式》的小明的面前。</p>
+<p>“好的。刚好我已经学习了设计模式的原理，终于可以派上用场了。”</p>
+<p>“之前你设计开发了活动模型，现在我们需要在任务型活动的参与方法上增加一层风险控制。”</p>
+<p>“OK。借此机会，我也想重构一下之前的设计。”</p>
+<p>活动模型的特点在于其组成部分较多，小明原先的活动模型的构建方式是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象活动接口</span></span><br><span class="line"><span class="keyword">interface</span> <span class="title class_">ActivityInterface</span> &#123;</span><br><span class="line">   <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 活动类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Activity</span> <span class="keyword">implements</span> <span class="title class_">ActivityInterface</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String type;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Integer scene;</span><br><span class="line">    <span class="keyword">private</span> String material;</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Activity</span><span class="params">(String type)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="comment">// id的构建部分依赖于活动的type</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;period&quot;</span>.equals(type)) &#123;</span><br><span class="line">            id = <span class="number">0L</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Activity</span><span class="params">(String type, Long id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Activity</span><span class="params">(String type, Long id, Integer scene)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.scene = scene;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Activity</span><span class="params">(String type, String name, Integer scene, String material)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.scene = scene;</span><br><span class="line">        <span class="built_in">this</span>.material = material;</span><br><span class="line">        <span class="comment">// name的构建完全依赖于活动的type</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;period&quot;</span>.equals(type)) &#123;</span><br><span class="line">            <span class="built_in">this</span>.id = <span class="number">0L</span>;</span><br><span class="line">            <span class="built_in">this</span>.name = <span class="string">&quot;period&quot;</span> + name;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.name = <span class="string">&quot;normal&quot;</span> + name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 参与活动</span></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// do nothing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务型活动</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Task task;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TaskActivity</span><span class="params">(String type, String name, Integer scene, String material, Task task)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(type, name, scene, material);</span><br><span class="line">        <span class="built_in">this</span>.task = task;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 参与任务型活动</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 更新任务状态为进行中</span></span><br><span class="line">        task.getState().update(task, ActionType.START);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>经过自主分析，小明发现活动的构造不够合理，主要问题表现在：</p>
+<ol>
+<li>活动的构造组件较多，导致可以组合的构造函数太多，尤其是在模型增加字段时还需要去修改构造函数；</li>
+<li>部分组件的构造存在一定的顺序关系，但是当前的实现没有体现顺序，导致构造逻辑比较混乱，并且存在部分重复的代码。</li>
+</ol>
+<p>发现问题后，小明回忆自己的学习成果，马上想到可以使用创建型模式中的<strong>建造者模式</strong>去做重构：</p>
+<blockquote>
+<p>建造者模式：指将一个复杂对象的构造与它的表示分离，使同样的构建过程可以创建不同的表示。它是将一个复杂的对象分解为多个简单的对象，然后一步一步构建而成。它将变与不变相分离，即产品的组成部分是不变的，但每一部分是可以灵活选择的。建造者模式的主要角色如下:</p>
+<ol>
+<li>产品角色（Product）：它是包含多个组成部件的复杂对象，由具体建造者来创建其各个零部件。</li>
+<li>抽象建造者（Builder）：它是一个包含创建产品各个子部件的抽象方法的接口，通常还包含一个返回复杂产品的方法 getResult()。</li>
+<li>具体建造者(Concrete Builder）：实现 Builder 接口，完成复杂产品的各个部件的具体创建方法。</li>
+<li>指挥者（Director）：它调用建造者对象中的部件构造与装配方法完成复杂对象的创建，在指挥者中不涉及具体产品的信息。</li>
+</ol>
+</blockquote>
+<p>根据建造者模式的定义，上述活动的每个字段都是一个产品。于是，小明可以通过在活动里面实现静态的建造者类来简易地实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 活动类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Activity</span> <span class="keyword">implements</span> <span class="title class_">ActivityInterface</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> String type;</span><br><span class="line">    <span class="keyword">protected</span> Long id;</span><br><span class="line">    <span class="keyword">protected</span> String name;</span><br><span class="line">    <span class="keyword">protected</span> Integer scene;</span><br><span class="line">    <span class="keyword">protected</span> String material;</span><br><span class="line">    <span class="comment">// 全参构造函数</span></span><br><span class="line">   <span class="keyword">public</span> <span class="title function_">Activity</span><span class="params">(String type, Long id, String name, Integer scene, String material)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.type = type;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.scene = scene;</span><br><span class="line">        <span class="built_in">this</span>.material = material;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// do nothing</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 静态建造器类，使用奇异递归模板模式允许继承并返回继承建造器类</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Builder</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Builder</span>&lt;T&gt;&gt; &#123;</span><br><span class="line">        <span class="keyword">protected</span> String type;</span><br><span class="line">        <span class="keyword">protected</span> Long id;</span><br><span class="line">        <span class="keyword">protected</span> String name;</span><br><span class="line">        <span class="keyword">protected</span> Integer scene;</span><br><span class="line">        <span class="keyword">protected</span> String material;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setType</span><span class="params">(String type)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.type = type;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setId</span><span class="params">(Long id)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.id = id;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setId</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;period&quot;</span>.equals(<span class="built_in">this</span>.type)) &#123;</span><br><span class="line">                <span class="built_in">this</span>.id = <span class="number">0L</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setScene</span><span class="params">(Integer scene)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.scene = scene;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setMaterial</span><span class="params">(String material)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.material = material;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;period&quot;</span>.equals(<span class="built_in">this</span>.type)) &#123;</span><br><span class="line">                <span class="built_in">this</span>.name = <span class="string">&quot;period&quot;</span> + name;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">this</span>.name = <span class="string">&quot;normal&quot;</span> + name;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> (T) <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> Activity <span class="title function_">build</span><span class="params">()</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Activity</span>(type, id, name, scene, material);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 任务型活动</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TaskActivity</span> <span class="keyword">extends</span> <span class="title class_">Activity</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> Task task;</span><br><span class="line">   <span class="comment">// 全参构造函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">TaskActivity</span><span class="params">(String type, Long id, String name, Integer scene, String material, Task task)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(type, id, name, scene, material);</span><br><span class="line">        <span class="built_in">this</span>.task = task;</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// 参与任务型活动</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 更新任务状态为进行中</span></span><br><span class="line">        task.getState().update(task, ActionType.START);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 继承建造器类</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Builder</span> <span class="keyword">extends</span> <span class="title class_">Activity</span>.Builder&lt;Builder&gt; &#123;</span><br><span class="line">        <span class="keyword">private</span> Task task;</span><br><span class="line">        <span class="keyword">public</span> Builder <span class="title function_">setTask</span><span class="params">(Task task)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.task = task;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">public</span> TaskActivity <span class="title function_">build</span><span class="params">()</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">TaskActivity</span>(type, id, name, scene, material, task);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小明发现，上面的建造器没有使用诸如抽象建造器类等完整的实现，但是基本是完成了活动各个组件的建造流程。使用建造器的模式下，可以先按顺序构建字段type，然后依次构建其他组件，最后使用build方法获取建造完成的活动。这种设计一方面封装性好，构建和表示分离；另一方面扩展性好，各个具体的建造者相互独立，有利于系统的解耦。可以说是一次比较有价值的重构。在实际的应用中，如果字段类型多，同时各个字段只需要简单的赋值，可以直接引用Lombok的@Builder注解来实现轻量的建造者。</p>
+<p>重构完活动构建的设计后，小明开始对参加活动方法增加风控。最简单的方式肯定是直接修改目标方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">    <span class="comment">// 对目标用户做风险控制，失败则抛出异常</span></span><br><span class="line">    Risk.doControl(userId);</span><br><span class="line">    <span class="comment">// 更新任务状态为进行中</span></span><br><span class="line">    task.state.update(task, ActionType.START);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是考虑到，最好能尽可能避免对旧方法的直接修改，同时为方法增加风控，也是一类比较常见的功能新增，可能会在多处使用。</p>
+<p>“老师，风险控制会出现在多种活动的参与方法中吗？”</p>
+<p>“有这个可能性。有的活动需要风险控制，有的不需要。风控像是在适当的时候对参与这个方法的装饰。”</p>
+<p>“对了，装饰器模式！”</p>
+<p>小明马上想到用<strong>装饰器模式</strong>来完成设计：</p>
+<blockquote>
+<p>装饰器模式的定义：指在不改变现有对象结构的情况下，动态地给该对象增加一些职责（即增加其额外功能）的模式，它属于对象结构型模式。装饰器模式主要包含以下角色：</p>
+<ol>
+<li>抽象构件（Component）角色：定义一个抽象接口以规范准备接收附加责任的对象。</li>
+<li>具体构件（ConcreteComponent）角色：实现抽象构件，通过装饰角色为其添加一些职责。</li>
+<li>抽象装饰（Decorator）角色：继承抽象构件，并包含具体构件的实例，可以通过其子类扩展具体构件的功能。</li>
+<li>具体装饰（ConcreteDecorator）角色：实现抽象装饰的相关方法，并给具体构件对象添加附加的责任。</li>
+</ol>
+</blockquote>
+<p>小明使用了装饰器模式后，新的代码就变成了这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 抽象装饰角色</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">ActivityDecorator</span> <span class="keyword">implements</span> <span class="title class_">ActivityInterface</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> ActivityInterface activity;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ActivityDecorator</span><span class="params">(ActivityInterface activity)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.activity = activity;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 能够对活动做风险控制的包装类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RiskControlDecorator</span> <span class="keyword">extends</span> <span class="title class_">ActivityDecorator</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RiskControlDecorator</span><span class="params">(ActivityInterface activity)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(activity);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">participate</span><span class="params">(Long userId)</span> &#123;</span><br><span class="line">        <span class="comment">// 对目标用户做风险控制，失败则抛出异常</span></span><br><span class="line">       Risk.doControl(userId);</span><br><span class="line">        <span class="comment">// 更新任务状态为进行中</span></span><br><span class="line">        activity.participate(userId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终，小明设计完成的结构类图如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://upyun.goku.top/blog/error.jpg&quot;" data-lazy-src="https://ghproxy.com/https://raw.githubusercontent.com/sgr997/images/main/zhuanzai/20220311125643.png" alt="活动迭代重构_类图"></p>
+<p>最终，小明通过自己的思考分析，结合学习的设计模式知识，完成了活动模型的重构和迭代。</p>
+<p>“老师，我已经能做到自主分析功能特点，并合理应用设计模式去完成程序设计和代码重构了，实在太感谢您了。”</p>
+<p>“设计模式作为一种软件设计的最佳实践，你已经很好地理解并应用于实践了，非常不错。但学海无涯，还需持续精进！”</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>本文以三个实际场景为出发点，借助小明和老师两个虚拟的人物，试图以一种较为诙谐的“对话”方式来讲述设计模式的应用场景、优点和缺点。如果大家想要去系统性地了解设计模式，也可以通过市面上很多的教材进行学习，都介绍了经典的23种设计模式的结构和实现。不过，很多教材的内容即便配合了大量的示例，但有时也会让人感到费解，主要原因在于：一方面，很多案例比较脱离实际的应用场景；另一方面，部分设计模式显然更适用于大型复杂的结构设计，而当其应用到简单的场景时，仿佛让代码变得更加繁琐、冗余。因此，本文希望通过这种“对话+代码展示+结构类图”的方式，以一种更易懂的方式来介绍设计模式。</p>
+<p>当然，本文只讲述了部分比较常见的设计模式，还有其他的设计模式，仍然需要同学们去研读经典著作，举一反三，学以致用。我们也希望通过学习设计模式能让更多的同学在系统设计能力上得到提升。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li>Gamma E. 设计模式: 可复用面向对象软件的基础 [M]. 机械工业出版社, 2007.</li>
+<li>弗里曼. Head First 设计模式 [M]. 中国电力出版社, 2007.</li>
+<li><a target="_blank" rel="noopener" href="http://www.oodesign.com/">oodesign.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://java-design-patterns.com/">java-design-patterns.com</a></li>
+<li><a target="_blank" rel="noopener" href="http://c.biancheng.net/design_pattern/"><strong>Java设计模式：23种设计模式全面解析</strong></a></li>
+</ul>
+<h1 id="作者简介"><a href="#作者简介" class="headerlink" title="作者简介"></a>作者简介</h1><p>嘉凯、杨柳，来自美团金融服务平台&#x2F;联名卡研发团队。</p>
+<h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>文章来源于<strong>美团技术团队</strong>微信公众号，转载已获取授权，文章原链接：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/H2toewJKEwq1mXme_iMWkA">戳我看原文</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://upyun.goku.top/blog/error.jpg&quot;" data-lazy-src="https://ghproxy.com/https://raw.githubusercontent.com/sgr997/images/main/zhuanzai/20220311123516.png" alt="授权图"></p>
+</article><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/29609.html"><img class="prev-cover" src="https://upyun.goku.top/blog/docker.jpeg" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">docker学习(附：安装mysql，redis)</div></div></a></div><div class="next-post pull-right"><a href="/posts/52604.html"><img class="next-cover" src="https://upyun.goku.top/blog/spring.png" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spring高级49讲原笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/8275.html" title="Spring中使用模板方法模式(接上文)"><img class="cover" src="https://upyun.goku.top/blog/post_banner_8.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-12-13</div><div class="title">Spring中使用模板方法模式(接上文)</div></div></a></div><div><a href="/posts/22676.html" title="Spring项目中使用策略模式和工厂模式"><img class="cover" src="https://upyun.goku.top/blog/post_banner_7.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2021-12-04</div><div class="title">Spring项目中使用策略模式和工厂模式</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A5%96%E5%8A%B1%E7%9A%84%E5%8F%91%E6%94%BE%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text">奖励的发放策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">任务模型的设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%BB%E5%8A%A8%E7%9A%84%E8%BF%AD%E4%BB%A3%E9%87%8D%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">活动的迭代重构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">5.</span> <span class="toc-text">结语</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">6.</span> <span class="toc-text">参考资料</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E8%80%85%E7%AE%80%E4%BB%8B"><span class="toc-number">7.</span> <span class="toc-text">作者简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%B4%E6%98%8E"><span class="toc-number">8.</span> <span class="toc-text">说明</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2f7a06ce.html" title="🧠ChatGPT 中文调教指南"><img src="https://upyun.goku.top/blog/post_banner_11.jpeg?_r_=4368ceda-0914-6a44-6fc4-a1233c5e3de3" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="🧠ChatGPT 中文调教指南"/></a><div class="content"><a class="title" href="/posts/2f7a06ce.html" title="🧠ChatGPT 中文调教指南">🧠ChatGPT 中文调教指南</a><time datetime="2024-10-19T04:45:36.000Z" title="发表于 2024-10-19 12:45:36">2024-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f34cb02b.html" title="TVBox接口备忘"><img src="https://upyun.goku.top/blog/post_banner_7.jpeg?_r_=e1a8d92c-592b-13f8-88c5-2801feef081e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="TVBox接口备忘"/></a><div class="content"><a class="title" href="/posts/f34cb02b.html" title="TVBox接口备忘">TVBox接口备忘</a><time datetime="2024-10-05T20:22:37.458Z" title="发表于 2024-10-06 04:22:37">2024-10-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20e6247.html" title="docker构建多平台镜像"><img src="https://upyun.goku.top/blog/docker.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="docker构建多平台镜像"/></a><div class="content"><a class="title" href="/posts/20e6247.html" title="docker构建多平台镜像">docker构建多平台镜像</a><time datetime="2024-08-30T13:20:43.000Z" title="发表于 2024-08-30 21:20:43">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3a71ca1d.html" title="nginx转发请求丢失自定义请求头"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=579af843-e4df-3009-be93-2416b88aba45" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="nginx转发请求丢失自定义请求头"/></a><div class="content"><a class="title" href="/posts/3a71ca1d.html" title="nginx转发请求丢失自定义请求头">nginx转发请求丢失自定义请求头</a><time datetime="2024-08-30T13:20:43.000Z" title="发表于 2024-08-30 21:20:43">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/5dd44277.html" title="QuantumultX在访问指定网站时，运行指定脚本"><img src="https://upyun.goku.top/blog/QuantumultX.png" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="QuantumultX在访问指定网站时，运行指定脚本"/></a><div class="content"><a class="title" href="/posts/5dd44277.html" title="QuantumultX在访问指定网站时，运行指定脚本">QuantumultX在访问指定网站时，运行指定脚本</a><time datetime="2023-11-16T12:14:16.000Z" title="发表于 2023-11-16 20:14:16">2023-11-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">26</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>16</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

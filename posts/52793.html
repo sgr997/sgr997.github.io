@@ -1,0 +1,579 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>原子弹的入门到精通 | Pei</title><meta name="keywords" content="奇怪的知识"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="原子弹的入门到精通"><meta name="application-name" content="原子弹的入门到精通"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="原子弹的入门到精通"><meta property="og:url" content="https://blog.goku.top/posts/52793.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="谁不想造个原子弹呢？"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/yzd.jpeg"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/yzd.jpeg"><meta name="description" content="谁不想造个原子弹呢？"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/52793"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: '原子弹的入门到精通',
+  postAI: '',
+  pageFillDescription: '准备工作, 开始动工, 防辐设备, 分离高招准备工作我们大约需要磅的铀体积差不多有一个棒球的大小再配合一些很容易到手的材料这种炸弹就能使哩以内任何东西化为乌有里以内的东西严重受损在里半径内的人都会受到致命的辐射线辐射尘随风飘扬能使里内的人都致病如果它在纽约市引爆大概有万人会死亡还有万人会受伤这种效果恐怖份子应该会很满意这种原子弹甚至在战场上也都能派上用场不过要提醒各位铀的分量不要超过磅因为对这样多的铀其引爆的技巧相当困难单凭业余的机槭工匠大概是无法适时且有效地把这些东西凑在一起挺有可能你还没做一半它就在你面前了那可就真浪费感情我个人的偏好是用磅或磅的铀因为这样效果不差而且如果设计上出点小差错也不致于有太严重的后果一旦把足够的材料紧聚在一起我们最棘手的技术就是得使它们能紧聚在一起维持约半秒钟这半秒钟的延迟就是技术上最主要的问题原因是这样的当这两堆物质靠太近时会发生剧烈的反应而产生大量的能量在瞬间比一秒钟小很多迫使这两堆物质分开这样的结果和爆竹的效果差不多几百尺外的人根本不知道有这回事对一个稍有自尊的恐怖份子而言是不会以此为满足的对吗所以当务之急就是要设计出一套办法使两堆铀能聚得久一点好让一些比较惊人的大事发生如果你这位恐怖份子有栋两层楼房含地下室两根火药包水泥立方码的沙石那么大约只要一个礼拜就可以完工了全部的费用除去房租不算大概只要美元就够了根据当前汇率折合成人民币大概就是元最后的问题是怎样把铀或钸弄到手这留待后面再谈开始动工准备妥当后第一件事就是把分批弄来的铀分成二等分用一对半球容器装起来你或可用乙炔喷灯来作铀的熔点是而乙炔喷灯的燃点是因此理论土来说乙炔喷灯足以熔化铀也许你应该花几十块耐火砖作个窑加上一个风箱效果会此较好不过如果你有耐心再加上一些运气因为铀这东西燃烧会乙炔喷灯应该是够用的了铀熔成液体后流到半球状的洼槽制陶瓷用的耐火泥就可派上用场则第一个半球型作好冷却了再移开作第二个有件事要注意这时候在这区域附近不能有人因为铀有对人不利的特性如果铀熔化时你就在现场那么你总会吸进一点嘿嘿其结果不是说你会少活几年而是你只剩下几个钟头好活了如果你这个恐怖份子确能置个人生死于度外那当然就不必计较这些了否则我建议你采用自动控制装置当铀熔化时和它相隔尺再用吨铅隔离这样应该足够安全了将铀分成两堆的工作完成后你就应分别用铅箱装好再从二楼挖个洞通到地下室用一对黑铁管接起来使总长约尺左右若能用寸厚的水泥敷于管外可能稍好不过如果地板够坚实而且房子是建在岩石上也可以不必这么麻烦在放下管子之前先把装铀的半球形容器的平面朝上放在水泥上再把管子放置妥当原子弹就已完工一半了为了不使铀散逸地下室应该用沙石水泥和水混合填好但因为这只要用一次就达到目的了做得好不好看也无所谓啦真正要注意的是管子外面有足够的阻挡力量使原子弹在前铀不致漏出其实只要半液体状的沙泥混合物就足以担当大任了如此这般原子弹的接收部分就完工了引爆部分比较难做构想之一是将另一个半球容器放在管子的上端引爆时让它倒向下面的接收部分就可以了原理上虽很简单但有些技术上的困难不易解决比如说如果引爆用的半球容器放歪了一点它就会沿着管子滑下来这样你想成为恐怖份子的美梦就落空了因为这种死法不会让人觉得恐怖只会成为茶余饭后的笑料罢了目前可能是最简单而有效的设计把一个细线织成的罩子就像夏天防苍蝇的那种放在管子的上端再塞进管内留约寸在外面这时再把另一段尺长的管子焊在原来的管子上若要使连接的部分更牢可以在此部分钻几个洞把铁钉插进去然后拿尺长的寸铜管里面装熔化的铅将引爆的半球容器安在铅底座中一个吻合的凹槽里另一根铁棍则凿入管子的另一端约一尺这装置总重量是磅最后把有螺纹的盖子套在管子上头等到它能旋得松紧自如时再将它拿下来在它上面钻一个洞使能容得下引爆的装置杆装置杆则留下寸长露出洞口杆上并恰留钻一个钉孔将各种大小不同的钉子试着去配合最恰当的大小是能合于整个引爆装置当然试着配合时暂不在接受管上端作以免危险然后将或炸药涂在一个碟子上最好是咖啡壶中过滤器的底座再塞进去并插进一两个雷管这放在引爆装置杆的四周再由一两条引线连出来到外面然后把它旋紧原子弹就大功告成了剩下的工作只是把引线接到定时器上再把下端的安全针拔掉然后离开这城市约小时后这城市就离开这个世界了定时器一旦引爆其力量足使另一个安全针脱落引爆装置就掉到接收部分去即使不考虑产生的加速度光是重力就足使磅的物体由尺高空掉下产生的十次方耳格秒的动能把所生的冲力考虑进去则接触点有的十二次方耳格秒的动能可使两个半球容器接触的时间够长而产生令人满意的效果防辐设备为了要将所有重要的步骤交代清楚应该再将几个小问题说明一下例如前文曾经简略地谈到用乙炔喷灯时要考虑铀有发火燃烧的可能性其实应该说整个机械操作都要在乳状液槽中进行对不太熟悉机械技术操作的人而言所谓乳状液就是一种看来像牛乳一样的液体和油有许多相似之处可是不会发火燃烧这种乳状液在一般机械工厂供货商处都很容易买到而且不会有入问你买这种东西干什么用了这种乳状液可以使危险降到最低程度事实上若我们要溶解铀或对铀作机械处理最好在纯氮的大气中才安全可是如果你够小心而且运气又好的话那么也不必用这种极端安全的方法辐射的问题是比较麻烦的一点镭的辐射量和重量成正比但铀的辐射量和重量却是成指数关系也是这种性质使它具有性因为每个半球所装的质量都超过了临界值的一半所以和它们同在一间房子里非常地危险只吸进去一点点含放射性尘埃的空气就意味着你马上要离开这个世界因此我建议所有的工作人员应有其它的氧气供应每人口中含个氧气管或可解决这个问题但要通盘解决辐射的问题可能比较麻烦不过只要有决心加上智能和运气这问题还是可以克服的我还要建议采用一种用铅作成外壳而且有动力的轮椅让操作员坐在里面可以安全地作业上面只要开个小缝用铅作的玻璃当窗户操作员就可以看到外面铅作的袖子和手套可以用来作一些需要和铀碰触的机械动作为了防止辐射外逸整栋房子的墙壁地板都需覆盖上一层铅地下室的天花板也要加上一层铅板以免接收部分产生辐射的问题算起来起码要用上吨的铅以维持基本的安全问题这么一来又得多花工夫支撑地板免得垮下来这些工作都作好了就可以开始动手制造原子弹如果你想作一道红烧兔子大餐打开食谱第一步就是要抓一只兔子来同理现在你也会问怎样把铀弄到手铀通常此钸容易拿到其实你只要平时注意看报纸应该不难知道核能发电厂里就有只要由电厂里偷根控制棒出来把它熔了再把其中没有用的铀分离出来就成了要潜入一个核子反应炉说起来并不是什么太难的事尤其大学校园中的核子反应炉都只有些马马虎虎的安全设施一般设施就是些带刺铁丝网围墙门口站了一两个警卫事前可以作出误闯的样子来几次投石问路看看有没有什么电子安全装置大概结果都是根本没有的可是我们偷偷摸摸的潜进去并没有什么用因为铀非常的重不要讲是一个人就算是一队人马开进去也搬不到足够的分量出来尤其这批人马又身装铅甲以防辐射就更不管用了依我之见干脆偷辆卡车和拖车要那种特重型的就是运三峡电站转子的那种干掉警卫代以自己人然后就直闯进去拿你要的东西很干脆效率又高不过反应器都是装在一个镍铁合金的球状容器里容器再浸在水中通常旁边会有千斤顶以便修护时用所以也可以顺便用来把整个反应炉心起出来放到卡车里不过要注意一件事搬动反应器时要拔出一些燃料棒或是插进一些节制棒否则你和整个反应器都要化为灰烬建议你或可向当时被你挟制的人质请教这方面的技术以便搬动炉心此外整个反应器重约吨加上拖车需要寸厚的铅板作防护所以拖车如何拖动吨的重量还是颇伤脑筋的所以前面要用特重型的拖车要不然到了地炉子也搬上车了却发现拖不动那不是面子都丢尽了或者你觉得搬走整个反应器不切实际也可以只带走约磅的备用燃料棒不过千万也要带着石墨或铅免得燃料棒因不断地反应生热而熔化了如果你忘了这步骤回家打开盖子只会看到一堆熔化了的铀而且四处散射可能你当场就一命呜呼而遗笑万年性命是小这脸咱可丢不起所以别忘记拿了磅的燃料棒之后要和磅的石墨或铅混合反应器的铀大约含的铀自然界铀则只含的铀做原子弹的铀则需要的铀否则根本不到手的磅燃料棒可以提炼出所需要约磅的铀不过要有耐心和经验去分离它如果你自知无法全部把铀分离出来就得多弄点燃料棒一般说来以目前的技术要达到每次增加纯度并没有什么问题所以你最少要弄到磅的燃料棒若能弄到磅最好把这些加上去你总共要带万磅吨的东西其次还要找个地方放这些东西我建议你租间仓库如用原来那两层楼的建筑来分离铀似乎不太实际因为这至少需要万平方尺的空间分离高招下面就要考虑用什么方法来分离铀对恐怖份子来说气体扩散法是好方法之一这也是早期制造原子弹时所采用的不但可靠又不必太复杂的技术不过花费较多而且所用的化学药品更是吓人首先你要有约哩长的特殊玻璃线钢管并以吨的氢氟酸形成六氟化铀然后吹向一具有特殊小孔的膜因为六氟化铀较重在经过这层膜时会被陷住而不易透过每过一次可使铀的成分增加如此程序只要反复操作所得六氟化铀的成分就愈大最后只要把六氟化铀中的氟分离出来就行了因为氢氟酸很贵而且不易取得所以最好是去偷一点来要不然就先去偷个几百万美金也行如果你觉得此路不通还有其它的办法你可以在树林里建个滋生反应器用铀来作钸再用化学上的技术分离即可至于如何建滋生反应器也不是难事随便一本大学教科书都可以告诉你好几种方法虽然在理论上没有困难但是也有它实际上的难处不过如果你刚好有私人用的小河又有几火车的钠数量可观的不锈钢管一百亩与外界隔离的土地那就没有间题如果对这两种方法你都没有兴趣还有一些有趣的新技术可供参考你可以先用一块低温磁铁它在液态氦的温度约零下下能保持高斯的磁扬不过唔不过下面的程序太复杂了还有一法是用雷射因为铀较重被激光束照射后运动的偏离角比铀小所以若在和雷射光垂直的平面上洒上一层铀则铀铀可藉其偏离角来分离此法原理上简单可行但时间上太慢一天大概只能处理磅的铀含和而分离的效率约每处理一次可以产生约的铀所以要处理次才能达到原子弹的标准如此算来从磅磅的燃料棒中分离出磅纯度的铀约需费时四年然而它的辐射量又使你根本没有四年好活所以还得找三两个志愿者来完成你的未竟之志因此若能有愚公移山之志或可成功祝你好运',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-12-13 11:35:48',
+  postMainColor: '#e47428',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>16</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">转载</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" itemprop="url">奇怪的知识</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>奇怪的知识</span></a></span></div></div><h1 class="post-title" itemprop="name headline">原子弹的入门到精通</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2021-12-17T13:13:48.000Z" title="发表于 2021-12-17 21:13:48">2021-12-17</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2024-12-13T03:35:48.277Z" title="更新于 2024-12-13 11:35:48">2024-12-13</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="transparent"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/52793.html"><header><a class="post-meta-categories" href="/categories/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" itemprop="url">奇怪的知识</a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" tabindex="-1" itemprop="url">奇怪的知识</a><h1 id="CrawlerTitle" itemprop="name headline">原子弹的入门到精通</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">xxx</span><time itemprop="dateCreated datePublished" datetime="2021-12-17T13:13:48.000Z" title="发表于 2021-12-17 21:13:48">2021-12-17</time><time itemprop="dateCreated datePublished" datetime="2024-12-13T03:35:48.277Z" title="更新于 2024-12-13 11:35:48">2024-12-13</time></header><h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li><p>我们大约需要30磅的铀235，体积差不多有一个棒球的大小，再配合一些很容易到手的材料，这种炸弹就能使1&#x2F;3哩以内任何东西化为乌有；2&#x2F;3里以内的东西严重受损；在1.25里半径内的人都会受到致命的辐射线；辐射尘随风飘扬，能使40里内的人都致病。如果它在纽约市引爆，大概有25万人会死亡，还有40万人会受伤。这种效果恐怖份子应该会很满意；这种原子弹甚至在战场上也都能派上用场。</p>
+</li>
+<li><p>不过，要提醒各位:铀235的分量不要超过45磅，因为对这样多的铀，其引爆的技巧相当困难，单凭业余的机槭工匠，大概是无法适时且有效地把这些东西凑在一起。挺有可能你还没做一半，它就在你面前BOOM了，那可就真浪费感情。我个人的偏好是用36磅或37磅的铀235，因为这样效果不差，而且，如果设计上出点小差错，也不致于有太严重的后果。一旦把足够的材料紧聚在一起，我们最棘手的技术就是得使它们能紧聚在一起维持约半秒钟，这半秒钟的延迟就是技术上最主要的问题。原因是这样的:当这两堆物质靠太近时，会发生剧烈的反应而产生大量的能量，在瞬间(比一秒钟小很多)迫使这两堆物质分开。这样的结果和爆竹的效果差不多，几百尺外的人根本不知道有这回事。对一个稍有「自尊」的恐怖份子而言，是不会以此为满足的，对吗?所以，当务之急就是要设计出一套办法，使两堆铀235能聚得久一点，好让一些比较惊人的「大事」发生。如果你这位恐怖份子有栋两层楼房(含地下室)、两根火药、15包水泥、20立方码的沙石，那么大约只要一个礼拜就可以完工了。全部的费用，除去房租不算，大概只要3000美元就够了。根据当前汇率，折合成人民币大概就是25000元。最后的问题是怎样把铀235或钸弄到手，这留待后面再谈。</p>
+</li>
+</ul>
+<h1 id="开始动工"><a href="#开始动工" class="headerlink" title="开始动工"></a>开始动工</h1><ul>
+<li>准备妥当后，第一件事就是把分批弄来的铀235分成二等分，用一对半球容器装起来，你或可用乙炔喷灯(AcetyleneTorch)来作。铀的熔点是414.2°C，而乙炔喷灯的燃点是526.4°C，因此理论土来说，乙炔喷灯足以熔化铀235。也许你应该花几十块耐火砖作个窑，加上一个风箱，效果会此较好；不过如果你有耐心再加上一些运气(因为铀这东西燃烧会BOOM)，乙炔喷灯应该是够用的了。铀熔成液体后，流到半球状的洼槽(制陶瓷用的耐火泥就可派上用场)，则第一个半球型作好冷却了，再移开作第二个。有件事要注意:这时候，在这区域附近不能有人。因为，铀有对人不利的特性。如果铀熔化时你就在现场，那么，你总会吸进一点，嘿嘿…，其结果不是说你会少活几年，而是你只剩下几个钟头好活了!如果你这个恐怖份子确能置个人生死于度外，那当然就不必计较这些了，否则我建议你采用自动控制装置。当铀熔化时，和它相隔50尺，再用5吨铅隔离，这样应该足够安全了。将铀235分成两堆的工作完成后，你就应分别用铅箱装好。再从二楼挖个洞通到地下室，用一对黑铁管接起来，使总长约20尺左右。若能用6寸厚的水泥敷于管外可能稍好，不过如果地板够坚实，而且房子是建在岩石上，也可以不必这么麻烦。在放下管子之前，先把装铀的半球形容器的平面朝上放在水泥上，再把管子放置妥当，原子弹就已完工一半了。为了不使铀散逸，地下室应该用沙、石、水泥和水混合填好，但因为这只要用一次就达到目的了，做得好不好看也无所谓啦。真正要注意的是，管子外面有足够的阻挡力量，使原子弹在BOOM前铀不致漏出。其实只要半液体状的沙泥混合物，就足以担当大任了。如此这般，原子弹的接收部分就完工了。引爆部分比较难做，构想之一是将另一个半球容器放在管子的上端，引爆时，让它倒向下面的接收部分就可以了。原理上虽很简单，但有些技术上的困难不易解决，比如说，如果引爆用的半球容器放歪了一点，它就会沿着管子滑下来，这样你想成为恐怖份子的美梦就落空了，因为这种死法不会让人觉得恐怖，只会成为茶余饭后的笑料罢了。目前可能是最简单而有效的设计，把一个细线织成的罩子(就像夏天防苍蝇的那种)，放在管子的上端，再塞进管内，留约3-4寸在外面；这时再把另一段4尺长的管子焊在原来的管子上。若要使连接的部分更牢，可以在此部分钻几个洞，把铁钉插进去。然后拿3尺长的2.5寸铜管，里面装熔化的铅，将引爆的半球容器安在铅底座中一个吻合的凹槽里；另一根铁棍则凿入管子的另一端约一尺，这装置总重量是80-95磅。最后，把有螺纹的盖子套在管子上头，等到它能旋得松紧自如时，再将它拿下来，在它上面钻一个洞，使能容得下引爆的装置杆；装置杆则留下6~8寸长露出洞口，杆上并恰留钻一个钉孔。将各种大小不同的钉子试着去配合，最恰当的大小是能合于整个引爆装置(当然，试着配合时暂不在接受管上端作，以免危险)。然后，将TNT或炸药涂在一个碟子上(最好是咖啡壶中过滤器的底座)，再塞进去，并插进一两个雷管。这放在引爆装置杆的四周，再由一两条引线连出来到外面，然后把它旋紧，原子弹就大功告成了。剩下的工作只是把引线接到定时器上，再把下端的安全针拔掉，然后离开这城市，约12小时后，这城市就离开这个世界了。定时器一旦引爆，其力量足使另一个安全针脱落，引爆装置就掉到接收部分去，即使不考虑BOOM产生的加速度，光是重力就足使95磅的物体由20尺高空掉下，产生8X10的十次方耳格&#x2F;秒的动能。把BOOM所生的冲力考虑进去，则接触点有10的十二次方耳格&#x2F;秒的动能，可使两个半球容器接触的时间够长，而产生令人满意的效果。</li>
+</ul>
+<h1 id="防辐设备"><a href="#防辐设备" class="headerlink" title="防辐设备"></a>防辐设备</h1><ul>
+<li><p>为了要将所有重要的步骤交代清楚，应该再将几个小问题说明一下。例如，前文曾经简略地谈到，用乙炔喷灯时要考虑铀有发火燃烧的可能性。其实，应该说整个机械操作都要在「乳状液槽」中进行。对不太熟悉机械技术操作的人而言，所谓乳状液就是一种看来像牛乳一样的液体，和油有许多相似之处，可是不会发火燃烧。这种乳状液在一般机械工厂供货商处都很容易买到，而且不会有入问你买这种东西干什么?用了这种乳状液，可以使危险降到最低程度。事实上，若我们要溶解铀或对铀作机械处理，最好在纯氮的大气中才安全。可是如果你够小心，而且运气又好的话，那么也不必用这种极端安全的方法。辐射的问题是比较麻烦的一点，镭的辐射量和重量成正比，但铀的辐射量和重量却是成指数关系(也是这种性质使它具有BOOM性)。因为每个半球所装的质量都超过了临界值的一半，所以和它们同在一间房子里非常地危险。只吸进去一点点含放射性尘埃的空气，就意味着你马上要离开这个世界。因此我建议所有的工作人员应有其它的氧气供应，每人口中含个氧气管或可解决这个问题。但要通盘解决辐射的问题可能比较麻烦，不过只要有决心，加上智能和运气，这问题还是可以克服的。我还要建议采用一种用铅作成外壳而且有动力的轮椅，让操作员坐在里面可以安全地作业。上面只要开个小缝，用铅作的玻璃当窗户，操作员就可以看到外面。铅作的袖子和手套，可以用来作一些需要和铀碰触的机械动作。为了防止辐射外逸，整栋房子的墙壁、地板都需覆盖上一层铅；地下室的天花板也要加上一层铅板，以免接收部分产生辐射的问题。算起来起码要用上6~8吨的铅，以维持基本的安全问题。这么一来，又得多花工夫支撑地板，免得垮下来。这些工作都作好了，就可以开始动手制造原子弹。如果你想作一道「红烧兔子」大餐，打开食谱第一步就是要抓一只兔子来!同理，现在你也会问:「怎样把铀235弄到手?」(铀235通常此钸容易拿到。)其实，你只要平时注意看报纸，应该不难知道，核能发电厂里就有。只要由电厂里偷根控制棒出来，把它熔了，再把其中没有用的铀238分离出来就成了。要潜入一个核子反应炉，说起来并不是什么太难的事，尤其大学校园中的核子反应炉，都只有些马马虎虎的安全设施。一般设施就是些带刺铁丝网围墙，门口站了一两个警卫。事前可以作出误闯的样子来几次投石问路，看看有没有什么电子安全装置，大概结果都是根本没有的。可是我们偷偷摸摸的潜进去并没有什么用，因为铀非常的重，不要讲是一个人，就算是一队人马开进去，也搬不到足够的分量出来。尤其这批人马又身装铅甲以防辐射，就更不管用了。依我之见，干脆偷辆卡车和拖车(要那种特重型的，就是运三峡电站转子的那种)，干掉警卫，代以自己人，然后就直闯进去拿你要的东西，很干脆，效率又高。不过，反应器都是装在一个镍-铁合金的球状容器里，容器再浸在水中，通常，旁边会有千斤顶，以便修护时用，所以也可以顺便用来把整个反应炉心起出来放到卡车里。</p>
+</li>
+<li><p>不过要注意一件事，搬动反应器时要拔出一些燃料棒，或是插进一些节制棒，否则你和整个反应器都要化为灰烬。建议你或可向当时被<strong>你挟制的人质</strong>请教这方面的技术，以便搬动炉心。此外，整个反应器重约50吨，加上拖车需要6寸厚的铅板作防护，所以拖车如何拖动65吨的重量，还是颇伤脑筋的(所以前面要用特重型的拖车，要不然到了地，炉子也搬上车了，却发现拖不动，那不是面子都丢尽了)。或者，你觉得搬走整个反应器不切实际，也可以只带走约1200磅的备用燃料棒。不过千万也要带着石墨或铅，免得燃料棒因不断地反应生热而熔化了。如果你忘了这步骤，回家打开盖子，只会看到一堆熔化了的铀，而且四处散射，可能你当场就一命呜呼而遗笑万年。性命是小，这脸咱可丢不起，所以别忘记拿了1200磅的燃料棒之后，要和15000磅的石墨或铅混合。反应器的铀大约含3%的铀235(自然界铀则只含0.5%的铀235)，做原子弹的铀则需要97%的铀235，否则根本不BOOM。到手的1200磅燃料棒，可以提炼出所需要约36磅的铀235，不过要有耐心和经验去分离它。如果你自知无法全部把铀235分离出来，就得多弄点燃料棒。一般说来，以目前的技术，要达到每次增加纯度25%并没有什么问题，所以你最少要弄到4800磅的燃料棒，若能弄到9600磅最好。把这些加上去，你总共要带15万磅(75吨)的东西。其次还要找个地方放这些东西，我建议你租间仓库，如用原来那两层楼的建筑来分离铀似乎不太实际，因为这至少需要2万平方尺的空间。</p>
+</li>
+</ul>
+<h1 id="分离高招"><a href="#分离高招" class="headerlink" title="分离高招"></a>分离高招</h1><ul>
+<li><p>下面就要考虑用什么方法来分离铀235。对恐怖份子来说，气体扩散法是好方法之一，这也是早期制造原子弹时所采用的，不但可靠又不必太复杂的技术。不过花费较多，而且所用的化学药品更是吓人。首先，你要有约12哩长的特殊玻璃线钢管，并以60吨的氢氟酸(HF)形成六氟化铀，然后吹向一具有特殊小孔的膜。因为六氟化铀238较重，在经过这层膜时会被陷住而不易透过。每过一次可使铀235的成分增加0.5%，如此程序只要反复操作，所得六氟化铀235的成分就愈大，最后只要把六氟化铀中的氟分离出来就行了。因为氢氟酸很贵，而且不易取得所以最好是去偷一点来，要不然就先去偷个几百万美金也行。如果你觉得此路不通，还有其它的办法。你可以在树林里建个滋生反应器(BreederReactor)，用铀来作钸，再用化学上的技术分离即可。至于如何建滋生反应器，也不是难事，随便一本大学教科书，都可以告诉你好几种方法。虽然在理论上没有困难，但是也有它实际上的难处。</p>
+</li>
+<li><p>不过如果你刚好有私人用的小河，又有几火车的钠，数量可观的不锈钢管，一百亩与外界隔离的土地，那就没有间题。如果对这两种方法你都没有兴趣，还有一些有趣的新技术可供参考。你可以先用一块低温磁铁(CryogenicMagnet)，它在液态氦的温度(约零下270°C)下能保持20,000高斯的磁扬…不过，唔，不过下面的程序太复杂了…还有一法是用雷射，因为铀238较重，被激光束照射后，运动的偏离角比铀235小。所以若在和雷射光垂直的平面上洒上一层铀，则铀235、铀238可藉其偏离角来分离。此法原理上简单可行，但时间上太慢。一天大概只能处理20磅的铀(含235和238)，而分离的效率约12.5%，每处理一次可以产生约10%的铀235，所以要处理9次才能达到原子弹的标准。如此算来，从9600磅磅的燃料棒中分离出36磅纯度97%的铀235，约需费时四年。然而，它的辐射量又使你根本没有四年好活，所以还得找三两个志愿者来完成你的未竟之志。</p>
+</li>
+</ul>
+<div class="note info no-icon flat"><p>因此，若能有愚公移山之志，或可成功，祝你好运!</p>
+</div></article><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/14388.html"><img class="prev-cover" src="https://upyun.goku.top/blog/git.jpeg" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Git基础教程，复习回顾</div></div></a></div><div class="next-post pull-right"><a href="/posts/9365.html"><img class="next-cover" src="https://upyun.goku.top/blog/jvm.jpeg" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JVM学习-类加载</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/b1f3f1c4.html" title="Java伪随机数打印任意的字母数字"><img class="cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2022-11-17</div><div class="title">Java伪随机数打印任意的字母数字</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%8A%A8%E5%B7%A5"><span class="toc-number">2.</span> <span class="toc-text">开始动工</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%B2%E8%BE%90%E8%AE%BE%E5%A4%87"><span class="toc-number">3.</span> <span class="toc-text">防辐设备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%86%E7%A6%BB%E9%AB%98%E6%8B%9B"><span class="toc-number">4.</span> <span class="toc-text">分离高招</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/2f7a06ce.html" title="🧠ChatGPT 中文调教指南"><img src="https://upyun.goku.top/blog/post_banner_11.jpeg?_r_=4368ceda-0914-6a44-6fc4-a1233c5e3de3" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="🧠ChatGPT 中文调教指南"/></a><div class="content"><a class="title" href="/posts/2f7a06ce.html" title="🧠ChatGPT 中文调教指南">🧠ChatGPT 中文调教指南</a><time datetime="2024-10-19T04:45:36.000Z" title="发表于 2024-10-19 12:45:36">2024-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f34cb02b.html" title="TVBox接口备忘"><img src="https://upyun.goku.top/blog/post_banner_7.jpeg?_r_=e1a8d92c-592b-13f8-88c5-2801feef081e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="TVBox接口备忘"/></a><div class="content"><a class="title" href="/posts/f34cb02b.html" title="TVBox接口备忘">TVBox接口备忘</a><time datetime="2024-10-05T20:22:37.458Z" title="发表于 2024-10-06 04:22:37">2024-10-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/20e6247.html" title="docker构建多平台镜像"><img src="https://upyun.goku.top/blog/docker.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="docker构建多平台镜像"/></a><div class="content"><a class="title" href="/posts/20e6247.html" title="docker构建多平台镜像">docker构建多平台镜像</a><time datetime="2024-08-30T13:20:43.000Z" title="发表于 2024-08-30 21:20:43">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/3a71ca1d.html" title="nginx转发请求丢失自定义请求头"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=579af843-e4df-3009-be93-2416b88aba45" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="nginx转发请求丢失自定义请求头"/></a><div class="content"><a class="title" href="/posts/3a71ca1d.html" title="nginx转发请求丢失自定义请求头">nginx转发请求丢失自定义请求头</a><time datetime="2024-08-30T13:20:43.000Z" title="发表于 2024-08-30 21:20:43">2024-08-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/5dd44277.html" title="QuantumultX在访问指定网站时，运行指定脚本"><img src="https://upyun.goku.top/blog/QuantumultX.png" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="QuantumultX在访问指定网站时，运行指定脚本"/></a><div class="content"><a class="title" href="/posts/5dd44277.html" title="QuantumultX在访问指定网站时，运行指定脚本">QuantumultX在访问指定网站时，运行指定脚本</a><time datetime="2023-11-16T12:14:16.000Z" title="发表于 2023-11-16 20:14:16">2023-11-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2024 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">47</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">30</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">26</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>16</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>1</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
