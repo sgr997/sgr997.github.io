@@ -1,0 +1,108 @@
+/*移动端隐藏顶部块区域*/
+@media screen and (max-width: 768px) {
+  #topPostGroup {
+    height: 240px;
+  }
+  #swiper_container_blog {
+    padding: 10px;
+  }
+  #home_top {
+    padding: 0px 20px 0px;
+    display: none;
+  }
+}
+/*移动端隐藏顶部块区域end*/
+/* 堵猫猫 */
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%;
+    margin: 3% auto;
+    text-align: center
+}
+
+.aspect-ratio iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0
+}
+
+@media screen and (max-width: 500px) {
+    .aspect-ratio {
+        padding-bottom: 100%;
+        position: relative !important;
+        overflow: hidden !important;
+        position: relative;
+        width: 100%;
+        height: 0;
+        margin: 3% auto;
+        text-align: center
+    }
+
+    canvas {
+        width: 570px !important;
+        height: 501px !important
+    }
+
+    .aspect-ratio iframe {
+        position: absolute;
+        transform: scale(.6) !important;
+        width: 570px !important;
+        height: 570px !important;
+        left: -120px !important;
+        top: -100px !important
+    }
+}
+
+/* 堵猫猫end */
+
+/*文章摘要*/
+.post-TianliGPT {
+    margin-bottom: 40px
+}
+
+/*模糊加载，1s为加载动画的时间，1为加载动画的次数，ease-in-out为动画效果*/
+html {
+    -webkit-animation: imgblur 1s 1 ease-in-out;
+    animation: imgblur 1s 1 ease-in-out;
+}
+
+@keyframes imgblur {
+    0% {
+        filter: blur(5px);
+    }
+
+    100% {
+        filter: blur(0px);
+    }
+}
+
+/*适配使用-webkit内核的浏览器 */
+@-webkit-keyframes imgblur {
+    0% {
+        -webkit-filter: blur(5px);
+    }
+
+    100% {
+        -webkit-filter: blur(0px);
+    }
+}
+/*模糊加载结束*/
+
+/* 图片大小优化  */
+#article-container img {
+    display: block;
+    margin: 0 auto .8rem;
+    max-width: 90%;
+    max-height: 450px
+}
+
+@media screen and (max-width: 768px) {
+    #article-container img {
+        max-width:100%
+    }
+}
+/* 图片大小优化end  */
