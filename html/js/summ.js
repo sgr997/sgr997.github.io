@@ -174,60 +174,66 @@ function tianliGPT(usePjax) {
                 console.error('GPT错误：可能由于一个或多个错误导致没有正常运行，原因出在获取文章容器中的内容失败，或者可能是在文章转换过程中失败。', e);
                 return '';
             }
-        },
-
         fetchTianliGPT: async function (content) {
-            const key = getPostUrl();
-            const summary = getDataIfNotExpired(key)
-            if (summary) {
-                console.log('from cache')
+            // 从页面 meta description 读取摘要（由 Hexo frontmatter description 生成）
+            const metaDesc = document.querySelector('meta[name="description"]');
+            const desc = metaDesc ? metaDesc.getAttribute('content') : '';
+            
+            if (desc && desc.trim().length > 10) {
+                console.log('AI摘要: 从页面 description 读取');
                 return {
-                    summary: summary,
-                    audioId: '-1' // 获取音频的 ID
+                    summary: desc.trim(),
+                    audioId: '-1'
                 };
             }
-            // const apiUrl = `http://localhost:3000/summary.json?postKey=${encodeURIComponent(key)}&content=${encodeURIComponent(content)}&t=` + new Date().getTime();
-            const apiUrl = `https://blogapi.goku.top/summary.json?postKey=${encodeURIComponent(key)}&content=${encodeURIComponent(content)}&t=` + new Date().getTime();
+            
+            // fallback: 没有 description 时显示提示
+            return {
+                summary: '暂无摘要，作者还未为这篇文章添加 description。',
+                audioId: '-1'
+            };
+        },
 
-            const timeout = 60000; // 设置超时时间（毫秒）
 
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), timeout);
-                const response = await fetch(apiUrl, {signal: controller.signal});
-                if (response.ok) {
-                    const data = await response.json();
-                    saveDataWithTimestamp(key, data.summary)
-                    return {
-                        summary: data.summary,
-                        audioId: '-1' // 获取音频的 ID
-                    };
-                } else {
-                    if (response.status === 402 || response.status === 403) {
-                        document.querySelectorAll('.post-TianliGPT').forEach(el => {
-                            el.style.display = 'none';
-                        });
-                        return {
-                            summary: '获取文章摘要失败，当前网站没有调用权限。',
-                            audioId: '-1' // 获取音频的 ID
-                        }
-                    }
-                    throw new Error('获取文章摘要超时');
-                }
-            } catch (error) {
-                if (error.name === 'AbortError') {
-                    console.error('请求超时');
-                    return {
-                        summary: '获取文章摘要超时。当你出现这个问题时，可能是因为文章过长导致的 AI 运算量过大，您可以稍等一下然后刷新页面重试。',
-                        audioId: '-1' // 获取音频的 ID
-                    }
-                } else {
-                    console.error('请求失败：', error);
-                    return {
-                        summary: '获取文章摘要失败，请稍候重试。',
-                        audioId: '-1' // 获取音频的 ID
-                    }
-                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }
         },
 
