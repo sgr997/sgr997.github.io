@@ -5,8 +5,8 @@
     
     <entry>
       <title>从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</title>
-      <link href="/posts/8e4397cb.html"/>
-      <url>/posts/8e4397cb.html</url>
+      <link href="/posts/b468c6cc.html"/>
+      <url>/posts/b468c6cc.html</url>
       
         <content type="html"><![CDATA[<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote><p>本篇是 AI Agent 系列的收官总结。以下是系列完整目录，建议收藏作为学习索引。</p></blockquote><p><strong>🏗️ 基础理论篇</strong></p><ol><li><a href="/posts/fca03c3e.html">从零理解 RAG：检索增强生成完整指南</a></li><li><a href="/posts/33f9bc72.html">Embedding 向量化的魔法：从文本到向量的数学之旅与 Java 实战</a></li><li><a href="/posts/a3f7b2e1.html">理解 AI Agent 的大脑：ReAct 模式从入门到实战</a></li><li><a href="/posts/b6013d15.html">Spring AI 核心架构全解析：从 ChatModel 到 Advisor Chain 的设计哲学</a></li></ol><p><strong>🧩 核心组件篇</strong><br>5. <a href="/posts/70d64e78.html">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战</a><br>6. <a href="/posts/2b43307f.html">AI Agent 的记忆力是怎么实现的——LangChain4j Memory 机制深度解析</a><br>7. <a href="/posts/fd311830.html">AI Agent 的工具箱：深入理解 Tool Use 与 Spring AI Function Calling 实战</a><br>8. <a href="/posts/f0b37481.html">让 AI 学会”说人话”——Spring AI 结构化输出实战</a><br>9. <a href="/posts/7724df09.html">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</a></p><p><strong>🏛️ 架构设计篇</strong><br>10. <a href="/posts/e05701b9.html">AI Agent 的规划大脑：从任务分解到自适应执行策略</a><br>11. <a href="/posts/0a5950eb.html">AI Agent 的工作流编排：从顺序链到自适应 DAG 的 Java 实战</a><br>12. <a href="/posts/33667def.html">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</a><br>13. <a href="/posts/4832ee17.html">Agent 间如何对话：A2A 协议深度解析与 Java 实战</a></p><p><strong>🔍 知识检索篇</strong><br>14. <a href="/posts/613efee9.html">AI Agent 的知识检索引擎：从向量搜索到智能检索策略的 Java 实战</a><br>15. <a href="/posts/746c8779.html">当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</a><br>16. <a href="/posts/ed7564f3.html">当 RAG 遇到 Agent：Agentic RAG 的架构设计与 Java 实战</a><br>17. <a href="/posts/4dc416f2.html">MCP 模型上下文协议：AI 的万能接口与 MCP Server 实战</a></p><p><strong>🚀 进阶能力篇</strong><br>18. <a href="/posts/ca85dd5c.html">AI Agent 的推理引擎：从 Chain-of-Thought 到推理模型的深度解析与 Java 实战</a><br>19. <a href="/posts/8cad3739.html">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</a><br>20. <a href="/posts/fff28300.html">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</a><br>21. <a href="/posts/1d413ee9.html">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</a><br>22. <a href="/posts/8d500988.html">AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战</a></p><p><strong>🛡️ 生产保障篇</strong><br>23. <a href="/posts/8f2b89d0.html">AI Agent 的安全防线：Prompt 注入防御与生产级安全防护实战</a><br>24. <a href="/posts/9ff0e580.html">AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战</a><br>25. <a href="/posts/cca7bdf3.html">AI Agent 的流式响应与实时交互：从 SSE 到 WebSocket 的 Java 实战</a><br>26. <a href="/posts/eb4e7280.html">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</a><br>27. <a href="/posts/a26fbc69.html">AI Agent 评估与优化：从基准测试到生产环境的质量守护实战</a></p><p><strong>🧭 全景总结（本文）</strong></p><hr><h2 id="一、为什么要写这篇收官文"><a href="#一、为什么要写这篇收官文" class="headerlink" title="一、为什么要写这篇收官文"></a>一、为什么要写这篇收官文</h2><p>过去 11 天，我们从 RAG 的第一个概念出发，一路走到了多 Agent 协作和生产级容错。27 篇文章，超过 15 万字，覆盖了 AI Agent 从理论到生产的完整知识体系。</p><p>但文章越多，一个现实问题越突出：<strong>知识是碎片化的</strong>。</p><p>读者打开任何一篇，都能学到具体的技术点。但如果不把这些点连成线、再织成面，就很难形成系统性的认知。这篇收官文的目标就是做这件事——<strong>把 27 篇文章变成一张可导航的知识地图</strong>。</p><h2 id="二、AI-Agent-全景知识图谱"><a href="#二、AI-Agent-全景知识图谱" class="headerlink" title="二、AI Agent 全景知识图谱"></a>二、AI Agent 全景知识图谱</h2><p>如果把 AI Agent 比作一个人，那么这 27 篇文章覆盖的就是这个人从器官到系统的完整解剖图：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                        AI Agent 全景架构                            │</span><br><span class="line">├─────────────────────────────────────────────────────────────────────┤</span><br><span class="line">│                                                                     │</span><br><span class="line">│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐          │</span><br><span class="line">│  │  推理引擎     │◄──►│  规划大脑     │◄──►│  工作流编排   │          │</span><br><span class="line">│  │  CoT/推理模型 │    │  任务分解     │    │  DAG/顺序链   │          │</span><br><span class="line">│  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘          │</span><br><span class="line">│         │                   │                   │                   │</span><br><span class="line">│         ▼                   ▼                   ▼                   │</span><br><span class="line">│  ┌─────────────────────────────────────────────────────┐           │</span><br><span class="line">│  │                   核心执行循环 (ReAct)                │           │</span><br><span class="line">│  │  思考 → 行动 → 观察 → 思考 → 行动 → ...              │           │</span><br><span class="line">│  └────┬──────────┬──────────┬──────────┬───────────────┘           │</span><br><span class="line">│       │          │          │          │                            │</span><br><span class="line">│       ▼          ▼          ▼          ▼                            │</span><br><span class="line">│  ┌────────┐ ┌────────┐ ┌────────┐ ┌────────┐                      │</span><br><span class="line">│  │ 记忆系统│ │ 工具调用│ │ 知识检索│ │ 结构化 │                      │</span><br><span class="line">│  │        │ │        │ │        │ │ 输出   │                      │</span><br><span class="line">│  │ChatMem │ │Function│ │RAG     │ │        │                      │</span><br><span class="line">│  │LangCh4j│ │Calling │ │GraphRAG│ │JSON/XML│                      │</span><br><span class="line">│  │持久化  │ │MCP     │ │Agentic │ │        │                      │</span><br><span class="line">│  └────────┘ └────────┘ └────────┘ └────────┘                      │</span><br><span class="line">│                                                                     │</span><br><span class="line">│  ┌─────────────────────────────────────────────────────┐           │</span><br><span class="line">│  │                  进阶能力层                          │           │</span><br><span class="line">│  │  多模态感知 │ 自我反思 │ 上下文工程 │ 人机协作       │           │</span><br><span class="line">│  └─────────────────────────────────────────────────────┘           │</span><br><span class="line">│                                                                     │</span><br><span class="line">│  ┌─────────────────────────────────────────────────────┐           │</span><br><span class="line">│  │                  生产保障层                          │           │</span><br><span class="line">│  │  安全防护 │ 可观测性 │ 流式响应 │ 容错韧性 │ 评估优化│           │</span><br><span class="line">│  └─────────────────────────────────────────────────────┘           │</span><br><span class="line">│                                                                     │</span><br><span class="line">│  ┌─────────────────────────────────────────────────────┐           │</span><br><span class="line">│  │                  协作与通信层                        │           │</span><br><span class="line">│  │  多Agent系统 │ A2A协议 │ MCP协议 │ Human-in-the-Loop│           │</span><br><span class="line">│  └─────────────────────────────────────────────────────┘           │</span><br><span class="line">│                                                                     │</span><br><span class="line">└─────────────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure><p>每一层都对应系列中的一组文章。它们不是孤立的知识点，而是彼此依赖、互相咬合的齿轮。</p><h2 id="三、学习路线：三条路径由浅入深"><a href="#三、学习路线：三条路径由浅入深" class="headerlink" title="三、学习路线：三条路径由浅入深"></a>三、学习路线：三条路径由浅入深</h2><p>不同背景的读者，适合不同的阅读顺序。我设计了三条路径：</p><h3 id="路径-A：零基础入门（8-篇）"><a href="#路径-A：零基础入门（8-篇）" class="headerlink" title="路径 A：零基础入门（8 篇）"></a>路径 A：零基础入门（8 篇）</h3><p>适合没有 AI 开发经验，但有 Java 基础的开发者。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RAG 入门 → Embedding → ReAct 模式 → 记忆系统(ChatMemory)</span><br><span class="line">    → 工具调用 → 结构化输出 → Prompt 工程 → 评估优化</span><br></pre></td></tr></table></figure><p><strong>核心逻辑</strong>：先理解”AI 怎么获取知识”（RAG + Embedding），再理解”AI 怎么思考和行动”（ReAct），然后逐步搭建一个完整的 Agent。</p><p><strong>读完能做什么</strong>：用 Spring AI 搭建一个具备记忆、工具调用和结构化输出的基础 Agent。</p><h3 id="路径-B：架构师进阶（12-篇）"><a href="#路径-B：架构师进阶（12-篇）" class="headerlink" title="路径 B：架构师进阶（12 篇）"></a>路径 B：架构师进阶（12 篇）</h3><p>适合已经了解 Agent 基础概念，想要设计生产级系统的架构师。</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">路径 A 全部 → 规划大脑 → 工作流 DAG → 多 Agent 系统</span><br><span class="line">    → A2A 协议 → 安全防护 → 可观测性 → 容错韧性</span><br><span class="line">    → 上下文工程 → 人机协作</span><br></pre></td></tr></table></figure><p><strong>核心逻辑</strong>：从单 Agent 扩展到多 Agent，从功能实现深入到生产保障。</p><p><strong>读完能做什么</strong>：设计一个多 Agent 协作系统，具备安全防护、可观测性和容错能力。</p><h3 id="路径-C：深度研究型（全部-27-篇）"><a href="#路径-C：深度研究型（全部-27-篇）" class="headerlink" title="路径 C：深度研究型（全部 27 篇）"></a>路径 C：深度研究型（全部 27 篇）</h3><p>适合想要全面理解 AI Agent 技术栈的技术负责人或布道者。</p><p>按发布时间顺序阅读即可——文章的发布顺序本身就是按照由浅入深设计的。特别推荐以下几篇”串联文”：</p><ul><li><a href="/posts/b6013d15.html">Spring AI 核心架构全解析</a> — 理解框架层的设计哲学</li><li><a href="/posts/ed7564f3.html">当 RAG 遇到 Agent：Agentic RAG</a> — RAG 和 Agent 的交汇点</li><li><a href="/posts/1d413ee9.html">AI Agent 的上下文工程</a> — 从 Token 角度重新审视整个系统</li></ul><h2 id="四、Spring-AI-vs-LangChain4j：怎么选"><a href="#四、Spring-AI-vs-LangChain4j：怎么选" class="headerlink" title="四、Spring AI vs LangChain4j：怎么选"></a>四、Spring AI vs LangChain4j：怎么选</h2><p>系列中同时使用了两个框架，很多读者问”到底该用哪个”。这里给出一个明确的对比：</p><table><thead><tr><th>维度</th><th>Spring AI</th><th>LangChain4j</th></tr></thead><tbody><tr><td><strong>生态归属</strong></td><td>Spring 官方项目</td><td>社区驱动</td></tr><tr><td><strong>设计哲学</strong></td><td>Spring 风格：接口抽象 + 自动配置</td><td>链式调用：Builder 模式 + 流式 API</td></tr><tr><td><strong>学习曲线</strong></td><td>低（熟悉 Spring 的开发者零门槛）</td><td>中（需要理解 Chain&#x2F;Agent 抽象）</td></tr><tr><td><strong>多模型支持</strong></td><td>30+ 模型提供商</td><td>20+ 模型提供商</td></tr><tr><td><strong>Function Calling</strong></td><td><code>@Tool</code> 注解 + 自动注册</td><td><code>@Tool</code> 注解 + AiServices</td></tr><tr><td><strong>RAG 支持</strong></td><td>内置 DocumentReader&#x2F;VectorStore 抽象</td><td>内置 EmbeddingStore + DocumentSplitter</td></tr><tr><td><strong>Memory</strong></td><td>Advisor Chain 插件式</td><td>ChatMemory 接口 + 多种实现</td></tr><tr><td><strong>MCP 支持</strong></td><td>原生集成（Client + Server）</td><td>通过 MCP SDK 集成</td></tr><tr><td><strong>流式输出</strong></td><td>Flux<Response> 原生支持</td><td>StreamingChatLanguageModel</td></tr><tr><td><strong>生产就绪</strong></td><td>Spring 生态加持（Actuator&#x2F;Micrometer）</td><td>需要自行集成监控</td></tr><tr><td><strong>社区活跃度</strong></td><td>高（Spring 团队维护）</td><td>中高（活跃但非大厂背书）</td></tr><tr><td><strong>适合场景</strong></td><td>企业级 Spring Boot 项目</td><td>快速原型 &#x2F; Python 背景团队</td></tr></tbody></table><h3 id="我的建议"><a href="#我的建议" class="headerlink" title="我的建议"></a>我的建议</h3><p><strong>如果你是 Java&#x2F;Spring 技术栈</strong> → 选 <strong>Spring AI</strong>。理由很简单：你的团队已经熟悉 Spring，Spring AI 的自动配置和 Actuator 集成让生产化成本最低。</p><p><strong>如果你需要快速验证想法</strong> → 选 <strong>LangChain4j</strong>。它的链式 API 更直观，上手更快，适合 Hackathon 或 PoC。</p><p><strong>如果团队同时有 Python 和 Java</strong> → 两者都了解一下。LangChain（Python）和 LangChain4j 的概念是相通的，跨语言协作时更容易对齐。</p><p><strong>实际上</strong>：系列中两个框架都用了，这不是巧合——理解两个框架的设计差异，比死守一个框架更有价值。当你理解了 ChatMemory 接口在 LangChain4j 中的设计，再看 Spring AI 的 Advisor Chain，你会发现它们解决的是同一个问题，只是抽象层次不同。</p><h2 id="五、从-Agent-到-Coding-Agent：下一个前沿"><a href="#五、从-Agent-到-Coding-Agent：下一个前沿" class="headerlink" title="五、从 Agent 到 Coding Agent：下一个前沿"></a>五、从 Agent 到 Coding Agent：下一个前沿</h2><p>AI Agent 最激动人心的应用场景，不是聊天机器人，不是 RAG 问答——而是 <strong>AI 自己写代码</strong>。</p><p>过去一年，Coding Agent 从”补全几行代码”进化到了”独立完成一个功能模块”。这个领域的代表产品：</p><ul><li><strong>Claude Code</strong>（Anthropic）— 终端原生的自主编程 Agent</li><li><strong>GitHub Copilot</strong>（Microsoft&#x2F;GitHub）— IDE 集成的 AI 编程助手</li><li><strong>Codex</strong>（OpenAI）— 云端异步编程 Agent</li><li><strong>Cursor</strong> — AI-native IDE</li></ul><p>如果你读完了我们的 AI Agent 系列，你会发现一个有趣的事情：<strong>Coding Agent 的架构，和我们讲的 Agent 架构是同构的</strong>。</p><table><thead><tr><th>Agent 概念</th><th>Coding Agent 实现</th></tr></thead><tbody><tr><td>ReAct 循环</td><td>读代码 → 思考 → 写代码 → 运行测试 → 观察结果</td></tr><tr><td>工具调用</td><td>文件读写、终端命令、Git 操作、浏览器</td></tr><tr><td>记忆系统</td><td>CLAUDE.md 项目上下文、会话历史、项目记忆</td></tr><tr><td>RAG</td><td>代码库搜索、文档检索、AST 分析</td></tr><tr><td>多 Agent</td><td>子 Agent 并行处理不同模块</td></tr><tr><td>人机协作</td><td>代码审查、权限审批、Plan 模式</td></tr><tr><td>上下文工程</td><td>压缩策略、Token 预算、&#x2F;compact 命令</td></tr><tr><td>安全防护</td><td>权限控制、危险命令拦截、沙箱执行</td></tr><tr><td>可观测性</td><td>Token 用量追踪、成本监控、日志审计</td></tr></tbody></table><p><strong>这不是巧合</strong>——Coding Agent 就是 AI Agent 理论在”软件开发”这个垂直领域的最佳实践。</p><h2 id="六、接下来的计划"><a href="#六、接下来的计划" class="headerlink" title="六、接下来的计划"></a>六、接下来的计划</h2><p>下一篇系列，我们将深入 <strong>Claude Code</strong>——目前最强大的终端原生 Coding Agent。</p><p>不同于泛泛而谈的”使用教程”，我们会像这个系列一样，<strong>从底层原理到高级实战，由浅入深地拆解它的每一个能力</strong>：</p><ul><li>它的 Agent Loop 是怎么工作的？</li><li>CLAUDE.md 的上下文工程有哪些最佳实践？</li><li>Hooks 和 MCP 如何扩展它的能力边界？</li><li>多 Agent 编排如何实现复杂的开发任务？</li><li>怎么把它集成到 CI&#x2F;CD 流水线中？</li></ul><p>如果你已经读完了 AI Agent 系列，你会发现：<strong>你已经具备了理解 Coding Agent 的全部理论基础</strong>。</p><p>接下来，就是把这些理论变成你的生产力。</p><h2 id="七、写在最后"><a href="#七、写在最后" class="headerlink" title="七、写在最后"></a>七、写在最后</h2><p>27 篇文章，11 天，15 万字。</p><p>这个系列的初衷很简单：<strong>让 Java 开发者不用去翻英文文档，也能系统性地掌握 AI Agent 的完整知识体系</strong>。</p><p>如果你只读了其中几篇，希望这篇收官文能帮你找到下一步该读什么。如果你全部读完了——恭喜，你已经具备了在 Java 生态中构建生产级 AI Agent 系统的理论基础。</p><p><strong>理论够了，该动手了。</strong></p><p>下个系列见。</p>]]></content>
       
@@ -20,13 +20,13 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
+            <tag> Java </tag>
+            
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> 知识图谱 </tag>
             
@@ -55,11 +55,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> Human-in-the-Loop </tag>
             
@@ -92,17 +92,17 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
             
-            <tag> 成本优化 </tag>
+            <tag> LangChain4j </tag>
             
             <tag> Token管理 </tag>
             
             <tag> 上下文工程 </tag>
+            
+            <tag> 成本优化 </tag>
             
         </tags>
       
@@ -127,19 +127,19 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
+            
+            <tag> Human-in-the-Loop </tag>
             
             <tag> 容错 </tag>
             
             <tag> 重试策略 </tag>
             
             <tag> 断路器 </tag>
-            
-            <tag> Human-in-the-Loop </tag>
             
         </tags>
       
@@ -164,11 +164,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> Reflexion </tag>
             
@@ -199,11 +199,11 @@
       
         <tags>
             
+            <tag> AI Agent </tag>
+            
             <tag> Java </tag>
             
             <tag> Spring Boot </tag>
-            
-            <tag> AI Agent </tag>
             
             <tag> A2A </tag>
             
@@ -232,11 +232,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> 多模态 </tag>
             
@@ -269,11 +269,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> Chain-of-Thought </tag>
             
@@ -306,9 +306,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> AI Agent </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring AI </tag>
             
@@ -341,9 +341,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> AI Agent </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring AI </tag>
             
@@ -376,11 +376,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> SSE </tag>
             
@@ -411,19 +411,19 @@
       
         <tags>
             
+            <tag> AI Agent </tag>
+            
+            <tag> Spring AI </tag>
+            
             <tag> LangChain4j </tag>
             
-            <tag> AI Agent </tag>
+            <tag> 成本优化 </tag>
             
             <tag> 可观测性 </tag>
             
             <tag> OpenTelemetry </tag>
             
-            <tag> Spring AI </tag>
-            
             <tag> APM </tag>
-            
-            <tag> 成本优化 </tag>
             
         </tags>
       
@@ -483,13 +483,13 @@
       
         <tags>
             
-            <tag> RAG </tag>
-            
-            <tag> 向量检索 </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> RAG </tag>
+            
+            <tag> 向量检索 </tag>
             
             <tag> Reranking </tag>
             
@@ -518,13 +518,13 @@
       
         <tags>
             
-            <tag> RAG </tag>
-            
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
+            
+            <tag> RAG </tag>
             
             <tag> Agentic RAG </tag>
             
@@ -555,11 +555,11 @@
             
             <tag> Java </tag>
             
-            <tag> RAG </tag>
+            <tag> Spring AI </tag>
             
             <tag> LangChain4j </tag>
             
-            <tag> Spring AI </tag>
+            <tag> RAG </tag>
             
             <tag> Embedding </tag>
             
@@ -590,17 +590,17 @@
       
         <tags>
             
+            <tag> LangChain4j </tag>
+            
+            <tag> 知识图谱 </tag>
+            
+            <tag> Spring Boot </tag>
+            
             <tag> RAG </tag>
             
             <tag> LLM </tag>
             
-            <tag> Spring Boot </tag>
-            
-            <tag> LangChain4j </tag>
-            
             <tag> GraphRAG </tag>
-            
-            <tag> 知识图谱 </tag>
             
         </tags>
       
@@ -625,11 +625,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> 成本优化 </tag>
             
@@ -660,11 +660,11 @@
       
         <tags>
             
-            <tag> Spring Boot </tag>
+            <tag> LangChain4j </tag>
             
             <tag> Multi-Agent </tag>
             
-            <tag> LangChain4j </tag>
+            <tag> Spring Boot </tag>
             
             <tag> 分布式系统 </tag>
             
@@ -693,11 +693,11 @@
       
         <tags>
             
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> Prompt Engineering </tag>
             
@@ -726,13 +726,13 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
-            <tag> LangChain4j </tag>
-            
             <tag> AI Agent </tag>
             
+            <tag> Java </tag>
+            
             <tag> Spring AI </tag>
+            
+            <tag> LangChain4j </tag>
             
             <tag> Planning </tag>
             
@@ -761,11 +761,11 @@
       
         <tags>
             
+            <tag> AI Agent </tag>
+            
             <tag> Java </tag>
             
             <tag> LangChain4j </tag>
-            
-            <tag> AI Agent </tag>
             
             <tag> Memory </tag>
             
@@ -823,17 +823,17 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
-            <tag> Python </tag>
-            
             <tag> AI Agent </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring AI </tag>
             
             <tag> Function Calling </tag>
             
             <tag> MCP </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -858,9 +858,9 @@
       
         <tags>
             
-            <tag> Java </tag>
-            
             <tag> AI Agent </tag>
+            
+            <tag> Java </tag>
             
             <tag> Spring AI </tag>
             
@@ -891,15 +891,15 @@
       
         <tags>
             
-            <tag> LLM </tag>
-            
-            <tag> Spring Boot </tag>
+            <tag> AI Agent </tag>
             
             <tag> LangChain4j </tag>
             
-            <tag> AI Agent </tag>
+            <tag> Spring Boot </tag>
             
             <tag> Memory </tag>
+            
+            <tag> LLM </tag>
             
         </tags>
       
@@ -957,9 +957,9 @@
       
         <tags>
             
-            <tag> LLM </tag>
-            
             <tag> AI Agent </tag>
+            
+            <tag> LLM </tag>
             
             <tag> ReAct </tag>
             
@@ -1019,15 +1019,15 @@
       
         <tags>
             
-            <tag> RAG </tag>
+            <tag> Spring Boot </tag>
             
-            <tag> LLM </tag>
+            <tag> RAG </tag>
             
             <tag> 向量检索 </tag>
             
-            <tag> TF-IDF </tag>
+            <tag> LLM </tag>
             
-            <tag> Spring Boot </tag>
+            <tag> TF-IDF </tag>
             
         </tags>
       
@@ -1248,7 +1248,7 @@
       <link href="/posts/8f5930f3.html"/>
       <url>/posts/8f5930f3.html</url>
       
-        <content type="html"><![CDATA[<blockquote><p>各平台、机构及一些投诉举报电话收集，记录这些号码可以让你在生活中应对各种情况，如紧急救助、消费维权、服务咨询、网上购物、媒体举报、政府监督等，节省时间和精力，提高效率。<br>信息收集于网络，不保证绝对正确，使用了New Bing进行了筛选过滤，去除了已经过时、不存在的机构信息，希望可以对你有所帮助！</p></blockquote><h2 id="银行保险"><a href="#银行保险" class="headerlink" title="银行保险"></a>银行保险</h2><ul><li>工商银行 95588</li><li>建设银行 95533</li><li>中国人寿 95519</li><li>太平洋保险 95500</li><li>中国平安保险集团 95511</li><li>新华人寿保险 95567</li><li>医疗保险查询 96102</li><li>泰康人寿保险 95522</li></ul><h2 id="紧急救助"><a href="#紧急救助" class="headerlink" title="紧急救助"></a>紧急救助</h2><ul><li>报警台 110</li><li>火警台 119</li><li>医疗急救台 120</li><li>交通事故报警台 122</li><li>水上求救 12395</li><li>短信报警号码 12110</li><li>非紧急救助中心 12345</li></ul><h2 id="投诉举报"><a href="#投诉举报" class="headerlink" title="投诉举报"></a>投诉举报</h2><ul><li>消费者投诉热线 12315</li><li>价格投诉热线 12358</li><li>质量投诉 12365</li><li>环保投诉 12369</li><li>税务投诉 12366</li><li>公共卫生监督 12320</li><li>市长热线 12345</li><li>法律援助 12348</li><li>妇女维权 12310</li><li>民工维权 12350</li></ul><h2 id="铁路航空"><a href="#铁路航空" class="headerlink" title="铁路航空"></a>铁路航空</h2><ul><li>铁路12306</li><li>国航 95583</li><li>海航 95339</li><li>南航 95539</li><li>东航 95508</li><li>深航 95080</li><li>厦航 95555</li><li>山航 95369</li></ul><h2 id="快递客服"><a href="#快递客服" class="headerlink" title="快递客服"></a>快递客服</h2><ul><li>申通快递 4008895543</li><li>EMS 11183</li><li>顺丰速运 4008111111</li><li>圆通速递 02169777888</li><li>中通速递 02139777777</li><li>韵达快运 02139207888</li><li>天天快递 02167662333</li><li>汇通快运 02162963636</li><li>速尔快递 4008822168</li><li>德邦物流 4008305555</li><li>宅急送 4006789000</li><li>中铁快运 <strong>95372</strong></li><li>鑫飞鸿快递 <strong>02169781990</strong></li><li>UPS <strong>4008208388</strong></li><li>FedEx(联邦快递）<strong>4008861888</strong></li></ul><h2 id="通讯客服"><a href="#通讯客服" class="headerlink" title="通讯客服"></a>通讯客服</h2><ul><li>中国移动: <strong>10086</strong></li><li>中国联通: <strong>10010</strong></li><li>中国电信: <strong>10000</strong></li><li>中国邮政: <strong>11185</strong></li><li>查号台: <strong>114</strong></li><li>移动信息查询: <strong>12580</strong></li><li>联通114: <strong>114</strong></li><li>电信114: <strong>114</strong></li><li>电话障碍申告台: <strong>112</strong></li><li>中国电信1接入号: <strong>17900</strong></li><li>联通1P接入号: <strong>17910</strong></li><li>移动P接入号: <strong>17951</strong></li><li>联通长途接入号: <strong>193</strong></li></ul><h2 id="网上购物"><a href="#网上购物" class="headerlink" title="网上购物"></a>网上购物</h2><ul><li>淘宝网: <strong>057188158198</strong></li><li>京东商城: <strong>4006065500</strong></li><li>当当网: <strong>4007116699</strong></li><li>亚马逊中国: <strong>4008105111</strong></li><li>美团: <strong>4006605335</strong></li><li>糯米网: <strong>4006500117</strong></li></ul><h2 id="售后服务"><a href="#售后服务" class="headerlink" title="售后服务"></a>售后服务</h2><ul><li>苹果: <strong>4006272273</strong></li><li>诺基亚: <strong>4008800123</strong></li><li>三星: <strong>4008105858</strong></li><li>索尼移动: <strong>4008109000</strong></li><li>联想: <strong>8008108888</strong></li><li>戴尔: <strong>8008580888</strong></li><li>索尼: <strong>8008209000</strong></li><li>飞利浦: <strong>8008201201</strong></li><li>松下: <strong>8008100781</strong></li><li>东芝: <strong>8008108208</strong></li><li>TCL: <strong>4008123456</strong></li><li>肯德基: <strong>4008823823</strong></li><li>必胜客: <strong>4008123123</strong></li><li>真功夫: <strong>4006927927</strong></li></ul><h2 id="租车电话"><a href="#租车电话" class="headerlink" title="租车电话"></a>租车电话</h2><ul><li>神州租车: <strong>4006166666</strong></li><li>一嗨租车: <strong>4008886608</strong></li><li>易到用车: <strong>10107777</strong></li></ul><h2 id="媒体举报"><a href="#媒体举报" class="headerlink" title="媒体举报"></a>媒体举报</h2><ul><li>中央电视台《焦点访谈》：01068579889</li><li>北京复兴路11号中央电视台邮编：100859</li><li>中央电视台《东方时空》：01068508738</li><li>中央电视台《实话实说》：01063984662</li><li>中央电视台《面对面》：01063984655</li><li>中央电视台《新闻调查》：01068579889转198</li><li>中央电视台《今日说法》：01068579889-166</li><li>凤凰台总机 01068977288</li><li>人民日报新闻线索：01065368383</li><li>解放日报新闻热线：862163523600</li><li>新华社新闻热线01063073111 &#x2F; 322</li><li>01063076206 &#x2F; 01063074267</li></ul><h2 id="政府监督"><a href="#政府监督" class="headerlink" title="政府监督"></a>政府监督</h2><ul><li>中组部反映违反选人用人方面的问题举报：电话：区号+12380</li><li>高检检察机关超期羁押举报 电话：01065252000</li><li>高检群众举报职务犯罪电话：01065252000</li><li>邮箱：<a href="mailto:&#99;&#121;&#x69;&#x62;&#64;&#x73;&#112;&#112;&#x2e;&#x67;&#111;&#118;&#46;&#99;&#110;">&#99;&#121;&#x69;&#x62;&#64;&#x73;&#112;&#112;&#x2e;&#x67;&#111;&#118;&#46;&#99;&#110;</a></li><li>高检减刑、假释、保外就医专项检查活动举报电话：01068650468</li><li>国家发改委教育乱收费举报 电话：01068502937 &#x2F; 01066096145 &#x2F; 03715900737 &#x2F; 03715959578</li><li>国家发改委重大建设项目违规举报：01068501111</li><li>农民工工资拖欠问题举报：01068304532</li></ul>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>各平台、机构及一些投诉举报电话收集，记录这些号码可以让你在生活中应对各种情况，如紧急救助、消费维权、服务咨询、网上购物、媒体举报、政府监督等，节省时间和精力，提高效率。<br>信息收集于网络，不保证绝对正确，使用了New Bing进行了筛选过滤，去除了已经过时、不存在的机构信息，希望可以对你有所帮助！</p></blockquote><h2 id="银行保险"><a href="#银行保险" class="headerlink" title="银行保险"></a>银行保险</h2><ul><li>工商银行 95588</li><li>建设银行 95533</li><li>中国人寿 95519</li><li>太平洋保险 95500</li><li>中国平安保险集团 95511</li><li>新华人寿保险 95567</li><li>医疗保险查询 96102</li><li>泰康人寿保险 95522</li></ul><h2 id="紧急救助"><a href="#紧急救助" class="headerlink" title="紧急救助"></a>紧急救助</h2><ul><li>报警台 110</li><li>火警台 119</li><li>医疗急救台 120</li><li>交通事故报警台 122</li><li>水上求救 12395</li><li>短信报警号码 12110</li><li>非紧急救助中心 12345</li></ul><h2 id="投诉举报"><a href="#投诉举报" class="headerlink" title="投诉举报"></a>投诉举报</h2><ul><li>消费者投诉热线 12315</li><li>价格投诉热线 12358</li><li>质量投诉 12365</li><li>环保投诉 12369</li><li>税务投诉 12366</li><li>公共卫生监督 12320</li><li>市长热线 12345</li><li>法律援助 12348</li><li>妇女维权 12310</li><li>民工维权 12350</li></ul><h2 id="铁路航空"><a href="#铁路航空" class="headerlink" title="铁路航空"></a>铁路航空</h2><ul><li>铁路12306</li><li>国航 95583</li><li>海航 95339</li><li>南航 95539</li><li>东航 95508</li><li>深航 95080</li><li>厦航 95555</li><li>山航 95369</li></ul><h2 id="快递客服"><a href="#快递客服" class="headerlink" title="快递客服"></a>快递客服</h2><ul><li>申通快递 4008895543</li><li>EMS 11183</li><li>顺丰速运 4008111111</li><li>圆通速递 02169777888</li><li>中通速递 02139777777</li><li>韵达快运 02139207888</li><li>天天快递 02167662333</li><li>汇通快运 02162963636</li><li>速尔快递 4008822168</li><li>德邦物流 4008305555</li><li>宅急送 4006789000</li><li>中铁快运 <strong>95372</strong></li><li>鑫飞鸿快递 <strong>02169781990</strong></li><li>UPS <strong>4008208388</strong></li><li>FedEx(联邦快递）<strong>4008861888</strong></li></ul><h2 id="通讯客服"><a href="#通讯客服" class="headerlink" title="通讯客服"></a>通讯客服</h2><ul><li>中国移动: <strong>10086</strong></li><li>中国联通: <strong>10010</strong></li><li>中国电信: <strong>10000</strong></li><li>中国邮政: <strong>11185</strong></li><li>查号台: <strong>114</strong></li><li>移动信息查询: <strong>12580</strong></li><li>联通114: <strong>114</strong></li><li>电信114: <strong>114</strong></li><li>电话障碍申告台: <strong>112</strong></li><li>中国电信1接入号: <strong>17900</strong></li><li>联通1P接入号: <strong>17910</strong></li><li>移动P接入号: <strong>17951</strong></li><li>联通长途接入号: <strong>193</strong></li></ul><h2 id="网上购物"><a href="#网上购物" class="headerlink" title="网上购物"></a>网上购物</h2><ul><li>淘宝网: <strong>057188158198</strong></li><li>京东商城: <strong>4006065500</strong></li><li>当当网: <strong>4007116699</strong></li><li>亚马逊中国: <strong>4008105111</strong></li><li>美团: <strong>4006605335</strong></li><li>糯米网: <strong>4006500117</strong></li></ul><h2 id="售后服务"><a href="#售后服务" class="headerlink" title="售后服务"></a>售后服务</h2><ul><li>苹果: <strong>4006272273</strong></li><li>诺基亚: <strong>4008800123</strong></li><li>三星: <strong>4008105858</strong></li><li>索尼移动: <strong>4008109000</strong></li><li>联想: <strong>8008108888</strong></li><li>戴尔: <strong>8008580888</strong></li><li>索尼: <strong>8008209000</strong></li><li>飞利浦: <strong>8008201201</strong></li><li>松下: <strong>8008100781</strong></li><li>东芝: <strong>8008108208</strong></li><li>TCL: <strong>4008123456</strong></li><li>肯德基: <strong>4008823823</strong></li><li>必胜客: <strong>4008123123</strong></li><li>真功夫: <strong>4006927927</strong></li></ul><h2 id="租车电话"><a href="#租车电话" class="headerlink" title="租车电话"></a>租车电话</h2><ul><li>神州租车: <strong>4006166666</strong></li><li>一嗨租车: <strong>4008886608</strong></li><li>易到用车: <strong>10107777</strong></li></ul><h2 id="媒体举报"><a href="#媒体举报" class="headerlink" title="媒体举报"></a>媒体举报</h2><ul><li>中央电视台《焦点访谈》：01068579889</li><li>北京复兴路11号中央电视台邮编：100859</li><li>中央电视台《东方时空》：01068508738</li><li>中央电视台《实话实说》：01063984662</li><li>中央电视台《面对面》：01063984655</li><li>中央电视台《新闻调查》：01068579889转198</li><li>中央电视台《今日说法》：01068579889-166</li><li>凤凰台总机 01068977288</li><li>人民日报新闻线索：01065368383</li><li>解放日报新闻热线：862163523600</li><li>新华社新闻热线01063073111 &#x2F; 322</li><li>01063076206 &#x2F; 01063074267</li></ul><h2 id="政府监督"><a href="#政府监督" class="headerlink" title="政府监督"></a>政府监督</h2><ul><li>中组部反映违反选人用人方面的问题举报：电话：区号+12380</li><li>高检检察机关超期羁押举报 电话：01065252000</li><li>高检群众举报职务犯罪电话：01065252000</li><li>邮箱：<a href="mailto:&#x63;&#x79;&#x69;&#98;&#64;&#115;&#x70;&#x70;&#46;&#103;&#x6f;&#x76;&#46;&#x63;&#x6e;">&#x63;&#x79;&#x69;&#98;&#64;&#115;&#x70;&#x70;&#46;&#103;&#x6f;&#x76;&#46;&#x63;&#x6e;</a></li><li>高检减刑、假释、保外就医专项检查活动举报电话：01068650468</li><li>国家发改委教育乱收费举报 电话：01068502937 &#x2F; 01066096145 &#x2F; 03715900737 &#x2F; 03715959578</li><li>国家发改委重大建设项目违规举报：01068501111</li><li>农民工工资拖欠问题举报：01068304532</li></ul>]]></content>
       
       
       <categories>
@@ -1550,36 +1550,11 @@
     
     
     <entry>
-      <title>堵猫猫小游戏</title>
-      <link href="/posts/d10ad42e.html"/>
-      <url>/posts/d10ad42e.html</url>
-      
-        <content type="html"><![CDATA[<h2 id="娱乐一下吧"><a href="#娱乐一下吧" class="headerlink" title="娱乐一下吧"></a>娱乐一下吧</h2><p>欢迎评论区晒出你的战绩</p><div align="center" class="aspect-ratio">    <iframe src="/html/CatchCat/index.html" scrolling="no" border="0" frameborder="no" framespacing="0" high_quality="1" danmaku="1" allowfullscreen></iframe></div><p><a href="https://github.com/SadTomlzr/catch-cat">游戏源代码</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 娱乐 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 娱乐 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>mac开发环境记录</title>
       <link href="/posts/8baa02f7.html"/>
       <url>/posts/8baa02f7.html</url>
       
-        <content type="html"><![CDATA[<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><h2 id="直接下载安装包安装，无需使用brew安装"><a href="#直接下载安装包安装，无需使用brew安装" class="headerlink" title="直接下载安装包安装，无需使用brew安装"></a>直接下载安装包安装，无需使用brew安装</h2><p><a href="https://link.zhihu.com/?target=https://sourceforge.net/projects/git-osx-installer/">https://link.zhihu.com/?target=https%3A//sourceforge.net/projects/git-osx-installer/</a></p><h2 id="查看git安装位置"><a href="#查看git安装位置" class="headerlink" title="查看git安装位置"></a>查看git安装位置</h2><p>which git</p><h2 id="全局配置查看"><a href="#全局配置查看" class="headerlink" title="全局配置查看"></a>全局配置查看</h2><p>git config –global –list</p><p>git config –list</p><h2 id="设置用户名和邮箱"><a href="#设置用户名和邮箱" class="headerlink" title="设置用户名和邮箱"></a>设置用户名和邮箱</h2><p>git config –global user.name “xxx”</p><p>git config –global user.email “xxxx”</p><h2 id="生成ssh秘钥"><a href="#生成ssh秘钥" class="headerlink" title="生成ssh秘钥"></a>生成ssh秘钥</h2><p>ssh-keygen -t rsa -C “<a href="mailto:&#x78;&#x78;&#120;&#x78;&#64;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">&#x78;&#x78;&#120;&#x78;&#64;&#x6d;&#97;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a>“</p><h2 id="默认存放地址"><a href="#默认存放地址" class="headerlink" title="默认存放地址"></a>默认存放地址</h2><p>~&#x2F;.ssh&#x2F;</p><h1 id="nodejs-amp-nvm"><a href="#nodejs-amp-nvm" class="headerlink" title="nodejs &amp; nvm"></a>nodejs &amp; nvm</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><h3 id="通过pkg安装包安装，如需安装其他版本，请将6-9-4更换为版本号即可"><a href="#通过pkg安装包安装，如需安装其他版本，请将6-9-4更换为版本号即可" class="headerlink" title="通过pkg安装包安装，如需安装其他版本，请将6.9.4更换为版本号即可"></a>通过pkg安装包安装，如需安装其他版本，请将6.9.4更换为版本号即可</h3><p><a href="https://npm.taobao.org/mirrors/node/v6.9.4/node-v6.9.4.pkg">https://npm.taobao.org/mirrors/node/v6.9.4/node-v6.9.4.pkg</a></p><h3 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h3><p>node -v</p><h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p>nvm github：<a href="https://github.com/nvm-sh/nvm#troubleshooting-on-macos">https://github.com/nvm-sh/nvm#troubleshooting-on-macos</a></p><h3 id="执行安装脚本"><a href="#执行安装脚本" class="headerlink" title="执行安装脚本"></a>执行安装脚本</h3><p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh</a> | bash</p><p>或</p><p>wget -qO- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh</a> | bash</p><h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>vim ~&#x2F;.zshrc</p><h4 id="将下边填入进去"><a href="#将下边填入进去" class="headerlink" title="将下边填入进去"></a>将下边填入进去</h4><p>source ~&#x2F;.nvm&#x2F;nvm.sh</p><h4 id="使配置生效"><a href="#使配置生效" class="headerlink" title="使配置生效"></a>使配置生效</h4><p>source ~&#x2F;.zshrc</p><h4 id="验证安装-1"><a href="#验证安装-1" class="headerlink" title="验证安装"></a>验证安装</h4><p>nvm -v</p><h1 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>&#x2F;usr&#x2F;bin&#x2F;ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”</p><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>sudo &#x2F;usr&#x2F;bin&#x2F;ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/uninstall">https://raw.githubusercontent.com/Homebrew/install/master/uninstall</a>)”</p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>命令描述</p><p>brew update更新 Homebrew</p><p>brew search package搜索软件包</p><p>brew install package安装</p><p>brew uninstall package卸载软件包</p><p>brew upgrade升级所有软件包</p><p>brew upgrade package升级指定软件包</p><p>brew list列出已安装的软件包列表</p><p>brew services command package管理 brew 安装软件包</p><p>brew services list列出 brew 管理运行的服务</p><p>brew info package查看软件包信息</p><p>brew deps package列出软件包的依赖关系</p><p>brew help查看帮助</p><p>brew cleanup清除过时软件包</p><p>brew link package创建软件包符号链接</p><p>brew unlink package取消软件包符号链接</p><p>brew doctor检查系统是否存在问题</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="git"><a href="#git" class="headerlink" title="git"></a>git</h1><h2 id="直接下载安装包安装，无需使用brew安装"><a href="#直接下载安装包安装，无需使用brew安装" class="headerlink" title="直接下载安装包安装，无需使用brew安装"></a>直接下载安装包安装，无需使用brew安装</h2><p><a href="https://link.zhihu.com/?target=https://sourceforge.net/projects/git-osx-installer/">https://link.zhihu.com/?target=https%3A//sourceforge.net/projects/git-osx-installer/</a></p><h2 id="查看git安装位置"><a href="#查看git安装位置" class="headerlink" title="查看git安装位置"></a>查看git安装位置</h2><p>which git</p><h2 id="全局配置查看"><a href="#全局配置查看" class="headerlink" title="全局配置查看"></a>全局配置查看</h2><p>git config –global –list</p><p>git config –list</p><h2 id="设置用户名和邮箱"><a href="#设置用户名和邮箱" class="headerlink" title="设置用户名和邮箱"></a>设置用户名和邮箱</h2><p>git config –global user.name “xxx”</p><p>git config –global user.email “xxxx”</p><h2 id="生成ssh秘钥"><a href="#生成ssh秘钥" class="headerlink" title="生成ssh秘钥"></a>生成ssh秘钥</h2><p>ssh-keygen -t rsa -C “<a href="mailto:&#120;&#x78;&#x78;&#x78;&#x40;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#109;">&#120;&#x78;&#x78;&#x78;&#x40;&#x6d;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#109;</a>“</p><h2 id="默认存放地址"><a href="#默认存放地址" class="headerlink" title="默认存放地址"></a>默认存放地址</h2><p>~&#x2F;.ssh&#x2F;</p><h1 id="nodejs-amp-nvm"><a href="#nodejs-amp-nvm" class="headerlink" title="nodejs &amp; nvm"></a>nodejs &amp; nvm</h1><h2 id="nodejs"><a href="#nodejs" class="headerlink" title="nodejs"></a>nodejs</h2><h3 id="通过pkg安装包安装，如需安装其他版本，请将6-9-4更换为版本号即可"><a href="#通过pkg安装包安装，如需安装其他版本，请将6-9-4更换为版本号即可" class="headerlink" title="通过pkg安装包安装，如需安装其他版本，请将6.9.4更换为版本号即可"></a>通过pkg安装包安装，如需安装其他版本，请将6.9.4更换为版本号即可</h3><p><a href="https://npm.taobao.org/mirrors/node/v6.9.4/node-v6.9.4.pkg">https://npm.taobao.org/mirrors/node/v6.9.4/node-v6.9.4.pkg</a></p><h3 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h3><p>node -v</p><h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p>nvm github：<a href="https://github.com/nvm-sh/nvm#troubleshooting-on-macos">https://github.com/nvm-sh/nvm#troubleshooting-on-macos</a></p><h3 id="执行安装脚本"><a href="#执行安装脚本" class="headerlink" title="执行安装脚本"></a>执行安装脚本</h3><p>curl -o- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh</a> | bash</p><p>或</p><p>wget -qO- <a href="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh">https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh</a> | bash</p><h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>vim ~&#x2F;.zshrc</p><h4 id="将下边填入进去"><a href="#将下边填入进去" class="headerlink" title="将下边填入进去"></a>将下边填入进去</h4><p>source ~&#x2F;.nvm&#x2F;nvm.sh</p><h4 id="使配置生效"><a href="#使配置生效" class="headerlink" title="使配置生效"></a>使配置生效</h4><p>source ~&#x2F;.zshrc</p><h4 id="验证安装-1"><a href="#验证安装-1" class="headerlink" title="验证安装"></a>验证安装</h4><p>nvm -v</p><h1 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>&#x2F;usr&#x2F;bin&#x2F;ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/install">https://raw.githubusercontent.com/Homebrew/install/master/install</a>)”</p><h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><p>sudo &#x2F;usr&#x2F;bin&#x2F;ruby -e “$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/master/uninstall">https://raw.githubusercontent.com/Homebrew/install/master/uninstall</a>)”</p><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>命令描述</p><p>brew update更新 Homebrew</p><p>brew search package搜索软件包</p><p>brew install package安装</p><p>brew uninstall package卸载软件包</p><p>brew upgrade升级所有软件包</p><p>brew upgrade package升级指定软件包</p><p>brew list列出已安装的软件包列表</p><p>brew services command package管理 brew 安装软件包</p><p>brew services list列出 brew 管理运行的服务</p><p>brew info package查看软件包信息</p><p>brew deps package列出软件包的依赖关系</p><p>brew help查看帮助</p><p>brew cleanup清除过时软件包</p><p>brew link package创建软件包符号链接</p><p>brew unlink package取消软件包符号链接</p><p>brew doctor检查系统是否存在问题</p>]]></content>
       
       
       <categories>
@@ -1984,9 +1959,9 @@
       
         <tags>
             
-            <tag> JVM </tag>
-            
             <tag> Java </tag>
+            
+            <tag> JVM </tag>
             
         </tags>
       
@@ -2196,9 +2171,9 @@
       
         <tags>
             
-            <tag> JVM </tag>
-            
             <tag> Java </tag>
+            
+            <tag> JVM </tag>
             
         </tags>
       
@@ -2223,9 +2198,9 @@
       
         <tags>
             
-            <tag> 开发问题记录 </tag>
-            
             <tag> Java </tag>
+            
+            <tag> 开发问题记录 </tag>
             
         </tags>
       
@@ -2250,9 +2225,9 @@
       
         <tags>
             
-            <tag> 开发问题记录 </tag>
-            
             <tag> Java </tag>
+            
+            <tag> 开发问题记录 </tag>
             
         </tags>
       
