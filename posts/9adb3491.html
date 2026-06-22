@@ -1,0 +1,650 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>2026开发者终端效率工具指南 | Pei</title><meta name="keywords" content="效率工具,终端,开发者体验,命令行"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="2026开发者终端效率工具指南"><meta name="application-name" content="2026开发者终端效率工具指南"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="2026开发者终端效率工具指南"><meta property="og:url" content="https://blog.goku.top/posts/9adb3491.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="从 shell 提示符到文件查找、版本控制、系统监控，一份让你告别低效操作的现代终端工具清单"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=b942e70f-cc24-5d66-8d54-71ae36ee9937"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=b942e70f-cc24-5d66-8d54-71ae36ee9937"><meta name="description" content="从 shell 提示符到文件查找、版本控制、系统监控，一份让你告别低效操作的现代终端工具清单"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/9adb3491"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: '2026开发者终端效率工具指南',
+  postAI: '',
+  pageFillDescription: '为什么你需要这些工具？, 一、Shell 提示符：Starship, 二、目录跳转：zoxide, 三、文件搜索：ripgrep + fzf, ripgrep：比 grep 快10倍, fzf：万物模糊搜索, 四、文件查看：bat + eza, bat：更好的 cat, eza：更好的 ls, 五、版本控制：lazygit + gh, lazygit：Git 的 TUI 界面, gh：GitHub CLI, 六、系统监控：btop + dust + duf, btop：更现代的 htop, dust：更好的 du, duf：更好的 df, 七、Shell 增强：atuin + mise, atuin：Shell 历史记录的革命, mise：语言版本管理, 八、一站式配置方案, 写在最后为什么你需要这些工具作为开发者我们每天在终端里花大量时间跳目录找代码提交看日志查进程但大部分人的终端还停留在五年前的水平好消息是和社区催生了一批高性能替代品它们不仅更快还提供了现代化的交互体验这篇文章不是推荐个工具的列表而是挑选了我自己每天都在用的真正提升效率的工具覆盖终端使用的完整链路导航搜索编辑版本控制监控一提示符默认的提示符信息太少又丑是跨的提示符定制工具用写的快到无感安装或在或末尾添加会自动检测你所在的项目类型等并显示相关版本号和状态比如在仓库里它会显示分支名数量是否一行全搞定自定义配置也很简单在里写一句话评价配置一次受益终身从此再也回不去默认提示符二目录跳转还在一层一层是的智能替代品基于历史访问频率做模糊匹配安装在配置中添加使用方式极其简洁之前你可能这样现在只要会自动跳到你最常访问的包含的目录查看所有匹配项会弹出交互式选择列表它的核心原理是记录你每次的路径和频率用一个加权算法排序你去得越多的目录优先级越高数据存储在是格式你甚至可以用查询自己的跳转习惯对比的无需交互直接跳转需要选择确认两者可以搭配使用三文件搜索比快倍是写的替代品默认忽略文件速度快得惊人基本用法和语法兼容搜索指定目录正则忽略文件在大型项目里比如项目动辄几千个文件的速度差异非常明显它底层用的是的引擎和内存映射万物模糊搜索是一个通用的模糊查找器可以和几乎任何命令组合搜索文件预览文件内容作为快捷键使用安装时自动配置按弹出文件搜索和结合杀手级用法结合文件搜索历史命令搜索目录跳转这三个快捷键覆盖了终端里的查找需求四文件查看更好的是的替代品自带语法高亮行号标记基本用法语法高亮自动检测显示行号作为的直接替代在中设置别名更好的是的替代品支持图标状态树形视图别名设置效果每个文件类型都有对应图标状态一目了然五版本控制的界面把操作变成了可视化的终端用户界面特别适合处理复杂的场景启动它的核心优势交互式直接拖拽调整顺序交互式可视化选择内容文件预览选中文件直接看改动一键批量合并官方的命令行工具几乎可以在终端里完成所有操作创建实现用户认证模块查看状态创建登录页错误监控六系统监控更现代的替代了界面更美观信息更丰富它的内存网络磁盘监控都是实时动画的而且支持鼠标操作更好的查看当前目录空间占用指定深度更好的表格化显示磁盘使用情况一目了然七增强历史记录的革命替代了内置的支持跨会话同步加密存储云端备份安装添加到配置核心功能上下箭头搜索输入然后按方向键只显示包含当前输入的命令跨会话共享多终端的历史记录统一云端同步换电脑也不丢历史可选存储可以对历史记录做查询搜索历史中所有相关命令按时间范围搜索语言版本管理统一了等工具用一个工具管理所有语言版本安装安装指定版本在项目根目录创建进入目录自动切换版本八一站式配置方案如果你不想一个个装我整理了一个脚本一键安装所有工具一键安装终端效率工具安装终端效率工具配置添加到配置安装完成请重启终端或运行写在最后这些工具的共同特点编写性能优异交互友好配置简单它们不会让你成为更强的开发者但会让你的日常开发体验提升几个档次效率工具的本质不是快而是减少认知负担当你不用再记住目录路径不用再和的正则语法搏斗不用再纠结操作你的注意力才能真正放在写好代码上最后分享一个我的终端工作流提供上下文感知的提示符负责目录导航负责模糊搜索负责文件查看负责操作管理历史命令监控系统状态这套组合覆盖了终端使用的全部场景而且每个工具都只做一件事并做到最好哲学在现代工具链里依然闪闪发光',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-11 08:35:11',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 1.05rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 1.05rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 1.05rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 1.05rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90%E4%B8%8E%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" itemprop="url">工具推荐与效率提升</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>效率工具</span></a><a class="article-meta__tags" href="/tags/%E7%BB%88%E7%AB%AF/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>终端</span></a><a class="article-meta__tags" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>开发者体验</span></a><a class="article-meta__tags" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>命令行</span></a></span></div></div><h1 class="post-title" itemprop="name headline">2026开发者终端效率工具指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-11T04:00:00.000Z" title="发表于 2026-06-11 12:00:00">2026-06-11</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-11T00:35:11.145Z" title="更新于 2026-06-11 08:35:11">2026-06-11</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=b942e70f-cc24-5d66-8d54-71ae36ee9937"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/9adb3491.html"><header><a class="post-meta-categories" href="/categories/%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90%E4%B8%8E%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" itemprop="url">工具推荐与效率提升</a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url">效率工具</a><a href="/tags/%E7%BB%88%E7%AB%AF/" tabindex="-1" itemprop="url">终端</a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" tabindex="-1" itemprop="url">开发者体验</a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" tabindex="-1" itemprop="url">命令行</a><h1 id="CrawlerTitle" itemprop="name headline">2026开发者终端效率工具指南</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-11T04:00:00.000Z" title="发表于 2026-06-11 12:00:00">2026-06-11</time><time itemprop="dateCreated datePublished" datetime="2026-06-11T00:35:11.145Z" title="更新于 2026-06-11 08:35:11">2026-06-11</time></header><h2 id="为什么你需要这些工具？"><a href="#为什么你需要这些工具？" class="headerlink" title="为什么你需要这些工具？"></a>为什么你需要这些工具？</h2><p>作为开发者，我们每天在终端里花大量时间：<code>cd</code> 跳目录、<code>grep</code> 找代码、<code>git</code> 提交、看日志、查进程……但大部分人的终端还停留在五年前的水平。好消息是，Rust 和 Go 社区催生了一批高性能替代品，它们不仅更快，还提供了现代化的交互体验。</p>
+<p>这篇文章不是”推荐100个工具”的列表，而是挑选了我自己每天都在用的、真正提升效率的工具，覆盖终端使用的完整链路：<strong>导航 → 搜索 → 编辑 → 版本控制 → 监控</strong>。</p>
+<h2 id="一、Shell-提示符：Starship"><a href="#一、Shell-提示符：Starship" class="headerlink" title="一、Shell 提示符：Starship"></a>一、Shell 提示符：Starship</h2><p>默认的 bash&#x2F;zsh 提示符信息太少，又丑。Starship 是跨 shell 的提示符定制工具，用 Rust 写的，快到无感。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew install starship</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">curl -sS https://starship.rs/install.sh | sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 ~/.bashrc 或 ~/.zshrc 末尾添加</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init zsh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Starship 会自动检测你所在的项目类型（Node、Rust、Python、Go 等），并显示相关版本号和状态。比如在 Git 仓库里，它会显示分支名、commit 数量、是否 dirty，一行全搞定。</p>
+<p>自定义配置也很简单，在 <code>~/.config/starship.toml</code> 里写：</p>
+<figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[character]</span></span><br><span class="line"><span class="attr">success_symbol</span> = <span class="string">&quot;[➜](bold green)&quot;</span></span><br><span class="line"><span class="attr">error_symbol</span> = <span class="string">&quot;[✗](bold red)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[directory]</span></span><br><span class="line"><span class="attr">truncation_length</span> = <span class="number">3</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold cyan&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[git_branch]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot; &quot;</span></span><br><span class="line"><span class="attr">style</span> = <span class="string">&quot;bold purple&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[nodejs]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot; &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">[python]</span></span><br><span class="line"><span class="attr">symbol</span> = <span class="string">&quot; &quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>一句话评价</strong>：配置一次，受益终身。从此再也回不去默认提示符。</p>
+<h2 id="二、目录跳转：zoxide"><a href="#二、目录跳转：zoxide" class="headerlink" title="二、目录跳转：zoxide"></a>二、目录跳转：zoxide</h2><p>还在一层一层 <code>cd</code>？<code>zoxide</code> 是 <code>cd</code> 的智能替代品，基于历史访问频率做模糊匹配。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew install zoxide</span><br><span class="line"><span class="comment"># 在 shell 配置中添加</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(zoxide init zsh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方式极其简洁：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 之前你可能这样：</span></span><br><span class="line"><span class="built_in">cd</span> ~/projects/my-app/src/components</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在只要：</span></span><br><span class="line">z comp</span><br><span class="line"><span class="comment"># zoxide 会自动跳到你最常访问的包含 &quot;comp&quot; 的目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有匹配项</span></span><br><span class="line">zi comp</span><br><span class="line"><span class="comment"># 会弹出交互式选择列表</span></span><br></pre></td></tr></table></figure>
+
+<p>它的核心原理是记录你每次 <code>cd</code> 的路径和频率，用一个加权算法排序。你去得越多的目录，优先级越高。数据存储在 <code>~/.local/share/zoxide/db</code>，是 SQLite 格式，你甚至可以用 SQL 查询自己的跳转习惯。</p>
+<p><strong>对比 fzf 的 cd</strong>：zoxide 无需交互，直接跳转；fzf-cd 需要选择确认。两者可以搭配使用。</p>
+<h2 id="三、文件搜索：ripgrep-fzf"><a href="#三、文件搜索：ripgrep-fzf" class="headerlink" title="三、文件搜索：ripgrep + fzf"></a>三、文件搜索：ripgrep + fzf</h2><h3 id="ripgrep：比-grep-快10倍"><a href="#ripgrep：比-grep-快10倍" class="headerlink" title="ripgrep：比 grep 快10倍"></a>ripgrep：比 grep 快10倍</h3><p><code>ripgrep</code>（rg）是 Rust 写的 grep 替代品，默认忽略 <code>.gitignore</code> 文件，速度快得惊人。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">brew install ripgrep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本用法（和 grep 语法兼容）</span></span><br><span class="line">rg <span class="string">&quot;TODO|FIXME&quot;</span> --<span class="built_in">type</span> py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索指定目录</span></span><br><span class="line">rg <span class="string">&quot;error&quot;</span> src/ --line-number</span><br><span class="line"></span><br><span class="line"><span class="comment"># 正则 + 忽略文件</span></span><br><span class="line">rg <span class="string">&quot;\.unwrap\(\)&quot;</span> -g <span class="string">&quot;!.git&quot;</span> -g <span class="string">&quot;!target/&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在大型项目里（比如 Spring Boot 项目动辄几千个 Java 文件），ripgrep 的速度差异非常明显。它底层用的是 Rust 的 regex 引擎和内存映射 I&#x2F;O。</p>
+<h3 id="fzf：万物模糊搜索"><a href="#fzf：万物模糊搜索" class="headerlink" title="fzf：万物模糊搜索"></a>fzf：万物模糊搜索</h3><p><code>fzf</code> 是一个通用的模糊查找器，可以和几乎任何命令组合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">brew install fzf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索文件</span></span><br><span class="line">fzf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预览文件内容</span></span><br><span class="line">fzf --preview <span class="string">&#x27;cat &#123;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 作为 Ctrl+T 快捷键使用（安装时自动配置）</span></span><br><span class="line"><span class="comment"># 按 Ctrl+T 弹出文件搜索</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 和 git 结合</span></span><br><span class="line">git <span class="built_in">log</span> --oneline | fzf --preview <span class="string">&#x27;git show &#123;1&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>杀手级用法</strong>：结合 <code>Ctrl+T</code>（文件搜索）、<code>Ctrl+R</code>（历史命令搜索）、<code>Alt+C</code>（目录跳转），这三个快捷键覆盖了终端里80%的查找需求。</p>
+<h2 id="四、文件查看：bat-eza"><a href="#四、文件查看：bat-eza" class="headerlink" title="四、文件查看：bat + eza"></a>四、文件查看：bat + eza</h2><h3 id="bat：更好的-cat"><a href="#bat：更好的-cat" class="headerlink" title="bat：更好的 cat"></a>bat：更好的 cat</h3><p><code>bat</code> 是 <code>cat</code> 的替代品，自带语法高亮、行号、Git diff 标记。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">brew install bat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 基本用法（语法高亮自动检测）</span></span><br><span class="line">bat src/main/java/App.java</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示行号</span></span><br><span class="line">bat -n config.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 作为 cat 的直接替代（在 .bashrc 中设置别名）</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">cat</span>=<span class="string">&#x27;bat --paging=never&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="eza：更好的-ls"><a href="#eza：更好的-ls" class="headerlink" title="eza：更好的 ls"></a>eza：更好的 ls</h3><p><code>eza</code> 是 <code>ls</code> 的替代品，支持图标、Git 状态、树形视图。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">brew install eza</span><br><span class="line"></span><br><span class="line"><span class="comment"># 别名设置</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;eza --icons&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;eza -la --icons --git&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> lt=<span class="string">&#x27;eza --tree --level=2 --icons&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 效果：每个文件类型都有对应图标，Git 状态一目了然</span></span><br><span class="line"><span class="comment"># 📁 src/    ✓</span></span><br><span class="line"><span class="comment"># 📄 README.md    ✗ (modified)</span></span><br><span class="line"><span class="comment"># 📄 pom.xml</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="五、版本控制：lazygit-gh"><a href="#五、版本控制：lazygit-gh" class="headerlink" title="五、版本控制：lazygit + gh"></a>五、版本控制：lazygit + gh</h2><h3 id="lazygit：Git-的-TUI-界面"><a href="#lazygit：Git-的-TUI-界面" class="headerlink" title="lazygit：Git 的 TUI 界面"></a>lazygit：Git 的 TUI 界面</h3><p><code>lazygit</code> 把 Git 操作变成了可视化的 TUI（终端用户界面），特别适合处理复杂的 merge&#x2F;rebase 场景。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install lazygit</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">lazygit</span><br></pre></td></tr></table></figure>
+
+<p>它的核心优势：</p>
+<ul>
+<li><strong>交互式 rebase</strong>：直接拖拽调整 commit 顺序</li>
+<li><strong>交互式 stash</strong>：可视化选择 stash 内容</li>
+<li><strong>文件 diff 预览</strong>：选中文件直接看改动</li>
+<li><strong>一键 squash</strong>：批量合并 commit</li>
+</ul>
+<h3 id="gh：GitHub-CLI"><a href="#gh：GitHub-CLI" class="headerlink" title="gh：GitHub CLI"></a>gh：GitHub CLI</h3><p>GitHub 官方的命令行工具，几乎可以在终端里完成所有 GitHub 操作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">brew install gh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 PR</span></span><br><span class="line">gh <span class="built_in">pr</span> create --title <span class="string">&quot;feat: add user auth&quot;</span> --body <span class="string">&quot;实现用户认证模块&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 PR 状态</span></span><br><span class="line">gh <span class="built_in">pr</span> status</span><br><span class="line"></span><br><span class="line"><span class="comment"># Code Review</span></span><br><span class="line">gh <span class="built_in">pr</span> review 123 --approve</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 issue</span></span><br><span class="line">gh issue create --title <span class="string">&quot;Bug: 登录页500错误&quot;</span> --label <span class="string">&quot;bug,urgent&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 监控 CI</span></span><br><span class="line">gh run watch</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、系统监控：btop-dust-duf"><a href="#六、系统监控：btop-dust-duf" class="headerlink" title="六、系统监控：btop + dust + duf"></a>六、系统监控：btop + dust + duf</h2><h3 id="btop：更现代的-htop"><a href="#btop：更现代的-htop" class="headerlink" title="btop：更现代的 htop"></a>btop：更现代的 htop</h3><p><code>btop</code> 替代了 <code>htop</code>，界面更美观，信息更丰富。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install btop</span><br><span class="line">btop</span><br></pre></td></tr></table></figure>
+
+<p>它的 CPU&#x2F;内存&#x2F;网络&#x2F;磁盘监控都是实时动画的，而且支持鼠标操作。</p>
+<h3 id="dust：更好的-du"><a href="#dust：更好的-du" class="headerlink" title="dust：更好的 du"></a>dust：更好的 du</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">brew install dust</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前目录空间占用</span></span><br><span class="line">dust</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定深度</span></span><br><span class="line">dust -d 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="duf：更好的-df"><a href="#duf：更好的-df" class="headerlink" title="duf：更好的 df"></a>duf：更好的 df</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install duf</span><br><span class="line">duf</span><br><span class="line"><span class="comment"># 表格化显示磁盘使用情况，一目了然</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="七、Shell-增强：atuin-mise"><a href="#七、Shell-增强：atuin-mise" class="headerlink" title="七、Shell 增强：atuin + mise"></a>七、Shell 增强：atuin + mise</h2><h3 id="atuin：Shell-历史记录的革命"><a href="#atuin：Shell-历史记录的革命" class="headerlink" title="atuin：Shell 历史记录的革命"></a>atuin：Shell 历史记录的革命</h3><p><code>atuin</code> 替代了 shell 内置的 history，支持跨会话同步、加密存储、云端备份。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">brew install atuin</span><br><span class="line"><span class="comment"># 添加到 shell 配置</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(atuin init zsh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>核心功能：</p>
+<ul>
+<li><strong>上下箭头搜索</strong>：输入 <code>at up</code> 然后按方向键，只显示包含当前输入的命令</li>
+<li><strong>跨会话共享</strong>：多终端的历史记录统一</li>
+<li><strong>云端同步</strong>：换电脑也不丢历史（可选）</li>
+<li><strong>SQLite 存储</strong>：可以对历史记录做 SQL 查询</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 搜索历史中所有 git 相关命令</span></span><br><span class="line">atuin search git</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按时间范围搜索</span></span><br><span class="line">atuin search --after <span class="string">&quot;2026-01-01&quot;</span> --before <span class="string">&quot;2026-06-01&quot;</span> docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="mise：语言版本管理"><a href="#mise：语言版本管理" class="headerlink" title="mise：语言版本管理"></a>mise：语言版本管理</h3><p><code>mise</code> 统一了 <code>nvm</code>、<code>pyenv</code>、<code>rbenv</code>、<code>asdf</code> 等工具，用一个工具管理所有语言版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 mise</span></span><br><span class="line">brew install mise</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装指定版本</span></span><br><span class="line">mise use node@22</span><br><span class="line">mise use python@3.12</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在项目根目录创建 .mise.toml</span></span><br><span class="line"><span class="built_in">cat</span> &gt; .mise.toml &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line">[tools]</span><br><span class="line">node = <span class="string">&quot;22&quot;</span></span><br><span class="line">python = <span class="string">&quot;3.12&quot;</span></span><br><span class="line">java = <span class="string">&quot;21&quot;</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入目录自动切换版本</span></span><br><span class="line">mise install</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、一站式配置方案"><a href="#八、一站式配置方案" class="headerlink" title="八、一站式配置方案"></a>八、一站式配置方案</h2><p>如果你不想一个个装，我整理了一个脚本，一键安装所有工具：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 一键安装终端效率工具</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;📦 安装终端效率工具...&quot;</span></span><br><span class="line">brew install starship zoxide ripgrep fzf bat eza lazygit btop dust duf atuin mise</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;⚙️ 配置 shell...&quot;</span></span><br><span class="line"><span class="comment"># 添加到 shell 配置</span></span><br><span class="line">SHELL_RC=<span class="string">&quot;<span class="variable">$HOME</span>/.zshrc&quot;</span></span><br><span class="line"><span class="built_in">cat</span> &gt;&gt; <span class="string">&quot;<span class="variable">$SHELL_RC</span>&quot;</span> &lt;&lt; <span class="string">&#x27;EOF&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># === Terminal Efficiency Tools ===</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(starship init zsh)</span>&quot;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(zoxide init zsh)</span>&quot;</span></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(atuin init zsh)</span>&quot;</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">cat</span>=<span class="string">&#x27;bat --paging=never&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;eza --icons&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;eza -la --icons --git&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> lt=<span class="string">&#x27;eza --tree --level=2 --icons&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> lg=<span class="string">&#x27;lazygit&#x27;</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;✅ 安装完成！请重启终端或运行 source ~/.zshrc&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>这些工具的共同特点：<strong>Rust&#x2F;Go 编写、性能优异、交互友好、配置简单</strong>。它们不会让你成为更强的开发者，但会让你的日常开发体验提升几个档次。</p>
+<p>效率工具的本质不是”快”，而是<strong>减少认知负担</strong>。当你不用再记住目录路径、不用再和 grep 的正则语法搏斗、不用再纠结 rebase 操作，你的注意力才能真正放在写好代码上。</p>
+<p>最后分享一个我的终端工作流：</p>
+<ul>
+<li><strong>Starship</strong> 提供上下文感知的提示符</li>
+<li><strong>zoxide</strong> 负责目录导航</li>
+<li><strong>fzf</strong> 负责模糊搜索</li>
+<li><strong>bat + eza</strong> 负责文件查看</li>
+<li><strong>lazygit</strong> 负责 Git 操作</li>
+<li><strong>atuin</strong> 管理历史命令</li>
+<li><strong>btop</strong> 监控系统状态</li>
+</ul>
+<p>这套组合覆盖了终端使用的全部场景，而且每个工具都只做一件事并做到最好。Unix 哲学，在现代工具链里依然闪闪发光。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/9adb3491.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/9adb3491.html')">2026开发者终端效率工具指南</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/9adb3491.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=2026开发者终端效率工具指南&amp;url=https://blog.goku.top/posts/9adb3491.html&amp;pic=https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=b942e70f-cc24-5d66-8d54-71ae36ee9937" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>效率工具<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%BB%88%E7%AB%AF/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>终端<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>开发者体验<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>命令行<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/fca03c3e.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_1.jpeg?_r_=f21ad575-d742-3881-d0bb-422ceec44828" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">从零理解 RAG：检索增强生成完整指南</div></div></a></div><div class="next-post pull-right"><a href="/posts/a3f7b2e1.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=29e105f7-98b3-0930-0d92-1e0384132153" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">理解AI Agent的大脑：ReAct模式从入门到实战</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%A0%E9%9C%80%E8%A6%81%E8%BF%99%E4%BA%9B%E5%B7%A5%E5%85%B7%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">为什么你需要这些工具？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Shell-%E6%8F%90%E7%A4%BA%E7%AC%A6%EF%BC%9AStarship"><span class="toc-number">2.</span> <span class="toc-text">一、Shell 提示符：Starship</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BD%AC%EF%BC%9Azoxide"><span class="toc-number">3.</span> <span class="toc-text">二、目录跳转：zoxide</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%96%87%E4%BB%B6%E6%90%9C%E7%B4%A2%EF%BC%9Aripgrep-fzf"><span class="toc-number">4.</span> <span class="toc-text">三、文件搜索：ripgrep + fzf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ripgrep%EF%BC%9A%E6%AF%94-grep-%E5%BF%AB10%E5%80%8D"><span class="toc-number">4.1.</span> <span class="toc-text">ripgrep：比 grep 快10倍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fzf%EF%BC%9A%E4%B8%87%E7%89%A9%E6%A8%A1%E7%B3%8A%E6%90%9C%E7%B4%A2"><span class="toc-number">4.2.</span> <span class="toc-text">fzf：万物模糊搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%96%87%E4%BB%B6%E6%9F%A5%E7%9C%8B%EF%BC%9Abat-eza"><span class="toc-number">5.</span> <span class="toc-text">四、文件查看：bat + eza</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#bat%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84-cat"><span class="toc-number">5.1.</span> <span class="toc-text">bat：更好的 cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#eza%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84-ls"><span class="toc-number">5.2.</span> <span class="toc-text">eza：更好的 ls</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%9Alazygit-gh"><span class="toc-number">6.</span> <span class="toc-text">五、版本控制：lazygit + gh</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#lazygit%EF%BC%9AGit-%E7%9A%84-TUI-%E7%95%8C%E9%9D%A2"><span class="toc-number">6.1.</span> <span class="toc-text">lazygit：Git 的 TUI 界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gh%EF%BC%9AGitHub-CLI"><span class="toc-number">6.2.</span> <span class="toc-text">gh：GitHub CLI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%EF%BC%9Abtop-dust-duf"><span class="toc-number">7.</span> <span class="toc-text">六、系统监控：btop + dust + duf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#btop%EF%BC%9A%E6%9B%B4%E7%8E%B0%E4%BB%A3%E7%9A%84-htop"><span class="toc-number">7.1.</span> <span class="toc-text">btop：更现代的 htop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dust%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84-du"><span class="toc-number">7.2.</span> <span class="toc-text">dust：更好的 du</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#duf%EF%BC%9A%E6%9B%B4%E5%A5%BD%E7%9A%84-df"><span class="toc-number">7.3.</span> <span class="toc-text">duf：更好的 df</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81Shell-%E5%A2%9E%E5%BC%BA%EF%BC%9Aatuin-mise"><span class="toc-number">8.</span> <span class="toc-text">七、Shell 增强：atuin + mise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#atuin%EF%BC%9AShell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95%E7%9A%84%E9%9D%A9%E5%91%BD"><span class="toc-number">8.1.</span> <span class="toc-text">atuin：Shell 历史记录的革命</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mise%EF%BC%9A%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">8.2.</span> <span class="toc-text">mise：语言版本管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88"><span class="toc-number">9.</span> <span class="toc-text">八、一站式配置方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">10.</span> <span class="toc-text">写在最后</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_9.jpeg?_r_=39963fcd-4d82-5ccc-ddb7-bac1588fe2de" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</a><time datetime="2026-06-21T22:00:00.000Z" title="发表于 2026-06-22 06:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=3bfb2694-54e1-0b01-a84a-8ca76148221e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"/></a><div class="content"><a class="title" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</a><time datetime="2026-06-21T10:01:58.000Z" title="发表于 2026-06-21 18:01:58">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=7b11b9ff-0e9b-30e4-f133-56dea53e2d6a" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</a><time datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=be4e6f04-222f-80cc-7c2e-8971ccb0bfc5" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Agent 间如何对话：A2A 协议深度解析与 Java 实战"/></a><div class="content"><a class="title" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战">Agent 间如何对话：A2A 协议深度解析与 Java 实战</a><time datetime="2026-06-21T02:00:00.000Z" title="发表于 2026-06-21 10:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"/></a><div class="content"><a class="title" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</a><time datetime="2026-06-20T02:00:00.000Z" title="发表于 2026-06-20 10:00:00">2026-06-20</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 0.88rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 0.88rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 0.88rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 0.88rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

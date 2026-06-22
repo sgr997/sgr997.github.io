@@ -1,0 +1,804 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程 | Pei</title><meta name="keywords" content="LangChain4j,AI Agent,Spring AI,Prompt Engineering,System Prompt"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程"><meta name="application-name" content="AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程"><meta property="og:url" content="https://blog.goku.top/posts/7724df09.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="深入拆解 AI Agent 系统提示词设计的核心原理与工程实践，从 Token 经济学到注意力机制，从模板引擎到多层提示词架构，附 Spring AI 与 LangChain4j 完整实战代码。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=0f686df7-3c38-3312-ea8f-82ceb5032dbb"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=0f686df7-3c38-3312-ea8f-82ceb5032dbb"><meta name="description" content="深入拆解 AI Agent 系统提示词设计的核心原理与工程实践，从 Token 经济学到注意力机制，从模板引擎到多层提示词架构，附 Spring AI 与 LangChain4j 完整实战代码。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/7724df09"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: 'AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程',
+  postAI: '',
+  pageFillDescription: '系列文章, 写在前面, 一、Prompt 的本质：你和模型之间的合约, 1.1 先搞清楚一个认知误区, 1.2 System Prompt vs User Prompt：两种不同的信号, 1.3 Token 经济学：为什么 Prompt 长度很重要, 二、System Prompt 设计的五层架构, 三、核心技巧：从原理到实践, 3.1 Chain-of-Thought（CoT）：让模型想出来, 3.2 Few-shot：用例子教模型格式, 3.3 自我一致性（Self-Consistency）：多数投票, 3.4 结构化 Prompt：用 XMLx2FJSON 约束输出, 四、Prompt 与 Agent 组件的交互, 4.1 Prompt + Memory, 4.2 Prompt + RAG, 4.3 Prompt + Tool Use, 五、Java 生态实战：Spring AI 与 LangChain4j, 5.1 Spring AI 的 Prompt 模板引擎, 5.2 LangChain4j 的 SystemMessage 构建, 5.3 两种框架的 Prompt 管理对比, 六、企业级多层 Prompt 架构, 6.1 三层 Prompt 架构, 6.2 代码实现, 6.3 Prompt 版本管理, 七、常见陷阱与最佳实践, 7.1 五个致命陷阱, 7.2 最佳实践清单, 八、扩展思考：Prompt Engineering 的边界在哪？, 8.1 Prompt 不是万能的, 8.2 未来的方向, 总结系列文章本文是深度解析系列的第篇该系列完整目录从零理解检索增强生成完整指南理解的大脑模式从入门到实战的记忆系统从到持久化记忆模型上下文协议的万能接口与实战的工具箱与实战的记忆力是怎么实现的机制深度解析让学会说人话结构化输出实战的规划大脑从任务分解到自适应执行策略的灵魂对话系统提示词设计的艺术与工程本文团队协作多系统架构设计与实战写在前面如果你读过本系列之前的模式记忆系统检索增强等文章你会发现一个共同点所有这些能力的开关都藏在里的思考链靠驱动的工具描述靠传递的上下文靠拼接的检索结果靠注入就像的灵魂写得好聪明得像人写得差蠢得像块石头今天这篇我们聊聊不是那种请你帮我写个的入门科普而是从工程视角出发的底层原理是什么为什么有些写法效果好在生态中和分别怎么管理企业级场景下怎么组织多层提示词架构一的本质你和模型之间的合约先搞清楚一个认知误区很多人以为就是给模型写的一段话这个理解没错但太浅了本质上是你和模型之间的一份合约你在这份合约里规定了模型的角色行为边界输出格式思考方式模型拿到这份合约后会在它的概率空间里找到一个最符合合约描述的人格切片这就解释了为什么你是一个有年经验的架构师和回答以下问题会让同一个模型给出完全不同质量的答案不是模型变聪明了而是你激活了不同的参数子空间两种不同的信号在中消息分为三种角色你是谁怎么做事底层指令用户想问什么具体任务模型之前说了什么对话历史之所以特殊是因为它在计算中通常被赋予更高的权重虽然等厂商没有公开具体的权重机制但从实验结果来看的指令对模型行为的约束力远强于同等长度的用一个类比像是今天我想吃什么像是我是一个素食主义者前者改变一次决策后者改变所有决策经济学为什么长度很重要每个都要消耗而意味着钱和延迟理解经济学是工程化设计的基础长度的三个代价成本每千都要花钱次个并发用户次天天延迟趱长首延迟越高注意力稀释信息越多模型越容易走神现象中间信息容易被忽略关键指令应放在开头或结尾是年斯坦福的一项研究发现当上下文很长时模型对开头和结尾的信息注意力最强对中间的信息注意力最弱这意味着你的如果很长关键指令一定要放在最前面或最后面二设计的五层架构一个好的不是随手写的几句话而是有结构的我把它总结为五层架构第层角色定义你是一个企业级架构师助手第层能力边界你擅长微服务数据库设计你不会提供投资建议或医疗诊断第行为规范回答先给结论再展开解释代码示例用不确定的事情明确说不确定第层输出格式用格式输出代码块标注语言长回答分小节第层动态注入当前用户角色检索到的相关文档可用工具列表为什么要分层因为每一层的更新频率不同层级更新频率典型场景角色定义几乎不变产品定型后就固定能力边界偶尔调整新增能力或合规要求变化行为规范随迭代优化发现模型回复质量问题时调整输出格式按场景切换给用户的给系统的格式不同动态注入每次请求用户信息检索结果工具列表分层设计让你不需要每次都重写整个只需要替换变化的部分三核心技巧从原理到实践让模型想出来是最经典的技巧核心思想很简单让模型先想再说原理的每一层都是对上一层表示的精炼当你要求模型一步步思考时你在给模型更多的计算步骤来处理问题相当于从层的思考变成了层步的思考普通一个商店有个苹果卖了个又进了个还剩多少一个商店有个苹果卖了个又进了个还剩多少请一步步思考初始个卖了个个又进了个个答案个对于场景的价值更大还记得模式中的循环吗本质上就是的工程化实现模型在执行工具调用前先用自然语言描述自己的推理过程用例子教模型格式比请用以下格式输出有效倍原因很直观模型通过示例学格式比通过描述学格式快得多你是一个代码审查助手请按以下示例的格式输出审查结果示例输入示例输出严重注入漏洞位置方法第行问题直接拼接用户输入构造修复使用参数化查询影响攻击者可执行任意请审查以下代码关键要点示例要有代表性覆盖你期望的输出风格示例要有多样性包括简单和复杂的示例数量通常个就够太多会浪费自我一致性多数投票这是年提出的技术核心思想是同一个问题问模型多次取多数票温度时第次回答答案是第次回答答案是第次回答答案是第次回答答案是第次回答答案是多数票在场景中这可以用于关键决策节点比如让对是否需要调用工具做多次判断减少误触发结构化用约束输出还记得结构化输出那篇文章吗层面的结构化约束是另一种思路直接在中告诉模型你只能输出以下格式分析用户的问题输出以下格式分类意图实体类型实体值只输出不要输出其他内容为什么结构化输出在层面很重要因为的下游逻辑需要解析模型输出如果模型返回自然语言你需要再写一层解析逻辑如果模型直接返回你可以直接省掉一层结构化输出层面的约束生成层面的约束两者配合才能实现可靠的结构化输出四与组件的交互不是孤立存在的在架构中是连接各个组件的总线当你为添加记忆系统时记忆是以的形式注入的你是一个个人助手长期记忆用户是开发者偏好用户在北京时区用户不喜欢冗长的回答短期记忆最近对话用户帮我写个排序算法助手好的这是冒泡排序用户有没有更快的助手快速排序更适合当前问题用户这里有个关键的工程问题记忆注入的位置和格式研究表明记忆放在的中间偏后位置效果最好既不会覆盖角色定义开头也不会被当前问题挤掉注意力末尾在场景中检索到的文档需要注入基于以下参考资料回答用户问题如果参考资料不足以回答请明确说明不要编造参考资料中没有的信息参考资料文档标题自动配置原理内容的自动配置基于文档标题机制内容是一组依赖的集合用户问题的三个陷阱信息过载塞太多检索结果反而让模型迷路通常条结果足够来源冲突不同文档说法矛盾时要给模型裁判规则如优先信源幻觉转移模型可能忽略参考资料直接用自身知识回答需要强约束只基于参考资料回答在场景中工具的描述本身就是的一部分你可以使用以下工具描述搜索企业知识库参数必填搜索关键词可选返回结果数量默认使用场景当用户询问公司内部知识时使用描述发送邮件参数必填收件人邮箱必填邮件主题必填邮件正文使用场景当用户要求发送邮件时使用请根据用户的问题判断是否需要调用工具如果需要输出工具调用的格式如果不需要直接回答用户问题工具描述的质量直接影响调用准确率一个常见的坑是工具描述太简略搜索知识库这五个字的信息量远不如上面那段带参数说明和使用场景的描述五生态实战与的模板引擎提供了类基于模板引擎系统提示词模板你是一个能力行为规范回答先给结论再展开解释代码示例使用不确定的事情明确说我不确定输出格式上下文注入模板基于以下参考资料回答用户问题如果参考资料不足说明信息不完整参考资料用户问题构建完整的构建带上下文的将检索结果格式化为带编号的引用的核心设计思路是模板化结构化把当作带变量的模板运行时填充变量这比字符串拼接优雅得多也更安全避免注入攻击的构建的风格更函数式定义助手接口声明式你是一个高级代码审查专家审查维度安全性注入权限绕过性能查询内存泄漏锁竞争可维护性命名抽象单一职责健壮性异常处理空指针边界条件输出格式对每个问题输出严重等级严重警告建议问题描述修复建议附代码约束只关注代码忽略代码风格问题交给使用构建助手代码审查用低温度减少随机性调用的注解方式有一个巨大优势和业务代码紧耦合重构时不会遗漏的模板方式则更灵活适合需要动态组合的场景两种框架的管理对比维度定义字符串模板注解变量替换填充注解参数绑定多轮对话手动管理自动管理工具描述注解注解灵活度高模板可外部化到文件数据库中注解编译期确定类型安全低传参高接口强类型适用场景频繁变化需要测试稳定追求代码可维护性我的建议两者可以混用用的模板引擎管理方便热更新业务接口用的注解方式类型安全六企业级多层架构在真实的企业场景中不是一段文字而是一个分层的系统三层架构基础层角色定义合规约束输出格式存储位置代码库配置中心更新频率月级场景层客服场景数据分析场景代码审查场景存储位置管理平台更新频率周级动态层检索结果用户画像对话历史存储位置内存运行时拼接更新频率每次请求代码实现组装完整的基础层从配置加载场景层从管理平台加载动态层运行时拼接用户消息构建动态上下文用户信息角色偏好语言历史交互次数参考资料版本管理在生产环境中需要像代码一样做版本管理场景标识版本号内容是否激活测试指标这样做有三个好处测试同一场景部署两个版本对比效果快速回滚新效果差一键切回上一版效果追踪记录每个版本的满意度准确率等指标七常见陷阱与最佳实践五个致命陷阱陷阱指令矛盾你是一个友好的助手回答要简洁对每个问题提供详细全面的解释不要遗漏任何细节模型收到矛盾指令后行为会变得不可预测有时简洁有时冗长完全看运气陷阱否定指令的滥用不要输出代码不要提到不要太长模型对否定指令的遵循率远低于肯定指令原因是模型的训练数据中不要做的样本远少于做的样本更好的写法用纯文字描述方案不包含代码块使用作为示例语言控制在字以内陷阱角色定义过于宽泛你是一个全栈开发专家全栈太宽泛模型无法聚焦改为你是一个专注于后端前端的全栈开发者擅长领域设计数据库优化前端状态管理技术栈陷阱没有给退路回答用户的所有问题模型遇到超出能力范围的问题会编造答案加一句退路指令如果你不确定答案明确说这个问题我不确定建议查阅官方文档如果问题超出你的知识范围建议用户咨询相关专家陷阱过长导致性能下降超过后模型的指令遵循率开始下降如果你的太长考虑精简冗余描述将不常用指令移到动态层使用压缩技术如摘要替代原文最佳实践清单指令用肯定句不用否定句关键指令放在开头或结尾利用注意力分布用分隔符区分指令和内容如或标签提供个示例指定输出格式给模型退路不确定时怎么说控制在以内做测试用数据驱动优化版本管理支持快速回滚用低温度处理确定性任务高温度处理创意任务八扩展思考的边界在哪不是万能的再好的也解决不了这些问题模型本身的能力天花板不可能通过变成需要精确计算的场景数学计算日期推算模型容易出错实时信息模型不知道今天的天气和股价长文本的一致性超过模型上下文窗口的内容无法弥补这些问题的解决方案不是更好的而是更好的架构用工具调用解决计算问题用解决知识问题用解决上下文问题未来的方向自动生成让帮你写框架已经在做这件事优化器自动测试用遗传算法搜索最优多模态图文混合的设计图片文字指令纳入流水线自动化测试和部署总结不是玄学而是一门工程学科它的核心原则可以用三句话概括清晰胜过聪明模型不需要你的文学才华它需要你的精确指令结构胜过长度一个的结构化效果远好于的散文迭代胜过完美没有一稿就完美的持续测试和优化才是正道回到我们系列的脉络给了思考能力给了动手能力给了记忆能力给了知识检索能力给了规划能力结构化输出让能说人话而是让这些能力协调运转的粘合剂好的不是让模型更聪明而是让模型的聪明用对地方',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-16 21:50:07',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 1.05rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 1.05rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 1.05rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 1.05rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/LangChain4j/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LangChain4j</span></a><a class="article-meta__tags" href="/tags/AI-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/Spring-AI/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Spring AI</span></a><a class="article-meta__tags" href="/tags/Prompt-Engineering/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Prompt Engineering</span></a><a class="article-meta__tags" href="/tags/System-Prompt/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>System Prompt</span></a></span></div></div><h1 class="post-title" itemprop="name headline">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-16T02:00:00.000Z" title="发表于 2026-06-16 10:00:00">2026-06-16</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-16T13:50:07.291Z" title="更新于 2026-06-16 21:50:07">2026-06-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=0f686df7-3c38-3312-ea8f-82ceb5032dbb"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/7724df09.html"><header><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a><a href="/tags/LangChain4j/" tabindex="-1" itemprop="url">LangChain4j</a><a href="/tags/AI-Agent/" tabindex="-1" itemprop="url">AI Agent</a><a href="/tags/Spring-AI/" tabindex="-1" itemprop="url">Spring AI</a><a href="/tags/Prompt-Engineering/" tabindex="-1" itemprop="url">Prompt Engineering</a><a href="/tags/System-Prompt/" tabindex="-1" itemprop="url">System Prompt</a><h1 id="CrawlerTitle" itemprop="name headline">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-16T02:00:00.000Z" title="发表于 2026-06-16 10:00:00">2026-06-16</time><time itemprop="dateCreated datePublished" datetime="2026-06-16T13:50:07.291Z" title="更新于 2026-06-16 21:50:07">2026-06-16</time></header><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><p>本文是 AI Agent 深度解析系列的第 9 篇。该系列完整目录：</p>
+<ol>
+<li><a href="/posts/fca03c3e.html">从零理解 RAG：检索增强生成完整指南</a></li>
+<li><a href="/posts/a3f7b2e1.html">理解 AI Agent 的大脑：ReAct 模式从入门到实战</a></li>
+<li><a href="/posts/70d64e78.html">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆</a></li>
+<li><a href="/posts/4dc416f2.html">MCP 模型上下文协议：AI 的万能接口与 MCP Server 实战</a></li>
+<li><a href="/posts/fd311830.html">AI Agent 的工具箱：Tool Use 与 Function Calling 实战</a></li>
+<li><a href="/posts/2b43307f.html">AI Agent 的记忆力是怎么实现的：LangChain4j Memory 机制深度解析</a></li>
+<li><a href="/posts/f0b37481.html">让 AI 学会”说人话”：Spring AI 结构化输出实战</a></li>
+<li><a href="/posts/e05701b9.html">AI Agent 的规划大脑：从任务分解到自适应执行策略</a></li>
+<li><strong>AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</strong>（本文）</li>
+<li><a href="/posts/33667def.html">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</a></li>
+</ol>
+<hr>
+<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>如果你读过本系列之前的 <a href="/posts/a3f7b2e1.html">ReAct 模式</a>、<a href="/posts/fd311830.html">Tool Use</a>、<a href="/posts/2b43307f.html">Memory 记忆系统</a>、<a href="/posts/fca03c3e.html">RAG 检索增强</a> 等文章，你会发现一个共同点——<strong>所有这些能力的”开关”，都藏在 Prompt 里</strong>。</p>
+<p>ReAct 的思考链靠 Prompt 驱动，Tool Use 的工具描述靠 Prompt 传递，Memory 的上下文靠 Prompt 拼接，RAG 的检索结果靠 Prompt 注入。Prompt 就像 Agent 的灵魂，写得好，Agent 聪明得像人；写得差，Agent 蠢得像块石头。</p>
+<p>今天这篇，我们聊聊 <strong>Prompt Engineering</strong>——不是那种”请你帮我写个 Prompt”的入门科普，而是从<strong>工程视角</strong>出发：System Prompt 的底层原理是什么？为什么有些 Prompt 写法效果好？在 Java 生态中，Spring AI 和 LangChain4j 分别怎么管理 Prompt？企业级场景下怎么组织多层提示词架构？</p>
+<h2 id="一、Prompt-的本质：你和模型之间的”合约”"><a href="#一、Prompt-的本质：你和模型之间的”合约”" class="headerlink" title="一、Prompt 的本质：你和模型之间的”合约”"></a>一、Prompt 的本质：你和模型之间的”合约”</h2><h3 id="1-1-先搞清楚一个认知误区"><a href="#1-1-先搞清楚一个认知误区" class="headerlink" title="1.1 先搞清楚一个认知误区"></a>1.1 先搞清楚一个认知误区</h3><p>很多人以为 Prompt 就是”给模型写的一段话”。这个理解没错，但太浅了。</p>
+<p><strong>Prompt 本质上是你和模型之间的一份合约</strong>。你在这份合约里规定了模型的角色、行为边界、输出格式、思考方式。模型拿到这份合约后，会在它的概率空间里找到一个最符合合约描述的”人格切片”。</p>
+<p>这就解释了为什么”你是一个有 10 年经验的 Java 架构师”和”回答以下问题”会让同一个模型给出完全不同质量的答案——不是模型变聪明了，而是你激活了不同的参数子空间。</p>
+<h3 id="1-2-System-Prompt-vs-User-Prompt：两种不同的”信号”"><a href="#1-2-System-Prompt-vs-User-Prompt：两种不同的”信号”" class="headerlink" title="1.2 System Prompt vs User Prompt：两种不同的”信号”"></a>1.2 System Prompt vs User Prompt：两种不同的”信号”</h3><p>在 Chat API 中，消息分为三种角色：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────┐</span><br><span class="line">│  System Prompt    →  &quot;你是谁，怎么做事&quot;（底层指令）    │</span><br><span class="line">│  User Prompt      →  &quot;用户想问什么&quot;（具体任务）        │</span><br><span class="line">│  Assistant Prompt →  &quot;模型之前说了什么&quot;（对话历史）      │</span><br><span class="line">└─────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>System Prompt 之所以特殊</strong>，是因为它在 Attention 计算中通常被赋予更高的权重。虽然 OpenAI 等厂商没有公开具体的权重机制，但从实验结果来看，System Prompt 的指令对模型行为的约束力远强于同等长度的 User Prompt。</p>
+<p>用一个类比：User Prompt 像是”今天我想吃什么”，System Prompt 像是”我是一个素食主义者”。前者改变一次决策，后者改变所有决策。</p>
+<h3 id="1-3-Token-经济学：为什么-Prompt-长度很重要"><a href="#1-3-Token-经济学：为什么-Prompt-长度很重要" class="headerlink" title="1.3 Token 经济学：为什么 Prompt 长度很重要"></a>1.3 Token 经济学：为什么 Prompt 长度很重要</h3><p>每个 Prompt 都要消耗 Token，而 Token 意味着钱和延迟。理解 Token 经济学是工程化 Prompt 设计的基础：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">┌───────────────────────────────────────────────────────┐</span><br><span class="line">│  Prompt 长度的三个代价                                  │</span><br><span class="line">│                                                       │</span><br><span class="line">│  💰 成本：每千 Token 都要花钱                           │</span><br><span class="line">│     - GPT-4o System Prompt 2000 Token ≈ ¥0.04/次      │</span><br><span class="line">│     - 100 个并发用户 × 10 次/天 = ¥40/天               │</span><br><span class="line">│                                                       │</span><br><span class="line">│  ⏱️ 延迟：Prompt 趱长，首 Token 延迟越高               │</span><br><span class="line">│     - 1000 Token → ~200ms                             │</span><br><span class="line">│     - 4000 Token → ~500ms                             │</span><br><span class="line">│     - 16000 Token → ~1500ms                           │</span><br><span class="line">│                                                       │</span><br><span class="line">│  🧠 注意力稀释：信息越多，模型越容易&quot;走神&quot;              │</span><br><span class="line">│     - Lost in the Middle 现象：中间信息容易被忽略        │</span><br><span class="line">│     - 关键指令应放在开头或结尾                           │</span><br><span class="line">└───────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>“Lost in the Middle”</strong> 是 2023 年斯坦福的一项研究发现：当上下文很长时，模型对<strong>开头和结尾</strong>的信息注意力最强，对<strong>中间</strong>的信息注意力最弱。这意味着——</p>
+<blockquote>
+<p>你的 System Prompt 如果很长，关键指令一定要放在最前面或最后面。</p>
+</blockquote>
+<h2 id="二、System-Prompt-设计的五层架构"><a href="#二、System-Prompt-设计的五层架构" class="headerlink" title="二、System Prompt 设计的五层架构"></a>二、System Prompt 设计的五层架构</h2><p>一个好的 System Prompt 不是随手写的几句话，而是有结构的。我把它总结为五层架构：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────┐</span><br><span class="line">│                    第 1 层：角色定义                       │</span><br><span class="line">│   &quot;你是一个企业级 Java 架构师助手&quot;                         │</span><br><span class="line">├─────────────────────────────────────────────────────────┤</span><br><span class="line">│                    第 2 层：能力边界                       │</span><br><span class="line">│   &quot;你擅长 Spring Boot、微服务、数据库设计&quot;                 │</span><br><span class="line">│   &quot;你不会提供投资建议或医疗诊断&quot;                           │</span><br><span class="line">├─────────────────────────────────────────────────────────┤</span><br><span class="line">│                    第 3 行为规范                           │</span><br><span class="line">│   &quot;回答先给结论，再展开解释&quot;                               │</span><br><span class="line">│   &quot;代码示例用 Java 21，Spring Boot 3.x&quot;                   │</span><br><span class="line">│   &quot;不确定的事情明确说不确定&quot;                               │</span><br><span class="line">├─────────────────────────────────────────────────────────┤</span><br><span class="line">│                    第 4 层：输出格式                       │</span><br><span class="line">│   &quot;用 Markdown 格式输出&quot;                                  │</span><br><span class="line">│   &quot;代码块标注语言&quot;                                        │</span><br><span class="line">│   &quot;长回答分小节&quot;                                          │</span><br><span class="line">├─────────────────────────────────────────────────────────┤</span><br><span class="line">│                    第 5 层：动态注入                       │</span><br><span class="line">│   &quot;当前用户角色：&#123;role&#125;&quot;                                  │</span><br><span class="line">│   &quot;检索到的相关文档：&#123;context&#125;&quot;                           │</span><br><span class="line">│   &quot;可用工具列表：&#123;tools&#125;&quot;                                 │</span><br><span class="line">└─────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么要分层？</strong> 因为每一层的更新频率不同：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>更新频率</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>角色定义</td>
+<td>几乎不变</td>
+<td>产品定型后就固定</td>
+</tr>
+<tr>
+<td>能力边界</td>
+<td>偶尔调整</td>
+<td>新增能力或合规要求变化</td>
+</tr>
+<tr>
+<td>行为规范</td>
+<td>随迭代优化</td>
+<td>发现模型回复质量问题时调整</td>
+</tr>
+<tr>
+<td>输出格式</td>
+<td>按场景切换</td>
+<td>给用户的 vs 给系统的格式不同</td>
+</tr>
+<tr>
+<td>动态注入</td>
+<td>每次请求</td>
+<td>用户信息、检索结果、工具列表</td>
+</tr>
+</tbody></table>
+<p>分层设计让你不需要每次都重写整个 Prompt，只需要替换变化的部分。</p>
+<h2 id="三、核心技巧：从原理到实践"><a href="#三、核心技巧：从原理到实践" class="headerlink" title="三、核心技巧：从原理到实践"></a>三、核心技巧：从原理到实践</h2><h3 id="3-1-Chain-of-Thought（CoT）：让模型”想出来”"><a href="#3-1-Chain-of-Thought（CoT）：让模型”想出来”" class="headerlink" title="3.1 Chain-of-Thought（CoT）：让模型”想出来”"></a>3.1 Chain-of-Thought（CoT）：让模型”想出来”</h3><p>CoT 是最经典的 Prompt 技巧。核心思想很简单：<strong>让模型先想再说</strong>。</p>
+<p><strong>原理</strong>：Transformer 的每一层都是对上一层表示的”精炼”。当你要求模型”一步步思考”时，你在给模型更多的计算步骤来处理问题——相当于从 12 层 Transformer 的思考，变成了”12 层 × N 步”的思考。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">❌ 普通 Prompt：</span><br><span class="line">Q: 一个商店有 23 个苹果，卖了 7 个，又进了 12 个，还剩多少？</span><br><span class="line">A: 28</span><br><span class="line"></span><br><span class="line">✅ CoT Prompt：</span><br><span class="line">Q: 一个商店有 23 个苹果，卖了 7 个，又进了 12 个，还剩多少？</span><br><span class="line">   请一步步思考。</span><br><span class="line">A: </span><br><span class="line">   - 初始：23 个</span><br><span class="line">   - 卖了 7 个：23 - 7 = 16 个</span><br><span class="line">   - 又进了 12 个：16 + 12 = 28 个</span><br><span class="line">   - 答案：28 个</span><br></pre></td></tr></table></figure>
+
+<p>对于 Agent 场景，CoT 的价值更大。还记得 <a href="/posts/a3f7b2e1.html">ReAct 模式</a> 中的 Thought-Action-Observation 循环吗？<strong>ReAct 本质上就是 CoT 的工程化实现</strong>——模型在执行工具调用前，先用自然语言描述自己的推理过程。</p>
+<h3 id="3-2-Few-shot：用例子教模型”格式”"><a href="#3-2-Few-shot：用例子教模型”格式”" class="headerlink" title="3.2 Few-shot：用例子教模型”格式”"></a>3.2 Few-shot：用例子教模型”格式”</h3><p>Few-shot 比”请用以下格式输出”有效 10 倍。原因很直观：<strong>模型通过示例学格式，比通过描述学格式快得多</strong>。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">System Prompt:</span><br><span class="line">你是一个代码审查助手。请按以下示例的格式输出审查结果。</span><br><span class="line"></span><br><span class="line">示例输入：</span><br><span class="line">public void process(String name) &#123;</span><br><span class="line">    String sql = &quot;SELECT * FROM users WHERE name = &#x27;&quot; + name + &quot;&#x27;&quot;;</span><br><span class="line">    db.execute(sql);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">示例输出：</span><br><span class="line">🔴 严重：SQL 注入漏洞</span><br><span class="line">- 位置：process() 方法第 2 行</span><br><span class="line">- 问题：直接拼接用户输入构造 SQL</span><br><span class="line">- 修复：使用 PreparedStatement 参数化查询</span><br><span class="line">- 影响：攻击者可执行任意 SQL</span><br><span class="line"></span><br><span class="line">请审查以下代码：</span><br><span class="line">&#123;code&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键要点</strong>：</p>
+<ul>
+<li>示例要有<strong>代表性</strong>，覆盖你期望的输出风格</li>
+<li>示例要有<strong>多样性</strong>，包括简单和复杂的 case</li>
+<li>示例数量通常 <strong>2-3 个</strong>就够，太多会浪费 Token</li>
+</ul>
+<h3 id="3-3-自我一致性（Self-Consistency）：多数投票"><a href="#3-3-自我一致性（Self-Consistency）：多数投票" class="headerlink" title="3.3 自我一致性（Self-Consistency）：多数投票"></a>3.3 自我一致性（Self-Consistency）：多数投票</h3><p>这是 2022 年 Google 提出的技术，核心思想是：<strong>同一个问题问模型多次，取多数票</strong>。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">温度 = 0.7 时：</span><br><span class="line"></span><br><span class="line">第 1 次回答：答案是 A</span><br><span class="line">第 2 次回答：答案是 A</span><br><span class="line">第 3 次回答：答案是 B</span><br><span class="line">第 4 次回答：答案是 A</span><br><span class="line">第 5 次回答：答案是 A</span><br><span class="line"></span><br><span class="line">多数票 → A（4/5）</span><br></pre></td></tr></table></figure>
+
+<p>在 Agent 场景中，这可以用于<strong>关键决策节点</strong>——比如让 Agent 对”是否需要调用工具”做多次判断，减少误触发。</p>
+<h3 id="3-4-结构化-Prompt：用-XML-x2F-JSON-约束输出"><a href="#3-4-结构化-Prompt：用-XML-x2F-JSON-约束输出" class="headerlink" title="3.4 结构化 Prompt：用 XML&#x2F;JSON 约束输出"></a>3.4 结构化 Prompt：用 XML&#x2F;JSON 约束输出</h3><p>还记得 <a href="/posts/f0b37481.html">Spring AI 结构化输出</a> 那篇文章吗？Prompt 层面的结构化约束是另一种思路——直接在 Prompt 中告诉模型”你只能输出以下格式”：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">System Prompt:</span><br><span class="line">分析用户的问题，输出以下 JSON 格式：</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;intent&quot;: &quot;分类意图&quot;,</span><br><span class="line">  &quot;confidence&quot;: 0.0-1.0,</span><br><span class="line">  &quot;entities&quot;: [</span><br><span class="line">    &#123;&quot;type&quot;: &quot;实体类型&quot;, &quot;value&quot;: &quot;实体值&quot;&#125;</span><br><span class="line">  ],</span><br><span class="line">  &quot;response_strategy&quot;: &quot;direct|search|clarify&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">只输出 JSON，不要输出其他内容。</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么结构化输出在 Prompt 层面很重要？</strong></p>
+<p>因为 Agent 的下游逻辑需要解析模型输出。如果模型返回自然语言，你需要再写一层解析逻辑；如果模型直接返回 JSON，你可以直接 <code>JSON.parse()</code>，省掉一层 NLU。</p>
+<blockquote>
+<p>结构化输出 &#x3D; Prompt 层面的 Schema 约束 + 生成层面的 Grammar 约束。两者配合才能实现可靠的结构化输出。</p>
+</blockquote>
+<h2 id="四、Prompt-与-Agent-组件的交互"><a href="#四、Prompt-与-Agent-组件的交互" class="headerlink" title="四、Prompt 与 Agent 组件的交互"></a>四、Prompt 与 Agent 组件的交互</h2><p>Prompt 不是孤立存在的。在 Agent 架构中，Prompt 是连接各个组件的”总线”。</p>
+<h3 id="4-1-Prompt-Memory"><a href="#4-1-Prompt-Memory" class="headerlink" title="4.1 Prompt + Memory"></a>4.1 Prompt + Memory</h3><p>当你为 Agent 添加 <a href="/posts/70d64e78.html">Memory 记忆系统</a> 时，记忆是以 Prompt 的形式注入的：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">System Prompt：</span><br><span class="line">你是一个个人助手。</span><br><span class="line"></span><br><span class="line">[长期记忆]</span><br><span class="line">- 用户是 Java 开发者，偏好 Spring Boot</span><br><span class="line">- 用户在北京，时区 UTC+8</span><br><span class="line">- 用户不喜欢冗长的回答</span><br><span class="line"></span><br><span class="line">[短期记忆 - 最近对话]</span><br><span class="line">用户：帮我写个排序算法</span><br><span class="line">助手：好的，这是冒泡排序...</span><br><span class="line">用户：有没有更快的？</span><br><span class="line">助手：快速排序更适合...</span><br><span class="line"></span><br><span class="line">[当前问题]</span><br><span class="line">用户：&#123;new_message&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>这里有个关键的工程问题：记忆注入的位置和格式。</strong></p>
+<p>研究表明，记忆放在 System Prompt 的<strong>中间偏后</strong>位置效果最好——既不会覆盖角色定义（开头），也不会被当前问题挤掉注意力（末尾）。</p>
+<h3 id="4-2-Prompt-RAG"><a href="#4-2-Prompt-RAG" class="headerlink" title="4.2 Prompt + RAG"></a>4.2 Prompt + RAG</h3><p>在 <a href="/posts/fca03c3e.html">RAG 场景</a> 中，检索到的文档需要注入 Prompt：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">System Prompt：</span><br><span class="line">基于以下参考资料回答用户问题。</span><br><span class="line">如果参考资料不足以回答，请明确说明。</span><br><span class="line">不要编造参考资料中没有的信息。</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">参考资料：</span><br><span class="line">[1] 文档标题：Spring Boot 自动配置原理</span><br><span class="line">    内容：Spring Boot 的自动配置基于 @EnableAutoConfiguration...</span><br><span class="line"></span><br><span class="line">[2] 文档标题：Spring Boot Starter 机制</span><br><span class="line">    内容：Starter 是一组依赖的集合...</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">用户问题：&#123;question&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>RAG Prompt 的三个陷阱</strong>：</p>
+<ol>
+<li><strong>信息过载</strong>：塞太多检索结果，反而让模型”迷路”。通常 <strong>Top 3-5</strong> 条结果足够。</li>
+<li><strong>来源冲突</strong>：不同文档说法矛盾时，Prompt 要给模型”裁判规则”（如优先信源）。</li>
+<li><strong>幻觉转移</strong>：模型可能忽略参考资料，直接用自身知识回答。需要强约束：”只基于参考资料回答”。</li>
+</ol>
+<h3 id="4-3-Prompt-Tool-Use"><a href="#4-3-Prompt-Tool-Use" class="headerlink" title="4.3 Prompt + Tool Use"></a>4.3 Prompt + Tool Use</h3><p>在 <a href="/posts/fd311830.html">Tool Use 场景</a> 中，工具的描述本身就是 Prompt 的一部分：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">System Prompt：</span><br><span class="line">你可以使用以下工具：</span><br><span class="line"></span><br><span class="line">## search_knowledge_base</span><br><span class="line">描述：搜索企业知识库</span><br><span class="line">参数：</span><br><span class="line">  - query (string, 必填): 搜索关键词</span><br><span class="line">  - top_k (int, 可选): 返回结果数量，默认 5</span><br><span class="line">使用场景：当用户询问公司内部知识时使用</span><br><span class="line"></span><br><span class="line">## send_email</span><br><span class="line">描述：发送邮件</span><br><span class="line">参数：</span><br><span class="line">  - to (string, 必填): 收件人邮箱</span><br><span class="line">  - subject (string, 必填): 邮件主题</span><br><span class="line">  - body (string, 必填): 邮件正文</span><br><span class="line">使用场景：当用户要求发送邮件时使用</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">请根据用户的问题，判断是否需要调用工具。</span><br><span class="line">如果需要，输出工具调用的 JSON 格式。</span><br><span class="line">如果不需要，直接回答用户问题。</span><br></pre></td></tr></table></figure>
+
+<p><strong>工具描述的质量直接影响调用准确率。</strong> 一个常见的坑是工具描述太简略——<code>搜索知识库</code> 这五个字的信息量远不如上面那段带参数说明和使用场景的描述。</p>
+<h2 id="五、Java-生态实战：Spring-AI-与-LangChain4j"><a href="#五、Java-生态实战：Spring-AI-与-LangChain4j" class="headerlink" title="五、Java 生态实战：Spring AI 与 LangChain4j"></a>五、Java 生态实战：Spring AI 与 LangChain4j</h2><h3 id="5-1-Spring-AI-的-Prompt-模板引擎"><a href="#5-1-Spring-AI-的-Prompt-模板引擎" class="headerlink" title="5.1 Spring AI 的 Prompt 模板引擎"></a>5.1 Spring AI 的 Prompt 模板引擎</h3><p>Spring AI 提供了 <code>PromptTemplate</code> 类，基于 ST4（StringTemplate 4）模板引擎：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.prompt.Prompt;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.prompt.PromptTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AgentPromptService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 系统提示词模板</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">SYSTEM_PROMPT</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        你是一个 &#123;role&#125;。</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        ## 能力</span></span><br><span class="line"><span class="string">        &#123;capabilities&#125;</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        ## 行为规范</span></span><br><span class="line"><span class="string">        - 回答先给结论，再展开解释</span></span><br><span class="line"><span class="string">        - 代码示例使用 &#123;language&#125; &#123;version&#125;</span></span><br><span class="line"><span class="string">        - 不确定的事情明确说&quot;我不确定&quot;</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        ## 输出格式</span></span><br><span class="line"><span class="string">        &#123;output_format&#125;</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// RAG 上下文注入模板</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">RAG_PROMPT</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        基于以下参考资料回答用户问题。</span></span><br><span class="line"><span class="string">        如果参考资料不足，说明信息不完整。</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        ---</span></span><br><span class="line"><span class="string">        参考资料：</span></span><br><span class="line"><span class="string">        &#123;context&#125;</span></span><br><span class="line"><span class="string">        ---</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        用户问题：&#123;question&#125;</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构建完整的 System Prompt</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Prompt <span class="title function_">buildSystemPrompt</span><span class="params">(String role, String capabilities,</span></span><br><span class="line"><span class="params">                                     String language, String version,</span></span><br><span class="line"><span class="params">                                     String outputFormat)</span> &#123;</span><br><span class="line">        <span class="type">PromptTemplate</span> <span class="variable">template</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PromptTemplate</span>(SYSTEM_PROMPT);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Prompt</span>(</span><br><span class="line">            List.of(template.createMessage(</span><br><span class="line">                Map.of(</span><br><span class="line">                    <span class="string">&quot;role&quot;</span>, role,</span><br><span class="line">                    <span class="string">&quot;capabilities&quot;</span>, capabilities,</span><br><span class="line">                    <span class="string">&quot;language&quot;</span>, language,</span><br><span class="line">                    <span class="string">&quot;version&quot;</span>, version,</span><br><span class="line">                    <span class="string">&quot;output_format&quot;</span>, outputFormat</span><br><span class="line">                ),</span><br><span class="line">                org.springframework.ai.chat.model.ChatModelMessage.SYSTEM</span><br><span class="line">            ))</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构建带 RAG 上下文的 Prompt</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Prompt <span class="title function_">buildRagPrompt</span><span class="params">(String question, List&lt;String&gt; references)</span> &#123;</span><br><span class="line">        <span class="comment">// 将检索结果格式化为带编号的引用</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">formattedContext</span> <span class="operator">=</span> IntStream.range(<span class="number">0</span>, references.size())</span><br><span class="line">            .mapToObj(i -&gt; <span class="string">&quot;[%d] %s&quot;</span>.formatted(i + <span class="number">1</span>, references.get(i)))</span><br><span class="line">            .collect(Collectors.joining(<span class="string">&quot;\n\n&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="type">PromptTemplate</span> <span class="variable">template</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PromptTemplate</span>(RAG_PROMPT);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Prompt</span>(template.create(</span><br><span class="line">            Map.of(<span class="string">&quot;context&quot;</span>, formattedContext, <span class="string">&quot;question&quot;</span>, question)</span><br><span class="line">        ));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>**Spring AI Prompt 的核心设计思路是”模板化 + 结构化”**。<code>PromptTemplate</code> 把 Prompt 当作带变量的模板，运行时填充变量。这比字符串拼接优雅得多，也更安全（避免注入攻击）。</p>
+<h3 id="5-2-LangChain4j-的-SystemMessage-构建"><a href="#5-2-LangChain4j-的-SystemMessage-构建" class="headerlink" title="5.2 LangChain4j 的 SystemMessage 构建"></a>5.2 LangChain4j 的 SystemMessage 构建</h3><p>LangChain4j 的 API 风格更函数式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dev.langchain4j.service.SystemMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.UserMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.V;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.TokenStream;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.SystemMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.UserMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.AiMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.ChatMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.data.message.ToolExecutionResultMessage;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.memory.ChatMemory;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.memory.chat.MessageWindowChatMemory;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.chat.ChatLanguageModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.model.openai.OpenAiChatModel;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.AiServices;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.MemoryId;</span><br><span class="line"><span class="keyword">import</span> dev.langchain4j.service.Result;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 定义助手接口（声明式 System Prompt）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">CodeReviewAssistant</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SystemMessage(&quot;&quot;&quot;</span></span><br><span class="line"><span class="meta">        你是一个高级 Java 代码审查专家。</span></span><br><span class="line"><span class="meta">        </span></span><br><span class="line"><span class="meta">        ## 审查维度</span></span><br><span class="line"><span class="meta">        1. 安全性：SQL 注入、XSS、权限绕过</span></span><br><span class="line"><span class="meta">        2. 性能：N+1 查询、内存泄漏、锁竞争</span></span><br><span class="line"><span class="meta">        3. 可维护性：命名、抽象、单一职责</span></span><br><span class="line"><span class="meta">        4. 健壮性：异常处理、空指针、边界条件</span></span><br><span class="line"><span class="meta">        </span></span><br><span class="line"><span class="meta">        ## 输出格式</span></span><br><span class="line"><span class="meta">        对每个问题输出：</span></span><br><span class="line"><span class="meta">        - 严重等级：🔴 严重 / 🟡 警告 / 🔵 建议</span></span><br><span class="line"><span class="meta">        - 问题描述</span></span><br><span class="line"><span class="meta">        - 修复建议（附代码）</span></span><br><span class="line"><span class="meta">        </span></span><br><span class="line"><span class="meta">        ## 约束</span></span><br><span class="line"><span class="meta">        - 只关注 Java/Spring Boot 代码</span></span><br><span class="line"><span class="meta">        - 忽略代码风格问题（交给 Checkstyle）</span></span><br><span class="line"><span class="meta">        &quot;&quot;&quot;)</span></span><br><span class="line">    String <span class="title function_">review</span><span class="params">(<span class="meta">@UserMessage</span> String code)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 使用 AiServices 构建助手</span></span><br><span class="line"><span class="type">ChatLanguageModel</span> <span class="variable">model</span> <span class="operator">=</span> OpenAiChatModel.builder()</span><br><span class="line">    .apiKey(System.getenv(<span class="string">&quot;OPENAI_API_KEY&quot;</span>))</span><br><span class="line">    .modelName(<span class="string">&quot;gpt-4o&quot;</span>)</span><br><span class="line">    .temperature(<span class="number">0.3</span>)  <span class="comment">// 代码审查用低温度，减少随机性</span></span><br><span class="line">    .build();</span><br><span class="line"></span><br><span class="line"><span class="type">CodeReviewAssistant</span> <span class="variable">assistant</span> <span class="operator">=</span> AiServices.create(</span><br><span class="line">    CodeReviewAssistant.class, model</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 调用</span></span><br><span class="line"><span class="type">String</span> <span class="variable">review</span> <span class="operator">=</span> assistant.review(<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    @GetMapping(&quot;/user/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="string">    public User getUser(@PathVariable Long id) &#123;</span></span><br><span class="line"><span class="string">        String sql = &quot;SELECT * FROM users WHERE id = &quot; + id;</span></span><br><span class="line"><span class="string">        return jdbcTemplate.queryForObject(sql, User.class);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(review);</span><br></pre></td></tr></table></figure>
+
+<p><strong>LangChain4j 的 <code>@SystemMessage</code> 注解方式有一个巨大优势</strong>：System Prompt 和业务代码紧耦合，重构时不会遗漏。Spring AI 的模板方式则更灵活，适合 Prompt 需要动态组合的场景。</p>
+<h3 id="5-3-两种框架的-Prompt-管理对比"><a href="#5-3-两种框架的-Prompt-管理对比" class="headerlink" title="5.3 两种框架的 Prompt 管理对比"></a>5.3 两种框架的 Prompt 管理对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Spring AI</th>
+<th>LangChain4j</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Prompt 定义</td>
+<td><code>PromptTemplate</code> + 字符串模板</td>
+<td><code>@SystemMessage</code> 注解</td>
+</tr>
+<tr>
+<td>变量替换</td>
+<td><code>Map&lt;String, Object&gt;</code> 填充</td>
+<td><code>@V</code> 注解 + 参数绑定</td>
+</tr>
+<tr>
+<td>多轮对话</td>
+<td>手动管理 <code>List&lt;Message&gt;</code></td>
+<td><code>ChatMemory</code> 自动管理</td>
+</tr>
+<tr>
+<td>工具描述</td>
+<td><code>@Tool</code> 注解 + FunctionCallback</td>
+<td><code>@Tool</code> 注解 + ToolSpecification</td>
+</tr>
+<tr>
+<td>灵活度</td>
+<td>高（模板可外部化到文件&#x2F;数据库）</td>
+<td>中（注解编译期确定）</td>
+</tr>
+<tr>
+<td>类型安全</td>
+<td>低（Map 传参）</td>
+<td>高（接口强类型）</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>Prompt 频繁变化、需要 A&#x2F;B 测试</td>
+<td>Prompt 稳定、追求代码可维护性</td>
+</tr>
+</tbody></table>
+<p><strong>我的建议</strong>：两者可以混用。System Prompt 用 Spring AI 的模板引擎管理（方便热更新），业务接口用 LangChain4j 的注解方式（类型安全）。</p>
+<h2 id="六、企业级多层-Prompt-架构"><a href="#六、企业级多层-Prompt-架构" class="headerlink" title="六、企业级多层 Prompt 架构"></a>六、企业级多层 Prompt 架构</h2><p>在真实的企业场景中，Prompt 不是一段文字，而是一个<strong>分层的系统</strong>。</p>
+<h3 id="6-1-三层-Prompt-架构"><a href="#6-1-三层-Prompt-架构" class="headerlink" title="6.1 三层 Prompt 架构"></a>6.1 三层 Prompt 架构</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">┌───────────────────────────────────────────────────────────┐</span><br><span class="line">│  Layer 1：基础层（Base Prompt）                             │</span><br><span class="line">│  ├── 角色定义、合规约束、输出格式                            │</span><br><span class="line">│  ├── 存储位置：代码库 / 配置中心                             │</span><br><span class="line">│  └── 更新频率：月级                                        │</span><br><span class="line">├───────────────────────────────────────────────────────────┤</span><br><span class="line">│  Layer 2：场景层（Scenario Prompt）                         │</span><br><span class="line">│  ├── 客服场景 / 数据分析场景 / 代码审查场景                   │</span><br><span class="line">│  ├── 存储位置：Prompt 管理平台                              │</span><br><span class="line">│  └── 更新频率：周级                                        │</span><br><span class="line">├───────────────────────────────────────────────────────────┤</span><br><span class="line">│  Layer 3：动态层（Dynamic Context）                         │</span><br><span class="line">│  ├── RAG 检索结果、用户画像、对话历史                        │</span><br><span class="line">│  ├── 存储位置：内存（运行时拼接）                            │</span><br><span class="line">│  └── 更新频率：每次请求                                     │</span><br><span class="line">└───────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-代码实现"><a href="#6-2-代码实现" class="headerlink" title="6.2 代码实现"></a>6.2 代码实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.prompt.Prompt;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.prompt.PromptTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.messages.SystemMessage;</span><br><span class="line"><span class="keyword">import</span> org.springframework.ai.chat.messages.UserMessage;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PromptOrchestrator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> PromptRepository promptRepository;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserProfileService userProfileService;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RagService ragService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 组装完整的 Prompt</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Prompt <span class="title function_">assemble</span><span class="params">(String userId, String scenario,</span></span><br><span class="line"><span class="params">                           String userMessage)</span> &#123;</span><br><span class="line">        List&lt;ChatMessage&gt; messages = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Layer 1: 基础层 — 从配置加载</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">basePrompt</span> <span class="operator">=</span> loadBasePrompt();</span><br><span class="line">        messages.add(<span class="keyword">new</span> <span class="title class_">SystemMessage</span>(basePrompt));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Layer 2: 场景层 — 从 Prompt 管理平台加载</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">scenarioPrompt</span> <span class="operator">=</span> promptRepository.findByScenario(scenario);</span><br><span class="line">        messages.add(<span class="keyword">new</span> <span class="title class_">SystemMessage</span>(scenarioPrompt));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Layer 3: 动态层 — 运行时拼接</span></span><br><span class="line">        <span class="type">UserProfile</span> <span class="variable">profile</span> <span class="operator">=</span> userProfileService.getProfile(userId);</span><br><span class="line">        List&lt;Document&gt; docs = ragService.retrieve(userMessage, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">dynamicContext</span> <span class="operator">=</span> buildDynamicContext(profile, docs);</span><br><span class="line">        messages.add(<span class="keyword">new</span> <span class="title class_">SystemMessage</span>(dynamicContext));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 用户消息</span></span><br><span class="line">        messages.add(<span class="keyword">new</span> <span class="title class_">UserMessage</span>(userMessage));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Prompt</span>(messages);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 构建动态上下文</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">buildDynamicContext</span><span class="params">(UserProfile profile,</span></span><br><span class="line"><span class="params">                                       List&lt;Document&gt; docs)</span> &#123;</span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">        sb.append(<span class="string">&quot;## 用户信息\n&quot;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;- 角色：&quot;</span>).append(profile.getRole()).append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;- 偏好语言：&quot;</span>).append(profile.getPreferredLang()).append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        sb.append(<span class="string">&quot;- 历史交互次数：&quot;</span>).append(profile.getInteractionCount()).append(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!docs.isEmpty()) &#123;</span><br><span class="line">            sb.append(<span class="string">&quot;## 参考资料\n&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; docs.size(); i++) &#123;</span><br><span class="line">                sb.append(<span class="string">&quot;[&quot;</span>).append(i + <span class="number">1</span>).append(<span class="string">&quot;] &quot;</span>);</span><br><span class="line">                sb.append(docs.get(i).getTitle()).append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">                sb.append(docs.get(i).getContent()).append(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-3-Prompt-版本管理"><a href="#6-3-Prompt-版本管理" class="headerlink" title="6.3 Prompt 版本管理"></a>6.3 Prompt 版本管理</h3><p>在生产环境中，Prompt 需要像代码一样做版本管理：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> prompt_templates (</span><br><span class="line">    id <span class="type">BIGINT</span> <span class="keyword">PRIMARY</span> KEY AUTO_INCREMENT,</span><br><span class="line">    scenario <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,      <span class="comment">-- 场景标识</span></span><br><span class="line">    version <span class="type">INT</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>,               <span class="comment">-- 版本号</span></span><br><span class="line">    content TEXT <span class="keyword">NOT</span> <span class="keyword">NULL</span>,              <span class="comment">-- Prompt 内容</span></span><br><span class="line">    is_active <span class="type">BOOLEAN</span> <span class="keyword">DEFAULT</span> <span class="literal">FALSE</span>,    <span class="comment">-- 是否激活</span></span><br><span class="line">    metrics JSON,                       <span class="comment">-- A/B 测试指标</span></span><br><span class="line">    created_at <span class="type">TIMESTAMP</span> <span class="keyword">DEFAULT</span> NOW(),</span><br><span class="line">    <span class="keyword">UNIQUE</span> KEY uk_scenario_version (scenario, version)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>这样做有三个好处：</p>
+<ol>
+<li><strong>A&#x2F;B 测试</strong>：同一场景部署两个版本，对比效果</li>
+<li><strong>快速回滚</strong>：新 Prompt 效果差，一键切回上一版</li>
+<li><strong>效果追踪</strong>：记录每个版本的满意度、准确率等指标</li>
+</ol>
+<h2 id="七、常见陷阱与最佳实践"><a href="#七、常见陷阱与最佳实践" class="headerlink" title="七、常见陷阱与最佳实践"></a>七、常见陷阱与最佳实践</h2><h3 id="7-1-五个致命陷阱"><a href="#7-1-五个致命陷阱" class="headerlink" title="7.1 五个致命陷阱"></a>7.1 五个致命陷阱</h3><p><strong>陷阱 1：指令矛盾</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">❌ 你是一个友好的助手。回答要简洁。</span><br><span class="line">   ...</span><br><span class="line">   对每个问题提供详细、全面的解释，不要遗漏任何细节。</span><br></pre></td></tr></table></figure>
+
+<p>模型收到矛盾指令后，行为会变得不可预测——有时简洁，有时冗长，完全看运气。</p>
+<p><strong>陷阱 2：否定指令的滥用</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">❌ 不要输出代码</span><br><span class="line">❌ 不要提到 Java</span><br><span class="line">❌ 不要太长</span><br></pre></td></tr></table></figure>
+
+<p>模型对否定指令的遵循率远低于肯定指令。原因是模型的训练数据中，”不要做 X”的样本远少于”做 Y”的样本。</p>
+<p>更好的写法：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">✅ 用纯文字描述方案，不包含代码块</span><br><span class="line">✅ 使用 Python 作为示例语言</span><br><span class="line">✅ 控制在 200 字以内</span><br></pre></td></tr></table></figure>
+
+<p><strong>陷阱 3：角色定义过于宽泛</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">❌ 你是一个全栈开发专家</span><br></pre></td></tr></table></figure>
+
+<p>“全栈”太宽泛，模型无法聚焦。改为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">✅ 你是一个专注于 Spring Boot 后端 + Vue 3 前端的全栈开发者</span><br><span class="line">   擅长领域：REST API 设计、数据库优化、前端状态管理</span><br><span class="line">   技术栈：Java 21, Spring Boot 3.x, Vue 3, TypeScript, PostgreSQL</span><br></pre></td></tr></table></figure>
+
+<p><strong>陷阱 4：没有给”退路”</strong></p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">❌ 回答用户的所有问题</span><br></pre></td></tr></table></figure>
+
+<p>模型遇到超出能力范围的问题会编造答案。加一句”退路”指令：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">✅ 如果你不确定答案，明确说&quot;这个问题我不确定，建议查阅官方文档&quot;</span><br><span class="line">   如果问题超出你的知识范围，建议用户咨询相关专家</span><br></pre></td></tr></table></figure>
+
+<p><strong>陷阱 5：Prompt 过长导致性能下降</strong></p>
+<p>Prompt 超过 4000 Token 后，模型的指令遵循率开始下降。如果你的 Prompt 太长，考虑：</p>
+<ul>
+<li>精简冗余描述</li>
+<li>将不常用指令移到动态层</li>
+<li>使用 Prompt 压缩技术（如摘要替代原文）</li>
+</ul>
+<h3 id="7-2-最佳实践清单"><a href="#7-2-最佳实践清单" class="headerlink" title="7.2 最佳实践清单"></a>7.2 最佳实践清单</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">✅ 指令用肯定句，不用否定句</span><br><span class="line">✅ 关键指令放在开头或结尾（利用注意力分布）</span><br><span class="line">✅ 用分隔符区分指令和内容（如 --- 或 XML 标签）</span><br><span class="line">✅ 提供 2-3 个 Few-shot 示例</span><br><span class="line">✅ 指定输出格式（Markdown / JSON / XML）</span><br><span class="line">✅ 给模型&quot;退路&quot;（不确定时怎么说）</span><br><span class="line">✅ 控制 System Prompt 在 1000-3000 Token 以内</span><br><span class="line">✅ 做 A/B 测试，用数据驱动 Prompt 优化</span><br><span class="line">✅ 版本管理 Prompt，支持快速回滚</span><br><span class="line">✅ 用低温度（0.1-0.3）处理确定性任务，高温度（0.7-1.0）处理创意任务</span><br></pre></td></tr></table></figure>
+
+<h2 id="八、扩展思考：Prompt-Engineering-的边界在哪？"><a href="#八、扩展思考：Prompt-Engineering-的边界在哪？" class="headerlink" title="八、扩展思考：Prompt Engineering 的边界在哪？"></a>八、扩展思考：Prompt Engineering 的边界在哪？</h2><h3 id="8-1-Prompt-不是万能的"><a href="#8-1-Prompt-不是万能的" class="headerlink" title="8.1 Prompt 不是万能的"></a>8.1 Prompt 不是万能的</h3><p>再好的 Prompt 也解决不了这些问题：</p>
+<ul>
+<li><strong>模型本身的能力天花板</strong>：GPT-3.5 不可能通过 Prompt 变成 GPT-4</li>
+<li><strong>需要精确计算的场景</strong>：数学计算、日期推算，模型容易出错</li>
+<li><strong>实时信息</strong>：模型不知道今天的天气和股价</li>
+<li><strong>长文本的一致性</strong>：超过模型上下文窗口的内容，Prompt 无法弥补</li>
+</ul>
+<p>这些问题的解决方案不是更好的 Prompt，而是更好的<strong>架构</strong>——用工具调用解决计算问题，用 RAG 解决知识问题，用 Memory 解决上下文问题。</p>
+<h3 id="8-2-未来的方向"><a href="#8-2-未来的方向" class="headerlink" title="8.2 未来的方向"></a>8.2 未来的方向</h3><ol>
+<li><strong>Prompt 自动生成</strong>：让 AI 帮你写 Prompt（DSPy 框架已经在做这件事）</li>
+<li><strong>Prompt 优化器</strong>：自动 A&#x2F;B 测试，用遗传算法搜索最优 Prompt</li>
+<li><strong>多模态 Prompt</strong>：图文混合的 Prompt 设计（图片 + 文字指令）</li>
+<li><strong>Prompt-as-Code</strong>：Prompt 纳入 CI&#x2F;CD 流水线，自动化测试和部署</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Prompt Engineering 不是”玄学”，而是一门<strong>工程学科</strong>。它的核心原则可以用三句话概括：</p>
+<ol>
+<li><strong>清晰胜过聪明</strong>：模型不需要你的文学才华，它需要你的精确指令</li>
+<li><strong>结构胜过长度</strong>：一个 500 Token 的结构化 Prompt，效果远好于 3000 Token 的散文</li>
+<li><strong>迭代胜过完美</strong>：没有一稿就完美的 Prompt，持续测试和优化才是正道</li>
+</ol>
+<p>回到我们 AI Agent 系列的脉络：<a href="/posts/a3f7b2e1.html">ReAct</a> 给了 Agent 思考能力，<a href="/posts/fd311830.html">Tool Use</a> 给了 Agent 动手能力，<a href="/posts/2b43307f.html">Memory</a> 给了 Agent 记忆能力，<a href="/posts/fca03c3e.html">RAG</a> 给了 Agent 知识检索能力，<a href="/posts/e05701b9.html">Planning</a> 给了 Agent 规划能力，<a href="/posts/f0b37481.html">结构化输出</a> 让 Agent 能”说人话”。</p>
+<p>而 Prompt Engineering，是让这些能力<strong>协调运转</strong>的粘合剂。</p>
+<p>好的 Prompt 不是让模型更聪明，而是让模型的聪明用对地方。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/7724df09.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/7724df09.html')">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/7724df09.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程&amp;url=https://blog.goku.top/posts/7724df09.html&amp;pic=https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=0f686df7-3c38-3312-ea8f-82ceb5032dbb" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/LangChain4j/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LangChain4j<span class="tagsPageCount">16</span></a><a class="post-meta__box__tags" href="/tags/AI-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AI Agent<span class="tagsPageCount">21</span></a><a class="post-meta__box__tags" href="/tags/Spring-AI/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Spring AI<span class="tagsPageCount">19</span></a><a class="post-meta__box__tags" href="/tags/Prompt-Engineering/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Prompt Engineering<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/System-Prompt/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>System Prompt<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/e05701b9.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg?_r_=ea4f3ea5-3fae-6f7d-1cb1-b325b4462813" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AI Agent 的规划大脑：从任务分解到自适应执行策略</div></div></a></div><div class="next-post pull-right"><a href="/posts/33667def.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/9ff0e580.html" title="AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_8.jpeg?_r_=fc0a3274-ad2c-4cb2-cbb3-c29b07dbc411" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-19</div><div class="title">AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战</div></div></a></div><div><a href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-20</div><div class="title">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</div></div></a></div><div><a href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_9.jpeg?_r_=39963fcd-4d82-5ccc-ddb7-bac1588fe2de" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</div></div></a></div><div><a href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=3bfb2694-54e1-0b01-a84a-8ca76148221e" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-21</div><div class="title">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</div></div></a></div><div><a href="/posts/cca7bdf3.html" title="AI Agent 的流式响应与实时交互：从 SSE 到 WebSocket 的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg?_r_=781fdf67-6a3e-53ea-a9d8-e3de88d0fe2a" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-19</div><div class="title">AI Agent 的流式响应与实时交互：从 SSE 到 WebSocket 的 Java 实战</div></div></a></div><div><a href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=7b11b9ff-0e9b-30e4-f133-56dea53e2d6a" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-21</div><div class="title">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Prompt-%E7%9A%84%E6%9C%AC%E8%B4%A8%EF%BC%9A%E4%BD%A0%E5%92%8C%E6%A8%A1%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E2%80%9D%E5%90%88%E7%BA%A6%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">一、Prompt 的本质：你和模型之间的”合约”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%85%88%E6%90%9E%E6%B8%85%E6%A5%9A%E4%B8%80%E4%B8%AA%E8%AE%A4%E7%9F%A5%E8%AF%AF%E5%8C%BA"><span class="toc-number">3.1.</span> <span class="toc-text">1.1 先搞清楚一个认知误区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-System-Prompt-vs-User-Prompt%EF%BC%9A%E4%B8%A4%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E2%80%9D%E4%BF%A1%E5%8F%B7%E2%80%9D"><span class="toc-number">3.2.</span> <span class="toc-text">1.2 System Prompt vs User Prompt：两种不同的”信号”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-Token-%E7%BB%8F%E6%B5%8E%E5%AD%A6%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88-Prompt-%E9%95%BF%E5%BA%A6%E5%BE%88%E9%87%8D%E8%A6%81"><span class="toc-number">3.3.</span> <span class="toc-text">1.3 Token 经济学：为什么 Prompt 长度很重要</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81System-Prompt-%E8%AE%BE%E8%AE%A1%E7%9A%84%E4%BA%94%E5%B1%82%E6%9E%B6%E6%9E%84"><span class="toc-number">4.</span> <span class="toc-text">二、System Prompt 设计的五层架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A0%B8%E5%BF%83%E6%8A%80%E5%B7%A7%EF%BC%9A%E4%BB%8E%E5%8E%9F%E7%90%86%E5%88%B0%E5%AE%9E%E8%B7%B5"><span class="toc-number">5.</span> <span class="toc-text">三、核心技巧：从原理到实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-Chain-of-Thought%EF%BC%88CoT%EF%BC%89%EF%BC%9A%E8%AE%A9%E6%A8%A1%E5%9E%8B%E2%80%9D%E6%83%B3%E5%87%BA%E6%9D%A5%E2%80%9D"><span class="toc-number">5.1.</span> <span class="toc-text">3.1 Chain-of-Thought（CoT）：让模型”想出来”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-Few-shot%EF%BC%9A%E7%94%A8%E4%BE%8B%E5%AD%90%E6%95%99%E6%A8%A1%E5%9E%8B%E2%80%9D%E6%A0%BC%E5%BC%8F%E2%80%9D"><span class="toc-number">5.2.</span> <span class="toc-text">3.2 Few-shot：用例子教模型”格式”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E8%87%AA%E6%88%91%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%88Self-Consistency%EF%BC%89%EF%BC%9A%E5%A4%9A%E6%95%B0%E6%8A%95%E7%A5%A8"><span class="toc-number">5.3.</span> <span class="toc-text">3.3 自我一致性（Self-Consistency）：多数投票</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E7%BB%93%E6%9E%84%E5%8C%96-Prompt%EF%BC%9A%E7%94%A8-XML-x2F-JSON-%E7%BA%A6%E6%9D%9F%E8%BE%93%E5%87%BA"><span class="toc-number">5.4.</span> <span class="toc-text">3.4 结构化 Prompt：用 XML&#x2F;JSON 约束输出</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Prompt-%E4%B8%8E-Agent-%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="toc-number">6.</span> <span class="toc-text">四、Prompt 与 Agent 组件的交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Prompt-Memory"><span class="toc-number">6.1.</span> <span class="toc-text">4.1 Prompt + Memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-Prompt-RAG"><span class="toc-number">6.2.</span> <span class="toc-text">4.2 Prompt + RAG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Prompt-Tool-Use"><span class="toc-number">6.3.</span> <span class="toc-text">4.3 Prompt + Tool Use</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81Java-%E7%94%9F%E6%80%81%E5%AE%9E%E6%88%98%EF%BC%9ASpring-AI-%E4%B8%8E-LangChain4j"><span class="toc-number">7.</span> <span class="toc-text">五、Java 生态实战：Spring AI 与 LangChain4j</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-Spring-AI-%E7%9A%84-Prompt-%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E"><span class="toc-number">7.1.</span> <span class="toc-text">5.1 Spring AI 的 Prompt 模板引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-LangChain4j-%E7%9A%84-SystemMessage-%E6%9E%84%E5%BB%BA"><span class="toc-number">7.2.</span> <span class="toc-text">5.2 LangChain4j 的 SystemMessage 构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%B8%A4%E7%A7%8D%E6%A1%86%E6%9E%B6%E7%9A%84-Prompt-%E7%AE%A1%E7%90%86%E5%AF%B9%E6%AF%94"><span class="toc-number">7.3.</span> <span class="toc-text">5.3 两种框架的 Prompt 管理对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%A4%9A%E5%B1%82-Prompt-%E6%9E%B6%E6%9E%84"><span class="toc-number">8.</span> <span class="toc-text">六、企业级多层 Prompt 架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E4%B8%89%E5%B1%82-Prompt-%E6%9E%B6%E6%9E%84"><span class="toc-number">8.1.</span> <span class="toc-text">6.1 三层 Prompt 架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.2.</span> <span class="toc-text">6.2 代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-Prompt-%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="toc-number">8.3.</span> <span class="toc-text">6.3 Prompt 版本管理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%99%B7%E9%98%B1%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">9.</span> <span class="toc-text">七、常见陷阱与最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E4%BA%94%E4%B8%AA%E8%87%B4%E5%91%BD%E9%99%B7%E9%98%B1"><span class="toc-number">9.1.</span> <span class="toc-text">7.1 五个致命陷阱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%B8%85%E5%8D%95"><span class="toc-number">9.2.</span> <span class="toc-text">7.2 最佳实践清单</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%EF%BC%9APrompt-Engineering-%E7%9A%84%E8%BE%B9%E7%95%8C%E5%9C%A8%E5%93%AA%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">八、扩展思考：Prompt Engineering 的边界在哪？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-Prompt-%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E7%9A%84"><span class="toc-number">10.1.</span> <span class="toc-text">8.1 Prompt 不是万能的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E6%9C%AA%E6%9D%A5%E7%9A%84%E6%96%B9%E5%90%91"><span class="toc-number">10.2.</span> <span class="toc-text">8.2 未来的方向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">11.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_9.jpeg?_r_=39963fcd-4d82-5ccc-ddb7-bac1588fe2de" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</a><time datetime="2026-06-21T22:00:00.000Z" title="发表于 2026-06-22 06:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=3bfb2694-54e1-0b01-a84a-8ca76148221e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"/></a><div class="content"><a class="title" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</a><time datetime="2026-06-21T10:01:58.000Z" title="发表于 2026-06-21 18:01:58">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=7b11b9ff-0e9b-30e4-f133-56dea53e2d6a" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</a><time datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=be4e6f04-222f-80cc-7c2e-8971ccb0bfc5" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Agent 间如何对话：A2A 协议深度解析与 Java 实战"/></a><div class="content"><a class="title" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战">Agent 间如何对话：A2A 协议深度解析与 Java 实战</a><time datetime="2026-06-21T02:00:00.000Z" title="发表于 2026-06-21 10:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"/></a><div class="content"><a class="title" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</a><time datetime="2026-06-20T02:00:00.000Z" title="发表于 2026-06-20 10:00:00">2026-06-20</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 0.88rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 0.88rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 0.88rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 0.88rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -1,0 +1,833 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战 | Pei</title><meta name="keywords" content="Spring Boot,Multi-Agent,LangChain4j,分布式系统,AI架构"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战"><meta name="application-name" content="AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战"><meta property="og:url" content="https://blog.goku.top/posts/33667def.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="深入解析多Agent协作的核心架构模式——从角色分工、通信机制到冲突解决，结合LangChain4j与Spring Boot实战，构建可落地的企业级多Agent系统。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106"><meta name="description" content="深入解析多Agent协作的核心架构模式——从角色分工、通信机制到冲突解决，结合LangChain4j与Spring Boot实战，构建可落地的企业级多Agent系统。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/33667def"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: 'AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战',
+  postAI: '',
+  pageFillDescription: 'AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战, 系列文章, 为什么一个 Agent 不够？, 多 Agent 系统的三大架构模式, 1. 层级式架构（Hierarchical）, 2. 对等式架构（Peer-to-Peer）, 3. 混合式架构（Hybrid）, 通信机制：Agent 之间怎么说话？, 消息传递（Message Passing）, 共享状态（Shared State）, 事件驱动（Event-Driven）, 三种模式的对比, 任务分解：从造房子到搬砖, 任务分解的三种策略, 冲突解决：当 Agent 意见不一致时, 策略一：权威裁决, 策略二：投票机制, 策略三：迭代协商, 实战：用 LangChain4j + Spring Boot 构建多 Agent 系统, 整体架构, Step 1：定义 Agent 基础接口, Step 2：实现研究员 Agent, Step 3：实现写手 Agent, Step 4：实现审查员 Agent, Step 5：协调者 Agent —— 整合一切, Step 6：用 Spring 事件驱动解耦, 源码级解读：LangChain4j 中的 Agent 交互机制, 与 Spring AI 的对比, 生产环境的坑与最佳实践, 1. Token 成本控制, 2. 超时与熔断, 3. 可观测性, 4. 并发安全, 横向对比：主流多 Agent 框架, 多 Agent 的边界与未来, 什么时候不该用多 Agent？, 未来方向, 总结团队协作多系统架构设计与实战系列文章本文是深度解析系列的第篇建议先阅读以下前置文章理解的大脑模式从入门到实战的推理范式的工具箱与实战如何调用外部工具的记忆系统从到持久化记忆的短期与长期记忆的记忆力是怎么实现的机制深度解析记忆的另一套实现从零理解检索增强生成完整指南如何利用外部知识的规划大脑从任务分解到自适应执行策略如何规划任务模型上下文协议的万能接口与实战的标准化工具协议让学会说人话结构化输出实战如何输出结构化数据的灵魂对话系统提示词设计的艺术与工程的灵魂如何塑造为什么一个不够在前面的系列文章中我们已经深入理解了单个的核心能力推理工具调用规划和记忆一个配备齐全的已经能完成很多任务但在真实的企业场景中你会发现一个很快就会遇到瓶颈上下文窗口的物理限制即使是的大模型当你同时塞入系统提示词历史对话工具调用结果和检索到的文档时留给思考的空间其实很有限让一个既做需求分析又写代码还做代码审查和测试它的上下文窗口很快就会被撑爆角色混乱导致质量下降一个人既要当产品经理又要当架构师还要当开发和测试结果通常是每个角色都做得平庸心理学上叫角色冲突同一时间扮演多个角色会让认知负荷急剧上升也是一样当你让一个同时负责代码生成和代码审查时它很容易陷入自己审自己的盲区单点故障的系统风险一个挂了整个流程就停了而在多系统中某个失败时可以被重试被替代甚至被其他诊断和修复效率瓶颈一个只能串行执行任务而多可以并行工作一个分析需求一个查文档一个准备测试用例效率提升是数量级的这些问题指向一个自然的解决方案让多个专业化的组成团队分工协作多系统的三大架构模式层级式架构这是最接近现实企业组织的架构有一个主管负责接收任务分解子任务分配给下属收集结果并整合主管分配任务需求分析代码生成测试验证优点职责清晰易于管理主管可以做质量把关缺点主管是单点瓶颈它的上下文窗口要承载所有子的结果适用场景流程明确步骤可预期的任务比如代码生成流水线对等式架构没有中央调度者之间直接通信每个都可以发起对话请求帮助提供结果这种架构更灵活但也更难控制优点去中心化没有单点瓶颈灵活度高缺点难以保证收敛可能无限循环讨论调试困难适用场景开放式问题讨论如头脑风暴辩论式推理混合式架构实际项目中最常用的架构有一个轻量级的协调者负责全局调度但子之间也可以直接通信协调者不参与具体工作只负责派活和收结果协调者轻量级调度研究员工程师审查员可以直接通信不必经过协调者这种架构兼顾了可控性和灵活性是我们后面实战的重点通信机制之间怎么说话消息传递最直接的方式往的消息队列里扔一条消息收到后处理并回复在中这可以通过的变体来实现每个有独立的对话记忆之间的消息通过一个消息总线中转共享状态所有共享一个黑板每个都可以读写这类似于线程共享内存的模式高效但需要注意并发控制通知所有监听者事件驱动发布事件感兴趣的订阅并响应这种模式天然适合的事件机制自动触发代码审查三种模式的对比维度消息传递共享状态事件驱动耦合度中需要知道对方高共享内存低发布订阅调试难度中高竞态条件低事件可追踪适用场景点对点协作状态密集型任务松耦合流水线扩展性一般差好友好度中中非常好实战建议大多数场景下事件驱动是最优选择它和的天然契合而且松耦合的特性让系统更容易扩展和维护任务分解从造房子到搬砖多系统的第一个挑战不是怎么让协作而是怎么把大任务拆成小任务任务分解的三种策略基于流程的分解适合有明确步骤的任务比如从需求到代码可以分解为需求分析架构设计代码实现测试审查基于能力的分解根据每个的特长分配任务就像你不会让前端工程师去调数据库一样分析任务需要的能力找到匹配能力的基于数据的分解把大任务按数据维度拆分比如分析份简历可以拆成组每组份由个并行处理冲突解决当意见不一致时多个协作一定会遇到冲突比如代码生成写了一段代码但审查认为有性能问题怎么解决策略一权威裁决由一个高级做最终决策比如协调者综合双方意见后做决定把两个意见都交给仲裁者认为认为请综合分析并给出最终方案策略二投票机制适用于对等架构多个投票少数服从多数适合分类类任务比如情感分析内容审核不太适合创造性任务策略三迭代协商之间多轮对话逐步收敛到共识最接近人类团队的协作方式但代价是消耗高可能不收敛超过最大轮次交给仲裁者实战建议在企业场景中权威裁决迭代协商的混合策略最实用简单分歧用裁决快速解决复杂分歧用协商深入讨论但必须设置最大轮次防止无限循环实战用构建多系统接下来我们实现一个完整的多系统一个技术文档生成器由三个协作完成整体架构用户需求协调者研究员搜索资料写手撰写文章审查员质量检查输出最终文档定义基础接口实现研究员研究员的职责是根据主题搜索和整理资料它配备了搜索工具参考文章你是一个技术研究员你的职责是根据给定的主题搜索最新的技术资料整理关键信息提取核心要点验证信息的准确性和时效性输出格式核心概念个要点技术细节包括代码示例或架构图描述参考来源注意事项和常见误区当前主题使用工具搜索资料配置工具并调用实现写手写手接收研究员的资料撰写结构化的技术文章你是一个资深技术写手你的职责是基于研究员提供的资料撰写深入浅出的技术文章使用循序渐进的结构先讲是什么再讲为什么最后讲怎么用包含实际的代码示例优先用类比和生活化的例子解释复杂概念文章长度字写作风格要求像给朋友讲课一样自然先给结论再展开原理避免学术腔每个代码示例都要有解释研究资料实现审查员审查员检查文章质量提出修改意见它和写手形成制衡关系你是一个严格的技术审查员你的职责是检查文章的技术准确性代码示例是否正确概念解释是否准确深度是否只停留在表面有没有讲清楚为什么完整性是否遗漏了关键知识点可读性结构是否清晰例子是否恰当输出格式问题问题建议建议请审查以下文章协调者整合一切协调者是整个系统的大脑它决定任务执行流程调用其他并处理冲突最大重试次数阶段研究请深入研究以下主题收集全面的资料阶段撰写可能需要多轮修改基于研究资料撰写一篇完整的技术文章阶段审查请审查这篇文章的质量审查通过阶段根据审查意见修改审查员提出了以下意见请据此修改文章修改建议超过重试次数返回最新版本用事件驱动解耦为了让系统更灵活我们用的事件机制来驱动之间的协作事件定义协调者通过事件驱动研究完成触发写作写作完成触发审查源码级解读中的交互机制本身没有内置多的抽象但它的三件套提供了构建多系统的所有原材料关键在于理解的工具调用链的单次调用流程如果包含说明想调用工具执行工具获取结果把结果作为追加到消息列表再次调用模型让它基于工具结果继续推理在多场景中我们可以把调用另一个本身作为一种工具调用研究员搜索资料搜索主题搜索调用审查员检查代码质量待审查的代码审查这样协调者就可以通过模式参考文章自主决定何时调用哪个子形成一个动态的协作链与的对比在版本中对多的支持更偏向于函数调用链模式通过注册让模型通过函数调用串联多个步骤搜索技术资料审查文章质量的优势在于和生态天然集成依赖注入事件驱动配置管理都是开箱即用劣势在于多协作的抽象层次较低很多东西需要你自己实现多对比维度抽象无内置需要自行封装无内置通过组合工具注册注解编译时扫描记忆管理接口丰富较简单流式支持响应式生态集成独立库深度集成多模型支持好统一接口好统一接口生产环境的坑与最佳实践成本控制多系统最大的成本陷阱是上下文膨胀每个每次调用都要带上系统提示词历史消息工具结果三个各调用两轮消耗可能是单的倍解决方案用摘要压缩历史上下文把早期消息压缩成摘要之前的对话摘要超时与熔断调用可能因为网络模型过载等原因超时在多链路中一个超时会导致整个流程卡住降级返回缓存结果或简化提示服务暂时不可用请稍后重试配合的熔断器配置可观测性多系统的调试比单难得多你需要知道每个收到了什么输出了什么花了多长时间输入输出耗时并发安全当多个并行执行时共享的可能出现竞态条件使用不可变对象或并发安全的数据结构线程安全横向对比主流多框架框架语言核心理念优势劣势角色扮演任务委派上手快概念清晰深度定制困难对话式协作灵活支持人机混合学习曲线陡图状态机可控性最强可视化概念多入门门槛高工具记忆生态无缝集成多抽象需自建函数回调原生支持多支持较薄对于开发者来说的组合是当前最务实的选择虽然没有开箱即用的多框架但注解的组合足以构建生产级的多系统多的边界与未来什么时候不该用多任务足够简单如果一个能在轮对话内完成加多个只会增加复杂度和成本实时性要求极高多的通信开销会显著增加延迟预算有限消耗是硬成本多动辄倍的消耗需要有预算支撑缺乏可观测性基础设施没有日志追踪监控多系统出了问题你根本不知道是哪个的锅未来方向自组织团队目前的多系统大多需要人工定义角色和流程未来的方向是自己决定我需要什么样的队友我该怎么分工就像一个项目经理自动组建团队协议标准化参考文章解决了与工具之间的标准化通信但与之间的通信还没有统一协议的协议正在尝试填补这个空白混合人机协作不是所有决策都应该交给在关键节点引入人类审批形成做初步工作人类审核继续执行的半自动模式是目前最安全的落地方式总结多系统不是银弹但在合适的场景下它能显著提升系统的能力边界关键要点选择合适的架构层级式适合流程明确的任务对等式适合开放探索混合式最通用通信机制要简单事件驱动是生态下的最佳选择避免过度设计任务分解是核心好的分解决定了系统的上限差的分解会让多反而不如单控制成本上下文压缩摘要机制智能缓存缺一不可可观测性是生命线没有追踪和日志多系统就是黑盒从单到多本质上是从一个人干活到一个团队协作的转变这个过程中遇到的很多问题角色定义任务分配冲突解决在人类组织管理中已经有成熟的解决方案多系统的设计某种意义上就是在用代码重新实现组织管理学的核心思想本文是深度解析系列的第篇在之前的系列中我们已经探讨了推理模式工具调用记忆系统与检索增强规划策略协议结构化输出和多协作是这些能力的自然延伸当单个的能力被充分挖掘后让多个组成团队就是下一个进化方向',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-16 21:45:46',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 1.05rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 1.05rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 1.05rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 1.05rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI-Agent/" itemprop="url">AI Agent</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Spring-Boot/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Spring Boot</span></a><a class="article-meta__tags" href="/tags/Multi-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Multi-Agent</span></a><a class="article-meta__tags" href="/tags/LangChain4j/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LangChain4j</span></a><a class="article-meta__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>分布式系统</span></a><a class="article-meta__tags" href="/tags/AI%E6%9E%B6%E6%9E%84/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AI架构</span></a></span></div></div><h1 class="post-title" itemprop="name headline">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-16T10:02:18.000Z" title="发表于 2026-06-16 18:02:18">2026-06-16</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-16T13:45:46.933Z" title="更新于 2026-06-16 21:45:46">2026-06-16</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/33667def.html"><header><a class="post-meta-categories" href="/categories/AI-Agent/" itemprop="url">AI Agent</a><a href="/tags/Spring-Boot/" tabindex="-1" itemprop="url">Spring Boot</a><a href="/tags/Multi-Agent/" tabindex="-1" itemprop="url">Multi-Agent</a><a href="/tags/LangChain4j/" tabindex="-1" itemprop="url">LangChain4j</a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" tabindex="-1" itemprop="url">分布式系统</a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" tabindex="-1" itemprop="url">AI架构</a><h1 id="CrawlerTitle" itemprop="name headline">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-16T10:02:18.000Z" title="发表于 2026-06-16 18:02:18">2026-06-16</time><time itemprop="dateCreated datePublished" datetime="2026-06-16T13:45:46.933Z" title="更新于 2026-06-16 21:45:46">2026-06-16</time></header><h1 id="AI-Agent-团队协作：多-Agent-系统架构设计与-Java-实战"><a href="#AI-Agent-团队协作：多-Agent-系统架构设计与-Java-实战" class="headerlink" title="AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战"></a>AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</h1><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><p>本文是 AI Agent 深度解析系列的第 10 篇，建议先阅读以下前置文章：</p>
+<ul>
+<li><a href="/posts/a3f7b2e1.html">理解 AI Agent 的大脑：ReAct 模式从入门到实战</a> — Agent 的推理范式</li>
+<li><a href="/posts/fd311830.html">AI Agent 的工具箱：Tool Use 与 Function Calling 实战</a> — Agent 如何调用外部工具</li>
+<li><a href="/posts/70d64e78.html">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆</a> — Agent 的短期与长期记忆</li>
+<li><a href="/posts/2b43307f.html">AI Agent 的记忆力是怎么实现的：LangChain4j Memory 机制深度解析</a> — Agent 记忆的另一套实现</li>
+<li><a href="/posts/fca03c3e.html">从零理解 RAG：检索增强生成完整指南</a> — Agent 如何利用外部知识</li>
+<li><a href="/posts/e05701b9.html">AI Agent 的规划大脑：从任务分解到自适应执行策略</a> — Agent 如何规划任务</li>
+<li><a href="/posts/4dc416f2.html">MCP 模型上下文协议：AI 的万能接口与 MCP Server 实战</a> — Agent 的标准化工具协议</li>
+<li><a href="/posts/f0b37481.html">让 AI 学会”说人话”：Spring AI 结构化输出实战</a> — Agent 如何输出结构化数据</li>
+<li><a href="/posts/7724df09.html">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</a> — Agent 的”灵魂”如何塑造</li>
+</ul>
+<hr>
+<h2 id="为什么一个-Agent-不够？"><a href="#为什么一个-Agent-不够？" class="headerlink" title="为什么一个 Agent 不够？"></a>为什么一个 Agent 不够？</h2><p>在前面的系列文章中，我们已经深入理解了单个 Agent 的核心能力：<a href="/posts/a3f7b2e1.html">推理</a>、<a href="/posts/fd311830.html">工具调用</a>、<a href="/posts/e05701b9.html">规划</a>和<a href="/posts/70d64e78.html">记忆</a>。一个配备齐全的 Agent 已经能完成很多任务，但在真实的企业场景中，你会发现一个 Agent 很快就会遇到瓶颈：</p>
+<p><strong>上下文窗口的物理限制</strong>。即使是 128K token 的大模型，当你同时塞入系统提示词、历史对话、工具调用结果和检索到的文档时，留给”思考”的空间其实很有限。让一个 Agent 既做需求分析、又写代码、还做代码审查和测试，它的上下文窗口很快就会被撑爆。</p>
+<p><strong>角色混乱导致质量下降</strong>。一个人既要当产品经理、又要当架构师、还要当开发和测试，结果通常是每个角色都做得平庸。心理学上叫”角色冲突”——同一时间扮演多个角色会让认知负荷急剧上升。Agent 也是一样，当你让一个 Agent 同时负责代码生成和代码审查时，它很容易陷入”自己审自己”的盲区。</p>
+<p><strong>单点故障的系统风险</strong>。一个 Agent 挂了，整个流程就停了。而在多 Agent 系统中，某个 Agent 失败时可以被重试、被替代，甚至被其他 Agent 诊断和修复。</p>
+<p><strong>效率瓶颈</strong>。一个 Agent 只能串行执行任务，而多 Agent 可以并行工作——一个分析需求，一个查文档，一个准备测试用例，效率提升是数量级的。</p>
+<p>这些问题指向一个自然的解决方案：<strong>让多个专业化的 Agent 组成团队，分工协作</strong>。</p>
+<hr>
+<h2 id="多-Agent-系统的三大架构模式"><a href="#多-Agent-系统的三大架构模式" class="headerlink" title="多 Agent 系统的三大架构模式"></a>多 Agent 系统的三大架构模式</h2><h3 id="1-层级式架构（Hierarchical）"><a href="#1-层级式架构（Hierarchical）" class="headerlink" title="1. 层级式架构（Hierarchical）"></a>1. 层级式架构（Hierarchical）</h3><p>这是最接近现实企业组织的架构。有一个”主管 Agent”负责接收任务、分解子任务、分配给下属 Agent、收集结果并整合。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">            ┌──────────────┐</span><br><span class="line">            │  主管 Agent   │</span><br><span class="line">            │  (Orchestrator)│</span><br><span class="line">            └──────┬───────┘</span><br><span class="line">                   │ 分配任务</span><br><span class="line">      ┌────────────┼────────────┐</span><br><span class="line">      ▼            ▼            ▼</span><br><span class="line">┌──────────┐ ┌──────────┐ ┌──────────┐</span><br><span class="line">│ 需求分析  │ │ 代码生成  │ │ 测试验证  │</span><br><span class="line">│  Agent   │ │  Agent   │ │  Agent   │</span><br><span class="line">└──────────┘ └──────────┘ └──────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>：职责清晰，易于管理，主管 Agent 可以做质量把关。<br><strong>缺点</strong>：主管 Agent 是单点瓶颈，它的上下文窗口要承载所有子 Agent 的结果。<br><strong>适用场景</strong>：流程明确、步骤可预期的任务，比如代码生成流水线。</p>
+<h3 id="2-对等式架构（Peer-to-Peer）"><a href="#2-对等式架构（Peer-to-Peer）" class="headerlink" title="2. 对等式架构（Peer-to-Peer）"></a>2. 对等式架构（Peer-to-Peer）</h3><p>没有中央调度者，Agent 之间直接通信。每个 Agent 都可以发起对话、请求帮助、提供结果。这种架构更灵活，但也更难控制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">┌──────────┐         ┌──────────┐</span><br><span class="line">│ Agent A  │◄───────►│ Agent B  │</span><br><span class="line">└────┬─────┘         └─────┬────┘</span><br><span class="line">     │                     │</span><br><span class="line">     │    ┌──────────┐     │</span><br><span class="line">     └───►│ Agent C  │◄────┘</span><br><span class="line">          └──────────┘</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>：去中心化，没有单点瓶颈，灵活度高。<br><strong>缺点</strong>：难以保证收敛（可能无限循环讨论），调试困难。<br><strong>适用场景</strong>：开放式问题讨论，如头脑风暴、辩论式推理。</p>
+<h3 id="3-混合式架构（Hybrid）"><a href="#3-混合式架构（Hybrid）" class="headerlink" title="3. 混合式架构（Hybrid）"></a>3. 混合式架构（Hybrid）</h3><p>实际项目中最常用的架构。有一个轻量级的协调者负责全局调度，但子 Agent 之间也可以直接通信。协调者不参与具体工作，只负责”派活”和”收结果”。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">           ┌─────────────────┐</span><br><span class="line">           │   协调者 Agent   │</span><br><span class="line">           │  (轻量级调度)    │</span><br><span class="line">           └────────┬────────┘</span><br><span class="line">                    │</span><br><span class="line">      ┌─────────────┼─────────────┐</span><br><span class="line">      ▼             ▼             ▼</span><br><span class="line">┌──────────┐  ┌──────────┐  ┌──────────┐</span><br><span class="line">│ 研究员    │  │ 工程师    │  │ 审查员    │</span><br><span class="line">│  Agent   │──│  Agent   │──│  Agent   │</span><br><span class="line">└──────────┘  └──────────┘  └──────────┘</span><br><span class="line">     （可以直接通信，不必经过协调者）</span><br></pre></td></tr></table></figure>
+
+<p>这种架构兼顾了可控性和灵活性，是我们后面实战的重点。</p>
+<hr>
+<h2 id="通信机制：Agent-之间怎么”说话”？"><a href="#通信机制：Agent-之间怎么”说话”？" class="headerlink" title="通信机制：Agent 之间怎么”说话”？"></a>通信机制：Agent 之间怎么”说话”？</h2><h3 id="消息传递（Message-Passing）"><a href="#消息传递（Message-Passing）" class="headerlink" title="消息传递（Message Passing）"></a>消息传递（Message Passing）</h3><p>最直接的方式——Agent A 往 Agent B 的消息队列里扔一条消息，Agent B 收到后处理并回复。</p>
+<p>在 LangChain4j 中，这可以通过 <code>ChatMemory</code> 的变体来实现。每个 Agent 有独立的对话记忆，Agent 之间的消息通过一个”消息总线”中转：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">AgentMessageBus</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">send</span><span class="params">(String fromAgent, String toAgent, String message)</span>;</span><br><span class="line">    List&lt;AgentMessage&gt; <span class="title function_">receive</span><span class="params">(String agentName)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="共享状态（Shared-State）"><a href="#共享状态（Shared-State）" class="headerlink" title="共享状态（Shared State）"></a>共享状态（Shared State）</h3><p>所有 Agent 共享一个”黑板”（Blackboard），每个 Agent 都可以读写。这类似于线程共享内存的模式——高效但需要注意并发控制。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SharedBlackboard</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Object&gt; state = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;BlackboardListener&gt; listeners = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">(String key, Object value, String writer)</span> &#123;</span><br><span class="line">        state.put(key, value);</span><br><span class="line">        <span class="comment">// 通知所有监听者</span></span><br><span class="line">        listeners.forEach(l -&gt; l.onUpdate(key, value, writer));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">read</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> state.get(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="事件驱动（Event-Driven）"><a href="#事件驱动（Event-Driven）" class="headerlink" title="事件驱动（Event-Driven）"></a>事件驱动（Event-Driven）</h3><p>Agent 发布事件，感兴趣的 Agent 订阅并响应。这种模式天然适合 Spring 的事件机制：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AgentEventPublisher</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ApplicationEventPublisher publisher;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">publishTaskComplete</span><span class="params">(String agentName, TaskResult result)</span> &#123;</span><br><span class="line">        publisher.publishEvent(<span class="keyword">new</span> <span class="title class_">AgentTaskCompleteEvent</span>(agentName, result));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReviewerAgent</span> &#123;</span><br><span class="line">    <span class="meta">@EventListener</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onTaskComplete</span><span class="params">(AgentTaskCompleteEvent event)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;codeGenerator&quot;</span>.equals(event.getAgentName())) &#123;</span><br><span class="line">            <span class="comment">// 自动触发代码审查</span></span><br><span class="line">            reviewCode(event.getResult());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三种模式的对比"><a href="#三种模式的对比" class="headerlink" title="三种模式的对比"></a>三种模式的对比</h3><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>消息传递</th>
+<th>共享状态</th>
+<th>事件驱动</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>耦合度</td>
+<td>中（需要知道对方）</td>
+<td>高（共享内存）</td>
+<td>低（发布-订阅）</td>
+</tr>
+<tr>
+<td>调试难度</td>
+<td>中</td>
+<td>高（竞态条件）</td>
+<td>低（事件可追踪）</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>点对点协作</td>
+<td>状态密集型任务</td>
+<td>松耦合流水线</td>
+</tr>
+<tr>
+<td>扩展性</td>
+<td>一般</td>
+<td>差</td>
+<td>好</td>
+</tr>
+<tr>
+<td>Spring 友好度</td>
+<td>中</td>
+<td>中</td>
+<td>非常好</td>
+</tr>
+</tbody></table>
+<p><strong>实战建议</strong>：大多数场景下，事件驱动是最优选择。它和 Spring 的 <code>ApplicationEventPublisher</code> 天然契合，而且松耦合的特性让系统更容易扩展和维护。</p>
+<hr>
+<h2 id="任务分解：从”造房子”到”搬砖”"><a href="#任务分解：从”造房子”到”搬砖”" class="headerlink" title="任务分解：从”造房子”到”搬砖”"></a>任务分解：从”造房子”到”搬砖”</h2><p>多 Agent 系统的第一个挑战不是”怎么让 Agent 协作”，而是”怎么把大任务拆成小任务”。</p>
+<h3 id="任务分解的三种策略"><a href="#任务分解的三种策略" class="headerlink" title="任务分解的三种策略"></a>任务分解的三种策略</h3><p><strong>1. 基于流程的分解</strong></p>
+<p>适合有明确步骤的任务。比如”从需求到代码”可以分解为：需求分析 → 架构设计 → 代码实现 → 测试 → 审查。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PipelineOrchestrator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;AgentStep&gt; steps;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">execute</span><span class="params">(Task task)</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">context</span> <span class="operator">=</span> task;</span><br><span class="line">        <span class="keyword">for</span> (AgentStep step : steps) &#123;</span><br><span class="line">            context = step.execute(context);</span><br><span class="line">            <span class="keyword">if</span> (step.failed()) &#123;</span><br><span class="line">                <span class="keyword">return</span> Result.failure(step.getError());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Result.success(context);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 基于能力的分解</strong></p>
+<p>根据每个 Agent 的”特长”分配任务。就像你不会让前端工程师去调数据库一样。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CapabilityBasedRouter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, Agent&gt; agentRegistry;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> AgentRoute <span class="title function_">route</span><span class="params">(SubTask task)</span> &#123;</span><br><span class="line">        <span class="comment">// 分析任务需要的能力</span></span><br><span class="line">        Set&lt;String&gt; requiredCapabilities = analyzeCapabilities(task);</span><br><span class="line">        <span class="comment">// 找到匹配能力的 Agent</span></span><br><span class="line">        <span class="type">Agent</span> <span class="variable">bestAgent</span> <span class="operator">=</span> agentRegistry.values().stream()</span><br><span class="line">            .filter(a -&gt; a.getCapabilities().containsAll(requiredCapabilities))</span><br><span class="line">            .min(Comparator.comparingInt(Agent::getCurrentLoad))</span><br><span class="line">            .orElseThrow(() -&gt; <span class="keyword">new</span> <span class="title class_">NoSuitableAgentException</span>(task));</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AgentRoute</span>(bestAgent, task);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 基于数据的分解</strong></p>
+<p>把大任务按数据维度拆分。比如”分析 1000 份简历”可以拆成 10 组，每组 100 份，由 10 个 Agent 并行处理。</p>
+<hr>
+<h2 id="冲突解决：当-Agent-意见不一致时"><a href="#冲突解决：当-Agent-意见不一致时" class="headerlink" title="冲突解决：当 Agent 意见不一致时"></a>冲突解决：当 Agent 意见不一致时</h2><p>多个 Agent 协作一定会遇到冲突。比如代码生成 Agent 写了一段代码，但审查 Agent 认为有性能问题。怎么解决？</p>
+<h3 id="策略一：权威裁决"><a href="#策略一：权威裁决" class="headerlink" title="策略一：权威裁决"></a>策略一：权威裁决</h3><p>由一个”高级 Agent”做最终决策。比如协调者 Agent 综合双方意见后做决定。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConflictResolver</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> Resolution <span class="title function_">resolve</span><span class="params">(AgentOpinion opinion1, AgentOpinion opinion2)</span> &#123;</span><br><span class="line">        <span class="comment">// 把两个意见都交给仲裁者</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">prompt</span> <span class="operator">=</span> String.format(</span><br><span class="line">            <span class="string">&quot;Agent A 认为：%s\nAgent B 认为：%s\n请综合分析并给出最终方案。&quot;</span>,</span><br><span class="line">            opinion1.getContent(), opinion2.getContent()</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> arbitratorAgent.chat(prompt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="策略二：投票机制"><a href="#策略二：投票机制" class="headerlink" title="策略二：投票机制"></a>策略二：投票机制</h3><p>适用于对等架构。多个 Agent 投票，少数服从多数。适合”分类”类任务（比如情感分析、内容审核），不太适合创造性任务。</p>
+<h3 id="策略三：迭代协商"><a href="#策略三：迭代协商" class="headerlink" title="策略三：迭代协商"></a>策略三：迭代协商</h3><p>Agent 之间多轮对话，逐步收敛到共识。最接近人类团队的协作方式，但代价是 token 消耗高、可能不收敛。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NegotiationProtocol</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_ROUNDS</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Agreement <span class="title function_">negotiate</span><span class="params">(Agent agent1, Agent agent2, Topic topic)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">currentProposal</span> <span class="operator">=</span> agent1.propose(topic);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">round</span> <span class="operator">=</span> <span class="number">0</span>; round &lt; MAX_ROUNDS; round++) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">response</span> <span class="operator">=</span> agent2.evaluate(currentProposal);</span><br><span class="line">            <span class="keyword">if</span> (isAgreement(response)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Agreement</span>(response, round);</span><br><span class="line">            &#125;</span><br><span class="line">            currentProposal = agent1.refine(currentProposal, response);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 超过最大轮次，交给仲裁者</span></span><br><span class="line">        <span class="keyword">return</span> conflictResolver.arbitrate(agent1, agent2, topic);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实战建议</strong>：在企业场景中，”权威裁决 + 迭代协商”的混合策略最实用。简单分歧用裁决快速解决，复杂分歧用协商深入讨论，但必须设置最大轮次防止无限循环。</p>
+<hr>
+<h2 id="实战：用-LangChain4j-Spring-Boot-构建多-Agent-系统"><a href="#实战：用-LangChain4j-Spring-Boot-构建多-Agent-系统" class="headerlink" title="实战：用 LangChain4j + Spring Boot 构建多 Agent 系统"></a>实战：用 LangChain4j + Spring Boot 构建多 Agent 系统</h2><p>接下来我们实现一个完整的多 Agent 系统：一个”技术文档生成器”，由三个 Agent 协作完成。</p>
+<h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">用户需求 ──► 协调者 Agent ──► 研究员 Agent（搜索资料）</span><br><span class="line">                    │              │</span><br><span class="line">                    │              ▼</span><br><span class="line">                    └──────► 写手 Agent（撰写文章）</span><br><span class="line">                                │</span><br><span class="line">                                ▼</span><br><span class="line">                         审查员 Agent（质量检查）</span><br><span class="line">                                │</span><br><span class="line">                                ▼</span><br><span class="line">                           输出最终文档</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-1：定义-Agent-基础接口"><a href="#Step-1：定义-Agent-基础接口" class="headerlink" title="Step 1：定义 Agent 基础接口"></a>Step 1：定义 Agent 基础接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Agent</span> &#123;</span><br><span class="line">    String <span class="title function_">getName</span><span class="params">()</span>;</span><br><span class="line">    Set&lt;String&gt; <span class="title function_">getCapabilities</span><span class="params">()</span>;</span><br><span class="line">    AgentResponse <span class="title function_">chat</span><span class="params">(String message, AgentContext context)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2：实现研究员-Agent"><a href="#Step-2：实现研究员-Agent" class="headerlink" title="Step 2：实现研究员 Agent"></a>Step 2：实现研究员 Agent</h3><p>研究员 Agent 的职责是根据主题搜索和整理资料。它配备了搜索工具（参考 <a href="/posts/fd311830.html">Tool Use 文章</a>）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ResearcherAgent</span> <span class="keyword">implements</span> <span class="title class_">Agent</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel model;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ToolExecutor searchTool;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ResearcherAgent</span><span class="params">(</span></span><br><span class="line"><span class="params">            <span class="meta">@Value(&quot;$&#123;agent.model&#125;&quot;)</span> ChatLanguageModel model,</span></span><br><span class="line"><span class="params">            ToolExecutor searchTool)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.model = model;</span><br><span class="line">        <span class="built_in">this</span>.searchTool = searchTool;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;researcher&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Set&lt;String&gt; <span class="title function_">getCapabilities</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Set.of(<span class="string">&quot;search&quot;</span>, <span class="string">&quot;summarize&quot;</span>, <span class="string">&quot;fact-check&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AgentResponse <span class="title function_">chat</span><span class="params">(String message, AgentContext context)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">systemPrompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            你是一个技术研究员。你的职责是：</span></span><br><span class="line"><span class="string">            1. 根据给定的主题搜索最新的技术资料</span></span><br><span class="line"><span class="string">            2. 整理关键信息，提取核心要点</span></span><br><span class="line"><span class="string">            3. 验证信息的准确性和时效性</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            输出格式：</span></span><br><span class="line"><span class="string">            - 核心概念（3-5 个要点）</span></span><br><span class="line"><span class="string">            - 技术细节（包括代码示例或架构图描述）</span></span><br><span class="line"><span class="string">            - 参考来源</span></span><br><span class="line"><span class="string">            - 注意事项和常见误区</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            当前主题：%s</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>.formatted(context.getTopic());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用工具搜索资料</span></span><br><span class="line">        List&lt;ChatMessage&gt; messages = List.of(</span><br><span class="line">            SystemMessage.from(systemPrompt),</span><br><span class="line">            UserMessage.from(message)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 配置工具并调用</span></span><br><span class="line">        model.setTools(List.of(ToolSpecification.from(searchTool)));</span><br><span class="line">        Response&lt;AiMessage&gt; response = model.generate(messages);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AgentResponse</span>(</span><br><span class="line">            getName(),</span><br><span class="line">            response.content().text(),</span><br><span class="line">            extractSources(response)</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-3：实现写手-Agent"><a href="#Step-3：实现写手-Agent" class="headerlink" title="Step 3：实现写手 Agent"></a>Step 3：实现写手 Agent</h3><p>写手 Agent 接收研究员的资料，撰写结构化的技术文章。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WriterAgent</span> <span class="keyword">implements</span> <span class="title class_">Agent</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel model;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;writer&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Set&lt;String&gt; <span class="title function_">getCapabilities</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Set.of(<span class="string">&quot;write&quot;</span>, <span class="string">&quot;structure&quot;</span>, <span class="string">&quot;illustrate&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AgentResponse <span class="title function_">chat</span><span class="params">(String message, AgentContext context)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">systemPrompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            你是一个资深技术写手。你的职责是：</span></span><br><span class="line"><span class="string">            1. 基于研究员提供的资料，撰写深入浅出的技术文章</span></span><br><span class="line"><span class="string">            2. 使用循序渐进的结构：先讲&quot;是什么&quot;，再讲&quot;为什么&quot;，最后讲&quot;怎么用&quot;</span></span><br><span class="line"><span class="string">            3. 包含实际的代码示例（优先 Java/Spring Boot）</span></span><br><span class="line"><span class="string">            4. 用类比和生活化的例子解释复杂概念</span></span><br><span class="line"><span class="string">            5. 文章长度 3000-5000 字</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            写作风格要求：</span></span><br><span class="line"><span class="string">            - 像给朋友讲课一样自然</span></span><br><span class="line"><span class="string">            - 先给结论，再展开原理</span></span><br><span class="line"><span class="string">            - 避免学术腔</span></span><br><span class="line"><span class="string">            - 每个代码示例都要有解释</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            研究资料：</span></span><br><span class="line"><span class="string">            %s</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>.formatted(context.getResearchResults());</span><br><span class="line"></span><br><span class="line">        List&lt;ChatMessage&gt; messages = List.of(</span><br><span class="line">            SystemMessage.from(systemPrompt),</span><br><span class="line">            UserMessage.from(message)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        Response&lt;AiMessage&gt; response = model.generate(messages);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AgentResponse</span>(getName(), response.content().text(), List.of());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-4：实现审查员-Agent"><a href="#Step-4：实现审查员-Agent" class="headerlink" title="Step 4：实现审查员 Agent"></a>Step 4：实现审查员 Agent</h3><p>审查员 Agent 检查文章质量，提出修改意见。它和写手 Agent 形成”制衡”关系。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReviewerAgent</span> <span class="keyword">implements</span> <span class="title class_">Agent</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel model;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="string">&quot;reviewer&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Set&lt;String&gt; <span class="title function_">getCapabilities</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Set.of(<span class="string">&quot;review&quot;</span>, <span class="string">&quot;quality-check&quot;</span>, <span class="string">&quot;fact-verify&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> AgentResponse <span class="title function_">chat</span><span class="params">(String message, AgentContext context)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">systemPrompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            你是一个严格的技术审查员。你的职责是检查文章的：</span></span><br><span class="line"><span class="string">            1. 技术准确性：代码示例是否正确？概念解释是否准确？</span></span><br><span class="line"><span class="string">            2. 深度：是否只停留在表面？有没有讲清楚&quot;为什么&quot;？</span></span><br><span class="line"><span class="string">            3. 完整性：是否遗漏了关键知识点？</span></span><br><span class="line"><span class="string">            4. 可读性：结构是否清晰？例子是否恰当？</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            输出格式（JSON）：</span></span><br><span class="line"><span class="string">            &#123;</span></span><br><span class="line"><span class="string">              &quot;approved&quot;: true/false,</span></span><br><span class="line"><span class="string">              &quot;score&quot;: 1-10,</span></span><br><span class="line"><span class="string">              &quot;issues&quot;: [&quot;问题1&quot;, &quot;问题2&quot;],</span></span><br><span class="line"><span class="string">              &quot;suggestions&quot;: [&quot;建议1&quot;, &quot;建议2&quot;]</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">        List&lt;ChatMessage&gt; messages = List.of(</span><br><span class="line">            SystemMessage.from(systemPrompt),</span><br><span class="line">            UserMessage.from(<span class="string">&quot;请审查以下文章：\n&quot;</span> + context.getDraft())</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        Response&lt;AiMessage&gt; response = model.generate(messages);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">AgentResponse</span>(getName(), response.content().text(), List.of());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-5：协调者-Agent-——-整合一切"><a href="#Step-5：协调者-Agent-——-整合一切" class="headerlink" title="Step 5：协调者 Agent —— 整合一切"></a>Step 5：协调者 Agent —— 整合一切</h3><p>协调者是整个系统的”大脑”，它决定任务执行流程，调用其他 Agent，并处理冲突。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrchestratorAgent</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ResearcherAgent researcher;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WriterAgent writer;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReviewerAgent reviewer;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel model;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 最大重试次数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_RETRIES</span> <span class="operator">=</span> <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">generateDocument</span><span class="params">(String topic)</span> &#123;</span><br><span class="line">        <span class="type">AgentContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AgentContext</span>(topic);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阶段 1：研究</span></span><br><span class="line">        <span class="type">AgentResponse</span> <span class="variable">researchResult</span> <span class="operator">=</span> researcher.chat(</span><br><span class="line">            <span class="string">&quot;请深入研究以下主题，收集全面的资料：&quot;</span> + topic,</span><br><span class="line">            context</span><br><span class="line">        );</span><br><span class="line">        context.setResearchResults(researchResult.getContent());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 阶段 2：撰写（可能需要多轮修改）</span></span><br><span class="line">        <span class="type">AgentResponse</span> <span class="variable">writeResult</span> <span class="operator">=</span> writer.chat(</span><br><span class="line">            <span class="string">&quot;基于研究资料，撰写一篇完整的技术文章&quot;</span>,</span><br><span class="line">            context</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">currentDraft</span> <span class="operator">=</span> writeResult.getContent();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">attempt</span> <span class="operator">=</span> <span class="number">0</span>; attempt &lt; MAX_RETRIES; attempt++) &#123;</span><br><span class="line">            <span class="comment">// 阶段 3：审查</span></span><br><span class="line">            context.setDraft(currentDraft);</span><br><span class="line">            <span class="type">AgentResponse</span> <span class="variable">reviewResult</span> <span class="operator">=</span> reviewer.chat(</span><br><span class="line">                <span class="string">&quot;请审查这篇文章的质量&quot;</span>,</span><br><span class="line">                context</span><br><span class="line">            );</span><br><span class="line"></span><br><span class="line">            <span class="type">ReviewReport</span> <span class="variable">report</span> <span class="operator">=</span> parseReviewReport(reviewResult.getContent());</span><br><span class="line">            <span class="keyword">if</span> (report.isApproved() &amp;&amp; report.getScore() &gt;= <span class="number">7</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> currentDraft; <span class="comment">// 审查通过</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 阶段 4：根据审查意见修改</span></span><br><span class="line">            currentDraft = writer.chat(</span><br><span class="line">                <span class="string">&quot;审查员提出了以下意见，请据此修改文章：\n&quot;</span></span><br><span class="line">                    + String.join(<span class="string">&quot;\n&quot;</span>, report.getIssues()) + <span class="string">&quot;\n&quot;</span></span><br><span class="line">                    + <span class="string">&quot;修改建议：\n&quot;</span></span><br><span class="line">                    + String.join(<span class="string">&quot;\n&quot;</span>, report.getSuggestions()),</span><br><span class="line">                context</span><br><span class="line">            ).getContent();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> currentDraft; <span class="comment">// 超过重试次数，返回最新版本</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-6：用-Spring-事件驱动解耦"><a href="#Step-6：用-Spring-事件驱动解耦" class="headerlink" title="Step 6：用 Spring 事件驱动解耦"></a>Step 6：用 Spring 事件驱动解耦</h3><p>为了让系统更灵活，我们用 Spring 的事件机制来驱动 Agent 之间的协作：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事件定义</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">record</span> <span class="title class_">AgentTaskEvent</span><span class="params">(String agentName, String task, AgentContext context)</span> &#123;&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">record</span> <span class="title class_">AgentResultEvent</span><span class="params">(String agentName, AgentResponse result)</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 协调者通过事件驱动</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EventDrivenOrchestrator</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span> <span class="keyword">private</span> ApplicationEventPublisher publisher;</span><br><span class="line">    <span class="meta">@Autowired</span> <span class="keyword">private</span> ApplicationContext appContext;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">startWorkflow</span><span class="params">(String topic)</span> &#123;</span><br><span class="line">        <span class="type">AgentContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AgentContext</span>(topic);</span><br><span class="line">        publisher.publishEvent(<span class="keyword">new</span> <span class="title class_">AgentTaskEvent</span>(<span class="string">&quot;researcher&quot;</span>, topic, context));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@EventListener</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onResearchComplete</span><span class="params">(AgentResultEvent event)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;researcher&quot;</span>.equals(event.agentName())) &#123;</span><br><span class="line">            <span class="comment">// 研究完成，触发写作</span></span><br><span class="line">            <span class="type">AgentContext</span> <span class="variable">ctx</span> <span class="operator">=</span> event.result().getContext();</span><br><span class="line">            ctx.setResearchResults(event.result().getContent());</span><br><span class="line">            publisher.publishEvent(<span class="keyword">new</span> <span class="title class_">AgentTaskEvent</span>(<span class="string">&quot;writer&quot;</span>, <span class="string">&quot;write article&quot;</span>, ctx));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@EventListener</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onWriteComplete</span><span class="params">(AgentResultEvent event)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="string">&quot;writer&quot;</span>.equals(event.agentName())) &#123;</span><br><span class="line">            <span class="comment">// 写作完成，触发审查</span></span><br><span class="line">            <span class="type">AgentContext</span> <span class="variable">ctx</span> <span class="operator">=</span> event.result().getContext();</span><br><span class="line">            ctx.setDraft(event.result().getContent());</span><br><span class="line">            publisher.publishEvent(<span class="keyword">new</span> <span class="title class_">AgentTaskEvent</span>(<span class="string">&quot;reviewer&quot;</span>, <span class="string">&quot;review article&quot;</span>, ctx));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="源码级解读：LangChain4j-中的-Agent-交互机制"><a href="#源码级解读：LangChain4j-中的-Agent-交互机制" class="headerlink" title="源码级解读：LangChain4j 中的 Agent 交互机制"></a>源码级解读：LangChain4j 中的 Agent 交互机制</h2><p>LangChain4j 本身没有内置”多 Agent”的抽象，但它的 <code>ChatLanguageModel</code> + <code>ToolSpecification</code> + <code>ChatMemory</code> 三件套提供了构建多 Agent 系统的所有原材料。</p>
+<p>关键在于理解 <code>AiMessage</code> 的工具调用链：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// LangChain4j 的单次调用流程</span></span><br><span class="line">Response&lt;AiMessage&gt; response = model.generate(messages, toolSpecifications);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果 AiMessage 包含 toolExecutionRequests，说明 Agent 想调用工具</span></span><br><span class="line"><span class="keyword">if</span> (response.content().hasToolExecutionRequests()) &#123;</span><br><span class="line">    <span class="keyword">for</span> (ToolExecutionRequest request : response.content().toolExecutionRequests()) &#123;</span><br><span class="line">        <span class="comment">// 执行工具，获取结果</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">result</span> <span class="operator">=</span> toolExecutor.execute(request);</span><br><span class="line">        <span class="comment">// 把结果作为 ToolExecutionResultMessage 追加到消息列表</span></span><br><span class="line">        messages.add(ToolExecutionResultMessage.from(request, result));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 再次调用模型，让它基于工具结果继续推理</span></span><br><span class="line">    response = model.generate(messages, toolSpecifications);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在多 Agent 场景中，我们可以把”调用另一个 Agent”本身作为一种工具：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Tool(&quot;调用研究员 Agent 搜索资料&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">callResearcher</span><span class="params">(<span class="meta">@P(&quot;搜索主题&quot;)</span> String topic)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> researcherAgent.chat(<span class="string">&quot;搜索: &quot;</span> + topic, <span class="keyword">new</span> <span class="title class_">AgentContext</span>(topic))</span><br><span class="line">        .getContent();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Tool(&quot;调用审查员 Agent 检查代码质量&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">callReviewer</span><span class="params">(<span class="meta">@P(&quot;待审查的代码&quot;)</span> String code)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> reviewerAgent.chat(<span class="string">&quot;审查: &quot;</span> + code, <span class="keyword">new</span> <span class="title class_">AgentContext</span>(<span class="string">&quot;&quot;</span>))</span><br><span class="line">        .getContent();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，协调者 Agent 就可以通过 ReAct 模式（参考 <a href="/posts/a3f7b2e1.html">ReAct 文章</a>）自主决定何时调用哪个子 Agent，形成一个动态的协作链。</p>
+<h3 id="与-Spring-AI-的对比"><a href="#与-Spring-AI-的对比" class="headerlink" title="与 Spring AI 的对比"></a>与 Spring AI 的对比</h3><p>Spring AI 在 1.0 版本中对多 Agent 的支持更偏向于”函数调用链”模式，通过 <code>@Bean</code> 注册 <code>FunctionCallback</code>，让模型通过函数调用串联多个步骤：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Description(&quot;搜索技术资料&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Function&lt;SearchRequest, SearchResult&gt; <span class="title function_">searchTool</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request -&gt; searchService.search(request.query());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@Description(&quot;审查文章质量&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Function&lt;Article, ReviewReport&gt; <span class="title function_">reviewTool</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> article -&gt; reviewService.review(article);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Spring AI 的优势在于和 Spring 生态天然集成——依赖注入、事件驱动、配置管理都是开箱即用。劣势在于多 Agent 协作的抽象层次较低，很多东西需要你自己实现。</p>
+<p><strong>LangChain4j vs Spring AI 多 Agent 对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>LangChain4j</th>
+<th>Spring AI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Agent 抽象</td>
+<td>无内置，需要自行封装</td>
+<td>无内置，通过 Function 组合</td>
+</tr>
+<tr>
+<td>工具注册</td>
+<td><code>@Tool</code> 注解，编译时扫描</td>
+<td><code>FunctionCallback</code> Bean</td>
+</tr>
+<tr>
+<td>记忆管理</td>
+<td><code>ChatMemory</code> 接口丰富</td>
+<td><code>ChatMemory</code> 较简单</td>
+</tr>
+<tr>
+<td>流式支持</td>
+<td><code>StreamingChatLanguageModel</code></td>
+<td><code>Flux</code> 响应式</td>
+</tr>
+<tr>
+<td>生态集成</td>
+<td>独立库</td>
+<td>深度集成 Spring Boot</td>
+</tr>
+<tr>
+<td>多模型支持</td>
+<td>好（统一接口）</td>
+<td>好（统一接口）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="生产环境的坑与最佳实践"><a href="#生产环境的坑与最佳实践" class="headerlink" title="生产环境的坑与最佳实践"></a>生产环境的坑与最佳实践</h2><h3 id="1-Token-成本控制"><a href="#1-Token-成本控制" class="headerlink" title="1. Token 成本控制"></a>1. Token 成本控制</h3><p>多 Agent 系统最大的成本陷阱是<strong>上下文膨胀</strong>。每个 Agent 每次调用都要带上系统提示词 + 历史消息 + 工具结果，三个 Agent 各调用两轮，token 消耗可能是单 Agent 的 6-10 倍。</p>
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用摘要压缩历史上下文</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SummarizingMemory</span> <span class="keyword">implements</span> <span class="title class_">ChatMemory</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel model;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;ChatMessage&gt; messages = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_MESSAGES</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(ChatMessage message)</span> &#123;</span><br><span class="line">        messages.add(message);</span><br><span class="line">        <span class="keyword">if</span> (messages.size() &gt; MAX_MESSAGES) &#123;</span><br><span class="line">            <span class="comment">// 把早期消息压缩成摘要</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">summary</span> <span class="operator">=</span> summarize(messages.subList(<span class="number">0</span>, MAX_MESSAGES / <span class="number">2</span>));</span><br><span class="line">            messages.subList(<span class="number">0</span>, MAX_MESSAGES / <span class="number">2</span>).clear();</span><br><span class="line">            messages.add(<span class="number">0</span>, SystemMessage.from(<span class="string">&quot;之前的对话摘要：&quot;</span> + summary));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-超时与熔断"><a href="#2-超时与熔断" class="headerlink" title="2. 超时与熔断"></a>2. 超时与熔断</h3><p>Agent 调用可能因为网络、模型过载等原因超时。在多 Agent 链路中，一个超时会导致整个流程卡住。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ResilientAgentCaller</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@CircuitBreaker(name = &quot;agent&quot;, fallbackMethod = &quot;fallback&quot;)</span></span><br><span class="line">    <span class="meta">@TimeLimiter(name = &quot;agent&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> CompletableFuture&lt;AgentResponse&gt; <span class="title function_">callAgent</span><span class="params">(Agent agent, String msg, AgentContext ctx)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> CompletableFuture.supplyAsync(() -&gt; agent.chat(msg, ctx));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> CompletableFuture&lt;AgentResponse&gt; <span class="title function_">fallback</span><span class="params">(Agent agent, String msg, AgentContext ctx, Throwable t)</span> &#123;</span><br><span class="line">        <span class="comment">// 降级：返回缓存结果或简化提示</span></span><br><span class="line">        <span class="keyword">return</span> CompletableFuture.completedFuture(</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">AgentResponse</span>(agent.getName(), <span class="string">&quot;服务暂时不可用，请稍后重试。&quot;</span>, List.of())</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配合 Resilience4j 的熔断器配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">resilience4j:</span></span><br><span class="line">  <span class="attr">circuitbreaker:</span></span><br><span class="line">    <span class="attr">instances:</span></span><br><span class="line">      <span class="attr">agent:</span></span><br><span class="line">        <span class="attr">slidingWindowSize:</span> <span class="number">10</span></span><br><span class="line">        <span class="attr">failureRateThreshold:</span> <span class="number">50</span></span><br><span class="line">        <span class="attr">waitDurationInOpenState:</span> <span class="string">30s</span></span><br><span class="line">  <span class="attr">timelimiter:</span></span><br><span class="line">    <span class="attr">instances:</span></span><br><span class="line">      <span class="attr">agent:</span></span><br><span class="line">        <span class="attr">timeoutDuration:</span> <span class="string">60s</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-可观测性"><a href="#3-可观测性" class="headerlink" title="3. 可观测性"></a>3. 可观测性</h3><p>多 Agent 系统的调试比单 Agent 难得多。你需要知道每个 Agent 收到了什么、输出了什么、花了多长时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AgentTracingAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.example.agent.Agent.chat(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">traceAgent</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="type">Agent</span> <span class="variable">agent</span> <span class="operator">=</span> (Agent) pjp.getTarget();</span><br><span class="line">        <span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> (String) pjp.getArgs()[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">        <span class="type">Span</span> <span class="variable">span</span> <span class="operator">=</span> tracer.nextSpan().name(<span class="string">&quot;agent:&quot;</span> + agent.getName()).start();</span><br><span class="line">        <span class="keyword">try</span> (Tracer.<span class="type">SpanInScope</span> <span class="variable">ws</span> <span class="operator">=</span> tracer.withSpan(span)) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;[&#123;&#125;] 输入: &#123;&#125;&quot;</span>, agent.getName(), abbreviate(input, <span class="number">200</span>));</span><br><span class="line">            <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">            <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> pjp.proceed();</span><br><span class="line"></span><br><span class="line">            <span class="type">long</span> <span class="variable">elapsed</span> <span class="operator">=</span> System.currentTimeMillis() - start;</span><br><span class="line">            log.info(<span class="string">&quot;[&#123;&#125;] 输出: &#123;&#125; (耗时: &#123;&#125;ms)&quot;</span>, agent.getName(),</span><br><span class="line">                abbreviate(result.toString(), <span class="number">200</span>), elapsed);</span><br><span class="line"></span><br><span class="line">            span.tag(<span class="string">&quot;agent.name&quot;</span>, agent.getName());</span><br><span class="line">            span.tag(<span class="string">&quot;agent.elapsed_ms&quot;</span>, String.valueOf(elapsed));</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            span.error(e);</span><br><span class="line">            <span class="keyword">throw</span> e;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            span.end();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-并发安全"><a href="#4-并发安全" class="headerlink" title="4. 并发安全"></a>4. 并发安全</h3><p>当多个 Agent 并行执行时，共享的 <code>AgentContext</code> 可能出现竞态条件。使用不可变对象或并发安全的数据结构：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AgentContext</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> String topic;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ConcurrentHashMap&lt;String, String&gt; data = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(String key, String value)</span> &#123;</span><br><span class="line">        data.put(key, value);  <span class="comment">// 线程安全</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">get</span><span class="params">(String key)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> data.get(key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="横向对比：主流多-Agent-框架"><a href="#横向对比：主流多-Agent-框架" class="headerlink" title="横向对比：主流多 Agent 框架"></a>横向对比：主流多 Agent 框架</h2><table>
+<thead>
+<tr>
+<th>框架</th>
+<th>语言</th>
+<th>核心理念</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CrewAI</td>
+<td>Python</td>
+<td>角色扮演 + 任务委派</td>
+<td>上手快，概念清晰</td>
+<td>深度定制困难</td>
+</tr>
+<tr>
+<td>AutoGen</td>
+<td>Python</td>
+<td>对话式协作</td>
+<td>灵活，支持人机混合</td>
+<td>学习曲线陡</td>
+</tr>
+<tr>
+<td>LangGraph</td>
+<td>Python</td>
+<td>图状态机</td>
+<td>可控性最强，可视化</td>
+<td>概念多，入门门槛高</td>
+</tr>
+<tr>
+<td>LangChain4j</td>
+<td>Java</td>
+<td>工具 + 记忆</td>
+<td>Java 生态无缝集成</td>
+<td>多 Agent 抽象需自建</td>
+</tr>
+<tr>
+<td>Spring AI</td>
+<td>Java</td>
+<td>函数回调</td>
+<td>Spring 原生支持</td>
+<td>多 Agent 支持较薄</td>
+</tr>
+</tbody></table>
+<p>对于 Java 开发者来说，LangChain4j + Spring Boot 的组合是当前最务实的选择。虽然没有开箱即用的”多 Agent 框架”，但 <code>@Tool</code> 注解 + Spring Event + <code>ChatMemory</code> 的组合足以构建生产级的多 Agent 系统。</p>
+<hr>
+<h2 id="多-Agent-的边界与未来"><a href="#多-Agent-的边界与未来" class="headerlink" title="多 Agent 的边界与未来"></a>多 Agent 的边界与未来</h2><h3 id="什么时候不该用多-Agent？"><a href="#什么时候不该用多-Agent？" class="headerlink" title="什么时候不该用多 Agent？"></a>什么时候不该用多 Agent？</h3><ul>
+<li><strong>任务足够简单</strong>：如果一个 Agent 能在 2-3 轮对话内完成，加多个 Agent 只会增加复杂度和成本。</li>
+<li><strong>实时性要求极高</strong>：多 Agent 的通信开销会显著增加延迟。</li>
+<li><strong>预算有限</strong>：token 消耗是硬成本，多 Agent 动辄 5-10 倍的消耗需要有预算支撑。</li>
+<li><strong>缺乏可观测性基础设施</strong>：没有日志、追踪、监控，多 Agent 系统出了问题你根本不知道是哪个 Agent 的锅。</li>
+</ul>
+<h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><p><strong>自组织 Agent 团队</strong>：目前的多 Agent 系统大多需要人工定义角色和流程。未来的方向是 Agent 自己决定”我需要什么样的队友”、”我该怎么分工”——就像一个项目经理自动组建团队。</p>
+<p><strong>Agent 协议标准化</strong>：MCP（参考 <a href="/posts/4dc416f2.html">MCP 文章</a>）解决了 Agent 与工具之间的标准化通信，但 Agent 与 Agent 之间的通信还没有统一协议。Google 的 A2A（Agent-to-Agent）协议正在尝试填补这个空白。</p>
+<p><strong>混合人机协作</strong>：不是所有决策都应该交给 Agent。在关键节点引入人类审批，形成”Agent 做初步工作 → 人类审核 → Agent 继续执行”的半自动模式，是目前最安全的落地方式。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多 Agent 系统不是银弹，但在合适的场景下，它能显著提升 AI 系统的能力边界。关键要点：</p>
+<ol>
+<li><strong>选择合适的架构</strong>：层级式适合流程明确的任务，对等式适合开放探索，混合式最通用。</li>
+<li><strong>通信机制要简单</strong>：事件驱动是 Spring 生态下的最佳选择，避免过度设计。</li>
+<li><strong>任务分解是核心</strong>：好的分解决定了系统的上限，差的分解会让多 Agent 反而不如单 Agent。</li>
+<li><strong>控制成本</strong>：上下文压缩、摘要机制、智能缓存缺一不可。</li>
+<li><strong>可观测性是生命线</strong>：没有追踪和日志，多 Agent 系统就是黑盒。</li>
+</ol>
+<p>从单 Agent 到多 Agent，本质上是从”一个人干活”到”一个团队协作”的转变。这个过程中遇到的很多问题——角色定义、任务分配、冲突解决——在人类组织管理中已经有成熟的解决方案。多 Agent 系统的设计，某种意义上就是在用代码重新实现组织管理学的核心思想。</p>
+<hr>
+<p><em>本文是 AI Agent 深度解析系列的第 10 篇。在之前的系列中，我们已经探讨了 <a href="/posts/a3f7b2e1.html">ReAct 推理模式</a>、<a href="/posts/fd311830.html">Tool Use 工具调用</a>、<a href="/posts/70d64e78.html">记忆系统</a> 与 <a href="/posts/2b43307f.html">LangChain4j Memory</a>、<a href="/posts/fca03c3e.html">RAG 检索增强</a>、<a href="/posts/e05701b9.html">规划策略</a>、<a href="/posts/4dc416f2.html">MCP 协议</a>、<a href="/posts/f0b37481.html">结构化输出</a> 和 <a href="/posts/7724df09.html">Prompt Engineering</a>。多 Agent 协作是这些能力的自然延伸——当单个 Agent 的能力被充分挖掘后，让多个 Agent 组成团队就是下一个进化方向。</em></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/33667def.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/33667def.html')">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/33667def.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战&amp;url=https://blog.goku.top/posts/33667def.html&amp;pic=https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Spring-Boot/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Spring Boot<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/Multi-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Multi-Agent<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/LangChain4j/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LangChain4j<span class="tagsPageCount">16</span></a><a class="post-meta__box__tags" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>分布式系统<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/AI%E6%9E%B6%E6%9E%84/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AI架构<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/7724df09.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=0f686df7-3c38-3312-ea8f-82ceb5032dbb" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</div></div></a></div><div class="next-post pull-right"><a href="/posts/a26fbc69.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=73db79e8-1574-1e26-e83c-fd7dbf6a8a8e" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AI Agent 评估与优化：从基准测试到生产环境的质量守护实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/70d64e78.html" title="AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=a195337f-de86-c6aa-c007-acf0636da38e" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-13</div><div class="title">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战</div></div></a></div><div><a href="/posts/746c8779.html" title="当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=577a2c0a-448a-9d2d-e3bc-8c5b154db469" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-17</div><div class="title">当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</div></div></a></div><div><a href="/posts/fca03c3e.html" title="从零理解 RAG：检索增强生成完整指南"><img class="cover" src="https://upyun.goku.top/blog/post_banner_1.jpeg?_r_=f21ad575-d742-3881-d0bb-422ceec44828" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-11</div><div class="title">从零理解 RAG：检索增强生成完整指南</div></div></a></div><div><a href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=be4e6f04-222f-80cc-7c2e-8971ccb0bfc5" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-21</div><div class="title">Agent 间如何对话：A2A 协议深度解析与 Java 实战</div></div></a></div><div><a href="/posts/9ff0e580.html" title="AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_8.jpeg?_r_=fc0a3274-ad2c-4cb2-cbb3-c29b07dbc411" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-19</div><div class="title">AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战</div></div></a></div><div><a href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-20</div><div class="title">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AI-Agent-%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C%EF%BC%9A%E5%A4%9A-Agent-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E4%B8%8E-Java-%E5%AE%9E%E6%88%98"><span class="toc-number">1.</span> <span class="toc-text">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA-Agent-%E4%B8%8D%E5%A4%9F%EF%BC%9F"><span class="toc-number">1.2.</span> <span class="toc-text">为什么一个 Agent 不够？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A-Agent-%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%89%E5%A4%A7%E6%9E%B6%E6%9E%84%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text">多 Agent 系统的三大架构模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B1%82%E7%BA%A7%E5%BC%8F%E6%9E%B6%E6%9E%84%EF%BC%88Hierarchical%EF%BC%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 层级式架构（Hierarchical）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E7%AD%89%E5%BC%8F%E6%9E%B6%E6%9E%84%EF%BC%88Peer-to-Peer%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 对等式架构（Peer-to-Peer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%B7%B7%E5%90%88%E5%BC%8F%E6%9E%B6%E6%9E%84%EF%BC%88Hybrid%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 混合式架构（Hybrid）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E4%BF%A1%E6%9C%BA%E5%88%B6%EF%BC%9AAgent-%E4%B9%8B%E9%97%B4%E6%80%8E%E4%B9%88%E2%80%9D%E8%AF%B4%E8%AF%9D%E2%80%9D%EF%BC%9F"><span class="toc-number">1.4.</span> <span class="toc-text">通信机制：Agent 之间怎么”说话”？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%EF%BC%88Message-Passing%EF%BC%89"><span class="toc-number">1.4.1.</span> <span class="toc-text">消息传递（Message Passing）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E7%8A%B6%E6%80%81%EF%BC%88Shared-State%EF%BC%89"><span class="toc-number">1.4.2.</span> <span class="toc-text">共享状态（Shared State）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%EF%BC%88Event-Driven%EF%BC%89"><span class="toc-number">1.4.3.</span> <span class="toc-text">事件驱动（Event-Driven）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.4.4.</span> <span class="toc-text">三种模式的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3%EF%BC%9A%E4%BB%8E%E2%80%9D%E9%80%A0%E6%88%BF%E5%AD%90%E2%80%9D%E5%88%B0%E2%80%9D%E6%90%AC%E7%A0%96%E2%80%9D"><span class="toc-number">1.5.</span> <span class="toc-text">任务分解：从”造房子”到”搬砖”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3%E7%9A%84%E4%B8%89%E7%A7%8D%E7%AD%96%E7%95%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">任务分解的三种策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%B2%E7%AA%81%E8%A7%A3%E5%86%B3%EF%BC%9A%E5%BD%93-Agent-%E6%84%8F%E8%A7%81%E4%B8%8D%E4%B8%80%E8%87%B4%E6%97%B6"><span class="toc-number">1.6.</span> <span class="toc-text">冲突解决：当 Agent 意见不一致时</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E4%B8%80%EF%BC%9A%E6%9D%83%E5%A8%81%E8%A3%81%E5%86%B3"><span class="toc-number">1.6.1.</span> <span class="toc-text">策略一：权威裁决</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E4%BA%8C%EF%BC%9A%E6%8A%95%E7%A5%A8%E6%9C%BA%E5%88%B6"><span class="toc-number">1.6.2.</span> <span class="toc-text">策略二：投票机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E4%B8%89%EF%BC%9A%E8%BF%AD%E4%BB%A3%E5%8D%8F%E5%95%86"><span class="toc-number">1.6.3.</span> <span class="toc-text">策略三：迭代协商</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%EF%BC%9A%E7%94%A8-LangChain4j-Spring-Boot-%E6%9E%84%E5%BB%BA%E5%A4%9A-Agent-%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.7.</span> <span class="toc-text">实战：用 LangChain4j + Spring Boot 构建多 Agent 系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">1.7.1.</span> <span class="toc-text">整体架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1%EF%BC%9A%E5%AE%9A%E4%B9%89-Agent-%E5%9F%BA%E7%A1%80%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.7.2.</span> <span class="toc-text">Step 1：定义 Agent 基础接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%A0%94%E7%A9%B6%E5%91%98-Agent"><span class="toc-number">1.7.3.</span> <span class="toc-text">Step 2：实现研究员 Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%86%99%E6%89%8B-Agent"><span class="toc-number">1.7.4.</span> <span class="toc-text">Step 3：实现写手 Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-4%EF%BC%9A%E5%AE%9E%E7%8E%B0%E5%AE%A1%E6%9F%A5%E5%91%98-Agent"><span class="toc-number">1.7.5.</span> <span class="toc-text">Step 4：实现审查员 Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-5%EF%BC%9A%E5%8D%8F%E8%B0%83%E8%80%85-Agent-%E2%80%94%E2%80%94-%E6%95%B4%E5%90%88%E4%B8%80%E5%88%87"><span class="toc-number">1.7.6.</span> <span class="toc-text">Step 5：协调者 Agent —— 整合一切</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-6%EF%BC%9A%E7%94%A8-Spring-%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E8%A7%A3%E8%80%A6"><span class="toc-number">1.7.7.</span> <span class="toc-text">Step 6：用 Spring 事件驱动解耦</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E7%BA%A7%E8%A7%A3%E8%AF%BB%EF%BC%9ALangChain4j-%E4%B8%AD%E7%9A%84-Agent-%E4%BA%A4%E4%BA%92%E6%9C%BA%E5%88%B6"><span class="toc-number">1.8.</span> <span class="toc-text">源码级解读：LangChain4j 中的 Agent 交互机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E-Spring-AI-%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.8.1.</span> <span class="toc-text">与 Spring AI 的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E5%9D%91%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.9.</span> <span class="toc-text">生产环境的坑与最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Token-%E6%88%90%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="toc-number">1.9.1.</span> <span class="toc-text">1. Token 成本控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%B6%85%E6%97%B6%E4%B8%8E%E7%86%94%E6%96%AD"><span class="toc-number">1.9.2.</span> <span class="toc-text">2. 超时与熔断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7"><span class="toc-number">1.9.3.</span> <span class="toc-text">3. 可观测性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%B9%B6%E5%8F%91%E5%AE%89%E5%85%A8"><span class="toc-number">1.9.4.</span> <span class="toc-text">4. 并发安全</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94%EF%BC%9A%E4%B8%BB%E6%B5%81%E5%A4%9A-Agent-%E6%A1%86%E6%9E%B6"><span class="toc-number">1.10.</span> <span class="toc-text">横向对比：主流多 Agent 框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A-Agent-%E7%9A%84%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5"><span class="toc-number">1.11.</span> <span class="toc-text">多 Agent 的边界与未来</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%8D%E8%AF%A5%E7%94%A8%E5%A4%9A-Agent%EF%BC%9F"><span class="toc-number">1.11.1.</span> <span class="toc-text">什么时候不该用多 Agent？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-number">1.11.2.</span> <span class="toc-text">未来方向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.12.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_9.jpeg?_r_=39963fcd-4d82-5ccc-ddb7-bac1588fe2de" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</a><time datetime="2026-06-21T22:00:00.000Z" title="发表于 2026-06-22 06:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=3bfb2694-54e1-0b01-a84a-8ca76148221e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"/></a><div class="content"><a class="title" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</a><time datetime="2026-06-21T10:01:58.000Z" title="发表于 2026-06-21 18:01:58">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=7b11b9ff-0e9b-30e4-f133-56dea53e2d6a" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</a><time datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=be4e6f04-222f-80cc-7c2e-8971ccb0bfc5" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Agent 间如何对话：A2A 协议深度解析与 Java 实战"/></a><div class="content"><a class="title" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战">Agent 间如何对话：A2A 协议深度解析与 Java 实战</a><time datetime="2026-06-21T02:00:00.000Z" title="发表于 2026-06-21 10:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"/></a><div class="content"><a class="title" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</a><time datetime="2026-06-20T02:00:00.000Z" title="发表于 2026-06-20 10:00:00">2026-06-20</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 0.88rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 0.88rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 0.88rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 0.88rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

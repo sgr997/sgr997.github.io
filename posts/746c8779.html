@@ -1,0 +1,830 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战 | Pei</title><meta name="keywords" content="RAG,LLM,Spring Boot,LangChain4j,GraphRAG,知识图谱"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战"><meta name="application-name" content="当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战"><meta property="og:url" content="https://blog.goku.top/posts/746c8779.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="传统 RAG 擅长精确查找，却在全局性问题上频频失手。GraphRAG 用知识图谱补上这块短板，本文从原理到源码到实战，完整拆解 GraphRAG 的工作机制。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=577a2c0a-448a-9d2d-e3bc-8c5b154db469"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=577a2c0a-448a-9d2d-e3bc-8c5b154db469"><meta name="description" content="传统 RAG 擅长精确查找，却在全局性问题上频频失手。GraphRAG 用知识图谱补上这块短板，本文从原理到源码到实战，完整拆解 GraphRAG 的工作机制。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/746c8779"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: '当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战',
+  postAI: '',
+  pageFillDescription: '系列文章, 引言：传统 RAG 的阿喀琉斯之踵, 知识图谱：用关系组织世界, 什么是知识图谱, 为什么知识图谱能补 RAG 的短板, GraphRAG：微软的解法, 索引阶段：从文本到图谱, Step 1：实体和关系提取, Step 2：实体消歧与合并, Step 3：构建知识图谱, Step 4：社区检测与层级摘要, 查询阶段：局部搜索 vs 全局搜索, 局部搜索（Local Search）, 全局搜索（Global Search）, 与其他 RAG 变体的横向对比, Spring Boot + LangChain4j 实战, 项目依赖, 实体-关系提取器, 知识图谱存储, 全局搜索（简化版 Map-Reduce）, 端到端使用示例, 生产环境的坑与最佳实践, 坑 1：实体提取成本爆炸, 坑 2：实体消歧不准, 坑 3：社区检测的粒度选择, 坑 4：图谱更新的连锁反应, 与 Agent 系统的整合, 技术边界与未来展望, GraphRAG 不是万能的, 未来方向, 总结系列文章本篇是系列的第篇前篇我们搭建了的核心能力推理记忆工具规划协作评估今天来聊一个让能力再上一个台阶的技术当遇上知识图谱原理与实战本文理解的大脑模式从入门到实战的灵魂对话系统提示词设计的艺术与工程的规划大脑从任务分解到自适应执行策略让学会说人话结构化输出实战的工具箱深入理解与实战的记忆力是怎么实现的机制深度解析模型上下文协议的万能接口与实战的记忆系统从到持久化记忆的实战从零理解检索增强生成完整指南团队协作多系统架构设计与实战评估与优化从基准测试到生产环境的质量守护实战引言传统的阿喀琉斯之踵在之前的完整指南中我们详细拆解了的全流程分块向量化召回精排生成那套方案在处理精确查找类问题时表现出色比如怎么配置数据源的持久化方式有哪些的是什么这类问题有一个共同特点答案集中在一个或少数几个文档片段中只要检索命中就能准确回答但当你问一个完全不同类型的问题时传统就露出了疲态这份技术文档的整体架构是什么这些论文中关于的核心观点有哪些共识和分歧这家公司过去三年的战略变化脉络是什么系统中所有涉及用户权限的模块之间是什么关系这类问题叫做全局性查询它们不是在找某个具体的片段而是在找分散在整个语料中的关联信息然后要求模型做综合归纳传统为什么搞不定原因很直观向量检索是基于语义相似度的它擅长找到跟问题最像的片段但不擅长找到跟问题相关但分散在不同地方的所有片段你把一个问题向量化后去匹配返回的片段往往集中在一两个局部无法覆盖全局信息打个比方传统像一个记忆力很好的图书管理员你问他第章第节讲了什么他翻得又快又准但你问他这本书的主旨是什么他就懵了因为他只能一次翻几页没法把整本书读完再给你总结就是来解决这个问题的知识图谱用关系组织世界在讲之前我们得先理解它依赖的核心数据结构知识图谱什么是知识图谱知识图谱是一种用图来表示知识的方式它由三种基本元素组成实体现实世界中的事物比如张三关系实体之间的联系比如依赖张三开发了项目属性实体的特征比如的版本是用图的语言来说实体是节点关系是边依赖依赖张三开发了项目项目使用了这张图看起来简单但它蕴含的信息密度远超传统文档当你看到这个节点顺着边走下去就能发现它和的依赖关系谁在用它用在什么项目里这种关系链路正是全局性查询所需要的为什么知识图谱能补的短板传统的索引是扁平的文档被切成块每块独立向量化块与块之间的关系丢失了而知识图谱的索引是结构化的实体和关系被显式建模你可以沿着关系链路走出一条完整的信息路径举个具体例子假设你的文档库里有篇技术博客其中篇提到了传统在回答在我们的技术栈中扮演什么角色时可能只检索到最相关的篇但知识图谱可以把篇中提到的所有相关实体和关系连成一张网用了哪些数据结构部署在哪些服务中跟哪些中间件配合使用全局视图自然浮现微软的解法年微软研究院发表了一篇论文提出了框架这个方案的核心思想是在索引阶段用从文档中提取实体和关系构建知识图谱然后对图做社区检测和层级摘要在查询阶段根据问题类型选择局部搜索或全局搜索这段话信息量很大我们拆开来看索引阶段从文本到图谱的索引过程分为四步实体和关系提取对每个文档块调用执行信息抽取请从以下文本中提取所有实体和它们之间的关系实体类型人物组织技术项目概念关系类型使用开发依赖属于合作文本会返回结构化的实体关系三元组技术技术订单服务项目订单服务使用订单服务使用依赖关键设计决策为什么用而不是传统的命名实体识别工具传统工具如擅长识别人名地名组织名这类通用实体但在专业领域技术文档法律合同医学文献中表现很差的优势在于零样本泛化你只需要在中定义实体类型它就能提取不需要标注数据训练当然代价是成本每处理一个文档块都要调用一次对于大规模语料来说索引成本可能非常高后面我们会讨论如何优化实体消歧与合并不同文档块可能用不同的名字指代同一个实体比如可能是同一个东西用做实体消歧以下是多个实体描述请判断哪些指的是同一个实体微框架快速开发框架框架团队内部简称请返回合并后的实体列表这一步对最终图谱质量影响巨大如果消歧做得不好同一个实体被拆成多个节点图谱的连通性就会下降社区检测的效果也会打折扣构建知识图谱把提取到的实体作为节点关系作为边构建一张图的实现中使用的是图计算库在内存中维护图结构技术微框架技术内存数据库依赖社区检测与层级摘要这是最核心的创新知识图谱建好后对图做社区检测算法社区检测的目的是把图中紧密连接的节点分成一组每组就是一个社区代表一个主题或知识簇社区后端技术栈社区前端技术栈社区工具链然后对每个社区用生成摘要社区摘要该社区围绕后端技术栈构建作为核心框架依赖做缓存做持久化做这套组合在团队的订单服务和用户服务中广泛使用更妙的是算法是层级化的它可以在不同粒度上做社区检测底层社区是小而精的主题簇上层社区是更大的知识域为每一层都生成摘要形成层级化的知识索引最细中间后端技术栈前端技术栈工具链最粗技术体系业务系统这个层级结构的意义在于不同粒度的问题可以命中不同层级的社区摘要查询阶段局部搜索全局搜索在查询时提供两种搜索模式分别应对不同类型的问题局部搜索适合精确查找类问题跟传统类似但利用了图谱的结构信息工作流程实体识别从用户问题中提取实体如图谱遍历从该实体节点出发沿边遍历跳收集关联实体和关系文档检索同时用向量检索找到相关文档块上下文组装把图谱信息实体关系社区摘要和文档块拼成生成基于组装好的上下文回答问题局部搜索的优势在于精确性它利用图谱的结构关系来补充向量检索可能遗漏的上下文全局搜索适合全局性查询这是真正的杀手锏工作流程选择社区层级根据问题的粒度选择合适的社区层级并行摘要对每个社区的摘要用生成一个中间答案聚合把所有中间答案汇总生成最终回答这个过程本质上是一个模式阶段对每个社区摘要独立提问社区摘要该社区关于后端技术栈的观点是社区摘要该社区关于前端技术栈的观点是社区摘要该社区关于的观点是阶段汇总所有中间答案综合来看技术体系的整体架构是为什么这样设计因为的上下文窗口是有限的你不可能把整个文档库的所有内容一次性塞进去但通过社区摘要的层级结构你可以把海量信息压缩成可控数量的摘要再分而治之这就解决了文章开头提到的图书管理员问题不需要一次读完整本书它只需要读每一章的摘要然后综合出全书主旨与其他变体的横向对比并不是唯一的增强方案我们来对比几种主流变体方案核心思路擅长不擅长文档分块向量化检索精确查找全局性问题多跳推理先让生成假设性答案再用答案做检索问题模糊时提升召回增加一次调用成本多轮检索每轮基于上轮结果扩展多步推理问题延迟高错误累积构建知识图谱社区摘要全局性查询关系推理索引成本高不适合频繁更新轻量级图谱双层索引实体关系文档成本敏感场景社区层级摘要能力弱的独特价值在于全局搜索能力其他方案本质上还是在找片段只有在索引阶段就把全局信息压缩好了的代价也很明显索引成本高每个文档块都要调做实体提取一个篇文档的语料库可能需要数千次调用更新成本高新增文档需要重新提取实体合并到图谱重新做社区检测不适合实时场景索引构建可能需要数小时不适合需要即时更新的知识库什么时候该用你的知识库相对稳定不是每分钟都在变用户经常问全局性总结性的问题文档之间有丰富的实体关系你有预算承担索引阶段的调用成本什么时候不该用知识库频繁更新考虑传统增量索引用户主要问精确查找类问题传统就够了调用预算有限考虑等轻量方案实战理论讲够了来写代码我们用实现一个简化版的包含实体提取图谱构建和局部搜索项目依赖核心集成嵌入模型实体关系提取器从文本块中提取实体和关系核心思路用结构化让返回格式的三元组请从以下文本中提取实体和关系严格按格式返回实体类型人物组织技术项目概念产品关系类型使用开发依赖属于包含合作竞争文本返回格式实体名类型一句话描述源实体目标实体关系类型解析提取实体和关系实际生产中建议用或做健壮解析返回的可能格式不标准需要容错处理源码解析这段代码的核心是设计注意几个细节明确指定了实体类型和关系类型这比让自由发挥效果好得多减少了歧义和不一致要求返回格式配合的结构化输出能力参见结构化输出实战可以直接映射到对象容错处理返回的经常带有代码块标记需要清理知识图谱存储用做内存存储生产环境建议用添加实体如果已存在则合并描述实体消歧合并描述信息添加关系自动创建缺失的实体节点确保两端实体存在未知未知避免重复关系局部搜索从指定实体出发遍历跳内的关联信息找到所有与该实体相关的关系设计要点操作实现了简单的实体消歧同名实体的描述会被合并的跳遍历是图搜索的经典模式这里限制在跳以内避免结果爆炸生产环境建议用做图存储它的查询语言比手写遍历高效得多全局搜索简化版全局搜索对图谱中所有实体做式摘要完整版会先做社区检测这里简化为按实体类型分组阶段按实体类型分组每组生成中间答案拼接该类型所有实体的信息加入关系信息关系基于以下类别的知识信息回答问题知识信息请从的角度给出简洁但全面的回答字以内视角阶段汇总所有中间答案用户问题以下是不同视角的分析结果请综合归纳给出一个完整有层次的回答要求提炼各视角的共性结论指出不同视角之间的关联给出全局性总结与微软的差异原版使用社区检测算法对图做聚类每个社区对应一个主题簇这里简化为按实体类型分组效果不如社区检测精确但实现复杂度低很多适合中小规模知识库如果需要完整版社区检测可以引入库的或算法实现端到端使用示例索引构建文档实体提取图谱构建向量化存储分块字一块字重叠实体关系提取写入知识图谱同时做向量化存储用于局部搜索的文档检索索引构建完成实体数关系数智能查询根据问题类型自动选择局部或全局搜索简单启发式包含整体全局总结概述等词时用全局搜索局部搜索先识别实体再图谱遍历向量检索基于以下信息回答问题问题生产环境的坑与最佳实践坑实体提取成本爆炸假设你的知识库有篇文档每篇切成个块每个块调用一次做实体提取那就是次调用如果用级别的模型每次调用约美元索引成本就是美元优化方案用小模型做提取实体提取不需要最强的模型或开源的就够用成本降批量处理把多个文本块拼在一起一次调用提取多个块的实体减少调用次数增量更新只对新增修改的文档重新提取而不是全量重建批量实体提取将多个文本块合并为一次调用文档块请分别从以下个文档块中提取实体和关系对每个文档块返回独立的对象返回格式数组每个元素对应一个文档块的提取结果一次调用批量提取坑实体消歧不准同一个实体可能有多种表述框架如果消歧做不好图谱中会出现大量孤立节点最佳实践预处理规范化提取前先做文本规范化统一大小写去除特殊字符别名词典维护一份实体别名映射表硬编码高频别名嵌入相似度消歧对实体名做向量化计算相似度超过阈值的视为同一实体基于嵌入相似度的实体消歧返回已存在的规范名没找到匹配作为新实体坑社区检测的粒度选择的社区检测是层级化的但选择哪个层级做全局搜索是个问题层级太粗摘要太笼统层级太细的中间结果太多成本高且可能丢失全局视角经验法则全局性大问题整体架构是什么用粗粒度中等粒度问题后端技术栈的选型思路用中等粒度具体问题在哪些服务中使用用局部搜索不需要社区摘要坑图谱更新的连锁反应新增一篇文档不只是加几个节点那么简单新实体可能需要和已有实体合并新关系可能改变社区结构社区摘要需要重新生成生产建议小规模更新增量添加实体和关系定期如每天凌晨重新跑社区检测和摘要生成大规模更新全量重建图谱可以用异步任务队列处理不影响在线查询版本化图谱维护图谱的版本快照更新失败时可以回滚与系统的整合不是一个独立系统它是的知识增强层在我们的系列中的核心能力是推理和工具调用但推理的质量取决于它能获取多少高质量上下文可以作为的知识工具注册将注册为的工具参考的工具箱搜索知识库中的信息对于全局性问题使用全局模式精确查找使用局部模式查询内容搜索模式或这样在推理过程中参考模式可以自主决定何时使用全局搜索何时使用局部搜索甚至可以先用全局搜索了解整体概况再用局部搜索深挖细节技术边界与未来展望不是万能的不适合非结构化文本的实时场景如果你的知识库每分钟都在变化比如聊天记录的索引成本太高依赖质量实体提取的质量直接取决于的能力如果漏提了关键实体图谱就不完整可解释性有限虽然图谱本身是可解释的但社区检测和摘要生成是黑盒你很难追溯为什么这个社区被归为一组未来方向多模态不只是文本图片表格代码块也可以提取实体和关系自适应索引根据查询频率自动调整索引粒度高频热点区域做更细的索引增量社区检测避免每次更新都全量重跑社区检测研究增量图算法联动可以主动扩展图谱当发现知识缺口时自动触发信息采集和图谱更新总结的核心贡献是把全局性查询从不可能变为可能传统只能在文档片段级别做检索通过知识图谱社区摘要在索引阶段就把全局信息压缩好了查询时可以直接调用但这并不意味着要取代传统它们是互补关系精确查找传统快便宜简单全局性查询慢贵但能力独特混合方案先用启发式判断问题类型再路由到合适的检索策略对于开发者来说已经提供了构建所需的基础组件调用嵌入模型向量存储图谱存储可以选择成熟稳定或轻量级内存方案社区检测可以用内置的算法如果你的知识库有丰富的实体关系用户经常问整体情况类的问题值得投入如果你的需求主要是精确查找先把传统做好别过度工程化参考资源微软论文微软仓库官方文档系列前文从零理解检索增强生成完整指南',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-17 12:04:31',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 1.05rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 1.05rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 1.05rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 1.05rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 1.05rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 1.05rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 1.05rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 1.05rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 1.05rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 1.05rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 1.05rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 1.05rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 1.05rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 1.05rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 1.05rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 1.05rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 1.05rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 1.05rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 1.05rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 1.05rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 1.05rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 1.05rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 1.05rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 1.05rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 1.05rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 1.05rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 1.05rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">29</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/RAG/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>RAG</span></a><a class="article-meta__tags" href="/tags/LLM/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LLM</span></a><a class="article-meta__tags" href="/tags/Spring-Boot/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Spring Boot</span></a><a class="article-meta__tags" href="/tags/LangChain4j/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LangChain4j</span></a><a class="article-meta__tags" href="/tags/GraphRAG/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>GraphRAG</span></a><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>知识图谱</span></a></span></div></div><h1 class="post-title" itemprop="name headline">当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-17T02:00:00.000Z" title="发表于 2026-06-17 10:00:00">2026-06-17</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-17T04:04:31.088Z" title="更新于 2026-06-17 12:04:31">2026-06-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=577a2c0a-448a-9d2d-e3bc-8c5b154db469"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/746c8779.html"><header><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a><a href="/tags/RAG/" tabindex="-1" itemprop="url">RAG</a><a href="/tags/LLM/" tabindex="-1" itemprop="url">LLM</a><a href="/tags/Spring-Boot/" tabindex="-1" itemprop="url">Spring Boot</a><a href="/tags/LangChain4j/" tabindex="-1" itemprop="url">LangChain4j</a><a href="/tags/GraphRAG/" tabindex="-1" itemprop="url">GraphRAG</a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" tabindex="-1" itemprop="url">知识图谱</a><h1 id="CrawlerTitle" itemprop="name headline">当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-17T02:00:00.000Z" title="发表于 2026-06-17 10:00:00">2026-06-17</time><time itemprop="dateCreated datePublished" datetime="2026-06-17T04:04:31.088Z" title="更新于 2026-06-17 12:04:31">2026-06-17</time></header><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><p>本篇是 AI Agent 系列的第 12 篇。前 11 篇我们搭建了 Agent 的核心能力——推理、记忆、工具、规划、协作、评估，今天来聊一个让 RAG 能力再上一个台阶的技术：<strong>GraphRAG</strong>。</p>
+<ol>
+<li><strong>当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</strong>（本文）</li>
+<li><a href="/posts/a3f7b2e1.html">理解 AI Agent 的大脑：ReAct 模式从入门到实战</a></li>
+<li><a href="/posts/7724df09.html">AI Agent 的灵魂对话：Prompt Engineering 系统提示词设计的艺术与工程</a></li>
+<li><a href="/posts/e05701b9.html">AI Agent 的规划大脑：从任务分解到自适应执行策略</a></li>
+<li><a href="/posts/f0b37481.html">让 AI 学会”说人话”——Spring AI 结构化输出实战</a></li>
+<li><a href="/posts/fd311830.html">AI Agent 的工具箱：深入理解 Tool Use 与 Spring AI Function Calling 实战</a></li>
+<li><a href="/posts/2b43307f.html">AI Agent 的记忆力是怎么实现的——LangChain4j Memory 机制深度解析</a></li>
+<li><a href="/posts/4dc416f2.html">MCP 模型上下文协议：AI 的万能接口与 MCP Server 实战</a></li>
+<li><a href="/posts/70d64e78.html">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战</a></li>
+<li><a href="/posts/fca03c3e.html">从零理解 RAG：检索增强生成完整指南</a></li>
+<li><a href="/posts/33667def.html">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</a></li>
+<li><a href="/posts/a26fbc69.html">AI Agent 评估与优化：从基准测试到生产环境的质量守护实战</a></li>
+</ol>
+<hr>
+<h2 id="引言：传统-RAG-的”阿喀琉斯之踵”"><a href="#引言：传统-RAG-的”阿喀琉斯之踵”" class="headerlink" title="引言：传统 RAG 的”阿喀琉斯之踵”"></a>引言：传统 RAG 的”阿喀琉斯之踵”</h2><p>在之前的 <a href="/posts/fca03c3e.html">RAG 完整指南</a> 中，我们详细拆解了 RAG 的全流程——分块、向量化、召回、精排、生成。那套方案在处理<strong>精确查找类问题</strong>时表现出色，比如：</p>
+<ul>
+<li>“Spring Boot 怎么配置数据源？”</li>
+<li>“Redis 的持久化方式有哪些？”</li>
+<li>“Netty 的 EventLoop 是什么？”</li>
+</ul>
+<p>这类问题有一个共同特点：<strong>答案集中在一个或少数几个文档片段中</strong>，只要检索命中，LLM 就能准确回答。</p>
+<p>但当你问一个完全不同类型的问题时，传统 RAG 就露出了疲态：</p>
+<ul>
+<li>“这份技术文档的整体架构是什么？”</li>
+<li>“这些论文中关于 Transformer 的核心观点有哪些共识和分歧？”</li>
+<li>“这家公司过去三年的战略变化脉络是什么？”</li>
+<li>“系统中所有涉及用户权限的模块之间是什么关系？”</li>
+</ul>
+<p>这类问题叫做<strong>全局性查询（Global Query）</strong>。它们不是在找某个具体的片段，而是在找<strong>分散在整个语料中的关联信息</strong>，然后要求模型做<strong>综合归纳</strong>。</p>
+<p>传统 RAG 为什么搞不定？原因很直观：向量检索是基于语义相似度的，它擅长找到”跟问题最像的片段”，但不擅长找到”跟问题相关但分散在不同地方的所有片段”。你把一个问题向量化后去匹配，Top-K 返回的片段往往集中在一两个局部，无法覆盖全局信息。</p>
+<p>打个比方：传统 RAG 像一个记忆力很好的图书管理员，你问他”第 3 章第 2 节讲了什么”，他翻得又快又准。但你问他”这本书的主旨是什么”，他就懵了——因为他只能一次翻几页，没法把整本书读完再给你总结。</p>
+<p><strong>GraphRAG 就是来解决这个问题的。</strong></p>
+<hr>
+<h2 id="知识图谱：用”关系”组织世界"><a href="#知识图谱：用”关系”组织世界" class="headerlink" title="知识图谱：用”关系”组织世界"></a>知识图谱：用”关系”组织世界</h2><p>在讲 GraphRAG 之前，我们得先理解它依赖的核心数据结构——<strong>知识图谱（Knowledge Graph）</strong>。</p>
+<h3 id="什么是知识图谱"><a href="#什么是知识图谱" class="headerlink" title="什么是知识图谱"></a>什么是知识图谱</h3><p>知识图谱是一种用<strong>图（Graph）</strong>来表示知识的方式。它由三种基本元素组成：</p>
+<ul>
+<li><strong>实体（Entity）</strong>：现实世界中的事物，比如”Spring Boot”、”Redis”、”张三”</li>
+<li><strong>关系（Relation）</strong>：实体之间的联系，比如”Spring Boot <strong>依赖</strong> Redis”、”张三 <strong>开发了</strong> 项目X”</li>
+<li><strong>属性（Attribute）</strong>：实体的特征，比如”Spring Boot 的版本是 3.2”</li>
+</ul>
+<p>用图的语言来说，实体是<strong>节点（Node）</strong>，关系是<strong>边（Edge）</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Spring Boot] --依赖--&gt; [Redis]</span><br><span class="line">[Spring Boot] --依赖--&gt; [MySQL]</span><br><span class="line">[张三] --开发了--&gt; [项目X]</span><br><span class="line">[项目X] --使用了--&gt; [Spring Boot]</span><br></pre></td></tr></table></figure>
+
+<p>这张图看起来简单，但它蕴含的信息密度远超传统文档。当你看到”Spring Boot”这个节点，顺着边走下去，就能发现它和 Redis、MySQL 的依赖关系，谁在用它，用在什么项目里——<strong>这种关系链路正是全局性查询所需要的</strong>。</p>
+<h3 id="为什么知识图谱能补-RAG-的短板"><a href="#为什么知识图谱能补-RAG-的短板" class="headerlink" title="为什么知识图谱能补 RAG 的短板"></a>为什么知识图谱能补 RAG 的短板</h3><p>传统 RAG 的索引是<strong>扁平的</strong>：文档被切成块，每块独立向量化，块与块之间的关系丢失了。而知识图谱的索引是<strong>结构化的</strong>：实体和关系被显式建模，你可以沿着关系链路”走”出一条完整的信息路径。</p>
+<p>举个具体例子。假设你的文档库里有 100 篇技术博客，其中 15 篇提到了”Redis”。传统 RAG 在回答”Redis 在我们的技术栈中扮演什么角色”时，可能只检索到最相关的 3-5 篇。但知识图谱可以把 15 篇中提到的所有 Redis 相关实体和关系连成一张网——Redis 用了哪些数据结构、部署在哪些服务中、跟哪些中间件配合使用——<strong>全局视图自然浮现</strong>。</p>
+<hr>
+<h2 id="GraphRAG：微软的解法"><a href="#GraphRAG：微软的解法" class="headerlink" title="GraphRAG：微软的解法"></a>GraphRAG：微软的解法</h2><p>2024 年，微软研究院发表了一篇论文《From Local to Global: A Graph RAG Approach to Query-Focused Summarization》，提出了 GraphRAG 框架。这个方案的核心思想是：</p>
+<blockquote>
+<p><strong>在索引阶段，用 LLM 从文档中提取实体和关系，构建知识图谱，然后对图做社区检测和层级摘要。在查询阶段，根据问题类型选择局部搜索或全局搜索。</strong></p>
+</blockquote>
+<p>这段话信息量很大，我们拆开来看。</p>
+<h3 id="索引阶段：从文本到图谱"><a href="#索引阶段：从文本到图谱" class="headerlink" title="索引阶段：从文本到图谱"></a>索引阶段：从文本到图谱</h3><p>GraphRAG 的索引过程分为四步：</p>
+<h4 id="Step-1：实体和关系提取"><a href="#Step-1：实体和关系提取" class="headerlink" title="Step 1：实体和关系提取"></a>Step 1：实体和关系提取</h4><p>对每个文档块，调用 LLM 执行信息抽取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">请从以下文本中提取所有实体和它们之间的关系。</span><br><span class="line"></span><br><span class="line">实体类型：人物、组织、技术、项目、概念</span><br><span class="line">关系类型：使用、开发、依赖、属于、合作</span><br><span class="line"></span><br><span class="line">文本：...</span><br></pre></td></tr></table></figure>
+
+<p>LLM 会返回结构化的实体-关系三元组：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;entities&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Spring Boot&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;技术&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Redis&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;技术&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;订单服务&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;项目&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;relations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;订单服务&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Spring Boot&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;使用&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;订单服务&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Redis&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;使用&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Spring Boot&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Redis&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;依赖&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关键设计决策</strong>：为什么用 LLM 而不是传统的 NER（命名实体识别）工具？</p>
+<p>传统 NER 工具（如 spaCy、Stanford NER）擅长识别”人名、地名、组织名”这类通用实体，但在专业领域（技术文档、法律合同、医学文献）中表现很差。LLM 的优势在于<strong>零样本泛化</strong>——你只需要在 prompt 中定义实体类型，它就能提取，不需要标注数据训练。</p>
+<p>当然，代价是成本。每处理一个文档块都要调用一次 LLM API，对于大规模语料来说，索引成本可能非常高。后面我们会讨论如何优化。</p>
+<h4 id="Step-2：实体消歧与合并"><a href="#Step-2：实体消歧与合并" class="headerlink" title="Step 2：实体消歧与合并"></a>Step 2：实体消歧与合并</h4><p>不同文档块可能用不同的名字指代同一个实体。比如”Spring Boot”、”SpringBoot”、”SB”可能是同一个东西。GraphRAG 用 LLM 做实体消歧：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">以下是多个实体描述，请判断哪些指的是同一个实体：</span><br><span class="line"></span><br><span class="line">1. &quot;Spring Boot&quot; - Java 微框架</span><br><span class="line">2. &quot;SpringBoot&quot; - 快速开发框架</span><br><span class="line">3. &quot;SB 框架&quot; - 团队内部简称</span><br><span class="line"></span><br><span class="line">请返回合并后的实体列表。</span><br></pre></td></tr></table></figure>
+
+<p>这一步对最终图谱质量影响巨大。如果消歧做得不好，同一个实体被拆成多个节点，图谱的连通性就会下降，社区检测的效果也会打折扣。</p>
+<h4 id="Step-3：构建知识图谱"><a href="#Step-3：构建知识图谱" class="headerlink" title="Step 3：构建知识图谱"></a>Step 3：构建知识图谱</h4><p>把提取到的实体作为节点、关系作为边，构建一张图。GraphRAG 的实现中使用的是<strong>NetworkX</strong>（Python 图计算库），在内存中维护图结构。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"></span><br><span class="line">G = nx.Graph()</span><br><span class="line">G.add_node(<span class="string">&quot;Spring Boot&quot;</span>, <span class="built_in">type</span>=<span class="string">&quot;技术&quot;</span>, description=<span class="string">&quot;Java微框架&quot;</span>)</span><br><span class="line">G.add_node(<span class="string">&quot;Redis&quot;</span>, <span class="built_in">type</span>=<span class="string">&quot;技术&quot;</span>, description=<span class="string">&quot;内存数据库&quot;</span>)</span><br><span class="line">G.add_edge(<span class="string">&quot;Spring Boot&quot;</span>, <span class="string">&quot;Redis&quot;</span>, relation=<span class="string">&quot;依赖&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Step-4：社区检测与层级摘要"><a href="#Step-4：社区检测与层级摘要" class="headerlink" title="Step 4：社区检测与层级摘要"></a>Step 4：社区检测与层级摘要</h4><p>这是 GraphRAG 最核心的创新。</p>
+<p>知识图谱建好后，GraphRAG 对图做<strong>Leiden 社区检测算法</strong>。社区检测的目的是把图中紧密连接的节点分成一组——每组就是一个”社区”，代表一个主题或知识簇。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">社区 1: [Spring Boot, Redis, MySQL, MyBatis] → &quot;后端技术栈&quot;</span><br><span class="line">社区 2: [React, Vue, TypeScript, Webpack] → &quot;前端技术栈&quot;</span><br><span class="line">社区 3: [Docker, Kubernetes, Jenkins, GitLab CI] → &quot;DevOps 工具链&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后，GraphRAG 对每个社区用 LLM 生成<strong>摘要</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">社区 1 摘要：该社区围绕 Java 后端技术栈构建。Spring Boot 作为核心框架，</span><br><span class="line">依赖 Redis 做缓存、MySQL 做持久化、MyBatis 做 ORM。这套组合在团队的</span><br><span class="line">订单服务和用户服务中广泛使用。</span><br></pre></td></tr></table></figure>
+
+<p>更妙的是，Leiden 算法是<strong>层级化</strong>的——它可以在不同粒度上做社区检测。底层社区是小而精的主题簇，上层社区是更大的知识域。GraphRAG 为每一层都生成摘要，形成<strong>层级化的知识索引</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Level 0 (最细): [Spring Boot, Redis] → [MySQL, MyBatis] → [React, Vue] → ...</span><br><span class="line">Level 1 (中间): [后端技术栈] → [前端技术栈] → [DevOps工具链] → ...</span><br><span class="line">Level 2 (最粗): [技术体系] → [业务系统] → ...</span><br></pre></td></tr></table></figure>
+
+<p>这个层级结构的意义在于：<strong>不同粒度的问题可以命中不同层级的社区摘要</strong>。</p>
+<hr>
+<h3 id="查询阶段：局部搜索-vs-全局搜索"><a href="#查询阶段：局部搜索-vs-全局搜索" class="headerlink" title="查询阶段：局部搜索 vs 全局搜索"></a>查询阶段：局部搜索 vs 全局搜索</h3><p>GraphRAG 在查询时提供两种搜索模式，分别应对不同类型的问题。</p>
+<h4 id="局部搜索（Local-Search）"><a href="#局部搜索（Local-Search）" class="headerlink" title="局部搜索（Local Search）"></a>局部搜索（Local Search）</h4><p>适合<strong>精确查找类问题</strong>——跟传统 RAG 类似，但利用了图谱的结构信息。</p>
+<p>工作流程：</p>
+<ol>
+<li><strong>实体识别</strong>：从用户问题中提取实体（如”Spring Boot”）</li>
+<li><strong>图谱遍历</strong>：从该实体节点出发，沿边遍历 1-2 跳，收集关联实体和关系</li>
+<li><strong>文档检索</strong>：同时用向量检索找到相关文档块</li>
+<li><strong>上下文组装</strong>：把图谱信息（实体、关系、社区摘要）和文档块拼成 prompt</li>
+<li><strong>LLM 生成</strong>：基于组装好的上下文回答问题</li>
+</ol>
+<p>局部搜索的优势在于<strong>精确性</strong>——它利用图谱的结构关系来补充向量检索可能遗漏的上下文。</p>
+<h4 id="全局搜索（Global-Search）"><a href="#全局搜索（Global-Search）" class="headerlink" title="全局搜索（Global Search）"></a>全局搜索（Global Search）</h4><p>适合<strong>全局性查询</strong>——这是 GraphRAG 真正的杀手锏。</p>
+<p>工作流程：</p>
+<ol>
+<li><strong>选择社区层级</strong>：根据问题的粒度选择合适的社区层级</li>
+<li><strong>并行摘要</strong>：对每个社区的摘要，用 LLM 生成一个中间答案</li>
+<li><strong>Map-Reduce 聚合</strong>：把所有中间答案汇总，生成最终回答</li>
+</ol>
+<p>这个过程本质上是一个 <strong>Map-Reduce</strong> 模式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Map 阶段：对每个社区摘要独立提问</span><br><span class="line">  社区1摘要 → &quot;该社区关于后端技术栈的观点是...&quot;</span><br><span class="line">  社区2摘要 → &quot;该社区关于前端技术栈的观点是...&quot;</span><br><span class="line">  社区3摘要 → &quot;该社区关于 DevOps 的观点是...&quot;</span><br><span class="line"></span><br><span class="line">Reduce 阶段：汇总所有中间答案</span><br><span class="line">  &quot;综合来看，技术体系的整体架构是...&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么这样设计？</strong> 因为 LLM 的上下文窗口是有限的。你不可能把整个文档库的所有内容一次性塞进去。但通过社区摘要的层级结构，你可以把海量信息压缩成可控数量的摘要，再分而治之。</p>
+<p>这就解决了文章开头提到的”图书管理员”问题——GraphRAG 不需要一次读完整本书，它只需要读每一章的摘要，然后综合出全书主旨。</p>
+<hr>
+<h2 id="与其他-RAG-变体的横向对比"><a href="#与其他-RAG-变体的横向对比" class="headerlink" title="与其他 RAG 变体的横向对比"></a>与其他 RAG 变体的横向对比</h2><p>GraphRAG 并不是唯一的 RAG 增强方案。我们来对比几种主流变体：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>核心思路</th>
+<th>擅长</th>
+<th>不擅长</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Naive RAG</strong></td>
+<td>文档分块 → 向量化 → Top-K 检索</td>
+<td>精确查找、FAQ</td>
+<td>全局性问题、多跳推理</td>
+</tr>
+<tr>
+<td><strong>HyDE</strong></td>
+<td>先让 LLM 生成假设性答案，再用答案做检索</td>
+<td>问题模糊时提升召回</td>
+<td>增加一次 LLM 调用成本</td>
+</tr>
+<tr>
+<td><strong>Multi-hop RAG</strong></td>
+<td>多轮检索，每轮基于上轮结果扩展</td>
+<td>多步推理问题</td>
+<td>延迟高、错误累积</td>
+</tr>
+<tr>
+<td><strong>GraphRAG</strong></td>
+<td>构建知识图谱 + 社区摘要 + Map-Reduce</td>
+<td>全局性查询、关系推理</td>
+<td>索引成本高、不适合频繁更新</td>
+</tr>
+<tr>
+<td><strong>LightRAG</strong></td>
+<td>轻量级图谱 RAG，双层索引（实体&#x2F;关系 + 文档）</td>
+<td>成本敏感场景</td>
+<td>社区层级摘要能力弱</td>
+</tr>
+</tbody></table>
+<p><strong>GraphRAG 的独特价值</strong>在于全局搜索能力。其他方案本质上还是在”找片段”，只有 GraphRAG 在索引阶段就把全局信息压缩好了。</p>
+<p><strong>GraphRAG 的代价</strong>也很明显：</p>
+<ol>
+<li><strong>索引成本高</strong>：每个文档块都要调 LLM 做实体提取，一个 1000 篇文档的语料库可能需要数千次 LLM 调用</li>
+<li><strong>更新成本高</strong>：新增文档需要重新提取实体、合并到图谱、重新做社区检测</li>
+<li><strong>不适合实时场景</strong>：索引构建可能需要数小时，不适合需要即时更新的知识库</li>
+</ol>
+<p><strong>什么时候该用 GraphRAG？</strong></p>
+<ul>
+<li>你的知识库相对稳定（不是每分钟都在变）</li>
+<li>用户经常问全局性、总结性的问题</li>
+<li>文档之间有丰富的实体关系</li>
+<li>你有预算承担索引阶段的 LLM 调用成本</li>
+</ul>
+<p><strong>什么时候不该用？</strong></p>
+<ul>
+<li>知识库频繁更新（考虑传统 RAG + 增量索引）</li>
+<li>用户主要问精确查找类问题（传统 RAG 就够了）</li>
+<li>LLM 调用预算有限（考虑 LightRAG 等轻量方案）</li>
+</ul>
+<hr>
+<h2 id="Spring-Boot-LangChain4j-实战"><a href="#Spring-Boot-LangChain4j-实战" class="headerlink" title="Spring Boot + LangChain4j 实战"></a>Spring Boot + LangChain4j 实战</h2><p>理论讲够了，来写代码。我们用 LangChain4j 实现一个简化版的 GraphRAG，包含实体提取、图谱构建和局部搜索。</p>
+<h3 id="项目依赖"><a href="#项目依赖" class="headerlink" title="项目依赖"></a>项目依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- LangChain4j 核心 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-beta1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- OpenAI 集成 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-open-ai<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-beta1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 嵌入模型 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>dev.langchain4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>langchain4j-embeddings-bge-small-zh-v15<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0-beta1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实体-关系提取器"><a href="#实体-关系提取器" class="headerlink" title="实体-关系提取器"></a>实体-关系提取器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EntityRelationExtractor</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel llm;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">EntityRelationExtractor</span><span class="params">(ChatLanguageModel llm)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.llm = llm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从文本块中提取实体和关系</span></span><br><span class="line"><span class="comment">     * 核心思路：用结构化 prompt 让 LLM 返回 JSON 格式的三元组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> ExtractionResult <span class="title function_">extract</span><span class="params">(String text)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">prompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            请从以下文本中提取实体和关系，严格按 JSON 格式返回。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            实体类型：人物、组织、技术、项目、概念、产品</span></span><br><span class="line"><span class="string">            关系类型：使用、开发、依赖、属于、包含、合作、竞争</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            文本：</span></span><br><span class="line"><span class="string">            %s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            返回格式：</span></span><br><span class="line"><span class="string">            &#123;</span></span><br><span class="line"><span class="string">              &quot;entities&quot;: [</span></span><br><span class="line"><span class="string">                &#123;&quot;name&quot;: &quot;实体名&quot;, &quot;type&quot;: &quot;类型&quot;, &quot;description&quot;: &quot;一句话描述&quot;&#125;</span></span><br><span class="line"><span class="string">              ],</span></span><br><span class="line"><span class="string">              &quot;relations&quot;: [</span></span><br><span class="line"><span class="string">                &#123;&quot;source&quot;: &quot;源实体&quot;, &quot;target&quot;: &quot;目标实体&quot;, &quot;type&quot;: &quot;关系类型&quot;&#125;</span></span><br><span class="line"><span class="string">              ]</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>.formatted(text);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">response</span> <span class="operator">=</span> llm.generate(prompt);</span><br><span class="line">        <span class="keyword">return</span> parseResponse(response);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ExtractionResult <span class="title function_">parseResponse</span><span class="params">(String json)</span> &#123;</span><br><span class="line">        <span class="comment">// 解析 JSON，提取实体和关系</span></span><br><span class="line">        <span class="comment">// 实际生产中建议用 Jackson 或 Gson 做健壮解析</span></span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">mapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> mapper.readValue(json, ExtractionResult.class);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="comment">// LLM 返回的 JSON 可能格式不标准，需要容错处理</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">cleaned</span> <span class="operator">=</span> json.replaceAll(<span class="string">&quot;```json\\s*&quot;</span>, <span class="string">&quot;&quot;</span>).replaceAll(<span class="string">&quot;```&quot;</span>, <span class="string">&quot;&quot;</span>).trim();</span><br><span class="line">            <span class="keyword">return</span> mapper.readValue(cleaned, ExtractionResult.class);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>源码解析</strong>：这段代码的核心是 prompt 设计。注意几个细节：</p>
+<ol>
+<li><strong>明确指定了实体类型和关系类型</strong>——这比让 LLM 自由发挥效果好得多，减少了歧义和不一致</li>
+<li><strong>要求返回 JSON 格式</strong>——配合 LangChain4j 的结构化输出能力（参见 <a href="/posts/f0b37481.html">结构化输出实战</a>），可以直接映射到 Java 对象</li>
+<li><strong>容错处理</strong>——LLM 返回的 JSON 经常带有 markdown 代码块标记，需要清理</li>
+</ol>
+<h3 id="知识图谱存储"><a href="#知识图谱存储" class="headerlink" title="知识图谱存储"></a>知识图谱存储</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">KnowledgeGraph</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 用 ConcurrentHashMap 做内存存储，生产环境建议用 Neo4j</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, EntityNode&gt; entities = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> List&lt;RelationEdge&gt; relations = <span class="keyword">new</span> <span class="title class_">CopyOnWriteArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加实体，如果已存在则合并描述</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addEntity</span><span class="params">(String name, String type, String description)</span> &#123;</span><br><span class="line">        entities.merge(name, <span class="keyword">new</span> <span class="title class_">EntityNode</span>(name, type, description),</span><br><span class="line">            (existing, newNode) -&gt; &#123;</span><br><span class="line">                <span class="comment">// 实体消歧：合并描述信息</span></span><br><span class="line">                existing.setDescription(existing.getDescription() + <span class="string">&quot;; &quot;</span> + description);</span><br><span class="line">                <span class="keyword">return</span> existing;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 添加关系，自动创建缺失的实体节点</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addRelation</span><span class="params">(String source, String target, String type)</span> &#123;</span><br><span class="line">        <span class="comment">// 确保两端实体存在</span></span><br><span class="line">        entities.putIfAbsent(source, <span class="keyword">new</span> <span class="title class_">EntityNode</span>(source, <span class="string">&quot;未知&quot;</span>, <span class="string">&quot;&quot;</span>));</span><br><span class="line">        entities.putIfAbsent(target, <span class="keyword">new</span> <span class="title class_">EntityNode</span>(target, <span class="string">&quot;未知&quot;</span>, <span class="string">&quot;&quot;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 避免重复关系</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">exists</span> <span class="operator">=</span> relations.stream()</span><br><span class="line">            .anyMatch(r -&gt; r.getSource().equals(source)</span><br><span class="line">                &amp;&amp; r.getTarget().equals(target)</span><br><span class="line">                &amp;&amp; r.getType().equals(type));</span><br><span class="line">        <span class="keyword">if</span> (!exists) &#123;</span><br><span class="line">            relations.add(<span class="keyword">new</span> <span class="title class_">RelationEdge</span>(source, target, type));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 局部搜索：从指定实体出发，遍历 N 跳内的关联信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> SubGraph <span class="title function_">localSearch</span><span class="params">(String entityName, <span class="type">int</span> hops)</span> &#123;</span><br><span class="line">        Set&lt;String&gt; visited = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        Set&lt;String&gt; currentLevel = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        currentLevel.add(entityName);</span><br><span class="line">        List&lt;EntityNode&gt; subEntities = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        List&lt;RelationEdge&gt; subRelations = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">hop</span> <span class="operator">=</span> <span class="number">0</span>; hop &lt; hops; hop++) &#123;</span><br><span class="line">            Set&lt;String&gt; nextLevel = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">            <span class="keyword">for</span> (String name : currentLevel) &#123;</span><br><span class="line">                <span class="keyword">if</span> (visited.contains(name)) <span class="keyword">continue</span>;</span><br><span class="line">                visited.add(name);</span><br><span class="line"></span><br><span class="line">                <span class="type">EntityNode</span> <span class="variable">entity</span> <span class="operator">=</span> entities.get(name);</span><br><span class="line">                <span class="keyword">if</span> (entity != <span class="literal">null</span>) subEntities.add(entity);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 找到所有与该实体相关的关系</span></span><br><span class="line">                <span class="keyword">for</span> (RelationEdge rel : relations) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (rel.getSource().equals(name) || rel.getTarget().equals(name)) &#123;</span><br><span class="line">                        subRelations.add(rel);</span><br><span class="line">                        nextLevel.add(rel.getSource());</span><br><span class="line">                        nextLevel.add(rel.getTarget());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            currentLevel = nextLevel;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">SubGraph</span>(subEntities, subRelations);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>设计要点</strong>：</p>
+<ul>
+<li><code>merge</code> 操作实现了简单的实体消歧——同名实体的描述会被合并</li>
+<li><code>localSearch</code> 的 N 跳遍历是图搜索的经典模式，这里限制在 2 跳以内，避免结果爆炸</li>
+<li>生产环境建议用 <strong>Neo4j</strong> 做图存储，它的 Cypher 查询语言比手写遍历高效得多</li>
+</ul>
+<h3 id="全局搜索（简化版-Map-Reduce）"><a href="#全局搜索（简化版-Map-Reduce）" class="headerlink" title="全局搜索（简化版 Map-Reduce）"></a>全局搜索（简化版 Map-Reduce）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GlobalSearchEngine</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ChatLanguageModel llm;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> KnowledgeGraph knowledgeGraph;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">GlobalSearchEngine</span><span class="params">(ChatLanguageModel llm, KnowledgeGraph knowledgeGraph)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.llm = llm;</span><br><span class="line">        <span class="built_in">this</span>.knowledgeGraph = knowledgeGraph;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 全局搜索：对图谱中所有实体做 Map-Reduce 式摘要</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 完整版 GraphRAG 会先做社区检测，这里简化为按实体类型分组</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">globalSearch</span><span class="params">(String query)</span> &#123;</span><br><span class="line">        <span class="comment">// Map 阶段：按实体类型分组，每组生成中间答案</span></span><br><span class="line">        Map&lt;String, List&lt;EntityNode&gt;&gt; byType = knowledgeGraph.getAllEntities()</span><br><span class="line">            .stream()</span><br><span class="line">            .collect(Collectors.groupingBy(EntityNode::getType));</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; intermediateAnswers = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, List&lt;EntityNode&gt;&gt; entry : byType.entrySet()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">type</span> <span class="operator">=</span> entry.getKey();</span><br><span class="line">            List&lt;EntityNode&gt; entities = entry.getValue();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拼接该类型所有实体的信息</span></span><br><span class="line">            <span class="type">StringBuilder</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">            <span class="keyword">for</span> (EntityNode entity : entities) &#123;</span><br><span class="line">                context.append(<span class="string">&quot;- &quot;</span>).append(entity.getName())</span><br><span class="line">                       .append(<span class="string">&quot;: &quot;</span>).append(entity.getDescription()).append(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 加入关系信息</span></span><br><span class="line">                knowledgeGraph.getRelationsFor(entity.getName())</span><br><span class="line">                    .forEach(rel -&gt; context.append(<span class="string">&quot;  关系: &quot;</span>)</span><br><span class="line">                        .append(rel.getSource()).append(<span class="string">&quot; → &quot;</span>)</span><br><span class="line">                        .append(rel.getType()).append(<span class="string">&quot; → &quot;</span>)</span><br><span class="line">                        .append(rel.getTarget()).append(<span class="string">&quot;\n&quot;</span>));</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">mapPrompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                基于以下%s类别的知识信息，回答问题：</span></span><br><span class="line"><span class="string">                %s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                知识信息：</span></span><br><span class="line"><span class="string">                %s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                请从%s的角度，给出简洁但全面的回答（200字以内）。</span></span><br><span class="line"><span class="string">                &quot;&quot;&quot;</span>.formatted(type, query, context, type);</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">answer</span> <span class="operator">=</span> llm.generate(mapPrompt);</span><br><span class="line">            intermediateAnswers.add(<span class="string">&quot;【&quot;</span> + type + <span class="string">&quot;视角】&quot;</span> + answer);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Reduce 阶段：汇总所有中间答案</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">reducePrompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">            用户问题：%s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            以下是不同视角的分析结果，请综合归纳，给出一个完整、有层次的回答：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            %s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">            要求：</span></span><br><span class="line"><span class="string">            1. 提炼各视角的共性结论</span></span><br><span class="line"><span class="string">            2. 指出不同视角之间的关联</span></span><br><span class="line"><span class="string">            3. 给出全局性总结</span></span><br><span class="line"><span class="string">            &quot;&quot;&quot;</span>.formatted(query, String.join(<span class="string">&quot;\n\n&quot;</span>, intermediateAnswers));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> llm.generate(reducePrompt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>与微软 GraphRAG 的差异</strong>：原版使用 Leiden 社区检测算法对图做聚类，每个社区对应一个主题簇。这里简化为按实体类型分组，效果不如社区检测精确，但实现复杂度低很多，适合中小规模知识库。如果需要完整版社区检测，可以引入 <strong>JGraphT</strong> 库的 Louvain 或 Leiden 算法实现。</p>
+<h3 id="端到端使用示例"><a href="#端到端使用示例" class="headerlink" title="端到端使用示例"></a>端到端使用示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GraphRAGService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> EntityRelationExtractor extractor;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> KnowledgeGraph knowledgeGraph;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> GlobalSearchEngine globalSearch;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> EmbeddingStore&lt;TextSegment&gt; embeddingStore;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 索引构建：文档 → 实体提取 → 图谱构建 → 向量化存储</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">buildIndex</span><span class="params">(List&lt;Document&gt; documents)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (Document doc : documents) &#123;</span><br><span class="line">            <span class="comment">// 1. 分块</span></span><br><span class="line">            List&lt;TextSegment&gt; chunks = <span class="keyword">new</span> <span class="title class_">DocumentSplitter</span>()</span><br><span class="line">                .split(doc, <span class="number">500</span>, <span class="number">50</span>); <span class="comment">// 500 字一块，50 字重叠</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (TextSegment chunk : chunks) &#123;</span><br><span class="line">                <span class="comment">// 2. 实体-关系提取</span></span><br><span class="line">                <span class="type">ExtractionResult</span> <span class="variable">result</span> <span class="operator">=</span> extractor.extract(chunk.text());</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 3. 写入知识图谱</span></span><br><span class="line">                result.getEntities().forEach(e -&gt;</span><br><span class="line">                    knowledgeGraph.addEntity(e.getName(), e.getType(), e.getDescription()));</span><br><span class="line">                result.getRelations().forEach(r -&gt;</span><br><span class="line">                    knowledgeGraph.addRelation(r.getSource(), r.getTarget(), r.getType()));</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 4. 同时做向量化存储（用于局部搜索的文档检索）</span></span><br><span class="line">                <span class="type">Embedding</span> <span class="variable">embedding</span> <span class="operator">=</span> embeddingModel.embed(chunk).content();</span><br><span class="line">                embeddingStore.add(embedding, chunk);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        log.info(<span class="string">&quot;索引构建完成。实体数：&#123;&#125;，关系数：&#123;&#125;&quot;</span>,</span><br><span class="line">            knowledgeGraph.getEntityCount(), knowledgeGraph.getRelationCount());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 智能查询：根据问题类型自动选择局部或全局搜索</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">query</span><span class="params">(String question)</span> &#123;</span><br><span class="line">        <span class="comment">// 简单启发式：包含&quot;整体&quot;、&quot;全局&quot;、&quot;总结&quot;、&quot;概述&quot;等词时用全局搜索</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">isGlobal</span> <span class="operator">=</span> containsGlobalKeywords(question);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (isGlobal) &#123;</span><br><span class="line">            <span class="keyword">return</span> globalSearch.globalSearch(question);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 局部搜索：先识别实体，再图谱遍历 + 向量检索</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">entity</span> <span class="operator">=</span> extractMainEntity(question);</span><br><span class="line">            <span class="type">SubGraph</span> <span class="variable">subGraph</span> <span class="operator">=</span> knowledgeGraph.localSearch(entity, <span class="number">2</span>);</span><br><span class="line">            List&lt;TextSegment&gt; docs = vectorSearch(question, <span class="number">5</span>);</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">context</span> <span class="operator">=</span> buildContext(subGraph, docs);</span><br><span class="line">            <span class="keyword">return</span> llm.generate(<span class="string">&quot;基于以下信息回答问题：\n&quot;</span> + context + <span class="string">&quot;\n\n问题：&quot;</span> + question);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="生产环境的坑与最佳实践"><a href="#生产环境的坑与最佳实践" class="headerlink" title="生产环境的坑与最佳实践"></a>生产环境的坑与最佳实践</h2><h3 id="坑-1：实体提取成本爆炸"><a href="#坑-1：实体提取成本爆炸" class="headerlink" title="坑 1：实体提取成本爆炸"></a>坑 1：实体提取成本爆炸</h3><p>假设你的知识库有 1000 篇文档，每篇切成 10 个块，每个块调用一次 LLM 做实体提取。那就是 10000 次 LLM 调用。如果用 GPT-4 级别的模型，每次调用约 0.01-0.03 美元，索引成本就是 100-300 美元。</p>
+<p><strong>优化方案</strong>：</p>
+<ol>
+<li><strong>用小模型做提取</strong>：实体提取不需要最强的模型。GPT-3.5 或开源的 Qwen-7B 就够用，成本降 90%+</li>
+<li><strong>批量处理</strong>：把多个文本块拼在一起，一次调用提取多个块的实体，减少 API 调用次数</li>
+<li><strong>增量更新</strong>：只对新增&#x2F;修改的文档重新提取，而不是全量重建</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 批量实体提取：将多个文本块合并为一次 LLM 调用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> List&lt;ExtractionResult&gt; <span class="title function_">batchExtract</span><span class="params">(List&lt;TextSegment&gt; chunks)</span> &#123;</span><br><span class="line">    <span class="type">StringBuilder</span> <span class="variable">combined</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>();</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; chunks.size(); i++) &#123;</span><br><span class="line">        combined.append(<span class="string">&quot;--- 文档块 &quot;</span>).append(i + <span class="number">1</span>).append(<span class="string">&quot; ---\n&quot;</span>);</span><br><span class="line">        combined.append(chunks.get(i).text()).append(<span class="string">&quot;\n\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">prompt</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        请分别从以下 %d 个文档块中提取实体和关系。</span></span><br><span class="line"><span class="string">        对每个文档块，返回独立的 JSON 对象。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        %s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        返回格式：JSON 数组，每个元素对应一个文档块的提取结果。</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span>.formatted(chunks.size(), combined);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> llm.generate(prompt); <span class="comment">// 一次调用，批量提取</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="坑-2：实体消歧不准"><a href="#坑-2：实体消歧不准" class="headerlink" title="坑 2：实体消歧不准"></a>坑 2：实体消歧不准</h3><p>同一个实体可能有多种表述：”Spring Boot”、”SpringBoot”、”spring-boot”、”SB 框架”。如果消歧做不好，图谱中会出现大量孤立节点。</p>
+<p><strong>最佳实践</strong>：</p>
+<ol>
+<li><strong>预处理规范化</strong>：提取前先做文本规范化——统一大小写、去除特殊字符</li>
+<li><strong>别名词典</strong>：维护一份实体别名映射表，硬编码高频别名</li>
+<li><strong>嵌入相似度消歧</strong>：对实体名做向量化，计算相似度，超过阈值的视为同一实体</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 基于嵌入相似度的实体消歧</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">resolveEntity</span><span class="params">(String newEntity, <span class="type">double</span> threshold)</span> &#123;</span><br><span class="line">    <span class="type">Embedding</span> <span class="variable">newEmb</span> <span class="operator">=</span> embeddingModel.embed(newEntity).content();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (String existing : knowledgeGraph.getAllEntityNames()) &#123;</span><br><span class="line">        <span class="type">Embedding</span> <span class="variable">existingEmb</span> <span class="operator">=</span> embeddingModel.embed(existing).content();</span><br><span class="line">        <span class="type">double</span> <span class="variable">similarity</span> <span class="operator">=</span> CosineSimilarity.between(newEmb, existingEmb);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (similarity &gt; threshold) &#123;</span><br><span class="line">            <span class="keyword">return</span> existing; <span class="comment">// 返回已存在的规范名</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newEntity; <span class="comment">// 没找到匹配，作为新实体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="坑-3：社区检测的粒度选择"><a href="#坑-3：社区检测的粒度选择" class="headerlink" title="坑 3：社区检测的粒度选择"></a>坑 3：社区检测的粒度选择</h3><p>GraphRAG 的社区检测是层级化的，但选择哪个层级做全局搜索是个问题。层级太粗，摘要太笼统；层级太细，Map-Reduce 的中间结果太多，成本高且可能丢失全局视角。</p>
+<p><strong>经验法则</strong>：</p>
+<ul>
+<li>全局性大问题（”整体架构是什么”）→ 用粗粒度（Level 2+）</li>
+<li>中等粒度问题（”后端技术栈的选型思路”）→ 用中等粒度（Level 1）</li>
+<li>具体问题（”Redis 在哪些服务中使用”）→ 用局部搜索，不需要社区摘要</li>
+</ul>
+<h3 id="坑-4：图谱更新的连锁反应"><a href="#坑-4：图谱更新的连锁反应" class="headerlink" title="坑 4：图谱更新的连锁反应"></a>坑 4：图谱更新的连锁反应</h3><p>新增一篇文档，不只是加几个节点那么简单。新实体可能需要和已有实体合并，新关系可能改变社区结构，社区摘要需要重新生成。</p>
+<p><strong>生产建议</strong>：</p>
+<ul>
+<li><strong>小规模更新</strong>：增量添加实体和关系，定期（如每天凌晨）重新跑社区检测和摘要生成</li>
+<li><strong>大规模更新</strong>：全量重建图谱。可以用异步任务队列处理，不影响在线查询</li>
+<li><strong>版本化图谱</strong>：维护图谱的版本快照，更新失败时可以回滚</li>
+</ul>
+<hr>
+<h2 id="与-Agent-系统的整合"><a href="#与-Agent-系统的整合" class="headerlink" title="与 Agent 系统的整合"></a>与 Agent 系统的整合</h2><p>GraphRAG 不是一个独立系统，它是 Agent 的知识增强层。在我们的 <a href="/posts/a3f7b2e1.html">AI Agent 系列</a> 中，Agent 的核心能力是推理和工具调用，但推理的质量取决于它能获取多少高质量上下文。</p>
+<p>GraphRAG 可以作为 Agent 的<strong>知识工具</strong>注册：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将 GraphRAG 注册为 Agent 的工具</span></span><br><span class="line"><span class="comment"> * 参考：AI Agent 的工具箱（/posts/fd311830.html）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Tool(&quot;搜索知识库中的信息。对于全局性问题使用全局模式，精确查找使用局部模式。&quot;)</span></span><br><span class="line"><span class="keyword">public</span> String <span class="title function_">searchKnowledge</span><span class="params">(</span></span><br><span class="line"><span class="params">    <span class="meta">@P(&quot;查询内容&quot;)</span> String query,</span></span><br><span class="line"><span class="params">    <span class="meta">@P(&quot;搜索模式：local 或 global&quot;)</span> String mode</span></span><br><span class="line"><span class="params">)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">&quot;global&quot;</span>.equals(mode)) &#123;</span><br><span class="line">        <span class="keyword">return</span> globalSearchEngine.globalSearch(query);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> localSearchEngine.localSearch(query);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样，Agent 在推理过程中（参考 <a href="/posts/a3f7b2e1.html">ReAct 模式</a>）可以自主决定何时使用全局搜索、何时使用局部搜索，甚至可以先用全局搜索了解整体概况，再用局部搜索深挖细节。</p>
+<hr>
+<h2 id="技术边界与未来展望"><a href="#技术边界与未来展望" class="headerlink" title="技术边界与未来展望"></a>技术边界与未来展望</h2><h3 id="GraphRAG-不是万能的"><a href="#GraphRAG-不是万能的" class="headerlink" title="GraphRAG 不是万能的"></a>GraphRAG 不是万能的</h3><ol>
+<li><strong>不适合非结构化文本的实时场景</strong>：如果你的知识库每分钟都在变化（比如聊天记录），GraphRAG 的索引成本太高</li>
+<li><strong>依赖 LLM 质量</strong>：实体提取的质量直接取决于 LLM 的能力。如果 LLM 漏提了关键实体，图谱就不完整</li>
+<li><strong>可解释性有限</strong>：虽然图谱本身是可解释的，但社区检测和摘要生成是黑盒，你很难追溯”为什么这个社区被归为一组”</li>
+</ol>
+<h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><ol>
+<li><strong>多模态 GraphRAG</strong>：不只是文本，图片、表格、代码块也可以提取实体和关系</li>
+<li><strong>自适应索引</strong>：根据查询频率自动调整索引粒度，高频热点区域做更细的索引</li>
+<li><strong>增量社区检测</strong>：避免每次更新都全量重跑社区检测，研究增量图算法</li>
+<li><strong>GraphRAG + Agent 联动</strong>：Agent 可以主动扩展图谱——当发现知识缺口时，自动触发信息采集和图谱更新</li>
+</ol>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>GraphRAG 的核心贡献是<strong>把全局性查询从不可能变为可能</strong>。传统 RAG 只能在文档片段级别做检索，GraphRAG 通过知识图谱 + 社区摘要 + Map-Reduce，在索引阶段就把全局信息压缩好了，查询时可以直接调用。</p>
+<p>但这并不意味着 GraphRAG 要取代传统 RAG。它们是互补关系：</p>
+<ul>
+<li><strong>精确查找</strong> → 传统 RAG（快、便宜、简单）</li>
+<li><strong>全局性查询</strong> → GraphRAG（慢、贵、但能力独特）</li>
+<li><strong>混合方案</strong> → 先用启发式判断问题类型，再路由到合适的检索策略</li>
+</ul>
+<p>对于 Java 开发者来说，LangChain4j 已经提供了构建 GraphRAG 所需的基础组件（LLM 调用、嵌入模型、向量存储）。图谱存储可以选择 Neo4j（成熟稳定）或 JGraphT（轻量级内存方案）。社区检测可以用 JGraphT 内置的 Louvain 算法。</p>
+<p>如果你的知识库有丰富的实体关系，用户经常问”整体情况”类的问题，GraphRAG 值得投入。如果你的需求主要是精确查找，先把传统 RAG 做好，别过度工程化。</p>
+<hr>
+<blockquote>
+<p><strong>参考资源</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2404.16130">微软 GraphRAG 论文</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/graphrag">微软 GraphRAG GitHub 仓库</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.langchain4j.dev/">LangChain4j 官方文档</a></li>
+<li>系列前文：<a href="/posts/fca03c3e.html">从零理解 RAG：检索增强生成完整指南</a></li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/746c8779.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/746c8779.html')">当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/746c8779.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=当 RAG 遇上知识图谱：GraphRAG 原理与 Java 实战&amp;url=https://blog.goku.top/posts/746c8779.html&amp;pic=https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=577a2c0a-448a-9d2d-e3bc-8c5b154db469" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/RAG/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>RAG<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/LLM/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LLM<span class="tagsPageCount">4</span></a><a class="post-meta__box__tags" href="/tags/Spring-Boot/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Spring Boot<span class="tagsPageCount">5</span></a><a class="post-meta__box__tags" href="/tags/LangChain4j/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LangChain4j<span class="tagsPageCount">16</span></a><a class="post-meta__box__tags" href="/tags/GraphRAG/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>GraphRAG<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>知识图谱<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/a26fbc69.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=73db79e8-1574-1e26-e83c-fd7dbf6a8a8e" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AI Agent 评估与优化：从基准测试到生产环境的质量守护实战</div></div></a></div><div class="next-post pull-right"><a href="/posts/33f9bc72.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_12.jpeg?_r_=756cfe1d-79c4-884a-a3fb-353e18ef755e" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Embedding 向量化的魔法：从文本到向量的数学之旅与 Java 实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/fca03c3e.html" title="从零理解 RAG：检索增强生成完整指南"><img class="cover" src="https://upyun.goku.top/blog/post_banner_1.jpeg?_r_=f21ad575-d742-3881-d0bb-422ceec44828" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-11</div><div class="title">从零理解 RAG：检索增强生成完整指南</div></div></a></div><div><a href="/posts/70d64e78.html" title="AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=a195337f-de86-c6aa-c007-acf0636da38e" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-13</div><div class="title">AI Agent 的记忆系统：从 ChatMemory 到持久化记忆的 Java 实战</div></div></a></div><div><a href="/posts/33f9bc72.html" title="Embedding 向量化的魔法：从文本到向量的数学之旅与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_12.jpeg?_r_=756cfe1d-79c4-884a-a3fb-353e18ef755e" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-17</div><div class="title">Embedding 向量化的魔法：从文本到向量的数学之旅与 Java 实战</div></div></a></div><div><a href="/posts/ed7564f3.html" title="当 RAG 遇到 Agent：Agentic RAG 的架构设计与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_8.jpeg?_r_=efee0296-0e60-faf8-365a-d6fc365bb166" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-18</div><div class="title">当 RAG 遇到 Agent：Agentic RAG 的架构设计与 Java 实战</div></div></a></div><div><a href="/posts/33667def.html" title="AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=d0f6477e-67d9-56ff-066f-453fde78e106" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-16</div><div class="title">AI Agent 团队协作：多 Agent 系统架构设计与 Java 实战</div></div></a></div><div><a href="/posts/613efee9.html" title="AI Agent 的知识检索引擎：从向量搜索到智能检索策略的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=76bb8dfe-0d28-906a-330c-20f252f0a647" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-18</div><div class="title">AI Agent 的知识检索引擎：从向量搜索到智能检索策略的 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BC%A0%E7%BB%9F-RAG-%E7%9A%84%E2%80%9D%E9%98%BF%E5%96%80%E7%90%89%E6%96%AF%E4%B9%8B%E8%B8%B5%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">引言：传统 RAG 的”阿喀琉斯之踵”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%EF%BC%9A%E7%94%A8%E2%80%9D%E5%85%B3%E7%B3%BB%E2%80%9D%E7%BB%84%E7%BB%87%E4%B8%96%E7%95%8C"><span class="toc-number">3.</span> <span class="toc-text">知识图谱：用”关系”组织世界</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-number">3.1.</span> <span class="toc-text">什么是知识图谱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%83%BD%E8%A1%A5-RAG-%E7%9A%84%E7%9F%AD%E6%9D%BF"><span class="toc-number">3.2.</span> <span class="toc-text">为什么知识图谱能补 RAG 的短板</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GraphRAG%EF%BC%9A%E5%BE%AE%E8%BD%AF%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">GraphRAG：微软的解法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BB%8E%E6%96%87%E6%9C%AC%E5%88%B0%E5%9B%BE%E8%B0%B1"><span class="toc-number">4.1.</span> <span class="toc-text">索引阶段：从文本到图谱</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-1%EF%BC%9A%E5%AE%9E%E4%BD%93%E5%92%8C%E5%85%B3%E7%B3%BB%E6%8F%90%E5%8F%96"><span class="toc-number">4.1.1.</span> <span class="toc-text">Step 1：实体和关系提取</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-2%EF%BC%9A%E5%AE%9E%E4%BD%93%E6%B6%88%E6%AD%A7%E4%B8%8E%E5%90%88%E5%B9%B6"><span class="toc-number">4.1.2.</span> <span class="toc-text">Step 2：实体消歧与合并</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-3%EF%BC%9A%E6%9E%84%E5%BB%BA%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-number">4.1.3.</span> <span class="toc-text">Step 3：构建知识图谱</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Step-4%EF%BC%9A%E7%A4%BE%E5%8C%BA%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%B1%82%E7%BA%A7%E6%91%98%E8%A6%81"><span class="toc-number">4.1.4.</span> <span class="toc-text">Step 4：社区检测与层级摘要</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2-vs-%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2"><span class="toc-number">4.2.</span> <span class="toc-text">查询阶段：局部搜索 vs 全局搜索</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2%EF%BC%88Local-Search%EF%BC%89"><span class="toc-number">4.2.1.</span> <span class="toc-text">局部搜索（Local Search）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%EF%BC%88Global-Search%EF%BC%89"><span class="toc-number">4.2.2.</span> <span class="toc-text">全局搜索（Global Search）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E5%85%B6%E4%BB%96-RAG-%E5%8F%98%E4%BD%93%E7%9A%84%E6%A8%AA%E5%90%91%E5%AF%B9%E6%AF%94"><span class="toc-number">5.</span> <span class="toc-text">与其他 RAG 变体的横向对比</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-LangChain4j-%E5%AE%9E%E6%88%98"><span class="toc-number">6.</span> <span class="toc-text">Spring Boot + LangChain4j 实战</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96"><span class="toc-number">6.1.</span> <span class="toc-text">项目依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93-%E5%85%B3%E7%B3%BB%E6%8F%90%E5%8F%96%E5%99%A8"><span class="toc-number">6.2.</span> <span class="toc-text">实体-关系提取器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AD%98%E5%82%A8"><span class="toc-number">6.3.</span> <span class="toc-text">知识图谱存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2%EF%BC%88%E7%AE%80%E5%8C%96%E7%89%88-Map-Reduce%EF%BC%89"><span class="toc-number">6.4.</span> <span class="toc-text">全局搜索（简化版 Map-Reduce）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%88%B0%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-number">6.5.</span> <span class="toc-text">端到端使用示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E7%9A%84%E5%9D%91%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">7.</span> <span class="toc-text">生产环境的坑与最佳实践</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91-1%EF%BC%9A%E5%AE%9E%E4%BD%93%E6%8F%90%E5%8F%96%E6%88%90%E6%9C%AC%E7%88%86%E7%82%B8"><span class="toc-number">7.1.</span> <span class="toc-text">坑 1：实体提取成本爆炸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91-2%EF%BC%9A%E5%AE%9E%E4%BD%93%E6%B6%88%E6%AD%A7%E4%B8%8D%E5%87%86"><span class="toc-number">7.2.</span> <span class="toc-text">坑 2：实体消歧不准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91-3%EF%BC%9A%E7%A4%BE%E5%8C%BA%E6%A3%80%E6%B5%8B%E7%9A%84%E7%B2%92%E5%BA%A6%E9%80%89%E6%8B%A9"><span class="toc-number">7.3.</span> <span class="toc-text">坑 3：社区检测的粒度选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9D%91-4%EF%BC%9A%E5%9B%BE%E8%B0%B1%E6%9B%B4%E6%96%B0%E7%9A%84%E8%BF%9E%E9%94%81%E5%8F%8D%E5%BA%94"><span class="toc-number">7.4.</span> <span class="toc-text">坑 4：图谱更新的连锁反应</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E-Agent-%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%95%B4%E5%90%88"><span class="toc-number">8.</span> <span class="toc-text">与 Agent 系统的整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E8%BE%B9%E7%95%8C%E4%B8%8E%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">9.</span> <span class="toc-text">技术边界与未来展望</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GraphRAG-%E4%B8%8D%E6%98%AF%E4%B8%87%E8%83%BD%E7%9A%84"><span class="toc-number">9.1.</span> <span class="toc-text">GraphRAG 不是万能的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-number">9.2.</span> <span class="toc-text">未来方向</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">10.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_9.jpeg?_r_=39963fcd-4d82-5ccc-ddb7-bac1588fe2de" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</a><time datetime="2026-06-21T22:00:00.000Z" title="发表于 2026-06-22 06:00:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_6.jpeg?_r_=3bfb2694-54e1-0b01-a84a-8ca76148221e" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"/></a><div class="content"><a class="title" href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</a><time datetime="2026-06-21T10:01:58.000Z" title="发表于 2026-06-21 18:01:58">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=7b11b9ff-0e9b-30e4-f133-56dea53e2d6a" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"/></a><div class="content"><a class="title" href="/posts/fff28300.html" title="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</a><time datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=be4e6f04-222f-80cc-7c2e-8971ccb0bfc5" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Agent 间如何对话：A2A 协议深度解析与 Java 实战"/></a><div class="content"><a class="title" href="/posts/4832ee17.html" title="Agent 间如何对话：A2A 协议深度解析与 Java 实战">Agent 间如何对话：A2A 协议深度解析与 Java 实战</a><time datetime="2026-06-21T02:00:00.000Z" title="发表于 2026-06-21 10:00:00">2026-06-21</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_5.jpeg?_r_=b8a335f1-8ff4-1d07-36d4-a8157125beb2" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"/></a><div class="content"><a class="title" href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</a><time datetime="2026-06-20T02:00:00.000Z" title="发表于 2026-06-20 10:00:00">2026-06-20</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">76</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">109</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">32</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI/" style="font-size: 0.88rem;">AI<sup>2</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git/" style="font-size: 0.88rem;">Git<sup>1</sup></a><a href="/tags/IntelliJ-IDEA/" style="font-size: 0.88rem;">IntelliJ IDEA<sup>1</sup></a><a href="/tags/JVM/" style="font-size: 0.88rem;">JVM<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>25</sup></a><a href="/tags/LLM/" style="font-size: 0.88rem;">LLM<sup>4</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/Netty/" style="font-size: 0.88rem;">Netty<sup>4</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>2</sup></a><a href="/tags/RAG/" style="font-size: 0.88rem;">RAG<sup>5</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>3</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>5</sup></a><a href="/tags/TF-IDF/" style="font-size: 0.88rem;">TF-IDF<sup>1</sup></a><a href="/tags/TVBox/" style="font-size: 0.88rem;">TVBox<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/docker/" style="font-size: 0.88rem;">docker<sup>2</sup></a><a href="/tags/frp/" style="font-size: 0.88rem;">frp<sup>1</sup></a><a href="/tags/ios/" style="font-size: 0.88rem;">ios<sup>2</sup></a><a href="/tags/macos/" style="font-size: 0.88rem;">macos<sup>1</sup></a><a href="/tags/mysql/" style="font-size: 0.88rem;">mysql<sup>2</sup></a><a href="/tags/nginx/" style="font-size: 0.88rem;">nginx<sup>1</sup></a><a href="/tags/redis/" style="font-size: 0.88rem;">redis<sup>2</sup></a><a href="/tags/trollstore/" style="font-size: 0.88rem;">trollstore<sup>1</sup></a><a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" style="font-size: 0.88rem;">内网穿透<sup>1</sup></a><a href="/tags/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2/" style="font-size: 0.88rem;">向量检索<sup>2</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A5%87%E6%80%AA%E7%9A%84%E7%9F%A5%E8%AF%86/" style="font-size: 0.88rem;">奇怪的知识<sup>2</sup></a><a href="/tags/%E5%A8%B1%E4%B9%90/" style="font-size: 0.88rem;">娱乐<sup>2</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">学习<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%8D%93/" style="font-size: 0.88rem;">安卓<sup>2</sup></a><a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">工具<sup>2</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" style="font-size: 0.88rem;">开发问题记录<sup>4</sup></a><a href="/tags/%E5%BD%B1%E9%9F%B3/" style="font-size: 0.88rem;">影音<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 0.88rem;">生活<sup>4</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 0.88rem;">设计模式<sup>3</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 0.88rem;">项目<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
