@@ -1,3 +1,5 @@
+https://blog.goku.top/posts/8e4397cb.html
+https://blog.goku.top/posts/8d500988.html
 https://blog.goku.top/posts/1d413ee9.html
 https://blog.goku.top/posts/49215.html
 https://blog.goku.top/posts/51310.html
@@ -191,6 +193,10 @@ https://blog.goku.top/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/
 https://blog.goku.top/tags/ReAct/
 https://blog.goku.top/tags/LangChain/
 https://blog.goku.top/tags/%E7%BB%93%E6%9E%84%E5%8C%96%E8%BE%93%E5%87%BA/
+https://blog.goku.top/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/
+https://blog.goku.top/tags/HITL/
+https://blog.goku.top/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/
+https://blog.goku.top/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/
 https://blog.goku.top/categories/%E5%8D%9A%E5%AE%A2/
 https://blog.goku.top/categories/%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90/
 https://blog.goku.top/categories/%E5%A8%B1%E4%B9%90/
