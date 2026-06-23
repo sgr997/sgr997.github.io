@@ -1,0 +1,575 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>多文件重构与复杂任务实战 | Pei</title><meta name="keywords" content="AI Agent,Java,Spring Boot,Claude Code,重构,多文件编辑"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="当需求从&quot;改一个方法&quot;升级为&quot;重构整个认证模块&quot;，Claude Code 的多文件编辑、任务规划和上下文管理能力如何发挥？本文用 5 个真实 Java 场景拆解终端原生 Coding Agent 处理复杂任务的设计哲学。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多文件重构与复杂任务实战">
+<meta property="og:url" content="https://blog.goku.top/posts/bc1dcb9c.html">
+<meta property="og:site_name" content="Pei">
+<meta property="og:description" content="当需求从&quot;改一个方法&quot;升级为&quot;重构整个认证模块&quot;，Claude Code 的多文件编辑、任务规划和上下文管理能力如何发挥？本文用 5 个真实 Java 场景拆解终端原生 Coding Agent 处理复杂任务的设计哲学。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg">
+<meta property="article:published_time" content="2026-06-24T00:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-23T22:04:01.217Z">
+<meta property="article:author" content="Pei">
+<meta property="article:tag" content="AI Agent">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Claude Code">
+<meta property="article:tag" content="重构">
+<meta property="article:tag" content="多文件编辑">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png"><link rel="canonical" href="https://blog.goku.top/posts/bc1dcb9c"><link rel="preconnect" href="//cdn.jsdelivr.net"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '多文件重构与复杂任务实战',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: false,
+  postUpdate: '2026-06-24 06:04:01'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/plane_v2.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" type="text/css" href="/html/css/poem.css"><link rel="stylesheet" type="text/css" href="/html/css/snackbar.css"><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/zhheo/Post-Abstract-AI@0.15.2/tianli_gpt.css"><link rel="stylesheet" href="/html/css/goku.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://thirdqq.qlogo.cn/g?b=sdk&amp;k=C88w6ZftQk9ibgdcM4sH4jg&amp;s=140&amp;t=1657271033" onerror="onerror=null;src='https://upyun.goku.top/blog/loading.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">83</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">127</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random.html"><i class="fa-fw fa-solid fa-shuffle"></i><span> 随机一文</span></a></div><div class="menus_item"><a class="site-page" href="/webstack.html"><i class="fa-fw fa-solid fa-star"></i><span> 网址导航</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/posts/d10ad42e.html"><span> 堵猫猫</span></a></li><li><a class="site-page child" href="/posts/fc4d392a.html"><span> 烟花秀</span></a></li><li><a class="site-page child" href="/html/TheMatrix/index.html"><span> 黑客帝国</span></a></li><li><a class="site-page child" href="/html/Glare/index.html"><span> 炫光</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk"><i class="fa-fw fas fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa-solid fa-blog"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://upyun.goku.top/blog/post_banner_10.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Pei</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random.html"><i class="fa-fw fa-solid fa-shuffle"></i><span> 随机一文</span></a></div><div class="menus_item"><a class="site-page" href="/webstack.html"><i class="fa-fw fa-solid fa-star"></i><span> 网址导航</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/posts/d10ad42e.html"><span> 堵猫猫</span></a></li><li><a class="site-page child" href="/posts/fc4d392a.html"><span> 烟花秀</span></a></li><li><a class="site-page child" href="/html/TheMatrix/index.html"><span> 黑客帝国</span></a></li><li><a class="site-page child" href="/html/Glare/index.html"><span> 炫光</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk"><i class="fa-fw fas fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa-solid fa-blog"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div></div></div><div id="nav-right"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">多文件重构与复杂任务实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2026-06-24T00:00:00.000Z" title="发表于 2026-06-24 08:00:00">2026-06-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Claude-Code/">Claude Code</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote>
+<p>本篇是 Claude Code 系列的第 5 篇。系列将从安装入门到高级实战，由浅入深地拆解这个终端原生 Coding Agent 的每一个能力。</p>
+</blockquote>
+<p><strong>入门篇</strong></p>
+<ol>
+<li><a href="/posts/205343cf.html">Claude Code 是什么？从安装到第一次对话</a></li>
+<li><a href="/posts/7c7b64e9.html">日常开发工作流：用 Claude Code 重塑你的编码习惯</a></li>
+</ol>
+<p><strong>核心篇</strong><br>3. <a href="/posts/a1b4af21.html">内置命令全解：从 &#x2F;compact 到 &#x2F;doctor 的实战指南</a><br>4. <a href="/posts/2327dd63.html">CLAUDE.md：项目上下文工程的艺术</a></p>
+<p><strong>进阶篇</strong><br>5. <strong>多文件重构与复杂任务实战</strong>（本文）<br>6. <a href="/posts/">Hooks、MCP 与能力扩展</a></p>
+<p><strong>高级篇</strong><br>7. <a href="/posts/">Headless 模式与 CI&#x2F;CD 集成</a><br>8. <a href="/posts/">多 Agent 协作：从 Claude Code 到 Codex</a></p>
+<hr>
+<h2 id="引言：从”改一个方法”到”重构整个模块”"><a href="#引言：从”改一个方法”到”重构整个模块”" class="headerlink" title="引言：从”改一个方法”到”重构整个模块”"></a>引言：从”改一个方法”到”重构整个模块”</h2><p>在前四篇文章中，我们学会了安装 Claude Code、用它处理日常开发任务、掌握内置命令、以及通过 CLAUDE.md 构建项目记忆。这些能力足以应对大多数单文件、单方法的修改。</p>
+<p>但真实项目的挑战远不止于此。</p>
+<p>想象这样一个场景：你需要把 Spring Boot 项目中的 <code>User</code> 实体重命名为 <code>Account</code>。这不是改一个文件的事——它涉及 Entity、Repository、Service、Controller、DTO、Mapper、测试类、甚至 SQL 迁移脚本，总共 20+ 个文件。更要命的是，这些文件之间有复杂的引用关系：改了 Entity 的类名，Repository 的泛型参数要跟着变，Service 的注入字段名要跟着变，Controller 的路径映射可能也要调整。</p>
+<p>用 IDE 的 Rename 功能？它只能处理 Java 符号级别的重命名，跨 SQL、配置文件、前端接口就力不从心了。手动改？20 个文件逐一修改，漏一个就是运行时 <code>ClassNotFoundException</code>。</p>
+<p><strong>这正是 Claude Code 真正发力的场景。</strong> 它不是逐行替换的文本编辑器，而是一个理解代码语义的 Agent——它能读懂你的项目结构，分析文件间的依赖关系，制定修改计划，然后协调执行。</p>
+<p>本文将通过 5 个真实的 Java&#x2F;Spring Boot 场景，拆解 Claude Code 处理多文件重构和复杂任务的完整工作流。</p>
+<hr>
+<h2 id="一、Claude-Code-的多文件编辑：为什么它和-IDE-不一样？"><a href="#一、Claude-Code-的多文件编辑：为什么它和-IDE-不一样？" class="headerlink" title="一、Claude Code 的多文件编辑：为什么它和 IDE 不一样？"></a>一、Claude Code 的多文件编辑：为什么它和 IDE 不一样？</h2><h3 id="1-1-传统工具的局限"><a href="#1-1-传统工具的局限" class="headerlink" title="1.1 传统工具的局限"></a>1.1 传统工具的局限</h3><p>在讨论 Claude Code 之前，先理解传统工具为什么在多文件场景下不够用：</p>
+<table>
+<thead>
+<tr>
+<th>工具</th>
+<th>能力边界</th>
+<th>典型失败场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>IDE Rename</td>
+<td>Java 符号级重命名</td>
+<td>无法处理 XML 映射、SQL、配置文件</td>
+</tr>
+<tr>
+<td>Find &amp; Replace</td>
+<td>纯文本匹配</td>
+<td>无法区分 <code>user</code> 是变量名还是注释里的单词</td>
+</tr>
+<tr>
+<td>Spring Boot DevTools</td>
+<td>热重载</td>
+<td>只能处理运行时变更，不涉及文件修改</td>
+</tr>
+<tr>
+<td>手动修改</td>
+<td>完全靠人</td>
+<td>漏改、错改、顺序依赖</td>
+</tr>
+</tbody></table>
+<p>这些工具的共同问题是：<strong>它们不理解代码的语义结构。</strong> 它们要么只看到单个文件，要么只做文本替换，无法建立”这个字段在哪些文件的哪些位置被引用”的全局视图。</p>
+<h3 id="1-2-Claude-Code-的差异化：Agentic-Loop"><a href="#1-2-Claude-Code-的差异化：Agentic-Loop" class="headerlink" title="1.2 Claude Code 的差异化：Agentic Loop"></a>1.2 Claude Code 的差异化：Agentic Loop</h3><p>Claude Code 的核心是一个 <strong>Agentic Loop</strong>（代理循环），它在每次任务中经历三个阶段：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────┐</span><br><span class="line">│                                             │</span><br><span class="line">│   ┌──────────┐    ┌──────────┐    ┌──────┐ │</span><br><span class="line">│   │  收集上下文 │───▶│  执行操作  │───▶│ 验证 │ │</span><br><span class="line">│   │  (Gather) │    │  (Act)   │    │(Verify)│ │</span><br><span class="line">│   └──────────┘    └──────────┘    └──────┘ │</span><br><span class="line">│        ▲                              │     │</span><br><span class="line">│        └──────────────────────────────┘     │</span><br><span class="line">│                                             │</span><br><span class="line">└─────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>在多文件重构中，这个循环的威力体现在：</p>
+<ol>
+<li><strong>收集上下文</strong>：Claude 不只读你指定的文件，它会主动搜索整个项目——<code>grep</code> 引用、<code>find</code> 相关文件、读取配置、分析依赖</li>
+<li><strong>执行操作</strong>：基于理解的语义关系，逐文件修改，并保持跨文件的一致性</li>
+<li><strong>验证结果</strong>：运行测试、编译检查、甚至启动应用验证</li>
+</ol>
+<p><strong>关键区别：</strong> IDE 的重构是”声明式”的（你告诉它重命名什么），Claude Code 的重构是”对话式”的（你描述目标，它制定计划并执行）。这在跨语言、跨层的复杂重构中优势明显。</p>
+<hr>
+<h2 id="二、场景一：实体重命名的全链路更新"><a href="#二、场景一：实体重命名的全链路更新" class="headerlink" title="二、场景一：实体重命名的全链路更新"></a>二、场景一：实体重命名的全链路更新</h2><h3 id="2-1-问题描述"><a href="#2-1-问题描述" class="headerlink" title="2.1 问题描述"></a>2.1 问题描述</h3><p>一个典型的 Spring Boot 电商项目，需要将 <code>Product</code> 实体重命名为 <code>Merchandise</code>。涉及的文件类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/example/</span><br><span class="line">├── entity/Product.java              → Merchandise.java</span><br><span class="line">├── repository/ProductRepository.java → MerchandiseRepository.java</span><br><span class="line">├── service/ProductService.java       → MerchandiseService.java</span><br><span class="line">├── service/impl/ProductServiceImpl.java</span><br><span class="line">├── controller/ProductController.java → MerchandiseController.java</span><br><span class="line">├── dto/ProductDTO.java               → MerchandiseDTO.java</span><br><span class="line">├── mapper/ProductMapper.java         → MerchandiseMapper.java</span><br><span class="line">└── exception/ProductNotFoundException.java</span><br><span class="line"></span><br><span class="line">src/main/resources/</span><br><span class="line">├── mapper/ProductMapper.xml          → MerchandiseMapper.xml</span><br><span class="line">└── application.yml                   (如果有表名配置)</span><br><span class="line"></span><br><span class="line">src/test/java/com/example/</span><br><span class="line">├── service/ProductServiceTest.java</span><br><span class="line">└── controller/ProductControllerTest.java</span><br><span class="line"></span><br><span class="line">db/migration/</span><br><span class="line">└── V2__rename_product_to_merchandise.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-Claude-Code-实战"><a href="#2-2-Claude-Code-实战" class="headerlink" title="2.2 Claude Code 实战"></a>2.2 Claude Code 实战</h3><p><strong>第一步：探索阶段</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 将项目中的 Product 实体重命名为 Merchandise，包括所有相关的类、</span><br><span class="line">  接口、XML 映射、测试和数据库迁移脚本。先不要修改，先分析影响范围。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会执行以下操作：</p>
+<ul>
+<li>用 <code>grep -rn &quot;Product&quot; src/</code> 搜索所有引用</li>
+<li>读取关键文件理解泛型关系、依赖注入</li>
+<li>分析 XML 映射中的 <code>resultType</code> 和 <code>parameterType</code></li>
+<li>检查测试类中的 mock 对象和断言</li>
+</ul>
+<p>它会返回一份影响分析报告，类似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">影响分析：</span><br><span class="line">- 直接修改：12 个 Java 文件 + 1 个 XML + 1 个 SQL</span><br><span class="line">- 间接引用：3 个配置文件中的表名引用</span><br><span class="line">- 风险点：ProductMapper.xml 中的 namespace 需要同步更新</span><br></pre></td></tr></table></figure>
+
+<p><strong>第二步：执行阶段</strong></p>
+<p>确认分析无误后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; 好的，按照你的分析执行重构。每改完一组文件就运行一下编译检查。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会按照依赖顺序执行：</p>
+<ol>
+<li>先改 Entity（最底层）</li>
+<li>再改 Repository、Mapper（依赖 Entity）</li>
+<li>然后改 Service（依赖 Repository）</li>
+<li>接着改 Controller（依赖 Service）</li>
+<li>最后改测试和迁移脚本</li>
+</ol>
+<p><strong>第三步：验证阶段</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; 运行 mvn compile 检查编译，然后运行测试。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 自动执行 <code>mvn compile</code>，如果有编译错误，它会分析错误信息并修复遗漏的引用。</p>
+<h3 id="2-3-设计原理：为什么”先分析后执行”很重要？"><a href="#2-3-设计原理：为什么”先分析后执行”很重要？" class="headerlink" title="2.3 设计原理：为什么”先分析后执行”很重要？"></a>2.3 设计原理：为什么”先分析后执行”很重要？</h3><p>Claude Code 的 <code>Plan Mode</code>（按 <code>Shift+Tab</code> 两次切换）是一个关键设计。在复杂重构中，”先看清楚再动手”比”边改边看”安全得多。</p>
+<p>这和外科手术的原则一样：<strong>术前影像诊断 &gt; 直接开刀。</strong> Plan Mode 让 Claude 充当”影像科医生”——先扫描整个项目，绘制依赖图，识别风险点，然后你确认方案后才开始”手术”。</p>
+<hr>
+<h2 id="三、场景二：跨层接口签名变更"><a href="#三、场景二：跨层接口签名变更" class="headerlink" title="三、场景二：跨层接口签名变更"></a>三、场景二：跨层接口签名变更</h2><h3 id="3-1-问题描述"><a href="#3-1-问题描述" class="headerlink" title="3.1 问题描述"></a>3.1 问题描述</h3><p>你的 Spring Boot 项目需要给所有 Service 方法的查询操作添加分页支持。原来的方法签名是：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Product&gt; <span class="title function_">findByCategory</span><span class="params">(String category)</span>;</span><br><span class="line">List&lt;Order&gt; <span class="title function_">findByUserId</span><span class="params">(Long userId)</span>;</span><br><span class="line">List&lt;Product&gt; <span class="title function_">searchByName</span><span class="params">(String name)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>需要统一改为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Page&lt;Product&gt; <span class="title function_">findByCategory</span><span class="params">(String category, Pageable pageable)</span>;</span><br><span class="line">Page&lt;Order&gt; <span class="title function_">findByUserId</span><span class="params">(Long userId, Pageable pageable)</span>;</span><br><span class="line">Page&lt;Product&gt; <span class="title function_">searchByName</span><span class="params">(String name, Pageable pageable)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这涉及 Service 接口、实现类、Controller、以及前端调用方式的全链路变更。</p>
+<h3 id="3-2-Claude-Code-实战"><a href="#3-2-Claude-Code-实战" class="headerlink" title="3.2 Claude Code 实战"></a>3.2 Claude Code 实战</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 找到项目中所有返回 List 的 Service 查询方法，统一改为返回 Page&lt;T&gt;，</span><br><span class="line">  并添加 Pageable 参数。同步更新 Controller 层，从请求参数中提取 page 和 size。</span><br><span class="line">  先列出所有需要修改的方法清单。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会：</p>
+<ol>
+<li>扫描所有 <code>*Service.java</code> 和 <code>*ServiceImpl.java</code> 文件</li>
+<li>识别返回 <code>List&lt;T&gt;</code> 的查询方法</li>
+<li>区分”需要分页的查询”和”不需要分页的枚举查询”（如 <code>findAllStatuses()</code>）</li>
+<li>生成修改清单并请求确认</li>
+</ol>
+<p><strong>关键洞察</strong>：Claude 不会机械地把所有 <code>List</code> 改成 <code>Page</code>。它会理解哪些方法是真正的查询（需要分页），哪些是枚举或配置加载（不需要分页）。这就是”语义理解”和”文本替换”的本质区别。</p>
+<h3 id="3-3-Controller-层的级联更新"><a href="#3-3-Controller-层的级联更新" class="headerlink" title="3.3 Controller 层的级联更新"></a>3.3 Controller 层的级联更新</h3><p>Service 签名变了，Controller 必须同步更新：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 修改前</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/products&quot;)</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Product&gt; <span class="title function_">getProducts</span><span class="params">(<span class="meta">@RequestParam</span> String category)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> productService.findByCategory(category);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改后（Claude 自动添加）</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/products&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Page&lt;Product&gt; <span class="title function_">getProducts</span><span class="params">(</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam</span> String category,</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam(defaultValue = &quot;0&quot;)</span> <span class="type">int</span> page,</span></span><br><span class="line"><span class="params">        <span class="meta">@RequestParam(defaultValue = &quot;20&quot;)</span> <span class="type">int</span> size)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> productService.findByCategory(category, PageRequest.of(page, size));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Claude 还会自动处理一些容易遗漏的细节：</p>
+<ul>
+<li><code>@RequestParam</code> 的默认值设置</li>
+<li>返回类型从 <code>List</code> 到 <code>Page</code> 的序列化差异（JSON 结构会变）</li>
+<li>如果项目有 Swagger&#x2F;OpenAPI 注解，同步更新 <code>@ApiResponse</code></li>
+</ul>
+<hr>
+<h2 id="四、场景三：框架迁移——从-MyBatis-到-JPA"><a href="#四、场景三：框架迁移——从-MyBatis-到-JPA" class="headerlink" title="四、场景三：框架迁移——从 MyBatis 到 JPA"></a>四、场景三：框架迁移——从 MyBatis 到 JPA</h2><h3 id="4-1-问题描述"><a href="#4-1-问题描述" class="headerlink" title="4.1 问题描述"></a>4.1 问题描述</h3><p>这是最考验 Agent 能力的场景：把项目的数据访问层从 MyBatis 迁移到 Spring Data JPA。这不是简单的”替换关键字”，而是<strong>编程范式的转换</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>MyBatis</th>
+<th>JPA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SQL 管理</td>
+<td>XML 映射文件</td>
+<td>注解 + 方法名推导</td>
+</tr>
+<tr>
+<td>查询方式</td>
+<td>手写 SQL</td>
+<td><code>findByXxx()</code> 或 <code>@Query</code></td>
+</tr>
+<tr>
+<td>关联映射</td>
+<td><code>&lt;association&gt;</code> &#x2F; <code>&lt;collection&gt;</code></td>
+<td><code>@ManyToOne</code> &#x2F; <code>@OneToMany</code></td>
+</tr>
+<tr>
+<td>分页</td>
+<td><code>RowBounds</code> &#x2F; PageHelper</td>
+<td><code>Pageable</code> + <code>Page&lt;T&gt;</code></td>
+</tr>
+<tr>
+<td>事务</td>
+<td><code>@Transactional</code>（相同）</td>
+<td><code>@Transactional</code>（相同）</td>
+</tr>
+</tbody></table>
+<h3 id="4-2-Claude-Code-的处理策略"><a href="#4-2-Claude-Code-的处理策略" class="headerlink" title="4.2 Claude Code 的处理策略"></a>4.2 Claude Code 的处理策略</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 将项目的数据访问层从 MyBatis 迁移到 Spring Data JPA。</span><br><span class="line">  保留现有的数据库表结构不变，只改 Java 代码和配置。</span><br><span class="line">  分步骤执行，每步完成后运行编译检查。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会制定分步计划：</p>
+<p><strong>Step 1：依赖更新</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 移除 MyBatis --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- &lt;dependency&gt;mybatis-spring-boot-starter&lt;/dependency&gt; --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 添加 JPA --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-jpa<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 2：Entity 改造</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBatis 风格（纯 POJO）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Long categoryId;</span><br><span class="line">    <span class="comment">// getters/setters</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JPA 风格（Claude 自动转换）</span></span><br><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="meta">@Table(name = &quot;product&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="meta">@GeneratedValue(strategy = GenerationType.IDENTITY)</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column(nullable = false)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ManyToOne(fetch = FetchType.LAZY)</span></span><br><span class="line">    <span class="meta">@JoinColumn(name = &quot;category_id&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Category category;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 3：Repository 替换</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyBatis Mapper（删除）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductMapper</span> &#123;</span><br><span class="line">    Product <span class="title function_">selectById</span><span class="params">(Long id)</span>;</span><br><span class="line">    List&lt;Product&gt; <span class="title function_">selectByCategory</span><span class="params">(String category)</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">insert</span><span class="params">(Product product)</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">update</span><span class="params">(Product product)</span>;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteById</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// JPA Repository（Claude 生成）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductRepository</span> <span class="keyword">extends</span> <span class="title class_">JpaRepository</span>&lt;Product, Long&gt; &#123;</span><br><span class="line">    List&lt;Product&gt; <span class="title function_">findByCategoryName</span><span class="params">(String categoryName)</span>;</span><br><span class="line">    <span class="comment">// JpaRepository 已内置 save(), deleteById(), findById() 等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Step 4：删除 XML 映射文件</strong></p>
+<p>Claude 会删除 <code>src/main/resources/mapper/*.xml</code> 和 MyBatis 配置。</p>
+<p><strong>Step 5：更新 Service 层</strong></p>
+<p>将 <code>productMapper.selectById(id)</code> 改为 <code>productRepository.findById(id).orElseThrow(...)</code>。</p>
+<h3 id="4-3-风险控制：分步验证"><a href="#4-3-风险控制：分步验证" class="headerlink" title="4.3 风险控制：分步验证"></a>4.3 风险控制：分步验证</h3><p>框架迁移的风险很高。Claude Code 的做法是<strong>每步验证</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Step 2 完成后</span></span><br><span class="line">&gt; mvn compile -pl domain  <span class="comment"># 只编译 Entity 层</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 3 完成后</span></span><br><span class="line">&gt; mvn compile -pl repository  <span class="comment"># 编译 Repository 层</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 5 完成后</span></span><br><span class="line">&gt; mvn <span class="built_in">test</span>  <span class="comment"># 运行全部测试</span></span><br></pre></td></tr></table></figure>
+
+<p>这种”小步快跑”的策略，和 Martin Fowler 在《重构》中强调的”每次修改后运行测试”原则完全一致。Claude Code 通过 Agentic Loop 自动化了这个过程。</p>
+<hr>
+<h2 id="五、场景四：API-版本化——从-v1-到-v2-的平滑过渡"><a href="#五、场景四：API-版本化——从-v1-到-v2-的平滑过渡" class="headerlink" title="五、场景四：API 版本化——从 v1 到 v2 的平滑过渡"></a>五、场景四：API 版本化——从 v1 到 v2 的平滑过渡</h2><h3 id="5-1-问题描述"><a href="#5-1-问题描述" class="headerlink" title="5.1 问题描述"></a>5.1 问题描述</h3><p>你的 REST API 需要升级到 v2，但要保持 v1 的向后兼容。这意味着：</p>
+<ul>
+<li>Controller 要支持 <code>/api/v1/</code> 和 <code>/api/v2/</code> 两套路径</li>
+<li>v2 的 DTO 可能有字段变更</li>
+<li>Service 层要能同时处理两个版本的逻辑</li>
+</ul>
+<h3 id="5-2-Claude-Code-实战"><a href="#5-2-Claude-Code-实战" class="headerlink" title="5.2 Claude Code 实战"></a>5.2 Claude Code 实战</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 为项目的 REST API 添加 v2 版本支持。</span><br><span class="line">  v1 保持不变，v2 的主要变更：</span><br><span class="line">  1. 用户接口返回值增加 avatarUrl 和 lastLoginAt 字段</span><br><span class="line">  2. 商品列表接口改为返回树形分类结构</span><br><span class="line">  3. 分页响应统一包装为 &#123; data, pagination &#125; 格式</span><br><span class="line">  先分析现有代码结构，制定迁移计划。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会先分析现有的 Controller、DTO、Service 结构，然后提出方案：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">迁移方案：</span><br><span class="line">1. 创建 v2 DTO 包：dto.v2.*</span><br><span class="line">2. 创建 v2 Controller：controller.v2.*</span><br><span class="line">3. 复用现有 Service，通过 Mapper 转换 DTO</span><br><span class="line">4. 在 v2 Controller 中注入 v1 Service + v2 Mapper</span><br><span class="line"></span><br><span class="line">文件变更清单：</span><br><span class="line">+ src/.../dto/v2/UserResponseV2.java</span><br><span class="line">+ src/.../dto/v2/PagedResponse.java</span><br><span class="line">+ src/.../controller/v2/UserControllerV2.java</span><br><span class="line">+ src/.../controller/v2/ProductControllerV2.java</span><br><span class="line">~ src/.../config/WebMvcConfig.java (路径映射)</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-设计选择：为什么不直接改-v1？"><a href="#5-3-设计选择：为什么不直接改-v1？" class="headerlink" title="5.3 设计选择：为什么不直接改 v1？"></a>5.3 设计选择：为什么不直接改 v1？</h3><p>Claude 会解释版本化的设计原理：</p>
+<blockquote>
+<p><strong>API 版本化的黄金法则：永远不要破坏已发布的接口。</strong> v1 的消费者（前端 App、第三方集成）依赖现有的响应格式。新增 v2 路径是添加，不是修改——这是 Open-Closed Principle 在 API 设计中的体现。</p>
+</blockquote>
+<hr>
+<h2 id="六、场景五：大规模代码风格统一"><a href="#六、场景五：大规模代码风格统一" class="headerlink" title="六、场景五：大规模代码风格统一"></a>六、场景五：大规模代码风格统一</h2><h3 id="6-1-问题描述"><a href="#6-1-问题描述" class="headerlink" title="6.1 问题描述"></a>6.1 问题描述</h3><p>团队合并后，两个代码库的风格不一致：</p>
+<ul>
+<li>A 团队用 <code>@Slf4j</code> + Lombok，B 团队手写 <code>LoggerFactory</code></li>
+<li>A 团队用 <code>var</code> 局部变量类型推断，B 团队用显式类型声明</li>
+<li>A 团队的异常处理用 <code>@ControllerAdvice</code>，B 团队在 Controller 里 try-catch</li>
+</ul>
+<h3 id="6-2-Claude-Code-的批量处理"><a href="#6-2-Claude-Code-的批量处理" class="headerlink" title="6.2 Claude Code 的批量处理"></a>6.2 Claude Code 的批量处理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; 统一项目中的日志声明风格：</span><br><span class="line">  1. 所有手写的 private static final Logger logger = LoggerFactory.getLogger(...)</span><br><span class="line">     改为 @Slf4j 注解</span><br><span class="line">  2. 移除手写的 logger 字段</span><br><span class="line">  3. 确保 @Slf4j 的 import 语句正确</span><br><span class="line">  先统计有多少个文件需要修改。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会：</p>
+<ol>
+<li><code>grep -rn &quot;LoggerFactory.getLogger&quot; src/</code> 统计影响范围</li>
+<li>按文件逐一修改：添加 <code>@Slf4j</code>、删除 Logger 字段、更新 import</li>
+<li>运行编译确认没有遗漏</li>
+</ol>
+<hr>
+<h2 id="七、上下文管理：大代码库的生存策略"><a href="#七、上下文管理：大代码库的生存策略" class="headerlink" title="七、上下文管理：大代码库的生存策略"></a>七、上下文管理：大代码库的生存策略</h2><h3 id="7-1-上下文窗口的物理限制"><a href="#7-1-上下文窗口的物理限制" class="headerlink" title="7.1 上下文窗口的物理限制"></a>7.1 上下文窗口的物理限制</h3><p>Claude 的上下文窗口是有限的。当项目有数百个文件时，不可能把所有文件都塞进上下文。Claude Code 通过以下策略管理这个问题：</p>
+<p><strong>按需加载，而非全量扫描</strong></p>
+<p>Claude 不会一开始就读取所有文件。它根据任务需要，逐步读取：</p>
+<ul>
+<li>先搜索（<code>grep</code>、<code>find</code>）定位相关文件</li>
+<li>再读取（<code>read</code>）关键文件的内容</li>
+<li>最后编辑（<code>edit</code>）目标文件</li>
+</ul>
+<p><strong>自动压缩（Auto-compaction）</strong></p>
+<p>当上下文接近满时，Claude 自动压缩历史对话：</p>
+<ul>
+<li>保留最近的消息和关键代码片段</li>
+<li>丢弃早期的详细工具输出</li>
+<li>你可以用 <code>/compact focus on 认证模块重构</code> 手动指定保留重点</li>
+</ul>
+<p><strong>Subagent 委托</strong></p>
+<p>对于大型重构，Claude 可以将子任务委托给 Subagent：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 先用一个 subagent 分析 src/main/java 下所有文件的依赖关系图，</span><br><span class="line">  然后基于分析结果制定重构计划。</span><br></pre></td></tr></table></figure>
+
+<p>Subagent 有自己独立的上下文窗口，不会污染主会话的上下文。它完成分析后返回摘要，主会话基于摘要决策。</p>
+<h3 id="7-2-实战技巧：-context-命令"><a href="#7-2-实战技巧：-context-命令" class="headerlink" title="7.2 实战技巧：/context 命令"></a>7.2 实战技巧：<code>/context</code> 命令</h3><p>在长会话中，定期运行 <code>/context</code> 查看上下文使用情况：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Context window usage:</span><br><span class="line">  Conversation:    45%  (你的对话历史)</span><br><span class="line">  File contents:   30%  (读取的文件内容)</span><br><span class="line">  CLAUDE.md:        5%  (项目指令)</span><br><span class="line">  System:          10%  (系统指令)</span><br><span class="line">  Available:       10%  (剩余空间)</span><br></pre></td></tr></table></figure>
+
+<p>如果 “File contents” 占比过高，说明你让 Claude 读了太多文件。此时可以：</p>
+<ol>
+<li>运行 <code>/compact</code> 压缩上下文</li>
+<li>用 Subagent 委托分析任务</li>
+<li>更精确地指定需要读取的文件范围</li>
+</ol>
+<hr>
+<h2 id="八、Git-集成：重构的安全网"><a href="#八、Git-集成：重构的安全网" class="headerlink" title="八、Git 集成：重构的安全网"></a>八、Git 集成：重构的安全网</h2><h3 id="8-1-Checkpoint-机制"><a href="#8-1-Checkpoint-机制" class="headerlink" title="8.1 Checkpoint 机制"></a>8.1 Checkpoint 机制</h3><p>Claude Code 在编辑文件前会自动创建快照。如果重构出了问题：</p>
+<ul>
+<li>按 <code>Esc</code> 两次可以回退到任意历史状态</li>
+<li>或者直接告诉 Claude：”撤销刚才对 ProductService 的修改”</li>
+</ul>
+<p>这和 Git 的 <code>stash</code> 类似，但是<strong>自动的、细粒度的</strong>。你不需要手动 commit 就能回退。</p>
+<h3 id="8-2-与-Git-工作流的集成"><a href="#8-2-与-Git-工作流的集成" class="headerlink" title="8.2 与 Git 工作流的集成"></a>8.2 与 Git 工作流的集成</h3><p>重构完成后，Claude 可以帮你完成 Git 操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 查看本次重构的所有变更，生成一个有意义的 commit message，</span><br><span class="line">  然后创建一个 PR。</span><br></pre></td></tr></table></figure>
+
+<p>Claude 会：</p>
+<ol>
+<li><code>git diff --stat</code> 查看变更概览</li>
+<li>生成 Conventional Commits 风格的消息</li>
+<li><code>git add -A &amp;&amp; git commit</code></li>
+<li><code>gh pr create</code> 创建 PR，附带变更说明</li>
+</ol>
+<h3 id="8-3-Worktree-并行重构"><a href="#8-3-Worktree-并行重构" class="headerlink" title="8.3 Worktree 并行重构"></a>8.3 Worktree 并行重构</h3><p>如果重构太大，可以使用 Git Worktree 在多个分支上并行工作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 终端 1：重构 Entity 层</span></span><br><span class="line"><span class="built_in">cd</span> ~/project &amp;&amp; claude</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端 2：重构 Controller 层（在 worktree 中）</span></span><br><span class="line">git worktree add ../project-controllers feature/refactor-controllers</span><br><span class="line"><span class="built_in">cd</span> ../project-controllers &amp;&amp; claude</span><br></pre></td></tr></table></figure>
+
+<p>两个 Claude 会话各自独立工作，互不干扰。最后合并分支。</p>
+<hr>
+<h2 id="九、与其他工具的对比"><a href="#九、与其他工具的对比" class="headerlink" title="九、与其他工具的对比"></a>九、与其他工具的对比</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Claude Code</th>
+<th>Cursor</th>
+<th>GitHub Copilot</th>
+<th>IDE Refactor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>跨文件理解</td>
+<td>✅ 全项目扫描</td>
+<td>⚠️ 依赖索引</td>
+<td>❌ 当前文件为主</td>
+<td>⚠️ 符号级</td>
+</tr>
+<tr>
+<td>自然语言驱动</td>
+<td>✅ 描述目标即可</td>
+<td>✅ Chat 模式</td>
+<td>⚠️ 补全为主</td>
+<td>❌ 需要菜单操作</td>
+</tr>
+<tr>
+<td>执行验证</td>
+<td>✅ 运行测试&#x2F;编译</td>
+<td>⚠️ 需手动触发</td>
+<td>❌ 纯建议</td>
+<td>❌ 纯重构</td>
+</tr>
+<tr>
+<td>Git 集成</td>
+<td>✅ commit + PR</td>
+<td>⚠️ 需手动</td>
+<td>❌ 无</td>
+<td>❌ 无</td>
+</tr>
+<tr>
+<td>框架迁移</td>
+<td>✅ 理解范式差异</td>
+<td>⚠️ 部分支持</td>
+<td>❌ 不支持</td>
+<td>❌ 不支持</td>
+</tr>
+<tr>
+<td>上下文管理</td>
+<td>✅ 压缩 + Subagent</td>
+<td>⚠️ 有限</td>
+<td>❌ 无</td>
+<td>N&#x2F;A</td>
+</tr>
+</tbody></table>
+<p><strong>核心差异：</strong> Claude Code 是唯一一个能在”理解整个项目 → 制定计划 → 协调执行 → 自动验证”这个完整闭环中工作的工具。其他工具要么只做理解（Copilot），要么只做执行（IDE Refactor），无法端到端地处理复杂重构。</p>
+<hr>
+<h2 id="十、局限性与最佳实践"><a href="#十、局限性与最佳实践" class="headerlink" title="十、局限性与最佳实践"></a>十、局限性与最佳实践</h2><h3 id="10-1-Claude-Code-的局限"><a href="#10-1-Claude-Code-的局限" class="headerlink" title="10.1 Claude Code 的局限"></a>10.1 Claude Code 的局限</h3><p>诚实地说，Claude Code 在以下场景中仍有不足：</p>
+<ol>
+<li><p><strong>超大单文件</strong>：如果一个 Java 文件超过 2000 行，Claude 的编辑可能出错（行号偏移）。建议先拆分文件再重构。</p>
+</li>
+<li><p><strong>隐式依赖</strong>：Spring 的 <code>@ComponentScan</code>、MyBatis 的 XML 映射等隐式关联，Claude 可能遗漏。重构后务必运行完整测试。</p>
+</li>
+<li><p><strong>数据库 schema 变更</strong>：Claude 能生成迁移脚本，但无法执行数据库变更。需要你手动运行 Flyway&#x2F;Liquibase。</p>
+</li>
+<li><p><strong>运行时行为</strong>：Claude 看的是代码文本，不是运行时状态。反射调用、动态代理、AOP 切面等运行时行为可能不在它的分析范围内。</p>
+</li>
+</ol>
+<h3 id="10-2-最佳实践清单"><a href="#10-2-最佳实践清单" class="headerlink" title="10.2 最佳实践清单"></a>10.2 最佳实践清单</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">✅ 重构前：</span><br><span class="line">   □ 用 Plan Mode（Shift+Tab × 2）让 Claude 先分析再动手</span><br><span class="line">   □ 确保有完整的测试覆盖（至少覆盖核心路径）</span><br><span class="line">   □ 创建 Git 分支，方便回退</span><br><span class="line">   □ 在 CLAUDE.md 中记录项目的架构约定</span><br><span class="line"></span><br><span class="line">✅ 重构中：</span><br><span class="line">   □ 分步执行，每步后编译验证</span><br><span class="line">   □ 用 /context 监控上下文使用</span><br><span class="line">   □ 上下文紧张时用 /compact 或 Subagent</span><br><span class="line">   □ 不要一次改太多文件（建议每批 5-10 个）</span><br><span class="line"></span><br><span class="line">✅ 重构后：</span><br><span class="line">   □ 运行完整测试套件</span><br><span class="line">   □ 检查 git diff 确认变更范围</span><br><span class="line">   □ 用 Claude 生成 PR 描述</span><br><span class="line">   □ Code Review 时重点关注跨文件一致性</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>多文件重构是 Claude Code 从”好用”到”不可替代”的分水岭。</p>
+<p><strong>核心认知升级：</strong></p>
+<ol>
+<li><strong>Claude Code ≠ 高级 Find &amp; Replace</strong>——它理解代码语义，不是文本匹配</li>
+<li><strong>先规划后执行</strong>——Plan Mode 是复杂任务的安全阀</li>
+<li><strong>上下文是稀缺资源</strong>——用 <code>/context</code> 监控，用 Subagent 分流</li>
+<li><strong>小步快跑</strong>——分步执行 + 编译验证 &#x3D; 低风险重构</li>
+<li><strong>Git 是最后的安全网</strong>——Checkpoint + Worktree + PR &#x3D; 多层保护</li>
+</ol>
+<p>下一篇我们将进入 <strong>Hooks、MCP 与能力扩展</strong>——当 Claude Code 的内置工具不够用时，如何通过 Hooks 自动化工作流、通过 MCP 连接外部服务、通过 Skills 封装可复用的复杂流程。</p>
+<hr>
+<blockquote>
+<p><strong>参考资料</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://code.claude.com/docs/en/common-workflows">Anthropic - Claude Code Common Workflows</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.claude.com/docs/en/best-practices">Anthropic - Claude Code Best Practices</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.claude.com/docs/en/how-claude-code-works">Anthropic - How Claude Code Works</a></li>
+<li><a target="_blank" rel="noopener" href="https://code.claude.com/docs/en/prompt-library">Anthropic - Prompt Library</a></li>
+<li><a target="_blank" rel="noopener" href="https://martinfowler.com/books/refactoring.html">Martin Fowler - Refactoring: Improving the Design of Existing Code</a></li>
+</ul>
+</blockquote>
+</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI-Agent/">AI Agent</a><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/Spring-Boot/">Spring Boot</a><a class="post-meta__tags" href="/tags/Claude-Code/">Claude Code</a><a class="post-meta__tags" href="/tags/%E9%87%8D%E6%9E%84/">重构</a><a class="post-meta__tags" href="/tags/%E5%A4%9A%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91/">多文件编辑</a></div><div class="post_share"></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/posts/2327dd63.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CLAUDE.md：项目上下文工程的艺术</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><style>.card-widget.card-announcement {
+margin: 0;
+align-items: center;
+justify-content: center;
+text-align: center;
+}
+canvas {
+display: block;
+margin: 0 auto;
+cursor: move;
+}</style><div class="sticky_layout"></div></div></main><footer id="footer"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">关于博客</p><div class="bg-ad"><div>衷心感谢每一位光临我的博客的朋友，感谢你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获。<br/>本站域名goku.top取自我最喜爱的动漫七龙珠中的人物狗空（孙悟空）的英文名goku。</div><div class="btn-xz-box"><a class="btn-xz" target="_blank" rel="noopener" href="https://gg.goku.top">聊天问答</a></div></div></div><div class="t-t-r"><p class="ft-t t-l-t">推荐网址</p><ul class="ft-links"><li><a target="_blank" rel="noopener" href="https://github.com/sgr997">Github</a><a href="/webstack.html">网址导航</a></li><li><a target="_blank" rel="noopener" href="http://qiniu.goku.top/wxpay.jpeg">来杯咖啡</a><a href="/artitalk/">留点什么</a></li><li><a href="/about/">关于博主</a><a href="/archives/">文章归档</a></li><li><a href="/categories/">文章分类</a><a href="/tags/">文章标签</a></li></ul></div></div></div><div class="ft-item-2"><p class="ft-t">推荐友链</p><div class="ft-img-group"><div class="img-group-item"><a href="/webstack.html"><img src="https://upyun.goku.top/blog/icon.png" alt="网址导航"/></a></div></div></div></div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2023023872号</a> <div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      document.getElementById('twikoo-count').innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div>nullnull</div></body></html>
