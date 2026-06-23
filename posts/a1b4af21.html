@@ -1,0 +1,1375 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>内置命令全解：从 /compact 到 /doctor 的实战指南 | Pei</title><meta name="keywords" content="AI Agent,Claude Code,斜杠命令,终端工具,效率提升"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="内置命令全解：从 /compact 到 /doctor 的实战指南"><meta name="application-name" content="内置命令全解：从 /compact 到 /doctor 的实战指南"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="内置命令全解：从 /compact 到 /doctor 的实战指南"><meta property="og:url" content="https://blog.goku.top/posts/a1b4af21.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="Claude Code 内置 80+ 斜杠命令，覆盖会话管理、上下文优化、并行执行、代码审查全生命周期。本文按工作流阶段逐一拆解每个命令的设计原理与实战用法。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg"><meta name="description" content="Claude Code 内置 80+ 斜杠命令，覆盖会话管理、上下文优化、并行执行、代码审查全生命周期。本文按工作流阶段逐一拆解每个命令的设计原理与实战用法。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/a1b4af21"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: '内置命令全解：从 /compact 到 /doctor 的实战指南',
+  postAI: '',
+  pageFillDescription: '系列文章, 一、为什么需要斜杠命令？, 设计哲学：命令即接口, 二、命令全景图：按工作流阶段分组, 2.1 项目初始化阶段, x2Finit —— 生成项目记忆文件, x2Fpermissions —— 配置权限规则, x2Fmcp —— 连接外部工具, 2.2 日常开发阶段, x2Fcompact —— 上下文压缩, x2Fcontext —— 上下文可视化, x2Fmodel —— 切换模型, x2Feffort —— 调整推理深度, x2Fplan —— 进入计划模式, x2Fbtw —— 侧问题, 2.3 并行执行阶段, x2Fagents —— 管理子代理, x2Ftasks —— 查看后台任务, x2Ffork —— 派生后台工作, x2Fbackground —— 后台化当前会话, x2Fbatch —— 大规模并行变更, 2.4 代码审查与提交阶段, x2Fdiff —— 查看变更, x2Fcode-review —— 代码审查, x2Fsimplify —— 代码简化, x2Freview —— PR 审查, x2Fsecurity-review —— 安全审查, 2.5 会话管理阶段, x2Fclear —— 清空上下文, x2Fresume —— 恢复对话, x2Fbranch —— 分支对话, x2Frewind —— 回退, 2.6 成本与状态监控, x2Fusage —— 用量统计, x2Fstatus —— 状态查看, x2Fdoctor —— 诊断工具, x2Fdebug —— 调试日志, 2.7 配置与个性化, x2Fconfig —— 设置面板, x2Ftheme —— 主题切换, x2Fvim —— Vim 模式, x2Fterminal-setup —— 终端配置, 2.8 协作与分享, x2Fexport —— 导出对话, x2Fcopy —— 复制回复, x2Ffeedback —— 提交反馈, x2Frename —— 重命名会话, 2.9 高级功能, x2Fcd —— 切换工作目录, x2Fadd-dir —— 添加工作目录, x2Floop —— 定时循环, x2Fgoal —— 设置目标, x2Fdeep-research —— 深度研究, 三、键盘快捷键速查, 通用控制, 文本编辑, 会话导航, 快捷命令, 四、Java 开发者的命令组合拳, 场景 1：接手一个陌生的 Spring Boot 项目, 场景 2：修复一个复杂的并发 Bug, 场景 3：大规模框架升级, 场景 4：日常编码的高效循环, 五、命令速查表, A-D, E-P, R-Z, 六、总结：命令是 Agent 的操作系统系列文章本篇是系列的第篇系列将从安装入门到高级实战由浅入深地拆解这个终端原生的每一个能力入门篇是什么从安装到第一次对话日常开发工作流用重塑你的编码习惯核心篇内置命令全解从到的实战指南本文项目上下文工程的艺术进阶篇多文件重构与复杂任务实战与能力扩展高级篇模式与集成多协作从到一为什么需要斜杠命令在前两篇文章中我们已经学会启动输入自然语言让它干活但随着使用深入你会发现几个问题上下文溢出聊了分钟后开始忘事之前讨论的设计决策被丢掉了权限轰炸每次读文件跑测试都要你手动确认打断心流会话管理想回到昨天的对话继续但找不到入口想同时做两件事但终端只有一个成本失控不知道这次对话用了多少月底账单吓一跳斜杠命令就是对这些问题的系统级回答它们不是快捷方式而是操作系统的控制面板设计哲学命令即接口的斜杠命令遵循一个核心原则命令是人与之间的协议接口传统工具如的命令是人直接操作系统的手段但的命令不同你发出不是你去压缩上下文而是你指示自己做这件事这就像你给一个初级开发者说把之前的讨论总结一下只不过用了更精确的语法这个设计决定了几个关键特征命令只在消息开头识别帮我看看是什么意思不会触发压缩只有在行首才会生效命令可以带参数聚焦于数据库设计部分会生成带有特定关注点的摘要命令有作用域有些命令只影响当前会话有些影响全局配置二命令全景图按工作流阶段分组目前内置了个命令截至与其逐个罗列不如按开发者一天的工作流来组织项目初始化阶段当你第一次在一个代码库中启动这几个命令决定了整个后续体验的质量生成项目记忆文件会在项目根目录生成一个文件这是理解你项目的记忆锚点它会扫描你的项目结构已有代码风格然后生成一份结构化的项目说明为什么重要没有每次对话都要从零开始理解你的项目有了它知道这是一个项目使用分层架构是测试用代码风格遵循实战建议生成的是起点不是终点生成后用编辑它加入你的团队约定业务术语禁用的等我们在第篇会深入讲解的艺术扫描项目后生成打开编辑器补充团队约定配置权限规则这是你与建立信任边界的地方默认情况下每次要执行命令写文件都会请求你确认对于长期项目你需要配置规则让它自动放行安全操作权限规则分三个层级层级作用示例自动放行允许所有测试每次询问删除文件需要确认禁止执行永远不允许开发者的推荐配置在界面中添加允许所有命令允许所有命令允许允许运行允许编译允许查看状态允许查看日志允许查看差异允许写入目录设计原理为什么不用全部放行因为是它会自主决定执行什么命令权限规则是你给的行为准则就像你不会让实习生不经审批就操作生产数据库一样连接外部工具让能连接外部工具和数据源在界面中你可以查看已连接的服务器启用禁用特定服务器重连断开的服务器配置认证开发者的典型配置数据库浏览器让直接查询开发数据库而不是每次手写让你执行让读取描述直接开始开发让查看线上错误日志定位我们在第篇会深入讲解的配置和自定义日常开发阶段这是你一天中使用最频繁的命令组上下文压缩聚焦于用户认证模块的设计讨论这是中最重要的命令没有之一的上下文窗口是有限的当前默认约当你在一个长会话中讨论了很多内容后上下文会被填满让对当前对话进行摘要压缩释放上下文空间不带参数自己决定摘要的重点适合对话内容比较杂的场景带参数会特别关注你指定的部分比如聚焦于数据库设计和接口定义则摘要会保留这些关键信息而丢弃无关的讨论什么时候该用对话进行了分钟后开始忘记之前讨论的内容时准备切换到一个新任务前上下文使用率超过时用查看设计原理为什么不自动压缩因为压缩是有损的自动压缩可能丢掉你认为重要的上下文把控制权交给开发者让你决定什么时候压缩保留什么重点这是人在回路设计哲学的体现上下文可视化用一个彩色网格展示当前上下文的使用情况每种颜色代表不同类型的上下文系统提示词权限规则等对话历史你和的来回消息工具调用结果文件内容命令输出等记忆文件等实战场景当你感觉的响应质量下降时先用看看是不是上下文快满了如果工具调用结果占了大头说明读了太多文件考虑用压缩或者更精确地指定要读哪些文件切换模型支持在会话中动态切换模型不同模型的能力和成本差异很大模型特点适用场景最强推理能力复杂架构设计多文件重构平衡能力和速度日常开发代码生成最快速度简单查询快速问答实战建议日常开发用遇到复杂问题切到简单查询用省钱界面可以用左右箭头调整推理深度不需要切换模型也能控制思考多少调整推理深度这个命令控制思考多久再回答级别从低到高快速回答适合简单问题默认级别深度思考适合复杂问题更深度的推理专属级别结合推理和自动工作流编排什么时候调高写算法设计数据库做技术方案评审时什么时候调低改个配置查个用法重命名变量时省也省等待时间进入计划模式重构用户认证模块从迁移到在执行大改动前先让制定计划让进入只读模式它会分析代码设计方案列出步骤但不执行任何修改为什么重要的天性是直接干活但在复杂任务中直接动手往往导致返工让你有机会审核方案调整方向避免走偏典型工作流将订单服务从单体拆分为独立微服务输出分析依赖设计拆分方案列出迁移步骤你审核方案调整细节好的按方案执行第步开始执行侧问题的虚拟线程和传统线程池有什么区别在执行任务的过程中你突然想到一个问题想问但不想打断当前的工作流发送一个旁白会回答你的问题但这段对话不会加入正式上下文设计原理这就像你在时同事在写代码你随口问了一句这个的限流策略是什么问题得到回答但不影响正在写的代码就是这个随口一问的数字化并行执行阶段当任务规模变大一个不够用时管理子代理可以派生子代理来并行执行任务打开管理界面你可以查看正在运行的子代理配置可用的子代理类型启用禁用特定子代理开发者的典型场景一个子代理在写单元测试另一个在重构层一个子代理在查文档另一个在生成代码多个子代理分别处理不同模块的查看后台任务当在后台运行任务时通过或显示所有正在执行的后台任务及其状态派生后台工作给所有添加参数校验注解会创建一个后台子代理继承当前对话的完整上下文然后在后台执行你指定的任务你可以继续在主会话中做其他事情子代理完成后会把结果返回和的区别是你自己切换到一个新分支对话是让一个子代理在后台干活你继续做自己的事后台化当前会话继续完成剩余的测试用例编写把整个当前会话转为后台运行释放你的终端适合长时间运行的任务让继续干活你去做别的事情监控后台会话在终端中查看所有运行中的格式输出适合脚本处理大规模并行变更将下所有使用的地方替换为是最强大的并行执行命令它会研究代码库扫描所有相关文件分解任务将大改动拆成个独立单元展示计划让你审核分解方案并行执行每个单元在独立的中由一个子代理处理各自测试每个子代理独立运行测试提交每个单元生成一个独立的为什么需要单个在处理跨个文件的改动时上下文会溢出而且串行执行太慢通过并行化解决了这两个问题适用场景大规模迁移如框架升级如代码风格统一如所有日志从迁移到依赖替换如代码审查与提交阶段代码写完了准备提交查看变更打开一个交互式差异查看器展示当前未提交的变更每一轮对话产生的变更用左右箭头在不同版本间切换上下箭头浏览文件这比更好因为它按对话轮次组织变更让你清楚地看到第轮对话改了什么代码审查这是内置的代码审查命令会检查当前中的正确性空指针边界条件并发问题代码复用是否有现成的工具方法可以复用简化机会冗余代码过度设计效率问题不必要的循环可优化的查询参数详解参数含义审查深度越高越仔细自动修复发现的问题将审查意见作为内联评论发布启动云端多深度审查实战建议日常用大改动用关键发布前用代码简化是的轻量版只关注代码清理不找它会并行运行个审查复用检查是否有现成的可以复用简化检查是否有更简洁的写法效率检查是否有性能优化空间抽象层级检查代码是否在正确的抽象层级上审查对进行审查不带参数时列出当前仓库的开放供你选择安全审查专注于安全漏洞的深度审查注入认证绕过敏感数据泄露等对于项目特别关注配置是否正确用户输入是否做了校验和转义端点是否有正确的权限控制敏感信息是否硬编码会话管理阶段清空上下文用户认证重构开始一个全新的对话之前的对话可以通过找回给当前对话起个名字如用户认证重构方便以后在列表中识别和的区别是压缩当前对话保留精华是丢弃当前对话从零开始切换任务时用同一任务上下文满了用恢复对话用户认证重构打开一个对话选择器列出所有历史对话选择一个即可继续从开始后台运行的会话也会出现在列表中标记为实战场景昨天讨论了一个技术方案今天想继续执行找到昨天的对话继续干活分支对话尝试方案在当前对话的这个点创建一个分支让你可以尝试不同的方向而不丢失当前的对话状态就像的分支一样你可以在分支上试验不满意就切回来回退让你回退到之前的某个时间点可以回退对话和代码就像的但更智能它同时回退对话上下文和文件变更使用场景的修改方向不对想回到某个节点重新来想对比如果当时做了另一个选择的结果代码改坏了想回到改动前的状态成本与状态监控用量统计别名展示当前会话的用量和费用计划的用量限制和剩余额度按子代理插件服务器的用量分解为什么重要按计费用户或有月度限额用户不了解用量就像开车不看油表迟早抛锚成本优化建议简单问题用或切到模型及时用压缩上下文避免重复发送大文件内容用问旁白问题不占用主上下文读大文件时指定行范围而不是让读整个文件状态查看展示当前会话的状态信息版本号模型账户连接状态可以在响应过程中执行无需等待诊断工具当行为异常时会检查安装是否完整配置是否正确网络连接是否正常服务器是否健康权限配置是否有效检查结果用状态图标标记按可以让自动修复发现的问题什么时候用突然不响应工具消失权限配置异常升级后行为变化调试日志无法读取我的文件启用调试日志模式默认情况下调试日志是关闭的除非你用启动在会话中途开始捕获日志可以附带问题描述让重点分析配置与个性化设置面板打开设置界面可以调整主题深色浅色模型偏好输出风格各种行为开关从开始支持直接传对快速设置无需打开界面主题切换切换颜色主题支持自动匹配终端的深色浅色背景强制浅色深色色盲友好主题使用终端的颜色配置自定义主题放在下模式通过切换支持编辑模式切换后输入框变成的模式支持常见的快捷键终端配置配置终端快捷键如换行只在需要的终端中显示如等协作与分享导出对话将当前对话导出为纯文本适合记录重要的技术讨论分享给没有的同事存档决策过程复制回复复制最近一次或第次的回复到剪贴板当回复中有多个代码块时会弹出选择器让你选择复制哪个场景在远程服务器上使用时按可以把选择写入文件而不是剪贴板提交反馈生成的代码有编译错误别名提交反馈或报告会自动附带当前会话的上下文重命名会话迁移给当前会话起一个有意义的名字在列表中更容易识别高级功能切换工作目录在会话中切换到另一个项目目录关键特性保留提示缓存新目录的作为消息追加而不是重建整个系统提示迁移会话存储和会从新目录查找会话安全提示如果之前没在该目录工作过会提示你确认需要或更高版本添加工作目录让可以访问另一个目录的文件而不切换当前工作目录适合需要引用共享库配置文件等跨目录场景定时循环检查部署是否完成跑测试看看有没有失败让以固定间隔重复执行一个任务省略间隔时自动节奏适合监控部署状态轮询结果定期检查日志设置目标所有测试通过且代码覆盖率达到设置一个目标条件会持续工作直到条件满足这比手动一轮一轮地催促更高效深度研究对的支持程度如何启动一个研究工作流会发起多个网络搜索交叉验证来源最后综合成一份带引用的研究报告三键盘快捷键速查除了斜杠命令还有丰富的键盘快捷键通用控制快捷键功能发送消息换行需配置中断当前响应取消输入退出退出空行时文本编辑快捷键功能移到行首移到行尾删除到行尾删除到行首删除前一个单词后退一个单词前进一个单词注意键需要在终端中配置为键勾选设置会话导航快捷键功能反向搜索历史命令浏览输入历史命令自动补全快捷命令在输入框中直接输入不需要前缀快捷方式等价命令运行上一条命令四开发者的命令组合拳理论讲完了来看看实际的命令组合使用场景接手一个陌生的项目初始化项目记忆查看项目结构帮我梳理这个项目的模块结构和依赖关系配置权限省去反复确认添加相关的自动放行规则开始工作找到用户登录相关的代码解释整个认证流程场景修复一个复杂的并发先让分析问题分析中的竞态条件问题审核方案后执行按方案执行修复让自己验证跑的并发测试代码审查提交帮我提交这次修改用中文场景大规模框架升级先做影响分析分析从升级到的影响范围用并行执行将从升级到包括到的迁移监控进度逐个审查场景日常编码的高效循环写代码时用快速响应给添加一个批量查询接口好的遇到复杂问题时切到这个查询需要支持动态条件拼接和分页帮我设计一下解决后切回继续下一个任务订单批量查询五命令速查表最后按字母顺序整理一份速查表方便日常查阅命令功能使用频率添加工作目录启用禁用顾问模型管理子代理后台化当前会话大规模并行变更分支对话侧问题不占上下文清空上下文开始新对话代码审查压缩上下文设置面板上下文可视化复制回复到剪贴板查看费用别名启用调试日志深度研究工作流切换到桌面应用查看交互式差异诊断安装和配置命令功能使用频率调整推理深度导出对话提交反馈报告派生后台子代理设置目标条件查看帮助初始化登录账户退出登录定时循环执行管理服务器编辑记忆文件切换模型配置权限规则进入计划模式命令功能使用频率重命名会话恢复历史对话审查回退对话和代码启动并驱动应用安全审查代码简化查看可用技能查看状态查看后台任务切换主题用量统计验证代码变更六总结命令是的操作系统回顾全文的斜杠命令不是简单的快捷方式它们构成了一套完整的操作系统会话生命周期管理上下文资源管理模型与推理控制并行执行编排代码质量保障项目配置管理成本与健康监控掌握这些命令你就从的使用者变成了的指挥者你不再是被动地等待回答问题而是主动地编排的行为管理它的资源控制它的成本在下一篇中我们将深入这个决定理解你项目深度的关键文件一个好的能让从通用变成你的项目专家实践建议不要试图一次记住所有命令先掌握标的核心命令其他的用到时查速查表即可',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-23 12:05:08',
+  postMainColor: '#d97706',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI-Agent/" style="font-size: 1.05rem;">AI Agent<sup>27</sup></a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" style="font-size: 1.05rem;">AI架构<sup>1</sup></a><a href="/tags/APM/" style="font-size: 1.05rem;">APM<sup>1</sup></a><a href="/tags/DAG/" style="font-size: 1.05rem;">DAG<sup>1</sup></a><a href="/tags/Function-Calling/" style="font-size: 1.05rem;">Function Calling<sup>2</sup></a><a href="/tags/GPT-4V/" style="font-size: 1.05rem;">GPT-4V<sup>1</sup></a><a href="/tags/Gemini/" style="font-size: 1.05rem;">Gemini<sup>1</sup></a><a href="/tags/HITL/" style="font-size: 1.05rem;">HITL<sup>1</sup></a><a href="/tags/Human-in-the-Loop/" style="font-size: 1.05rem;">Human-in-the-Loop<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>26</sup></a><a href="/tags/LangChain4j/" style="font-size: 1.05rem;">LangChain4j<sup>19</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/OpenTelemetry/" style="font-size: 1.05rem;">OpenTelemetry<sup>1</sup></a><a href="/tags/Spring-AI/" style="font-size: 1.05rem;">Spring AI<sup>22</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>5</sup></a><a href="/tags/Token%E4%BC%98%E5%8C%96/" style="font-size: 1.05rem;">Token优化<sup>1</sup></a><a href="/tags/Token%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">Token管理<sup>1</sup></a><a href="/tags/Tool-Use/" style="font-size: 1.05rem;">Tool Use<sup>1</sup></a><a href="/tags/Whisper/" style="font-size: 1.05rem;">Whisper<sup>1</sup></a><a href="/tags/Workflow/" style="font-size: 1.05rem;">Workflow<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">上下文工程<sup>1</sup></a><a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" style="font-size: 1.05rem;">人机协作<sup>1</sup></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">分布式系统<sup>2</sup></a><a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 1.05rem;">可观测性<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 1.05rem;">多模态<sup>1</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 1.05rem;">学习路线<sup>1</sup></a><a href="/tags/%E5%AE%B9%E9%94%99/" style="font-size: 1.05rem;">容错<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 1.05rem;">成本优化<sup>4</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%96%AD%E8%B7%AF%E5%99%A8/" style="font-size: 1.05rem;">断路器<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1/" style="font-size: 1.05rem;">模型路由<sup>1</sup></a><a href="/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/" style="font-size: 1.05rem;">渐进式自治<sup>1</sup></a><a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/" style="font-size: 1.05rem;">状态机<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 1.05rem;">知识图谱<sup>2</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" style="font-size: 1.05rem;">缓存策略<sup>1</sup></a><a href="/tags/%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5/" style="font-size: 1.05rem;">重试策略<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">35</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Claude-Code/" itemprop="url">Claude Code</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/Claude-Code/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Claude Code</span></a><a class="article-meta__tags" href="/tags/%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>斜杠命令</span></a><a class="article-meta__tags" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>终端工具</span></a><a class="article-meta__tags" href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>效率提升</span></a></span></div></div><h1 class="post-title" itemprop="name headline">内置命令全解：从 /compact 到 /doctor 的实战指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-23T04:00:00.000Z" title="发表于 2026-06-23 12:00:00">2026-06-23</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-23T04:05:08.776Z" title="更新于 2026-06-23 12:05:08">2026-06-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_10.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/a1b4af21.html"><header><a class="post-meta-categories" href="/categories/Claude-Code/" itemprop="url">Claude Code</a><a href="/tags/AI-Agent/" tabindex="-1" itemprop="url">AI Agent</a><a href="/tags/Claude-Code/" tabindex="-1" itemprop="url">Claude Code</a><a href="/tags/%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4/" tabindex="-1" itemprop="url">斜杠命令</a><a href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/" tabindex="-1" itemprop="url">终端工具</a><a href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/" tabindex="-1" itemprop="url">效率提升</a><h1 id="CrawlerTitle" itemprop="name headline">内置命令全解：从 /compact 到 /doctor 的实战指南</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-23T04:00:00.000Z" title="发表于 2026-06-23 12:00:00">2026-06-23</time><time itemprop="dateCreated datePublished" datetime="2026-06-23T04:05:08.776Z" title="更新于 2026-06-23 12:05:08">2026-06-23</time></header><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote>
+<p>本篇是 Claude Code 系列的第 3 篇。系列将从安装入门到高级实战，由浅入深地拆解这个终端原生 Coding Agent 的每一个能力。</p>
+</blockquote>
+<p><strong>入门篇</strong></p>
+<ol>
+<li><a href="/posts/205343cf.html">Claude Code 是什么？从安装到第一次对话</a></li>
+<li><a href="/posts/7c7b64e9.html">日常开发工作流：用 Claude Code 重塑你的编码习惯</a></li>
+</ol>
+<p><strong>核心篇</strong><br>3. <strong>内置命令全解：从 &#x2F;compact 到 &#x2F;doctor 的实战指南</strong>（本文）<br>4. <a href="/posts/">CLAUDE.md：项目上下文工程的艺术</a></p>
+<p><strong>进阶篇</strong><br>5. <a href="/posts/">多文件重构与复杂任务实战</a><br>6. <a href="/posts/">Hooks、MCP 与能力扩展</a></p>
+<p><strong>高级篇</strong><br>7. <a href="/posts/">Headless 模式与 CI&#x2F;CD 集成</a><br>8. <a href="/posts/">多 Agent 协作：从 Claude Code 到 Codex</a></p>
+<hr>
+<h2 id="一、为什么需要斜杠命令？"><a href="#一、为什么需要斜杠命令？" class="headerlink" title="一、为什么需要斜杠命令？"></a>一、为什么需要斜杠命令？</h2><p>在前两篇文章中，我们已经学会启动 Claude Code、输入自然语言让它干活。但随着使用深入，你会发现几个问题：</p>
+<p><strong>上下文溢出</strong>——聊了 30 分钟后，Claude 开始”忘事”，之前讨论的设计决策被丢掉了。</p>
+<p><strong>权限轰炸</strong>——每次读文件、跑测试都要你手动确认，打断心流。</p>
+<p><strong>会话管理</strong>——想回到昨天的对话继续，但找不到入口；想同时做两件事，但终端只有一个。</p>
+<p><strong>成本失控</strong>——不知道这次对话用了多少 Token，月底账单吓一跳。</p>
+<p>斜杠命令就是 Claude Code 对这些问题的<strong>系统级回答</strong>。它们不是”快捷方式”，而是 Agent 操作系统的控制面板。</p>
+<h3 id="设计哲学：命令即接口"><a href="#设计哲学：命令即接口" class="headerlink" title="设计哲学：命令即接口"></a>设计哲学：命令即接口</h3><p>Claude Code 的斜杠命令遵循一个核心原则：<strong>命令是人与 Agent 之间的协议接口</strong>。</p>
+<p>传统 CLI 工具（如 <code>git</code>、<code>docker</code>）的命令是人直接操作系统的手段。但 Claude Code 的命令不同——你发出 <code>/compact</code>，不是你去压缩上下文，而是<strong>你指示 Claude 自己做这件事</strong>。这就像你给一个初级开发者说”把之前的讨论总结一下”，只不过用了更精确的语法。</p>
+<p>这个设计决定了几个关键特征：</p>
+<ol>
+<li><strong>命令只在消息开头识别</strong>——<code>帮我看看 /compact 是什么意思</code>不会触发压缩，只有 <code>/compact</code> 在行首才会生效</li>
+<li><strong>命令可以带参数</strong>——<code>/compact 聚焦于数据库设计部分</code>会生成带有特定关注点的摘要</li>
+<li><strong>命令有作用域</strong>——有些命令只影响当前会话（<code>/model</code>），有些影响全局配置（<code>/config</code>）</li>
+</ol>
+<hr>
+<h2 id="二、命令全景图：按工作流阶段分组"><a href="#二、命令全景图：按工作流阶段分组" class="headerlink" title="二、命令全景图：按工作流阶段分组"></a>二、命令全景图：按工作流阶段分组</h2><p>Claude Code 目前内置了 <strong>80+ 个命令</strong>（截至 v2.1.185）。与其逐个罗列，不如按开发者一天的工作流来组织。</p>
+<h3 id="2-1-项目初始化阶段"><a href="#2-1-项目初始化阶段" class="headerlink" title="2.1 项目初始化阶段"></a>2.1 项目初始化阶段</h3><p>当你第一次在一个代码库中启动 Claude Code，这几个命令决定了整个后续体验的质量。</p>
+<h4 id="x2F-init-——-生成项目记忆文件"><a href="#x2F-init-——-生成项目记忆文件" class="headerlink" title="&#x2F;init —— 生成项目记忆文件"></a>&#x2F;init —— 生成项目记忆文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /init</span><br></pre></td></tr></table></figure>
+
+<p><code>/init</code> 会在项目根目录生成一个 <code>CLAUDE.md</code> 文件，这是 Claude 理解你项目的”记忆锚点”。它会扫描你的项目结构、<code>pom.xml</code> &#x2F; <code>build.gradle</code>、README、已有代码风格，然后生成一份结构化的项目说明。</p>
+<p><strong>为什么重要？</strong> 没有 <code>CLAUDE.md</code>，Claude 每次对话都要从零开始理解你的项目。有了它，Claude 知道：</p>
+<ul>
+<li>这是一个 Spring Boot 3.x 项目，使用 Java 17</li>
+<li>分层架构是 Controller → Service → Repository</li>
+<li>测试用 JUnit 5 + Mockito</li>
+<li>代码风格遵循 Google Java Style Guide</li>
+</ul>
+<p><strong>实战建议</strong>：<code>/init</code> 生成的是起点，不是终点。生成后用 <code>/memory</code> 编辑它，加入你的团队约定、业务术语、禁用的 API 等。我们在第 4 篇会深入讲解 CLAUDE.md 的艺术。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; /init</span><br><span class="line"><span class="comment"># Claude 扫描项目后生成 CLAUDE.md</span></span><br><span class="line">&gt; /memory</span><br><span class="line"><span class="comment"># 打开编辑器，补充团队约定</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="x2F-permissions-——-配置权限规则"><a href="#x2F-permissions-——-配置权限规则" class="headerlink" title="&#x2F;permissions —— 配置权限规则"></a>&#x2F;permissions —— 配置权限规则</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /permissions</span><br></pre></td></tr></table></figure>
+
+<p>这是你与 Claude 建立”信任边界”的地方。默认情况下，Claude 每次要执行 Bash 命令、写文件都会请求你确认。对于长期项目，你需要配置规则让它自动放行安全操作。</p>
+<p>权限规则分三个层级：</p>
+<table>
+<thead>
+<tr>
+<th>层级</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Allow</td>
+<td>自动放行</td>
+<td><code>Bash(mvn test:*</code>)&#96; 允许所有 Maven 测试</td>
+</tr>
+<tr>
+<td>Ask</td>
+<td>每次询问</td>
+<td><code>Bash(rm *)</code> 删除文件需要确认</td>
+</tr>
+<tr>
+<td>Deny</td>
+<td>禁止执行</td>
+<td><code>Bash(rm -rf /)</code> 永远不允许</td>
+</tr>
+</tbody></table>
+<p><strong>Java 开发者的推荐配置</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 在 /permissions 界面中添加</span><br><span class="line">Bash(mvn *)          # 允许所有 Maven 命令</span><br><span class="line">Bash(gradle *)       # 允许所有 Gradle 命令</span><br><span class="line">Bash(./gradlew *)    # 允许 Gradle Wrapper</span><br><span class="line">Bash(java *)         # 允许运行 Java</span><br><span class="line">Bash(javac *)        # 允许编译 Java</span><br><span class="line">Bash(git status*)    # 允许查看 Git 状态</span><br><span class="line">Bash(git log*)       # 允许查看 Git 日志</span><br><span class="line">Bash(git diff*)      # 允许查看 Git 差异</span><br><span class="line">Write(./src/**)      # 允许写入 src 目录</span><br></pre></td></tr></table></figure>
+
+<p><strong>设计原理</strong>：为什么不用”全部放行”？因为 Claude 是 Agent，它会自主决定执行什么命令。权限规则是你给 Agent 的”行为准则”——就像你不会让实习生不经审批就操作生产数据库一样。</p>
+<h4 id="x2F-mcp-——-连接外部工具"><a href="#x2F-mcp-——-连接外部工具" class="headerlink" title="&#x2F;mcp —— 连接外部工具"></a>&#x2F;mcp —— 连接外部工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /mcp</span><br></pre></td></tr></table></figure>
+
+<p>MCP（Model Context Protocol）让 Claude 能连接外部工具和数据源。在 <code>/mcp</code> 界面中，你可以：</p>
+<ul>
+<li>查看已连接的 MCP 服务器</li>
+<li>启用&#x2F;禁用特定服务器</li>
+<li>重连断开的服务器</li>
+<li>配置 OAuth 认证</li>
+</ul>
+<p><strong>Java 开发者的典型 MCP 配置</strong>：</p>
+<ul>
+<li><strong>数据库浏览器</strong>——让 Claude 直接查询开发数据库，而不是每次手写 SQL 让你执行</li>
+<li><strong>JIRA&#x2F;Linear</strong>——让 Claude 读取 Issue 描述，直接开始开发</li>
+<li><strong>Sentry</strong>——让 Claude 查看线上错误日志，定位 bug</li>
+</ul>
+<p>我们在第 6 篇会深入讲解 MCP 的配置和自定义。</p>
+<hr>
+<h3 id="2-2-日常开发阶段"><a href="#2-2-日常开发阶段" class="headerlink" title="2.2 日常开发阶段"></a>2.2 日常开发阶段</h3><p>这是你一天中使用最频繁的命令组。</p>
+<h4 id="x2F-compact-——-上下文压缩"><a href="#x2F-compact-——-上下文压缩" class="headerlink" title="&#x2F;compact —— 上下文压缩"></a>&#x2F;compact —— 上下文压缩</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /compact</span><br><span class="line">&gt; /compact 聚焦于用户认证模块的设计讨论</span><br></pre></td></tr></table></figure>
+
+<p><strong>这是 Claude Code 中最重要的命令，没有之一。</strong></p>
+<p>Claude 的上下文窗口是有限的（当前默认约 200K tokens）。当你在一个长会话中讨论了很多内容后，上下文会被填满。<code>/compact</code> 让 Claude 对当前对话进行摘要压缩，释放上下文空间。</p>
+<p><strong>不带参数</strong>：Claude 自己决定摘要的重点。适合对话内容比较杂的场景。</p>
+<p><strong>带参数</strong>：Claude 会特别关注你指定的部分。比如 <code>/compact 聚焦于数据库设计和 API 接口定义</code>，则摘要会保留这些关键信息，而丢弃无关的讨论。</p>
+<p><strong>什么时候该用？</strong></p>
+<ul>
+<li>对话进行了 15-20 分钟后</li>
+<li>Claude 开始”忘记”之前讨论的内容时</li>
+<li>准备切换到一个新任务前</li>
+<li>上下文使用率超过 70% 时（用 <code>/context</code> 查看）</li>
+</ul>
+<p><strong>设计原理</strong>：为什么不自动压缩？因为压缩是有损的。自动压缩可能丢掉你认为重要的上下文。把控制权交给开发者，让你决定什么时候压缩、保留什么重点——这是 Claude Code”人在回路”设计哲学的体现。</p>
+<h4 id="x2F-context-——-上下文可视化"><a href="#x2F-context-——-上下文可视化" class="headerlink" title="&#x2F;context —— 上下文可视化"></a>&#x2F;context —— 上下文可视化</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /context</span><br><span class="line">&gt; /context all</span><br></pre></td></tr></table></figure>
+
+<p><code>/context</code> 用一个彩色网格展示当前上下文的使用情况。每种颜色代表不同类型的上下文：</p>
+<ul>
+<li>系统提示词（CLAUDE.md、权限规则等）</li>
+<li>对话历史（你和 Claude 的来回消息）</li>
+<li>工具调用结果（文件内容、命令输出等）</li>
+<li>记忆文件（auto-memory 等）</li>
+</ul>
+<p><strong>实战场景</strong>：当你感觉 Claude 的响应质量下降时，先用 <code>/context</code> 看看是不是上下文快满了。如果工具调用结果占了大头，说明 Claude 读了太多文件——考虑用 <code>/compact</code> 压缩，或者更精确地指定要读哪些文件。</p>
+<h4 id="x2F-model-——-切换模型"><a href="#x2F-model-——-切换模型" class="headerlink" title="&#x2F;model —— 切换模型"></a>&#x2F;model —— 切换模型</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; /model</span><br><span class="line">&gt; /model opus</span><br><span class="line">&gt; /model sonnet</span><br></pre></td></tr></table></figure>
+
+<p>Claude Code 支持在会话中动态切换模型。不同模型的能力和成本差异很大：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>特点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Claude Opus</td>
+<td>最强推理能力</td>
+<td>复杂架构设计、多文件重构</td>
+</tr>
+<tr>
+<td>Claude Sonnet</td>
+<td>平衡能力和速度</td>
+<td>日常开发、代码生成</td>
+</tr>
+<tr>
+<td>Claude Haiku</td>
+<td>最快速度</td>
+<td>简单查询、快速问答</td>
+</tr>
+</tbody></table>
+<p><strong>实战建议</strong>：日常开发用 Sonnet，遇到复杂问题切到 Opus，简单查询用 Haiku 省钱。<code>/model</code> 界面可以用左右箭头调整 effort level（推理深度），不需要切换模型也能控制”思考多少”。</p>
+<h4 id="x2F-effort-——-调整推理深度"><a href="#x2F-effort-——-调整推理深度" class="headerlink" title="&#x2F;effort —— 调整推理深度"></a>&#x2F;effort —— 调整推理深度</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; /effort high</span><br><span class="line">&gt; /effort low</span><br><span class="line">&gt; /effort ultracode</span><br></pre></td></tr></table></figure>
+
+<p>这个命令控制 Claude “思考多久再回答”。级别从低到高：</p>
+<ul>
+<li><strong>low</strong> —— 快速回答，适合简单问题</li>
+<li><strong>medium</strong> —— 默认级别</li>
+<li><strong>high</strong> —— 深度思考，适合复杂问题</li>
+<li><strong>xhigh</strong> —— 更深度的推理</li>
+<li><strong>ultracode</strong> —— Claude Code 专属级别，结合 xhigh 推理和自动工作流编排</li>
+</ul>
+<p><strong>什么时候调高？</strong> 写算法、设计数据库 schema、做技术方案评审时。<strong>什么时候调低？</strong> 改个配置、查个用法、重命名变量时。省 token 也省等待时间。</p>
+<h4 id="x2F-plan-——-进入计划模式"><a href="#x2F-plan-——-进入计划模式" class="headerlink" title="&#x2F;plan —— 进入计划模式"></a>&#x2F;plan —— 进入计划模式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /plan</span><br><span class="line">&gt; /plan 重构用户认证模块，从 Session 迁移到 JWT</span><br></pre></td></tr></table></figure>
+
+<p>在执行大改动前，先让 Claude 制定计划。<code>/plan</code> 让 Claude 进入只读模式——它会分析代码、设计方案、列出步骤，但不执行任何修改。</p>
+<p><strong>为什么重要？</strong> Agent 的天性是”直接干活”。但在复杂任务中，直接动手往往导致返工。<code>/plan</code> 让你有机会审核方案、调整方向，避免 Claude 走偏。</p>
+<p><strong>典型工作流</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; /plan 将订单服务从单体拆分为独立微服务</span><br><span class="line"><span class="comment"># Claude 输出：分析依赖 → 设计拆分方案 → 列出迁移步骤</span></span><br><span class="line"><span class="comment"># 你审核方案，调整细节</span></span><br><span class="line">&gt; 好的，按方案执行第 1-3 步</span><br><span class="line"><span class="comment"># Claude 开始执行</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="x2F-btw-——-侧问题"><a href="#x2F-btw-——-侧问题" class="headerlink" title="&#x2F;btw —— 侧问题"></a>&#x2F;btw —— 侧问题</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /btw Java 21 的虚拟线程和传统线程池有什么区别？</span><br></pre></td></tr></table></figure>
+
+<p>在执行任务的过程中，你突然想到一个问题想问 Claude，但不想打断当前的工作流。<code>/btw</code> 发送一个”旁白”——Claude 会回答你的问题，但这段对话不会加入正式上下文。</p>
+<p><strong>设计原理</strong>：这就像你在 pair programming 时，同事在写代码，你随口问了一句”这个 API 的限流策略是什么？”——问题得到回答，但不影响正在写的代码。<code>/btw</code> 就是这个”随口一问”的数字化。</p>
+<hr>
+<h3 id="2-3-并行执行阶段"><a href="#2-3-并行执行阶段" class="headerlink" title="2.3 并行执行阶段"></a>2.3 并行执行阶段</h3><p>当任务规模变大，一个 Claude 不够用时。</p>
+<h4 id="x2F-agents-——-管理子代理"><a href="#x2F-agents-——-管理子代理" class="headerlink" title="&#x2F;agents —— 管理子代理"></a>&#x2F;agents —— 管理子代理</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /agents</span><br></pre></td></tr></table></figure>
+
+<p>Claude Code 可以派生子代理（subagent）来并行执行任务。<code>/agents</code> 打开管理界面，你可以：</p>
+<ul>
+<li>查看正在运行的子代理</li>
+<li>配置可用的子代理类型</li>
+<li>启用&#x2F;禁用特定子代理</li>
+</ul>
+<p><strong>Java 开发者的典型场景</strong>：</p>
+<ul>
+<li>一个子代理在写单元测试，另一个在重构 Service 层</li>
+<li>一个子代理在查文档，另一个在生成代码</li>
+<li>多个子代理分别处理不同模块的 bug fix</li>
+</ul>
+<h4 id="x2F-tasks-——-查看后台任务"><a href="#x2F-tasks-——-查看后台任务" class="headerlink" title="&#x2F;tasks —— 查看后台任务"></a>&#x2F;tasks —— 查看后台任务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /tasks</span><br></pre></td></tr></table></figure>
+
+<p>当 Claude 在后台运行任务时（通过 <code>/fork</code> 或 <code>/background</code>），<code>/tasks</code> 显示所有正在执行的后台任务及其状态。</p>
+<h4 id="x2F-fork-——-派生后台工作"><a href="#x2F-fork-——-派生后台工作" class="headerlink" title="&#x2F;fork —— 派生后台工作"></a>&#x2F;fork —— 派生后台工作</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /fork 给所有 Controller 添加参数校验注解</span><br></pre></td></tr></table></figure>
+
+<p><code>/fork</code> 会创建一个后台子代理，继承当前对话的完整上下文，然后在后台执行你指定的任务。你可以继续在主会话中做其他事情，子代理完成后会把结果返回。</p>
+<p><strong>和 &#x2F;branch 的区别</strong>：<code>/branch</code> 是你自己切换到一个新分支对话；<code>/fork</code> 是让一个子代理在后台干活，你继续做自己的事。</p>
+<h4 id="x2F-background-——-后台化当前会话"><a href="#x2F-background-——-后台化当前会话" class="headerlink" title="&#x2F;background —— 后台化当前会话"></a>&#x2F;background —— 后台化当前会话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /background</span><br><span class="line">&gt; /background 继续完成剩余的测试用例编写</span><br></pre></td></tr></table></figure>
+
+<p><code>/background</code> 把整个当前会话转为后台运行，释放你的终端。适合长时间运行的任务——让 Claude 继续干活，你去做别的事情。</p>
+<p><strong>监控后台会话</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在终端中</span></span><br><span class="line">claude agents          <span class="comment"># 查看所有运行中的 agent</span></span><br><span class="line">claude agents --json   <span class="comment"># JSON 格式输出，适合脚本处理</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="x2F-batch-——-大规模并行变更"><a href="#x2F-batch-——-大规模并行变更" class="headerlink" title="&#x2F;batch —— 大规模并行变更"></a>&#x2F;batch —— 大规模并行变更</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /batch 将 src/ 下所有使用 SimpleDateFormat 的地方替换为 DateTimeFormatter</span><br></pre></td></tr></table></figure>
+
+<p><code>/batch</code> 是 Claude Code 最强大的并行执行命令。它会：</p>
+<ol>
+<li><strong>研究代码库</strong>——扫描所有相关文件</li>
+<li><strong>分解任务</strong>——将大改动拆成 5-30 个独立单元</li>
+<li><strong>展示计划</strong>——让你审核分解方案</li>
+<li><strong>并行执行</strong>——每个单元在独立的 git worktree 中由一个子代理处理</li>
+<li><strong>各自测试</strong>——每个子代理独立运行测试</li>
+<li><strong>提交 PR</strong>——每个单元生成一个独立的 Pull Request</li>
+</ol>
+<p><strong>为什么需要 &#x2F;batch？</strong> 单个 Claude 在处理跨 50 个文件的改动时，上下文会溢出，而且串行执行太慢。<code>/batch</code> 通过并行化解决了这两个问题。</p>
+<p><strong>适用场景</strong>：</p>
+<ul>
+<li>大规模 API 迁移（如 Spring Boot 2.x → 3.x）</li>
+<li>框架升级（如 JUnit 4 → JUnit 5）</li>
+<li>代码风格统一（如所有日志从 System.out 迁移到 SLF4J）</li>
+<li>依赖替换（如 Guava Cache → Caffeine）</li>
+</ul>
+<hr>
+<h3 id="2-4-代码审查与提交阶段"><a href="#2-4-代码审查与提交阶段" class="headerlink" title="2.4 代码审查与提交阶段"></a>2.4 代码审查与提交阶段</h3><p>代码写完了，准备提交。</p>
+<h4 id="x2F-diff-——-查看变更"><a href="#x2F-diff-——-查看变更" class="headerlink" title="&#x2F;diff —— 查看变更"></a>&#x2F;diff —— 查看变更</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /diff</span><br></pre></td></tr></table></figure>
+
+<p><code>/diff</code> 打开一个交互式差异查看器，展示：</p>
+<ul>
+<li>当前未提交的变更</li>
+<li>每一轮 Claude 对话产生的变更</li>
+</ul>
+<p>用左右箭头在不同版本间切换，上下箭头浏览文件。这比 <code>git diff</code> 更好，因为它按对话轮次组织变更，让你清楚地看到”第 3 轮对话改了什么”。</p>
+<h4 id="x2F-code-review-——-代码审查"><a href="#x2F-code-review-——-代码审查" class="headerlink" title="&#x2F;code-review —— 代码审查"></a>&#x2F;code-review —— 代码审查</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; /code-review</span><br><span class="line">&gt; /code-review --fix</span><br><span class="line">&gt; /code-review high</span><br><span class="line">&gt; /code-review ultra</span><br></pre></td></tr></table></figure>
+
+<p>这是内置的代码审查命令，会检查当前 diff 中的：</p>
+<ul>
+<li><strong>正确性 bug</strong>——空指针、边界条件、并发问题</li>
+<li><strong>代码复用</strong>——是否有现成的工具方法可以复用</li>
+<li><strong>简化机会</strong>——冗余代码、过度设计</li>
+<li><strong>效率问题</strong>——不必要的循环、可优化的查询</li>
+</ul>
+<p><strong>参数详解</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>low</code> &#x2F; <code>medium</code> &#x2F; <code>high</code></td>
+<td>审查深度，越高越仔细</td>
+</tr>
+<tr>
+<td><code>--fix</code></td>
+<td>自动修复发现的问题</td>
+</tr>
+<tr>
+<td><code>--comment</code></td>
+<td>将审查意见作为 GitHub PR 内联评论发布</td>
+</tr>
+<tr>
+<td><code>ultra</code></td>
+<td>启动云端多 Agent 深度审查</td>
+</tr>
+</tbody></table>
+<p><strong>实战建议</strong>：日常用 <code>/code-review medium --fix</code>，大改动用 <code>/code-review high</code>，关键发布前用 <code>/code-review ultra</code>。</p>
+<h4 id="x2F-simplify-——-代码简化"><a href="#x2F-simplify-——-代码简化" class="headerlink" title="&#x2F;simplify —— 代码简化"></a>&#x2F;simplify —— 代码简化</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /simplify</span><br></pre></td></tr></table></figure>
+
+<p><code>/simplify</code> 是 <code>/code-review</code> 的轻量版——只关注代码清理，不找 bug。它会并行运行 4 个审查 Agent：</p>
+<ol>
+<li><strong>复用检查</strong>——是否有现成的 helper 可以复用</li>
+<li><strong>简化检查</strong>——是否有更简洁的写法</li>
+<li><strong>效率检查</strong>——是否有性能优化空间</li>
+<li><strong>抽象层级检查</strong>——代码是否在正确的抽象层级上</li>
+</ol>
+<h4 id="x2F-review-——-PR-审查"><a href="#x2F-review-——-PR-审查" class="headerlink" title="&#x2F;review —— PR 审查"></a>&#x2F;review —— PR 审查</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; /review</span><br><span class="line">&gt; /review 123</span><br><span class="line">&gt; /review https://github.com/org/repo/pull/456</span><br></pre></td></tr></table></figure>
+
+<p><code>/review</code> 对 GitHub Pull Request 进行审查。不带参数时列出当前仓库的开放 PR 供你选择。</p>
+<h4 id="x2F-security-review-——-安全审查"><a href="#x2F-security-review-——-安全审查" class="headerlink" title="&#x2F;security-review —— 安全审查"></a>&#x2F;security-review —— 安全审查</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /security-review</span><br></pre></td></tr></table></figure>
+
+<p>专注于安全漏洞的深度审查：SQL 注入、XSS、认证绕过、敏感数据泄露等。对于 Java 项目，特别关注：</p>
+<ul>
+<li>Spring Security 配置是否正确</li>
+<li>用户输入是否做了校验和转义</li>
+<li>API 端点是否有正确的权限控制</li>
+<li>敏感信息是否硬编码</li>
+</ul>
+<hr>
+<h3 id="2-5-会话管理阶段"><a href="#2-5-会话管理阶段" class="headerlink" title="2.5 会话管理阶段"></a>2.5 会话管理阶段</h3><h4 id="x2F-clear-——-清空上下文"><a href="#x2F-clear-——-清空上下文" class="headerlink" title="&#x2F;clear —— 清空上下文"></a>&#x2F;clear —— 清空上下文</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /clear</span><br><span class="line">&gt; /clear <span class="string">&quot;用户认证重构&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/clear</code> 开始一个全新的对话，之前的对话可以通过 <code>/resume</code> 找回。给当前对话起个名字（如 <code>&quot;用户认证重构&quot;</code>），方便以后在 <code>/resume</code> 列表中识别。</p>
+<p><strong>和 &#x2F;compact 的区别</strong>：<code>/compact</code> 是压缩当前对话（保留精华），<code>/clear</code> 是丢弃当前对话（从零开始）。切换任务时用 <code>/clear</code>，同一任务上下文满了用 <code>/compact</code>。</p>
+<h4 id="x2F-resume-——-恢复对话"><a href="#x2F-resume-——-恢复对话" class="headerlink" title="&#x2F;resume —— 恢复对话"></a>&#x2F;resume —— 恢复对话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /resume</span><br><span class="line">&gt; /resume <span class="string">&quot;用户认证重构&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>/resume</code> 打开一个对话选择器，列出所有历史对话。选择一个即可继续。从 v2.1.144 开始，后台运行的会话也会出现在列表中，标记为 <code>bg</code>。</p>
+<p><strong>实战场景</strong>：昨天讨论了一个技术方案，今天想继续执行。<code>/resume</code> 找到昨天的对话，继续干活。</p>
+<h4 id="x2F-branch-——-分支对话"><a href="#x2F-branch-——-分支对话" class="headerlink" title="&#x2F;branch —— 分支对话"></a>&#x2F;branch —— 分支对话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /branch</span><br><span class="line">&gt; /branch <span class="string">&quot;尝试方案B&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在当前对话的这个点创建一个分支，让你可以尝试不同的方向，而不丢失当前的对话状态。就像 Git 的分支一样——你可以在分支上试验，不满意就切回来。</p>
+<h4 id="x2F-rewind-——-回退"><a href="#x2F-rewind-——-回退" class="headerlink" title="&#x2F;rewind —— 回退"></a>&#x2F;rewind —— 回退</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /rewind</span><br></pre></td></tr></table></figure>
+
+<p><code>/rewind</code> 让你回退到之前的某个时间点——可以回退对话和代码。就像 Git 的 <code>reset</code>，但更智能——它同时回退对话上下文和文件变更。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>Claude 的修改方向不对，想回到某个节点重新来</li>
+<li>想对比”如果当时做了另一个选择”的结果</li>
+<li>代码改坏了，想回到改动前的状态</li>
+</ul>
+<hr>
+<h3 id="2-6-成本与状态监控"><a href="#2-6-成本与状态监控" class="headerlink" title="2.6 成本与状态监控"></a>2.6 成本与状态监控</h3><h4 id="x2F-usage-——-用量统计"><a href="#x2F-usage-——-用量统计" class="headerlink" title="&#x2F;usage —— 用量统计"></a>&#x2F;usage —— 用量统计</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /usage</span><br></pre></td></tr></table></figure>
+
+<p><code>/usage</code>（别名 <code>/cost</code>、<code>/stats</code>）展示：</p>
+<ul>
+<li>当前会话的 Token 用量和费用</li>
+<li>计划的用量限制和剩余额度</li>
+<li>按 skill、子代理、插件、MCP 服务器的用量分解</li>
+</ul>
+<p><strong>为什么重要？</strong> Claude Code 按 Token 计费（API 用户）或有月度限额（Pro&#x2F;Max 用户）。不了解用量就像开车不看油表——迟早抛锚。</p>
+<p><strong>成本优化建议</strong>：</p>
+<ol>
+<li>简单问题用 <code>/effort low</code> 或切到 Haiku 模型</li>
+<li>及时用 <code>/compact</code> 压缩上下文，避免重复发送大文件内容</li>
+<li>用 <code>/btw</code> 问旁白问题，不占用主上下文</li>
+<li>读大文件时指定行范围，而不是让 Claude 读整个文件</li>
+</ol>
+<h4 id="x2F-status-——-状态查看"><a href="#x2F-status-——-状态查看" class="headerlink" title="&#x2F;status —— 状态查看"></a>&#x2F;status —— 状态查看</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /status</span><br></pre></td></tr></table></figure>
+
+<p>展示当前会话的状态信息：版本号、模型、账户、连接状态。可以在 Claude 响应过程中执行，无需等待。</p>
+<h4 id="x2F-doctor-——-诊断工具"><a href="#x2F-doctor-——-诊断工具" class="headerlink" title="&#x2F;doctor —— 诊断工具"></a>&#x2F;doctor —— 诊断工具</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /doctor</span><br></pre></td></tr></table></figure>
+
+<p>当 Claude Code 行为异常时，<code>/doctor</code> 会检查：</p>
+<ul>
+<li>安装是否完整</li>
+<li>配置是否正确</li>
+<li>网络连接是否正常</li>
+<li>MCP 服务器是否健康</li>
+<li>权限配置是否有效</li>
+</ul>
+<p>检查结果用状态图标标记，按 <code>f</code> 可以让 Claude 自动修复发现的问题。</p>
+<p><strong>什么时候用？</strong> Claude 突然不响应、MCP 工具消失、权限配置异常、升级后行为变化。</p>
+<h4 id="x2F-debug-——-调试日志"><a href="#x2F-debug-——-调试日志" class="headerlink" title="&#x2F;debug —— 调试日志"></a>&#x2F;debug —— 调试日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /debug</span><br><span class="line">&gt; /debug Claude 无法读取我的 Java 文件</span><br></pre></td></tr></table></figure>
+
+<p>启用调试日志模式。默认情况下调试日志是关闭的（除非你用 <code>claude --debug</code> 启动）。<code>/debug</code> 在会话中途开始捕获日志，可以附带问题描述让 Claude 重点分析。</p>
+<hr>
+<h3 id="2-7-配置与个性化"><a href="#2-7-配置与个性化" class="headerlink" title="2.7 配置与个性化"></a>2.7 配置与个性化</h3><h4 id="x2F-config-——-设置面板"><a href="#x2F-config-——-设置面板" class="headerlink" title="&#x2F;config —— 设置面板"></a>&#x2F;config —— 设置面板</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; /config</span><br><span class="line">&gt; /config thinking=<span class="literal">false</span></span><br><span class="line">&gt; /config model=opus</span><br><span class="line">&gt; /config theme=dark</span><br></pre></td></tr></table></figure>
+
+<p><code>/config</code> 打开设置界面，可以调整：</p>
+<ul>
+<li>主题（深色&#x2F;浅色）</li>
+<li>模型偏好</li>
+<li>输出风格</li>
+<li>各种行为开关</li>
+</ul>
+<p>从 v2.1.181 开始，支持直接传 key&#x3D;value 对快速设置，无需打开界面。</p>
+<h4 id="x2F-theme-——-主题切换"><a href="#x2F-theme-——-主题切换" class="headerlink" title="&#x2F;theme —— 主题切换"></a>&#x2F;theme —— 主题切换</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /theme</span><br></pre></td></tr></table></figure>
+
+<p>切换颜色主题。支持：</p>
+<ul>
+<li><strong>auto</strong>——自动匹配终端的深色&#x2F;浅色背景</li>
+<li><strong>light &#x2F; dark</strong>——强制浅色&#x2F;深色</li>
+<li><strong>daltonized</strong>——色盲友好主题</li>
+<li><strong>ANSI</strong>——使用终端的颜色配置</li>
+<li><strong>自定义主题</strong>——放在 <code>~/.claude/themes/</code> 下</li>
+</ul>
+<h4 id="x2F-vim-——-Vim-模式"><a href="#x2F-vim-——-Vim-模式" class="headerlink" title="&#x2F;vim —— Vim 模式"></a>&#x2F;vim —— Vim 模式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过 /config 切换</span></span><br><span class="line">&gt; /config editor=vim</span><br></pre></td></tr></table></figure>
+
+<p>Claude Code 支持 Vim 编辑模式。切换后输入框变成 Vim 的 Normal&#x2F;Insert 模式，支持常见的 Vim 快捷键。</p>
+<h4 id="x2F-terminal-setup-——-终端配置"><a href="#x2F-terminal-setup-——-终端配置" class="headerlink" title="&#x2F;terminal-setup —— 终端配置"></a>&#x2F;terminal-setup —— 终端配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /terminal-setup</span><br></pre></td></tr></table></figure>
+
+<p>配置终端快捷键，如 Shift+Enter 换行。只在需要的终端中显示（如 VS Code、Cursor、Alacritty 等）。</p>
+<hr>
+<h3 id="2-8-协作与分享"><a href="#2-8-协作与分享" class="headerlink" title="2.8 协作与分享"></a>2.8 协作与分享</h3><h4 id="x2F-export-——-导出对话"><a href="#x2F-export-——-导出对话" class="headerlink" title="&#x2F;export —— 导出对话"></a>&#x2F;export —— 导出对话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /export</span><br><span class="line">&gt; /export ~/Desktop/session-notes.txt</span><br></pre></td></tr></table></figure>
+
+<p>将当前对话导出为纯文本。适合：</p>
+<ul>
+<li>记录重要的技术讨论</li>
+<li>分享给没有 Claude Code 的同事</li>
+<li>存档决策过程</li>
+</ul>
+<h4 id="x2F-copy-——-复制回复"><a href="#x2F-copy-——-复制回复" class="headerlink" title="&#x2F;copy —— 复制回复"></a>&#x2F;copy —— 复制回复</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /copy</span><br><span class="line">&gt; /copy 2</span><br></pre></td></tr></table></figure>
+
+<p>复制最近一次（或第 N 次）Claude 的回复到剪贴板。当回复中有多个代码块时，会弹出选择器让你选择复制哪个。</p>
+<p><strong>SSH 场景</strong>：在远程服务器上使用时，按 <code>w</code> 可以把选择写入文件而不是剪贴板。</p>
+<h4 id="x2F-feedback-——-提交反馈"><a href="#x2F-feedback-——-提交反馈" class="headerlink" title="&#x2F;feedback —— 提交反馈"></a>&#x2F;feedback —— 提交反馈</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /feedback Claude 生成的代码有编译错误</span><br></pre></td></tr></table></figure>
+
+<p>别名 <code>/bug</code>、<code>/share</code>。提交反馈或报告 bug，会自动附带当前会话的上下文。</p>
+<h4 id="x2F-rename-——-重命名会话"><a href="#x2F-rename-——-重命名会话" class="headerlink" title="&#x2F;rename —— 重命名会话"></a>&#x2F;rename —— 重命名会话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /rename <span class="string">&quot;Spring Boot 3 迁移&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>给当前会话起一个有意义的名字，在 <code>/resume</code> 列表中更容易识别。</p>
+<hr>
+<h3 id="2-9-高级功能"><a href="#2-9-高级功能" class="headerlink" title="2.9 高级功能"></a>2.9 高级功能</h3><h4 id="x2F-cd-——-切换工作目录"><a href="#x2F-cd-——-切换工作目录" class="headerlink" title="&#x2F;cd —— 切换工作目录"></a>&#x2F;cd —— 切换工作目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /cd ../other-project</span><br></pre></td></tr></table></figure>
+
+<p>在会话中切换到另一个项目目录。关键特性：</p>
+<ul>
+<li><strong>保留提示缓存</strong>——新目录的 CLAUDE.md 作为消息追加，而不是重建整个系统提示</li>
+<li><strong>迁移会话存储</strong>——<code>--resume</code> 和 <code>--continue</code> 会从新目录查找会话</li>
+<li><strong>安全提示</strong>——如果之前没在该目录工作过，会提示你确认</li>
+</ul>
+<p>需要 v2.1.169 或更高版本。</p>
+<h4 id="x2F-add-dir-——-添加工作目录"><a href="#x2F-add-dir-——-添加工作目录" class="headerlink" title="&#x2F;add-dir —— 添加工作目录"></a>&#x2F;add-dir —— 添加工作目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /add-dir ../shared-library</span><br></pre></td></tr></table></figure>
+
+<p>让 Claude 可以访问另一个目录的文件，而不切换当前工作目录。适合需要引用共享库、配置文件等跨目录场景。</p>
+<h4 id="x2F-loop-——-定时循环"><a href="#x2F-loop-——-定时循环" class="headerlink" title="&#x2F;loop —— 定时循环"></a>&#x2F;loop —— 定时循环</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /loop 5m 检查部署是否完成</span><br><span class="line">&gt; /loop 30s 跑测试看看有没有失败</span><br></pre></td></tr></table></figure>
+
+<p>让 Claude 以固定间隔重复执行一个任务。省略间隔时 Claude 自动节奏。适合：</p>
+<ul>
+<li>监控部署状态</li>
+<li>轮询 CI&#x2F;CD 结果</li>
+<li>定期检查日志</li>
+</ul>
+<h4 id="x2F-goal-——-设置目标"><a href="#x2F-goal-——-设置目标" class="headerlink" title="&#x2F;goal —— 设置目标"></a>&#x2F;goal —— 设置目标</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; /goal 所有测试通过且代码覆盖率达到 80%</span><br><span class="line">&gt; /goal clear</span><br></pre></td></tr></table></figure>
+
+<p>设置一个目标条件，Claude 会持续工作直到条件满足。这比手动一轮一轮地催促 Claude 更高效。</p>
+<h4 id="x2F-deep-research-——-深度研究"><a href="#x2F-deep-research-——-深度研究" class="headerlink" title="&#x2F;deep-research —— 深度研究"></a>&#x2F;deep-research —— 深度研究</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; /deep-research Spring Boot 3.x 对 GraalVM Native Image 的支持程度如何？</span><br></pre></td></tr></table></figure>
+
+<p>启动一个研究工作流：Claude 会发起多个网络搜索、交叉验证来源、最后综合成一份带引用的研究报告。</p>
+<hr>
+<h2 id="三、键盘快捷键速查"><a href="#三、键盘快捷键速查" class="headerlink" title="三、键盘快捷键速查"></a>三、键盘快捷键速查</h2><p>除了斜杠命令，Claude Code 还有丰富的键盘快捷键：</p>
+<h3 id="通用控制"><a href="#通用控制" class="headerlink" title="通用控制"></a>通用控制</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Enter</code></td>
+<td>发送消息</td>
+</tr>
+<tr>
+<td><code>Shift+Enter</code></td>
+<td>换行（需配置）</td>
+</tr>
+<tr>
+<td><code>Escape</code></td>
+<td>中断当前响应</td>
+</tr>
+<tr>
+<td><code>Ctrl+C</code></td>
+<td>取消输入 &#x2F; 退出</td>
+</tr>
+<tr>
+<td><code>Ctrl+D</code></td>
+<td>退出（空行时）</td>
+</tr>
+</tbody></table>
+<h3 id="文本编辑"><a href="#文本编辑" class="headerlink" title="文本编辑"></a>文本编辑</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Ctrl+A</code></td>
+<td>移到行首</td>
+</tr>
+<tr>
+<td><code>Ctrl+E</code></td>
+<td>移到行尾</td>
+</tr>
+<tr>
+<td><code>Ctrl+K</code></td>
+<td>删除到行尾</td>
+</tr>
+<tr>
+<td><code>Ctrl+U</code></td>
+<td>删除到行首</td>
+</tr>
+<tr>
+<td><code>Ctrl+W</code></td>
+<td>删除前一个单词</td>
+</tr>
+<tr>
+<td><code>Alt+B</code></td>
+<td>后退一个单词</td>
+</tr>
+<tr>
+<td><code>Alt+F</code></td>
+<td>前进一个单词</td>
+</tr>
+</tbody></table>
+<p><strong>macOS 注意</strong>：Alt 键需要在终端中配置为 Meta 键：</p>
+<ul>
+<li><strong>iTerm2</strong>：Settings → Profiles → Keys → General → Left&#x2F;Right Option key → “Esc+”</li>
+<li><strong>Apple Terminal</strong>：Settings → Profiles → Keyboard → 勾选 “Use Option as Meta Key”</li>
+<li><strong>VS Code</strong>：设置 <code>&quot;terminal.integrated.macOptionIsMeta&quot;: true</code></li>
+</ul>
+<h3 id="会话导航"><a href="#会话导航" class="headerlink" title="会话导航"></a>会话导航</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Ctrl+R</code></td>
+<td>反向搜索历史命令</td>
+</tr>
+<tr>
+<td><code>↑</code> &#x2F; <code>↓</code></td>
+<td>浏览输入历史</td>
+</tr>
+<tr>
+<td><code>Tab</code></td>
+<td>命令自动补全</td>
+</tr>
+</tbody></table>
+<h3 id="快捷命令"><a href="#快捷命令" class="headerlink" title="快捷命令"></a>快捷命令</h3><p>在输入框中直接输入，不需要 <code>/</code> 前缀：</p>
+<table>
+<thead>
+<tr>
+<th>快捷方式</th>
+<th>等价命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>?</code></td>
+<td><code>/help</code></td>
+</tr>
+<tr>
+<td><code>!!</code></td>
+<td>运行上一条 shell 命令</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="四、Java-开发者的命令组合拳"><a href="#四、Java-开发者的命令组合拳" class="headerlink" title="四、Java 开发者的命令组合拳"></a>四、Java 开发者的命令组合拳</h2><p>理论讲完了，来看看实际的命令组合使用。</p>
+<h3 id="场景-1：接手一个陌生的-Spring-Boot-项目"><a href="#场景-1：接手一个陌生的-Spring-Boot-项目" class="headerlink" title="场景 1：接手一个陌生的 Spring Boot 项目"></a>场景 1：接手一个陌生的 Spring Boot 项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 初始化项目记忆</span></span><br><span class="line">&gt; /init</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 查看项目结构</span></span><br><span class="line">&gt; 帮我梳理这个项目的模块结构和依赖关系</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 配置权限（省去反复确认）</span></span><br><span class="line">&gt; /permissions</span><br><span class="line"><span class="comment"># 添加 Maven、Gradle、Git 相关的自动放行规则</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 开始工作</span></span><br><span class="line">&gt; 找到用户登录相关的代码，解释整个认证流程</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-2：修复一个复杂的并发-Bug"><a href="#场景-2：修复一个复杂的并发-Bug" class="headerlink" title="场景 2：修复一个复杂的并发 Bug"></a>场景 2：修复一个复杂的并发 Bug</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 先让 Claude 分析问题</span></span><br><span class="line">&gt; /plan 分析 UserService 中的竞态条件问题</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 审核方案后执行</span></span><br><span class="line">&gt; 按方案执行修复</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 让 Claude 自己验证</span></span><br><span class="line">&gt; 跑 UserService 的并发测试</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 代码审查</span></span><br><span class="line">&gt; /code-review high</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 提交</span></span><br><span class="line">&gt; 帮我提交这次修改，commit message 用中文</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-3：大规模框架升级"><a href="#场景-3：大规模框架升级" class="headerlink" title="场景 3：大规模框架升级"></a>场景 3：大规模框架升级</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 先做影响分析</span></span><br><span class="line">&gt; /plan 分析从 Spring Boot 2.7 升级到 3.2 的影响范围</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 用 /batch 并行执行</span></span><br><span class="line">&gt; /batch 将 Spring Boot 从 2.7 升级到 3.2，包括 javax 到 jakarta 的迁移</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 监控进度</span></span><br><span class="line">&gt; /tasks</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 逐个 PR 审查</span></span><br><span class="line">&gt; /review</span><br></pre></td></tr></table></figure>
+
+<h3 id="场景-4：日常编码的高效循环"><a href="#场景-4：日常编码的高效循环" class="headerlink" title="场景 4：日常编码的高效循环"></a>场景 4：日常编码的高效循环</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写代码时用 Sonnet + medium effort（快速响应）</span></span><br><span class="line">&gt; /model sonnet</span><br><span class="line">&gt; /effort medium</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给 OrderService 添加一个批量查询接口</span></span><br><span class="line">&gt; 好的</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遇到复杂问题时切到 Opus</span></span><br><span class="line">&gt; /model opus</span><br><span class="line">&gt; /effort high</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这个查询需要支持动态条件拼接和分页，帮我设计一下</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 解决后切回 Sonnet</span></span><br><span class="line">&gt; /model sonnet</span><br><span class="line">&gt; /effort medium</span><br><span class="line"></span><br><span class="line"><span class="comment"># 继续下一个任务</span></span><br><span class="line">&gt; /clear <span class="string">&quot;订单批量查询&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、命令速查表"><a href="#五、命令速查表" class="headerlink" title="五、命令速查表"></a>五、命令速查表</h2><p>最后，按字母顺序整理一份速查表，方便日常查阅。</p>
+<h3 id="A-D"><a href="#A-D" class="headerlink" title="A-D"></a>A-D</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/add-dir</code></td>
+<td>添加工作目录</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/advisor</code></td>
+<td>启用&#x2F;禁用顾问模型</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/agents</code></td>
+<td>管理子代理</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/background</code></td>
+<td>后台化当前会话</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/batch</code></td>
+<td>大规模并行变更</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/branch</code></td>
+<td>分支对话</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/btw</code></td>
+<td>侧问题（不占上下文）</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>清空上下文，开始新对话</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/code-review</code></td>
+<td>代码审查</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/compact</code></td>
+<td>压缩上下文</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/config</code></td>
+<td>设置面板</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/context</code></td>
+<td>上下文可视化</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/copy</code></td>
+<td>复制回复到剪贴板</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/cost</code></td>
+<td>查看费用（&#x2F;usage 别名）</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/debug</code></td>
+<td>启用调试日志</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/deep-research</code></td>
+<td>深度研究工作流</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/desktop</code></td>
+<td>切换到桌面应用</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/diff</code></td>
+<td>查看交互式差异</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/doctor</code></td>
+<td>诊断安装和配置</td>
+<td>★★☆</td>
+</tr>
+</tbody></table>
+<h3 id="E-P"><a href="#E-P" class="headerlink" title="E-P"></a>E-P</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/effort</code></td>
+<td>调整推理深度</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/export</code></td>
+<td>导出对话</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/feedback</code></td>
+<td>提交反馈&#x2F;报告 bug</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/fork</code></td>
+<td>派生后台子代理</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/goal</code></td>
+<td>设置目标条件</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/help</code></td>
+<td>查看帮助</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/init</code></td>
+<td>初始化 CLAUDE.md</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/login</code></td>
+<td>登录 Anthropic 账户</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/logout</code></td>
+<td>退出登录</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/loop</code></td>
+<td>定时循环执行</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/mcp</code></td>
+<td>管理 MCP 服务器</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/memory</code></td>
+<td>编辑记忆文件</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/model</code></td>
+<td>切换模型</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/permissions</code></td>
+<td>配置权限规则</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/plan</code></td>
+<td>进入计划模式</td>
+<td>★★★</td>
+</tr>
+</tbody></table>
+<h3 id="R-Z"><a href="#R-Z" class="headerlink" title="R-Z"></a>R-Z</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+<th>使用频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/rename</code></td>
+<td>重命名会话</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/resume</code></td>
+<td>恢复历史对话</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/review</code></td>
+<td>PR 审查</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/rewind</code></td>
+<td>回退对话和代码</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/run</code></td>
+<td>启动并驱动应用</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/security-review</code></td>
+<td>安全审查</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/simplify</code></td>
+<td>代码简化</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/skills</code></td>
+<td>查看可用技能</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/status</code></td>
+<td>查看状态</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/tasks</code></td>
+<td>查看后台任务</td>
+<td>★★☆</td>
+</tr>
+<tr>
+<td><code>/theme</code></td>
+<td>切换主题</td>
+<td>★☆☆</td>
+</tr>
+<tr>
+<td><code>/usage</code></td>
+<td>用量统计</td>
+<td>★★★</td>
+</tr>
+<tr>
+<td><code>/verify</code></td>
+<td>验证代码变更</td>
+<td>★★☆</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="六、总结：命令是-Agent-的操作系统"><a href="#六、总结：命令是-Agent-的操作系统" class="headerlink" title="六、总结：命令是 Agent 的操作系统"></a>六、总结：命令是 Agent 的操作系统</h2><p>回顾全文，Claude Code 的斜杠命令不是简单的”快捷方式”——它们构成了一套完整的 <strong>Agent 操作系统</strong>：</p>
+<ol>
+<li><strong>会话生命周期管理</strong>——<code>/clear</code>、<code>/resume</code>、<code>/branch</code>、<code>/rewind</code></li>
+<li><strong>上下文资源管理</strong>——<code>/compact</code>、<code>/context</code>、<code>/btw</code></li>
+<li><strong>模型与推理控制</strong>——<code>/model</code>、<code>/effort</code>、<code>/plan</code></li>
+<li><strong>并行执行编排</strong>——<code>/agents</code>、<code>/tasks</code>、<code>/fork</code>、<code>/background</code>、<code>/batch</code></li>
+<li><strong>代码质量保障</strong>——<code>/diff</code>、<code>/code-review</code>、<code>/simplify</code>、<code>/security-review</code></li>
+<li><strong>项目配置管理</strong>——<code>/init</code>、<code>/permissions</code>、<code>/mcp</code>、<code>/memory</code></li>
+<li><strong>成本与健康监控</strong>——<code>/usage</code>、<code>/status</code>、<code>/doctor</code>、<code>/debug</code></li>
+</ol>
+<p>掌握这些命令，你就从”Claude Code 的使用者”变成了”Claude Code 的指挥者”。你不再是被动地等待 AI 回答问题，而是主动地编排 Agent 的行为、管理它的资源、控制它的成本。</p>
+<p>在下一篇中，我们将深入 <code>CLAUDE.md</code>——这个决定 Claude 理解你项目深度的关键文件。一个好的 CLAUDE.md 能让 Claude 从”通用 AI”变成”你的项目专家”。</p>
+<hr>
+<blockquote>
+<p>💡 <strong>实践建议</strong>：不要试图一次记住所有命令。先掌握标 ★★★ 的核心命令（<code>/compact</code>、<code>/context</code>、<code>/model</code>、<code>/effort</code>、<code>/plan</code>、<code>/clear</code>、<code>/resume</code>、<code>/permissions</code>、<code>/init</code>、<code>/memory</code>、<code>/diff</code>、<code>/code-review</code>、<code>/usage</code>），其他的用到时查速查表即可。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/a1b4af21.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/a1b4af21.html')">内置命令全解：从 /compact 到 /doctor 的实战指南</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/a1b4af21.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=内置命令全解：从 /compact 到 /doctor 的实战指南&amp;url=https://blog.goku.top/posts/a1b4af21.html&amp;pic=https://upyun.goku.top/blog/post_banner_10.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/AI-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AI Agent<span class="tagsPageCount">27</span></a><a class="post-meta__box__tags" href="/tags/Claude-Code/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Claude Code<span class="tagsPageCount">3</span></a><a class="post-meta__box__tags" href="/tags/%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>斜杠命令<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>终端工具<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>效率提升<span class="tagsPageCount">2</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/7c7b64e9.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">日常开发工作流：用 Claude Code 重塑你的编码习惯</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-23</div><div class="title">日常开发工作流：用 Claude Code 重塑你的编码习惯</div></div></a></div><div><a href="/posts/205343cf.html" title="Claude Code 是什么？从安装到第一次对话"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-23</div><div class="title">Claude Code 是什么？从安装到第一次对话</div></div></a></div><div><a href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"><img class="cover" src="https://upyun.goku.top/blog/post_banner_9.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</div></div></a></div><div><a href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_11.jpeg?_r_=245f602a-7293-6878-6c4b-69aa451a36ad" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</div></div></a></div><div><a href="/posts/8d500988.html" title="AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=6c2fd8b6-979e-938d-2c50-5eed62c50cb8" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战</div></div></a></div><div><a href="/posts/9ff0e580.html" title="AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_8.jpeg?_r_=04ccebef-8ebb-ee99-3e0e-5a257f1abaef" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-19</div><div class="title">AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">一、为什么需要斜杠命令？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E5%93%B2%E5%AD%A6%EF%BC%9A%E5%91%BD%E4%BB%A4%E5%8D%B3%E6%8E%A5%E5%8F%A3"><span class="toc-number">2.1.</span> <span class="toc-text">设计哲学：命令即接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%91%BD%E4%BB%A4%E5%85%A8%E6%99%AF%E5%9B%BE%EF%BC%9A%E6%8C%89%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%98%B6%E6%AE%B5%E5%88%86%E7%BB%84"><span class="toc-number">3.</span> <span class="toc-text">二、命令全景图：按工作流阶段分组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96%E9%98%B6%E6%AE%B5"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 项目初始化阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-init-%E2%80%94%E2%80%94-%E7%94%9F%E6%88%90%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BF%86%E6%96%87%E4%BB%B6"><span class="toc-number">3.1.1.</span> <span class="toc-text">&#x2F;init —— 生成项目记忆文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-permissions-%E2%80%94%E2%80%94-%E9%85%8D%E7%BD%AE%E6%9D%83%E9%99%90%E8%A7%84%E5%88%99"><span class="toc-number">3.1.2.</span> <span class="toc-text">&#x2F;permissions —— 配置权限规则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-mcp-%E2%80%94%E2%80%94-%E8%BF%9E%E6%8E%A5%E5%A4%96%E9%83%A8%E5%B7%A5%E5%85%B7"><span class="toc-number">3.1.3.</span> <span class="toc-text">&#x2F;mcp —— 连接外部工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%97%A5%E5%B8%B8%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 日常开发阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-compact-%E2%80%94%E2%80%94-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9"><span class="toc-number">3.2.1.</span> <span class="toc-text">&#x2F;compact —— 上下文压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-context-%E2%80%94%E2%80%94-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">3.2.2.</span> <span class="toc-text">&#x2F;context —— 上下文可视化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-model-%E2%80%94%E2%80%94-%E5%88%87%E6%8D%A2%E6%A8%A1%E5%9E%8B"><span class="toc-number">3.2.3.</span> <span class="toc-text">&#x2F;model —— 切换模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-effort-%E2%80%94%E2%80%94-%E8%B0%83%E6%95%B4%E6%8E%A8%E7%90%86%E6%B7%B1%E5%BA%A6"><span class="toc-number">3.2.4.</span> <span class="toc-text">&#x2F;effort —— 调整推理深度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-plan-%E2%80%94%E2%80%94-%E8%BF%9B%E5%85%A5%E8%AE%A1%E5%88%92%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.2.5.</span> <span class="toc-text">&#x2F;plan —— 进入计划模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-btw-%E2%80%94%E2%80%94-%E4%BE%A7%E9%97%AE%E9%A2%98"><span class="toc-number">3.2.6.</span> <span class="toc-text">&#x2F;btw —— 侧问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 并行执行阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-agents-%E2%80%94%E2%80%94-%E7%AE%A1%E7%90%86%E5%AD%90%E4%BB%A3%E7%90%86"><span class="toc-number">3.3.1.</span> <span class="toc-text">&#x2F;agents —— 管理子代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-tasks-%E2%80%94%E2%80%94-%E6%9F%A5%E7%9C%8B%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1"><span class="toc-number">3.3.2.</span> <span class="toc-text">&#x2F;tasks —— 查看后台任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-fork-%E2%80%94%E2%80%94-%E6%B4%BE%E7%94%9F%E5%90%8E%E5%8F%B0%E5%B7%A5%E4%BD%9C"><span class="toc-number">3.3.3.</span> <span class="toc-text">&#x2F;fork —— 派生后台工作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-background-%E2%80%94%E2%80%94-%E5%90%8E%E5%8F%B0%E5%8C%96%E5%BD%93%E5%89%8D%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.3.4.</span> <span class="toc-text">&#x2F;background —— 后台化当前会话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-batch-%E2%80%94%E2%80%94-%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%B9%B6%E8%A1%8C%E5%8F%98%E6%9B%B4"><span class="toc-number">3.3.5.</span> <span class="toc-text">&#x2F;batch —— 大规模并行变更</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5%E4%B8%8E%E6%8F%90%E4%BA%A4%E9%98%B6%E6%AE%B5"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 代码审查与提交阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-diff-%E2%80%94%E2%80%94-%E6%9F%A5%E7%9C%8B%E5%8F%98%E6%9B%B4"><span class="toc-number">3.4.1.</span> <span class="toc-text">&#x2F;diff —— 查看变更</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-code-review-%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E5%AE%A1%E6%9F%A5"><span class="toc-number">3.4.2.</span> <span class="toc-text">&#x2F;code-review —— 代码审查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-simplify-%E2%80%94%E2%80%94-%E4%BB%A3%E7%A0%81%E7%AE%80%E5%8C%96"><span class="toc-number">3.4.3.</span> <span class="toc-text">&#x2F;simplify —— 代码简化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-review-%E2%80%94%E2%80%94-PR-%E5%AE%A1%E6%9F%A5"><span class="toc-number">3.4.4.</span> <span class="toc-text">&#x2F;review —— PR 审查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-security-review-%E2%80%94%E2%80%94-%E5%AE%89%E5%85%A8%E5%AE%A1%E6%9F%A5"><span class="toc-number">3.4.5.</span> <span class="toc-text">&#x2F;security-review —— 安全审查</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E9%98%B6%E6%AE%B5"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 会话管理阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-clear-%E2%80%94%E2%80%94-%E6%B8%85%E7%A9%BA%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-number">3.5.1.</span> <span class="toc-text">&#x2F;clear —— 清空上下文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-resume-%E2%80%94%E2%80%94-%E6%81%A2%E5%A4%8D%E5%AF%B9%E8%AF%9D"><span class="toc-number">3.5.2.</span> <span class="toc-text">&#x2F;resume —— 恢复对话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-branch-%E2%80%94%E2%80%94-%E5%88%86%E6%94%AF%E5%AF%B9%E8%AF%9D"><span class="toc-number">3.5.3.</span> <span class="toc-text">&#x2F;branch —— 分支对话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-rewind-%E2%80%94%E2%80%94-%E5%9B%9E%E9%80%80"><span class="toc-number">3.5.4.</span> <span class="toc-text">&#x2F;rewind —— 回退</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E6%88%90%E6%9C%AC%E4%B8%8E%E7%8A%B6%E6%80%81%E7%9B%91%E6%8E%A7"><span class="toc-number">3.6.</span> <span class="toc-text">2.6 成本与状态监控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-usage-%E2%80%94%E2%80%94-%E7%94%A8%E9%87%8F%E7%BB%9F%E8%AE%A1"><span class="toc-number">3.6.1.</span> <span class="toc-text">&#x2F;usage —— 用量统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-status-%E2%80%94%E2%80%94-%E7%8A%B6%E6%80%81%E6%9F%A5%E7%9C%8B"><span class="toc-number">3.6.2.</span> <span class="toc-text">&#x2F;status —— 状态查看</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-doctor-%E2%80%94%E2%80%94-%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7"><span class="toc-number">3.6.3.</span> <span class="toc-text">&#x2F;doctor —— 诊断工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-debug-%E2%80%94%E2%80%94-%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97"><span class="toc-number">3.6.4.</span> <span class="toc-text">&#x2F;debug —— 调试日志</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-%E9%85%8D%E7%BD%AE%E4%B8%8E%E4%B8%AA%E6%80%A7%E5%8C%96"><span class="toc-number">3.7.</span> <span class="toc-text">2.7 配置与个性化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-config-%E2%80%94%E2%80%94-%E8%AE%BE%E7%BD%AE%E9%9D%A2%E6%9D%BF"><span class="toc-number">3.7.1.</span> <span class="toc-text">&#x2F;config —— 设置面板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-theme-%E2%80%94%E2%80%94-%E4%B8%BB%E9%A2%98%E5%88%87%E6%8D%A2"><span class="toc-number">3.7.2.</span> <span class="toc-text">&#x2F;theme —— 主题切换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-vim-%E2%80%94%E2%80%94-Vim-%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.7.3.</span> <span class="toc-text">&#x2F;vim —— Vim 模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-terminal-setup-%E2%80%94%E2%80%94-%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="toc-number">3.7.4.</span> <span class="toc-text">&#x2F;terminal-setup —— 终端配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-8-%E5%8D%8F%E4%BD%9C%E4%B8%8E%E5%88%86%E4%BA%AB"><span class="toc-number">3.8.</span> <span class="toc-text">2.8 协作与分享</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-export-%E2%80%94%E2%80%94-%E5%AF%BC%E5%87%BA%E5%AF%B9%E8%AF%9D"><span class="toc-number">3.8.1.</span> <span class="toc-text">&#x2F;export —— 导出对话</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-copy-%E2%80%94%E2%80%94-%E5%A4%8D%E5%88%B6%E5%9B%9E%E5%A4%8D"><span class="toc-number">3.8.2.</span> <span class="toc-text">&#x2F;copy —— 复制回复</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-feedback-%E2%80%94%E2%80%94-%E6%8F%90%E4%BA%A4%E5%8F%8D%E9%A6%88"><span class="toc-number">3.8.3.</span> <span class="toc-text">&#x2F;feedback —— 提交反馈</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-rename-%E2%80%94%E2%80%94-%E9%87%8D%E5%91%BD%E5%90%8D%E4%BC%9A%E8%AF%9D"><span class="toc-number">3.8.4.</span> <span class="toc-text">&#x2F;rename —— 重命名会话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-9-%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="toc-number">3.9.</span> <span class="toc-text">2.9 高级功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-cd-%E2%80%94%E2%80%94-%E5%88%87%E6%8D%A2%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="toc-number">3.9.1.</span> <span class="toc-text">&#x2F;cd —— 切换工作目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-add-dir-%E2%80%94%E2%80%94-%E6%B7%BB%E5%8A%A0%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95"><span class="toc-number">3.9.2.</span> <span class="toc-text">&#x2F;add-dir —— 添加工作目录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-loop-%E2%80%94%E2%80%94-%E5%AE%9A%E6%97%B6%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.9.3.</span> <span class="toc-text">&#x2F;loop —— 定时循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-goal-%E2%80%94%E2%80%94-%E8%AE%BE%E7%BD%AE%E7%9B%AE%E6%A0%87"><span class="toc-number">3.9.4.</span> <span class="toc-text">&#x2F;goal —— 设置目标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x2F-deep-research-%E2%80%94%E2%80%94-%E6%B7%B1%E5%BA%A6%E7%A0%94%E7%A9%B6"><span class="toc-number">3.9.5.</span> <span class="toc-text">&#x2F;deep-research —— 深度研究</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%94%AE%E7%9B%98%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%80%9F%E6%9F%A5"><span class="toc-number">4.</span> <span class="toc-text">三、键盘快捷键速查</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E6%8E%A7%E5%88%B6"><span class="toc-number">4.1.</span> <span class="toc-text">通用控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91"><span class="toc-number">4.2.</span> <span class="toc-text">文本编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%AF%BC%E8%88%AA"><span class="toc-number">4.3.</span> <span class="toc-text">会话导航</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4"><span class="toc-number">4.4.</span> <span class="toc-text">快捷命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Java-%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E5%91%BD%E4%BB%A4%E7%BB%84%E5%90%88%E6%8B%B3"><span class="toc-number">5.</span> <span class="toc-text">四、Java 开发者的命令组合拳</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1%EF%BC%9A%E6%8E%A5%E6%89%8B%E4%B8%80%E4%B8%AA%E9%99%8C%E7%94%9F%E7%9A%84-Spring-Boot-%E9%A1%B9%E7%9B%AE"><span class="toc-number">5.1.</span> <span class="toc-text">场景 1：接手一个陌生的 Spring Boot 项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2%EF%BC%9A%E4%BF%AE%E5%A4%8D%E4%B8%80%E4%B8%AA%E5%A4%8D%E6%9D%82%E7%9A%84%E5%B9%B6%E5%8F%91-Bug"><span class="toc-number">5.2.</span> <span class="toc-text">场景 2：修复一个复杂的并发 Bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-3%EF%BC%9A%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%A1%86%E6%9E%B6%E5%8D%87%E7%BA%A7"><span class="toc-number">5.3.</span> <span class="toc-text">场景 3：大规模框架升级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-4%EF%BC%9A%E6%97%A5%E5%B8%B8%E7%BC%96%E7%A0%81%E7%9A%84%E9%AB%98%E6%95%88%E5%BE%AA%E7%8E%AF"><span class="toc-number">5.4.</span> <span class="toc-text">场景 4：日常编码的高效循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">五、命令速查表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#A-D"><span class="toc-number">6.1.</span> <span class="toc-text">A-D</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#E-P"><span class="toc-number">6.2.</span> <span class="toc-text">E-P</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#R-Z"><span class="toc-number">6.3.</span> <span class="toc-text">R-Z</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E5%91%BD%E4%BB%A4%E6%98%AF-Agent-%E7%9A%84%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">7.</span> <span class="toc-text">六、总结：命令是 Agent 的操作系统</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="内置命令全解：从 /compact 到 /doctor 的实战指南"/></a><div class="content"><a class="title" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南">内置命令全解：从 /compact 到 /doctor 的实战指南</a><time datetime="2026-06-23T04:00:00.000Z" title="发表于 2026-06-23 12:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="日常开发工作流：用 Claude Code 重塑你的编码习惯"/></a><div class="content"><a class="title" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯">日常开发工作流：用 Claude Code 重塑你的编码习惯</a><time datetime="2026-06-23T02:00:00.000Z" title="发表于 2026-06-23 10:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/205343cf.html" title="Claude Code 是什么？从安装到第一次对话"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Claude Code 是什么？从安装到第一次对话"/></a><div class="content"><a class="title" href="/posts/205343cf.html" title="Claude Code 是什么？从安装到第一次对话">Claude Code 是什么？从安装到第一次对话</a><time datetime="2026-06-23T00:00:00.000Z" title="发表于 2026-06-23 08:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/90c85c38.html" title="AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战"><img src="https://upyun.goku.top/blog/post_banner_7.jpeg?_r_=ddaddc62-994b-434a-695d-0a8b639467a7" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战"/></a><div class="content"><a class="title" href="/posts/90c85c38.html" title="AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战">AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战</a><time datetime="2026-06-22T10:30:00.000Z" title="发表于 2026-06-22 18:30:00">2026-06-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"><img src="https://upyun.goku.top/blog/post_banner_9.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"/></a><div class="content"><a class="title" href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</a><time datetime="2026-06-22T10:00:00.000Z" title="发表于 2026-06-22 18:00:00">2026-06-22</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">81</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">123</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">33</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI-Agent/" style="font-size: 0.88rem;">AI Agent<sup>27</sup></a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" style="font-size: 0.88rem;">AI架构<sup>1</sup></a><a href="/tags/APM/" style="font-size: 0.88rem;">APM<sup>1</sup></a><a href="/tags/DAG/" style="font-size: 0.88rem;">DAG<sup>1</sup></a><a href="/tags/Function-Calling/" style="font-size: 0.88rem;">Function Calling<sup>2</sup></a><a href="/tags/GPT-4V/" style="font-size: 0.88rem;">GPT-4V<sup>1</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>1</sup></a><a href="/tags/HITL/" style="font-size: 0.88rem;">HITL<sup>1</sup></a><a href="/tags/Human-in-the-Loop/" style="font-size: 0.88rem;">Human-in-the-Loop<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>26</sup></a><a href="/tags/LangChain4j/" style="font-size: 0.88rem;">LangChain4j<sup>19</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/OpenTelemetry/" style="font-size: 0.88rem;">OpenTelemetry<sup>1</sup></a><a href="/tags/Spring-AI/" style="font-size: 0.88rem;">Spring AI<sup>22</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>5</sup></a><a href="/tags/Token%E4%BC%98%E5%8C%96/" style="font-size: 0.88rem;">Token优化<sup>1</sup></a><a href="/tags/Token%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">Token管理<sup>1</sup></a><a href="/tags/Tool-Use/" style="font-size: 0.88rem;">Tool Use<sup>1</sup></a><a href="/tags/Whisper/" style="font-size: 0.88rem;">Whisper<sup>1</sup></a><a href="/tags/Workflow/" style="font-size: 0.88rem;">Workflow<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">上下文工程<sup>1</sup></a><a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" style="font-size: 0.88rem;">人机协作<sup>1</sup></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">分布式系统<sup>2</sup></a><a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 0.88rem;">可观测性<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 0.88rem;">多模态<sup>1</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 0.88rem;">学习路线<sup>1</sup></a><a href="/tags/%E5%AE%B9%E9%94%99/" style="font-size: 0.88rem;">容错<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 0.88rem;">成本优化<sup>4</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%96%AD%E8%B7%AF%E5%99%A8/" style="font-size: 0.88rem;">断路器<sup>1</sup></a><a href="/tags/%E6%A8%A1%E5%9E%8B%E8%B7%AF%E7%94%B1/" style="font-size: 0.88rem;">模型路由<sup>1</sup></a><a href="/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/" style="font-size: 0.88rem;">渐进式自治<sup>1</sup></a><a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/" style="font-size: 0.88rem;">状态机<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 0.88rem;">知识图谱<sup>2</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" style="font-size: 0.88rem;">缓存策略<sup>1</sup></a><a href="/tags/%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5/" style="font-size: 0.88rem;">重试策略<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
