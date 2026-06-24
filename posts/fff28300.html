@@ -1,35 +1,31 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战 | Pei</title><meta name="keywords" content="AI Agent,Spring AI,LangChain4j,Reflexion,自我反思,经验学习"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深入解析 AI Agent 的自我反思机制，从 Reflexion 论文到 Java 实战，让 Agent 能够从失败中学习、持续进化，而非重复犯同样的错误。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战">
-<meta property="og:url" content="https://blog.goku.top/posts/fff28300.html">
-<meta property="og:site_name" content="Pei">
-<meta property="og:description" content="深入解析 AI Agent 的自我反思机制，从 Reflexion 论文到 Java 实战，让 Agent 能够从失败中学习、持续进化，而非重复犯同样的错误。">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg">
-<meta property="article:published_time" content="2026-06-21T04:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-21T04:05:37.073Z">
-<meta property="article:author" content="Pei">
-<meta property="article:tag" content="AI Agent">
-<meta property="article:tag" content="Spring AI">
-<meta property="article:tag" content="LangChain4j">
-<meta property="article:tag" content="Reflexion">
-<meta property="article:tag" content="自我反思">
-<meta property="article:tag" content="经验学习">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_2.jpeg"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png"><link rel="canonical" href="https://blog.goku.top/posts/fff28300"><link rel="preconnect" href="//cdn.jsdelivr.net"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战 | Pei</title><meta name="keywords" content="AI Agent,LangChain4j,Spring AI,Reflexion,自我反思,经验学习"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><meta name="application-name" content="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战"><meta property="og:url" content="https://blog.goku.top/posts/fff28300.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="深入解析 AI Agent 的自我反思机制，从 Reflexion 论文到 Java 实战，让 Agent 能够从失败中学习、持续进化，而非重复犯同样的错误。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=3bb03c0f-00ad-89d3-cbc0-f21c8bcbbddd"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=3bb03c0f-00ad-89d3-cbc0-f21c8bcbbddd"><meta name="description" content="深入解析 AI Agent 的自我反思机制，从 Reflexion 论文到 Java 实战，让 Agent 能够从失败中学习、持续进化，而非重复犯同样的错误。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/fff28300"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
   root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
   algolia: undefined,
-  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
-  translate: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
   noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":400},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
   copy: {
     success: '复制成功',
     error: '复制错误',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
-    homepage: true,
+    homepage: false,
+    simplehomepage: true,
     post: false
   },
   runtime: '天',
@@ -40,25 +36,31 @@
     day: '天前',
     month: '个月前'
   },
-  copyright: undefined,
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
   lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"top-center"},
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
   source: {
     justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery@2/dist/fjGallery.min.css'
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
     }
   },
   isPhotoFigcaption: false,
   islazyload: true,
-  isAnchor: false
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
   title: 'AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战',
+  postAI: '',
+  pageFillDescription: '系列文章, 一个让人头疼的场景, 什么是自我反思？从人类认知到 Agent 设计, 反思的本质, 为什么 Agent 需要反思？, 学术前沿：Reflexion 框架, 自我反思的架构设计, 核心实现：用 LangChain4j 构建反思系统, 第一步：定义反思数据结构, 第二步：构建反思 Agent, 第三步：经验存储与检索, 第四步：编排反思循环, 进阶：反思质量的保障机制, 问题一：反思太泛泛, 问题二：错误经验的污染, 问题三：反思循环的死循环, 实战案例：智能客服 Agent 的反思进化, 场景设定, 三次迭代：Agent 是怎么变聪明的, 与记忆系统的关系, 生产环境考量, 性能开销, 与可观测性的结合, 安全性考量, 反思的边界：什么时候不该反思, 未来展望, 总结系列文章本篇是深度解析系列的第篇以下是系列文章导航理解的大脑模式从入门到实战的工具箱深入理解与实战的记忆系统从到持久化记忆的实战的规划大脑从任务分解到自适应执行策略的灵魂对话系统提示词设计的艺术与工程模型上下文协议的万能接口与实战让学会说人话结构化输出实战向量化的魔法从文本到向量的数学之旅与实战从零理解检索增强生成完整指南当遇到的架构设计与实战当遇上知识图谱原理与实战的知识检索引擎从向量搜索到智能检索策略的实战的推理引擎从到推理模型的深度解析与实战评估与优化从基准测试到生产环境的质量守护实战的可观测性从链路追踪到成本监控的实战的安全防线注入防御与生产级安全防护实战核心架构全解析从到的设计哲学的流式响应与实时交互从到的实战的工作流编排从顺序链到自适应的实战的多模态感知从图片理解到语音交互的实战团队协作多系统架构设计与实战间如何对话协议深度解析与实战的自我反思与经验学习从错误中进化的实战本文一个让人头疼的场景你有没有遇到过这种情况你让帮你查询一个订单的物流状态结果它调用了错误的明明应该调它却调了你告诉它错了应该用物流查询接口它道歉了重新调用这次对了然后第二天同一个问题又发生了它又调错了同一个接口这就是当下大多数的致命缺陷它们不记得自己犯过的错在之前的文章里我们讲过模式让具备了思考行动观察的推理循环在规划大脑里我们讲了任务分解策略在记忆系统里我们讲了短期和长期记忆但这些能力组合在一起还缺一块关键拼图自我反思人类之所以能进步不是因为不会犯错而是因为我们能反思错误总结经验下次做得更好也需要这种能力今天我们就来深入聊聊怎么让学会自我反思从错误中进化什么是自我反思从人类认知到设计反思的本质自我反思在认知科学中的定义是对自身思维过程的审视和评估用更通俗的话说你做完一件事之后回过头来想我刚才做得怎么样哪里可以改进下次遇到类似情况我应该怎么做这个过程包含三个关键步骤回顾我刚才做了什么结果是什么评估这个结果符合预期吗哪里做得好哪里做得不好提炼我能从中提取什么经验教训下次怎么改进为什么需要反思让我用一个对比来说明没有反思能力的用户帮我查询订单的物流状态调用拿到订单信息但没有物流状态对用户说抱歉我需要换个方式查询调用成功下次遇到同样问题还是会先调错接口有反思能力的用户帮我查询订单的物流状态调用失败没有物流信息反思物流查询应该用而不是调用成功经验记录查询物流状态时直接使用不要使用下次遇到类似问题会直接调用正确的接口差距在哪第一个把每次失败都当成独立事件第二个把失败变成了可复用的经验学术前沿框架年等人发表了论文提出了一个完整的自我反思框架核心思想是让用自然语言总结失败经验并在后续尝试中参考这些经验的流程是这样的执行任务评估结果如果失败生成反思存入记忆重试带着反思这和传统强化学习的区别在于用数值化的奖励信号更新参数而用自然语言的经验总结来引导行为这意味着不需要微调模型参数经验可以跨任务迁移人类可以阅读和编辑的反思记录自我反思的架构设计在动手写代码之前我们先来设计一下整体架构一个完整的自我反思系统包含四个核心模块执行引擎任务执行结果评估反思生成经验存储经验检索下次执行时任务执行器执行具体任务和之前模式一样使用思考行动观察的循环结果评估器判断任务是否成功如果失败分析失败原因这里可以用来做智能评估也可以用规则引擎做硬性检查反思生成器基于失败原因生成结构化的经验总结这是最核心的部分好的反思要具体可操作可复用经验存储与检索把反思记录持久化存储在后续执行类似任务时检索相关经验这里可以复用我们之前讲过的技术来做语义检索核心实现用构建反思系统理论讲够了来写代码我们用来实现一个完整的自我反思第一步定义反思数据结构反思记录从一次失败中学到的经验任务标识任务描述失败原因经验总结核心具体错误点教训下次该怎么做第几次尝试构造器省略将反思格式化为可注入的文本历史经验任务失败原因反思总结经验教训注意方法它把反思记录转换成一段可以直接注入到里的文本这是连接反思系统和执行系统的桥梁第二步构建反思评估任务执行结果判断是否成功你是一个任务结果评估专家根据任务描述和执行结果判断任务是否成功完成如果失败分析具体的失败原因返回格式失败原因成功时为空的完成度评分任务描述执行结果期望输出基于失败信息生成反思你是一个经验总结专家根据任务的失败信息生成一份结构化的反思报告要求具体指出错在哪里不要泛泛而谈分析为什么会出现这个错误根因分析给出下次遇到类似任务时应该怎么做可操作的建议如果有多个错误点逐一列出返回格式整体反思总结错误错误教训教训任务描述执行过程失败原因期望输出历史经验如有这里的设计有几个关键点评估要求返回结构化方便后续程序处理反思明确要求具体指出错在哪里这是因为泛泛的反思如下次要更仔细没有实际价值历史经验注入如果之前有类似任务的反思记录会一起传给让它避免重复之前的教训第三步经验存储与检索反思生成了得存起来而且存储之后要能高效检索当遇到新任务时能找到相关的历史经验经验存储使用向量数据库存储反思记录存储一条反思记录检索与当前任务相关的历史反思相似度阈值避免不相关的经验干扰这里复用了向量化的技术来实现语义检索当新任务进来时我们不是用关键词匹配历史经验而是用语义相似度查询订单物流和查看快递状态虽然用词不同但语义接近能检索到相关经验这个阈值很重要太低会引入不相关的经验误导太高会错过有价值的经验实际生产中需要根据业务场景调优第四步编排反思循环有了上面的组件我们来把它们组装成一个完整的反思循环带自我反思的执行器基础的任务执行器执行任务带反思重试检索相关历史经验尝试执行最多重试次执行任务第次尝试执行任务尝试评估结果任务在第次尝试后成功失败了生成反思任务第次尝试失败存储反思将新反思加入上下文为下次重试做准备已生成反思并更新上下文准备第次重试超过最大重试次数构建带历史经验的增强历史经验请务必参考避免重复犯错请基于以上经验避免重复错误重新执行任务这段代码的核心流程是检索历史经验在执行任务之前先从经验库中检索相关反思注入经验到把历史经验附加到原始后面执行评估反思存储标准的反思循环迭代改进每次反思后更新上下文让下一次尝试更聪明注意的设计它不是简单地把经验贴在后面而是加了强调性提示请务必参考避免重复犯错这是因为有时候会忽略长上下文中间的内容中间丢失问题显式提示可以提高注意力进阶反思质量的保障机制上面的实现看起来已经挺完整了但在生产环境中你很快会遇到几个问题问题一反思太泛泛可能生成这样的反思下次要更仔细地分析需求这种反思没有任何价值它不具体不可操作解决方案用评估约束反思质量评估以下反思记录的质量返回的评分评分标准具体性分是否指出了具体的错误操作而非泛泛而谈可操作性分给出的教训是否可以直接指导下一步行动根因分析分是否分析了错误的根本原因而非表面现象复用性分经验是否可以应用到类似但不同的场景低于分的反思需要重新生成返回问题问题改进建议反思内容在生成反思之后用另一个调用来评估反思质量如果评分低于阈值就让重新生成这相当于给反思加了一个质量门禁问题二错误经验的污染如果从一次偶然的失败中总结出了错误的经验比如偶尔超时错误地总结为这个不能用后续所有类似任务都会被误导解决方案经验验证与衰减机制经验验证器跟踪经验的有效性当一条经验被成功应用时增加其权重如果信心分降到阈值以下标记为待验证经验信心分过低标记为待验证定期清理低信心的经验每天执行归档低信心经验这个机制的核心思想是经验不是一成不变的它需要经过实践检验一条经验如果多次被成功应用信心分会逐渐升高如果应用后反而导致失败信心分会下降信心分过低的经验会被标记为待验证不再直接注入这有点像人类的认知过程你从别人那里学到一条经验用了几次发现确实管用就会越来越信任它如果发现不管用就会质疑它问题三反思循环的死循环有时候会陷入一个怪圈尝试失败反思重试还是失败因为问题本身不在能力范围内继续反思继续失败解决方案策略切换机制策略切换器当反思无法改善结果时切换到不同策略标准执行反思重试分解为子任务请求人工介入使用替代方案连续失败次以内继续反思重试连续失败次尝试分解任务连续失败次使用替代方案如不同的工具不同的连续失败次以上请求人工介入核心思想反思不是万能的当反思无法改善结果时需要升级策略先尝试分解任务再尝试替代方案最后请求人工介入这个渐进式升级机制避免了在死循环里打转实战案例智能客服的反思进化光说不练假把式我们来看一个完整的实战案例一个智能客服它需要处理用户的各种售后问题场景设定可用工具查询订单详情查询物流状态发起退款申请查询退款进度创建工单处理用户请求带反思能力处理客服请求准确解决用户问题并给出友好的回复兜底创建工单转人工无法处理的请求抱歉您的问题我暂时无法处理已为您转接人工客服三次迭代是怎么变聪明的第一次尝试无经验用户说我的订单还没到都一周了的行为思考用户在询问订单物流状态行动调用观察获取到订单详情但没有物流轨迹信息结果回复用户您的订单已发货但无法回答到哪了评估结果失败用户想知道物流状态只拿到了订单信息反思生成查询物流状态应该使用工具而不是返回的是订单基本信息商品金额状态而返回的是物流轨迹两者是不同的数据源错误地用代替没有区分订单状态和物流状态两个概念当用户提到到哪了物流快递发货了吗等关键词时应直接使用适合回答订单是否已付款买了什么等问题在调用工具前先分析用户想获取的是哪类信息第二次尝试带反思经验用户说我想看看我那个快递到哪了单号是的行为注入了第一次的反思思考用户说快递到哪了根据历史经验这属于物流查询应该用行动调用观察获取到物流轨迹显示包裹在杭州转运中心结果正确回复用户物流状态评估结果成功第三次尝试类似场景用户说帮我查一下发货没有的行为自动检索到历史经验思考用户问发货没有这是物流相关的查询经验中明确提到了发货了吗行动直接调用观察显示已发货在途运输中结果一次性给用户准确回复看到区别了吗第一次是犯错反思重试但后续的类似任务会自动检索到相关经验直接跳过犯错阶段与记忆系统的关系有读者可能会问这和我们之前讲的记忆系统有什么区别这是个好问题它们的关系是记忆系统是基础设施负责存储和检索信息反思系统是上层应用负责从失败中提取经验并利用记忆系统来存储和检索这些经验自我反思系统应用层评估反思经验验证策略切换记忆系统基础设施层短期记忆工作记忆长期记忆向量数据库经验存储记忆系统中的情景记忆部分天然就适合存储反思经验因为它存储的是发生过什么以及从中学到了什么但反思系统比记忆系统多了一层它有主动的评估和提炼过程记忆系统只是被动地存储信息反思系统则会主动分析这次失败的根本原因是什么下次应该怎么改进生产环境考量性能开销自我反思不是免费的每次反思至少需要次额外的调用评估反思加上向量检索的开销在高并发场景下这会显著增加延迟和成本优化策略延迟反思不是每次任务都需要实时反思对于非关键任务可以把反思过程放到异步队列中在低峰期处理选择性反思只对意料之外的失败进行反思如果的置信度很高但结果失败说明确实需要反思如果本身就不确定反思的价值较低批量反思把同一类任务的多个失败案例一起分析生成更全面的经验这比逐条反思效率更高异步反思服务不阻塞主流程反思可以慢一点不影响用户体验与可观测性的结合反思系统的运行本身也需要监控我们在可观测性文章中讲过的指标体系在这里同样适用反思触发率多少比例的任务触发了反思触发率突然升高可能说明环境发生了变化变更业务规则调整等反思成功率反思后重试成功的比例如果很低说明反思质量有问题经验命中率从经验库中检索到相关经验的比例如果很低可能是模型不适合当前领域平均重试次数一个任务平均需要几次尝试才能成功安全性考量反思记录中可能包含敏感信息用户数据内部地址等存储和检索反思时需要注意脱敏处理在存储反思之前对敏感字段进行脱敏访问控制不同业务线的反思记录应该隔离避免业务线的错误经验污染业务线审计日志反思记录的创建和应用都应该有审计日志便于追溯问题反思的边界什么时候不该反思自我反思很强大但不是银弹以下场景不建议使用反思机制确定性任务如果任务的执行路径是确定的如操作反思没有意义直接修就行时间敏感任务反思需要额外的调用时间对延迟要求极高的场景如实时交易可能不适用一次性任务如果同类任务不会再次出现反思的经验没有复用价值模型能力不足如果本身无法理解任务的复杂性反思也帮不了它巧妇难为无米之炊判断标准如果你的会反复执行同类任务且失败模式多样不是单一导致的那反思机制大概率能带来价值未来展望自我反思是进化的重要一步但远不是终点未来的发展方向可能包括跨经验共享多个之间共享反思经验一个犯的错可以成为所有的教训这和我们之前讲的多协作结合可以构建真正的集体智慧人类反馈整合不仅从自动评估中反思还从用户的显式反馈如这个回答不对中学习元反思不仅反思做了什么错事还反思反思过程本身是否有效如果发现反思一直没帮助改善结果说明反思策略本身需要调整持续学习与微调将反思经验转化为训练数据用于微调专用模型这比在中注入经验更高效但需要更多的基础设施支持总结今天我们深入探讨了的自我反思与经验学习机制核心要点回顾反思的本质回顾评估提炼把失败变成可复用的经验框架用自然语言总结经验不需要微调模型参数四个核心模块任务执行器结果评估器反思生成器经验存储与检索三个关键挑战反思太泛泛用质量评估约束错误经验污染用信心分和验证机制死循环用策略切换机制生产考量性能优化异步反思选择性反思可观测性安全性自我反思让从每次都犯同样的错进化为越用越聪明结合之前讲过的记忆规划等能力一个真正能自我进化的系统就初具雏形了最后送一句我很喜欢的话经验不是你经历了什么而是你从经历中学到了什么这句话对同样适用',
   isPost: true,
   isHome: false,
-  isHighlightShrink: undefined,
+  isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-06-21 12:05:37'
+  postUpdate: '2026-06-21 12:05:37',
+  postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -72,65 +74,104 @@
     display: inline !important
   }
 </style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
       }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
         }
       }
       const t = saveToLocal.get('theme')
     
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
         
       const asideStatus = saveToLocal.get('aside-status')
       if (asideStatus !== undefined) {
@@ -141,13 +182,14 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/html/css/plane_v2.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" type="text/css" href="/html/css/poem.css"><link rel="stylesheet" type="text/css" href="/html/css/snackbar.css"><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/zhheo/Post-Abstract-AI@0.15.2/tianli_gpt.css"><link rel="stylesheet" href="/html/css/goku.css"><meta name="generator" content="Hexo 6.3.0"></head><body><div id="loading-box"><div class="wizard-scene"><div class="wizard-objects"><div class="wizard-square"></div><div class="wizard-circle"></div><div class="wizard-triangle"></div></div><div class="wizard"><div class="wizard-body"></div><div class="wizard-right-arm"><div class="wizard-right-hand"></div></div><div class="wizard-left-arm"><div class="wizard-left-hand"></div></div><div class="wizard-head"><div class="wizard-beard"></div><div class="wizard-face"><div class="wizard-adds"></div></div><div class="wizard-hat"><div class="wizard-hat-of-the-hat"></div><div class="wizard-four-point-star --first"></div><div class="wizard-four-point-star --second"></div><div class="wizard-four-point-star --third"></div></div></div></div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://thirdqq.qlogo.cn/g?b=sdk&amp;k=C88w6ZftQk9ibgdcM4sH4jg&amp;s=140&amp;t=1657271033" onerror="onerror=null;src='https://upyun.goku.top/blog/loading.gif'" alt="avatar"/></div><div class="site-data is-center"><div class="data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">129</div></a></div><div class="data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random.html"><i class="fa-fw fa-solid fa-shuffle"></i><span> 随机一文</span></a></div><div class="menus_item"><a class="site-page" href="/webstack.html"><i class="fa-fw fa-solid fa-star"></i><span> 网址导航</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/posts/d10ad42e.html"><span> 堵猫猫</span></a></li><li><a class="site-page child" href="/posts/fc4d392a.html"><span> 烟花秀</span></a></li><li><a class="site-page child" href="/html/TheMatrix/index.html"><span> 黑客帝国</span></a></li><li><a class="site-page child" href="/html/Glare/index.html"><span> 炫光</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk"><i class="fa-fw fas fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa-solid fa-blog"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://upyun.goku.top/blog/post_banner_2.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Pei</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/random.html"><i class="fa-fw fa-solid fa-shuffle"></i><span> 随机一文</span></a></div><div class="menus_item"><a class="site-page" href="/webstack.html"><i class="fa-fw fa-solid fa-star"></i><span> 网址导航</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/posts/d10ad42e.html"><span> 堵猫猫</span></a></li><li><a class="site-page child" href="/posts/fc4d392a.html"><span> 烟花秀</span></a></li><li><a class="site-page child" href="/html/TheMatrix/index.html"><span> 黑客帝国</span></a></li><li><a class="site-page child" href="/html/Glare/index.html"><span> 炫光</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/artitalk"><i class="fa-fw fas fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fa-solid fa-blog"></i><span> 博客</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div></div></div><div id="nav-right"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/">AI</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote>
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI-Agent/" style="font-size: 1.05rem;">AI Agent<sup>30</sup></a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" style="font-size: 1.05rem;">AI架构<sup>1</sup></a><a href="/tags/APM/" style="font-size: 1.05rem;">APM<sup>1</sup></a><a href="/tags/Chain-of-Thought/" style="font-size: 1.05rem;">Chain-of-Thought<sup>1</sup></a><a href="/tags/DeepSeek-R1/" style="font-size: 1.05rem;">DeepSeek-R1<sup>1</sup></a><a href="/tags/GPT-4V/" style="font-size: 1.05rem;">GPT-4V<sup>1</sup></a><a href="/tags/Gemini/" style="font-size: 1.05rem;">Gemini<sup>1</sup></a><a href="/tags/Guardrails/" style="font-size: 1.05rem;">Guardrails<sup>1</sup></a><a href="/tags/HITL/" style="font-size: 1.05rem;">HITL<sup>1</sup></a><a href="/tags/Human-in-the-Loop/" style="font-size: 1.05rem;">Human-in-the-Loop<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>27</sup></a><a href="/tags/LLM-Security/" style="font-size: 1.05rem;">LLM Security<sup>1</sup></a><a href="/tags/LangChain4j/" style="font-size: 1.05rem;">LangChain4j<sup>19</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/OpenTelemetry/" style="font-size: 1.05rem;">OpenTelemetry<sup>1</sup></a><a href="/tags/Prompt-Injection/" style="font-size: 1.05rem;">Prompt Injection<sup>1</sup></a><a href="/tags/Spring-AI/" style="font-size: 1.05rem;">Spring AI<sup>22</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>6</sup></a><a href="/tags/Token%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">Token管理<sup>1</sup></a><a href="/tags/Whisper/" style="font-size: 1.05rem;">Whisper<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>3</sup></a><a href="/tags/o1/" style="font-size: 1.05rem;">o1<sup>1</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">上下文工程<sup>2</sup></a><a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" style="font-size: 1.05rem;">人机协作<sup>1</sup></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">分布式系统<sup>2</sup></a><a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 1.05rem;">可观测性<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 1.05rem;">多模态<sup>1</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 1.05rem;">学习路线<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" style="font-size: 1.05rem;">安全防护<sup>1</sup></a><a href="/tags/%E5%AE%B9%E9%94%99/" style="font-size: 1.05rem;">容错<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 1.05rem;">成本优化<sup>4</sup></a><a href="/tags/%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/" style="font-size: 1.05rem;">推理模型<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%96%AD%E8%B7%AF%E5%99%A8/" style="font-size: 1.05rem;">断路器<sup>1</sup></a><a href="/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/" style="font-size: 1.05rem;">渐进式自治<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 1.05rem;">知识图谱<sup>2</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5/" style="font-size: 1.05rem;">重试策略<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">38</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">四月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/LangChain4j/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>LangChain4j</span></a><a class="article-meta__tags" href="/tags/Spring-AI/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Spring AI</span></a><a class="article-meta__tags" href="/tags/Reflexion/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Reflexion</span></a><a class="article-meta__tags" href="/tags/%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>自我反思</span></a><a class="article-meta__tags" href="/tags/%E7%BB%8F%E9%AA%8C%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>经验学习</span></a></span></div></div><h1 class="post-title" itemprop="name headline">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-21T04:05:37.073Z" title="更新于 2026-06-21 12:05:37">2026-06-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=3bb03c0f-00ad-89d3-cbc0-f21c8bcbbddd"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/fff28300.html"><header><a class="post-meta-categories" href="/categories/AI/" itemprop="url">AI</a><a href="/tags/AI-Agent/" tabindex="-1" itemprop="url">AI Agent</a><a href="/tags/LangChain4j/" tabindex="-1" itemprop="url">LangChain4j</a><a href="/tags/Spring-AI/" tabindex="-1" itemprop="url">Spring AI</a><a href="/tags/Reflexion/" tabindex="-1" itemprop="url">Reflexion</a><a href="/tags/%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D/" tabindex="-1" itemprop="url">自我反思</a><a href="/tags/%E7%BB%8F%E9%AA%8C%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">经验学习</a><h1 id="CrawlerTitle" itemprop="name headline">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-21T04:00:00.000Z" title="发表于 2026-06-21 12:00:00">2026-06-21</time><time itemprop="dateCreated datePublished" datetime="2026-06-21T04:05:37.073Z" title="更新于 2026-06-21 12:05:37">2026-06-21</time></header><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote>
 <p>本篇是 AI Agent 深度解析系列的第 24 篇。以下是系列文章导航：</p>
 </blockquote>
 <ol>
@@ -360,98 +402,230 @@
 </ol>
 <p>自我反思让 Agent 从”每次都犯同样的错”进化为”越用越聪明”。结合之前讲过的 <a href="/posts/a3f7b2e1.html">ReAct</a>、<a href="/posts/70d64e78.html">记忆</a>、<a href="/posts/e05701b9.html">规划</a>等能力，一个真正能自我进化的 Agent 系统就初具雏形了。</p>
 <p>最后送一句我很喜欢的话：<strong>经验不是你经历了什么，而是你从经历中学到了什么。</strong> 这句话对 Agent，同样适用。</p>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Pei</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://blog.goku.top/posts/fff28300.html">https://blog.goku.top/posts/fff28300.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AI-Agent/">AI Agent</a><a class="post-meta__tags" href="/tags/Spring-AI/">Spring AI</a><a class="post-meta__tags" href="/tags/LangChain4j/">LangChain4j</a><a class="post-meta__tags" href="/tags/Reflexion/">Reflexion</a><a class="post-meta__tags" href="/tags/%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D/">自我反思</a><a class="post-meta__tags" href="/tags/%E7%BB%8F%E9%AA%8C%E5%AD%A6%E4%B9%A0/">经验学习</a></div><div class="post_share"></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wxpay.jpeg" target="_blank"><img class="post-qr-code-img" src="/img/wxpay.jpeg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpeg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpeg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/eb4e7280.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_3.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</div></div></a></div><div class="next-post pull-right"><a href="/posts/4832ee17.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_11.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Agent 间如何对话：A2A 协议深度解析与 Java 实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_7.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</div></div></a></div><div><a href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"><img class="cover" src="https://upyun.goku.top/blog/post_banner_9.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="title">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</div></div></a></div><div><a href="/posts/9ff0e580.html" title="AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_11.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-19</div><div class="title">AI Agent 的可观测性：从链路追踪到成本监控的 Java 实战</div></div></a></div><div><a href="/posts/8d500988.html" title="AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_12.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战</div></div></a></div><div><a href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_3.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-21</div><div class="title">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</div></div></a></div><div><a href="/posts/90c85c38.html" title="AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的成本优化：从模型路由到缓存策略的 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://thirdqq.qlogo.cn/g?b=sdk&amp;k=C88w6ZftQk9ibgdcM4sH4jg&amp;s=140&amp;t=1657271033" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/loading.gif'" alt="avatar"/></div><div class="author-info__name">Pei</div><div class="author-info__description"></div></div><div class="card-info-data is-center"><div class="card-info-data-item"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a></div><div class="card-info-data-item"><a href="/tags/"><div class="headline">标签</div><div class="length-num">129</div></a></div><div class="card-info-data-item"><a href="/categories/"><div class="headline">分类</div><div class="length-num">33</div></a></div></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sgr997"><i class="fab fa-github"></i><span>联系我</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sgr997" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="http://www.coolapk.com/u/725902" target="_blank" title="酷安"><i class="fa-solid fa-c"></i></a><a class="social-icon" href="https://space.bilibili.com/49499302" target="_blank" title="bilibili"><i class="fa-brands fa-bilibili"></i></a></div></div><script src="https://npm.elemecdn.com/ethan4116-blog/lib/js/other/two-people/zdog.dist.js"></script><style>.card-widget.card-announcement {
-margin: 0;
-align-items: center;
-justify-content: center;
-text-align: center;
-}
-canvas {
-display: block;
-margin: 0 auto;
-cursor: move;
-}</style><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E8%AE%A9%E4%BA%BA%E5%A4%B4%E7%96%BC%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">一个让人头疼的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D%EF%BC%9F%E4%BB%8E%E4%BA%BA%E7%B1%BB%E8%AE%A4%E7%9F%A5%E5%88%B0-Agent-%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">什么是自我反思？从人类认知到 Agent 设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.1.</span> <span class="toc-text">反思的本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Agent-%E9%9C%80%E8%A6%81%E5%8F%8D%E6%80%9D%EF%BC%9F"><span class="toc-number">3.2.</span> <span class="toc-text">为什么 Agent 需要反思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E6%9C%AF%E5%89%8D%E6%B2%BF%EF%BC%9AReflexion-%E6%A1%86%E6%9E%B6"><span class="toc-number">3.3.</span> <span class="toc-text">学术前沿：Reflexion 框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">自我反思的架构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%94%A8-LangChain4j-%E6%9E%84%E5%BB%BA%E5%8F%8D%E6%80%9D%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text">核心实现：用 LangChain4j 构建反思系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%8F%8D%E6%80%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">5.1.</span> <span class="toc-text">第一步：定义反思数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%8F%8D%E6%80%9D-Agent"><span class="toc-number">5.2.</span> <span class="toc-text">第二步：构建反思 Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%BB%8F%E9%AA%8C%E5%AD%98%E5%82%A8%E4%B8%8E%E6%A3%80%E7%B4%A2"><span class="toc-number">5.3.</span> <span class="toc-text">第三步：经验存储与检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%BC%96%E6%8E%92%E5%8F%8D%E6%80%9D%E5%BE%AA%E7%8E%AF"><span class="toc-number">5.4.</span> <span class="toc-text">第四步：编排反思循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%8F%8D%E6%80%9D%E8%B4%A8%E9%87%8F%E7%9A%84%E4%BF%9D%E9%9A%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">进阶：反思质量的保障机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%8F%8D%E6%80%9D%E5%A4%AA%E6%B3%9B%E6%B3%9B"><span class="toc-number">6.1.</span> <span class="toc-text">问题一：反思太泛泛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C%E7%9A%84%E6%B1%A1%E6%9F%93"><span class="toc-number">6.2.</span> <span class="toc-text">问题二：错误经验的污染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E5%8F%8D%E6%80%9D%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="toc-number">6.3.</span> <span class="toc-text">问题三：反思循环的死循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-Agent-%E7%9A%84%E5%8F%8D%E6%80%9D%E8%BF%9B%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">实战案例：智能客服 Agent 的反思进化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E8%AE%BE%E5%AE%9A"><span class="toc-number">7.1.</span> <span class="toc-text">场景设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9AAgent-%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E8%81%AA%E6%98%8E%E7%9A%84"><span class="toc-number">7.2.</span> <span class="toc-text">三次迭代：Agent 是怎么变聪明的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">8.</span> <span class="toc-text">与记忆系统的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%80%83%E9%87%8F"><span class="toc-number">9.</span> <span class="toc-text">生产环境考量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%BC%80%E9%94%80"><span class="toc-number">9.1.</span> <span class="toc-text">性能开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">9.2.</span> <span class="toc-text">与可观测性的结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7%E8%80%83%E9%87%8F"><span class="toc-number">9.3.</span> <span class="toc-text">安全性考量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D%E7%9A%84%E8%BE%B9%E7%95%8C%EF%BC%9A%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%8D%E8%AF%A5%E5%8F%8D%E6%80%9D"><span class="toc-number">10.</span> <span class="toc-text">反思的边界：什么时候不该反思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">11.</span> <span class="toc-text">未来展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"><img src="https://upyun.goku.top/blog/post_banner_8.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"/></a><div class="content"><a class="title" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台">Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台</a><time datetime="2026-06-24T02:00:00.000Z" title="发表于 2026-06-24 10:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多文件重构与复杂任务实战"/></a><div class="content"><a class="title" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战">多文件重构与复杂任务实战</a><time datetime="2026-06-24T00:00:00.000Z" title="发表于 2026-06-24 08:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2327dd63.html" title="CLAUDE.md：项目上下文工程的艺术"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="CLAUDE.md：项目上下文工程的艺术"/></a><div class="content"><a class="title" href="/posts/2327dd63.html" title="CLAUDE.md：项目上下文工程的艺术">CLAUDE.md：项目上下文工程的艺术</a><time datetime="2026-06-23T08:00:00.000Z" title="发表于 2026-06-23 16:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内置命令全解：从 /compact 到 /doctor 的实战指南"/></a><div class="content"><a class="title" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南">内置命令全解：从 /compact 到 /doctor 的实战指南</a><time datetime="2026-06-23T04:00:00.000Z" title="发表于 2026-06-23 12:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="日常开发工作流：用 Claude Code 重塑你的编码习惯"/></a><div class="content"><a class="title" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯">日常开发工作流：用 Claude Code 重塑你的编码习惯</a><time datetime="2026-06-23T02:00:00.000Z" title="发表于 2026-06-23 10:00:00">2026-06-23</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="ft"><div class="ft-item-1"><div class="t-top"><div class="t-t-l"><p class="ft-t t-l-t">关于博客</p><div class="bg-ad"><div>衷心感谢每一位光临我的博客的朋友，感谢你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获。<br/>本站域名goku.top取自我最喜爱的动漫七龙珠中的人物狗空（孙悟空）的英文名goku。</div><div class="btn-xz-box"><a class="btn-xz" target="_blank" rel="noopener" href="https://gg.goku.top">聊天问答</a></div></div></div><div class="t-t-r"><p class="ft-t t-l-t">推荐网址</p><ul class="ft-links"><li><a target="_blank" rel="noopener" href="https://github.com/sgr997">Github</a><a href="/webstack.html">网址导航</a></li><li><a target="_blank" rel="noopener" href="http://qiniu.goku.top/wxpay.jpeg">来杯咖啡</a><a href="/artitalk/">留点什么</a></li><li><a href="/about/">关于博主</a><a href="/archives/">文章归档</a></li><li><a href="/categories/">文章分类</a><a href="/tags/">文章标签</a></li></ul></div></div></div><div class="ft-item-2"><p class="ft-t">推荐友链</p><div class="ft-img-group"><div class="img-group-item"><a href="/webstack.html"><img src="https://upyun.goku.top/blog/icon.png" alt="网址导航"/></a></div></div></div></div><div class="copyright">&copy;2020 - 2026  <i id="heartbeat" class="fa fas fa-heartbeat"></i> Pei</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2023023872号</a> <div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">本地搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.bootcdn.net/ajax/libs/fancyapps-ui/5.0.22/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/fff28300.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/fff28300.html')">AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/fff28300.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=AI Agent 的自我反思与经验学习：从错误中进化的 Java 实战&amp;url=https://blog.goku.top/posts/fff28300.html&amp;pic=https://upyun.goku.top/blog/post_banner_10.jpeg?_r_=3bb03c0f-00ad-89d3-cbc0-f21c8bcbbddd" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/AI-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AI Agent<span class="tagsPageCount">30</span></a><a class="post-meta__box__tags" href="/tags/LangChain4j/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>LangChain4j<span class="tagsPageCount">19</span></a><a class="post-meta__box__tags" href="/tags/Spring-AI/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Spring AI<span class="tagsPageCount">22</span></a><a class="post-meta__box__tags" href="/tags/Reflexion/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Reflexion<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>自我反思<span class="tagsPageCount">1</span></a><a class="post-meta__box__tags" href="/tags/%E7%BB%8F%E9%AA%8C%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>经验学习<span class="tagsPageCount">1</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/posts/4832ee17.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=d33de872-81a7-5f1b-dda3-3b059eb786da" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Agent 间如何对话：A2A 协议深度解析与 Java 实战</div></div></a></div><div class="next-post pull-right"><a href="/posts/eb4e7280.html"><img class="next-cover" src="https://upyun.goku.top/blog/post_banner_7.jpeg?_r_=6b671387-5a10-2b53-78b3-d0848a114a37" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/8d500988.html" title="AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_3.jpeg?_r_=e69a1834-a263-765b-321e-5daa3bb854f2" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的人机协作：从 Human-in-the-Loop 到渐进式自治的 Java 实战</div></div></a></div><div><a href="/posts/1d413ee9.html" title="AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_2.jpeg?_r_=6e2fda7f-8a10-6bc7-542c-31baee46b40d" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">AI Agent 的上下文工程与 Token 预算管理：从窗口压缩到成本优化的 Java 实战</div></div></a></div><div><a href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"><img class="cover" src="https://upyun.goku.top/blog/post_banner_9.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</div></div></a></div><div><a href="/posts/eb4e7280.html" title="AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_7.jpeg?_r_=6b671387-5a10-2b53-78b3-d0848a114a37" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-21</div><div class="title">AI Agent 的容错与韧性：从错误处理到生产级可靠性保障的 Java 实战</div></div></a></div><div><a href="/posts/8cad3739.html" title="AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_11.jpeg?_r_=06662d24-afed-7d5a-03ed-a55e3881ff78" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-20</div><div class="title">AI Agent 的多模态感知：从图片理解到语音交互的 Java 实战</div></div></a></div><div><a href="/posts/ca85dd5c.html" title="AI Agent 的推理引擎：从 Chain-of-Thought 到推理模型的深度解析与 Java 实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg?_r_=9efc3331-8227-51ff-32bd-a474291e6d19" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-20</div><div class="title">AI Agent 的推理引擎：从 Chain-of-Thought 到推理模型的深度解析与 Java 实战</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E8%AE%A9%E4%BA%BA%E5%A4%B4%E7%96%BC%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">一个让人头疼的场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D%EF%BC%9F%E4%BB%8E%E4%BA%BA%E7%B1%BB%E8%AE%A4%E7%9F%A5%E5%88%B0-Agent-%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.</span> <span class="toc-text">什么是自我反思？从人类认知到 Agent 设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D%E7%9A%84%E6%9C%AC%E8%B4%A8"><span class="toc-number">3.1.</span> <span class="toc-text">反思的本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-Agent-%E9%9C%80%E8%A6%81%E5%8F%8D%E6%80%9D%EF%BC%9F"><span class="toc-number">3.2.</span> <span class="toc-text">为什么 Agent 需要反思？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E6%9C%AF%E5%89%8D%E6%B2%BF%EF%BC%9AReflexion-%E6%A1%86%E6%9E%B6"><span class="toc-number">3.3.</span> <span class="toc-text">学术前沿：Reflexion 框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E5%8F%8D%E6%80%9D%E7%9A%84%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.</span> <span class="toc-text">自我反思的架构设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9E%E7%8E%B0%EF%BC%9A%E7%94%A8-LangChain4j-%E6%9E%84%E5%BB%BA%E5%8F%8D%E6%80%9D%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text">核心实现：用 LangChain4j 构建反思系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%8F%8D%E6%80%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">5.1.</span> <span class="toc-text">第一步：定义反思数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E6%9E%84%E5%BB%BA%E5%8F%8D%E6%80%9D-Agent"><span class="toc-number">5.2.</span> <span class="toc-text">第二步：构建反思 Agent</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E7%BB%8F%E9%AA%8C%E5%AD%98%E5%82%A8%E4%B8%8E%E6%A3%80%E7%B4%A2"><span class="toc-number">5.3.</span> <span class="toc-text">第三步：经验存储与检索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E7%BC%96%E6%8E%92%E5%8F%8D%E6%80%9D%E5%BE%AA%E7%8E%AF"><span class="toc-number">5.4.</span> <span class="toc-text">第四步：编排反思循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E9%98%B6%EF%BC%9A%E5%8F%8D%E6%80%9D%E8%B4%A8%E9%87%8F%E7%9A%84%E4%BF%9D%E9%9A%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">6.</span> <span class="toc-text">进阶：反思质量的保障机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%8F%8D%E6%80%9D%E5%A4%AA%E6%B3%9B%E6%B3%9B"><span class="toc-number">6.1.</span> <span class="toc-text">问题一：反思太泛泛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E9%94%99%E8%AF%AF%E7%BB%8F%E9%AA%8C%E7%9A%84%E6%B1%A1%E6%9F%93"><span class="toc-number">6.2.</span> <span class="toc-text">问题二：错误经验的污染</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E5%8F%8D%E6%80%9D%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%AD%BB%E5%BE%AA%E7%8E%AF"><span class="toc-number">6.3.</span> <span class="toc-text">问题三：反思循环的死循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%99%BA%E8%83%BD%E5%AE%A2%E6%9C%8D-Agent-%E7%9A%84%E5%8F%8D%E6%80%9D%E8%BF%9B%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">实战案例：智能客服 Agent 的反思进化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E8%AE%BE%E5%AE%9A"><span class="toc-number">7.1.</span> <span class="toc-text">场景设定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E8%BF%AD%E4%BB%A3%EF%BC%9AAgent-%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E8%81%AA%E6%98%8E%E7%9A%84"><span class="toc-number">7.2.</span> <span class="toc-text">三次迭代：Agent 是怎么变聪明的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8E%E8%AE%B0%E5%BF%86%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">8.</span> <span class="toc-text">与记忆系统的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E8%80%83%E9%87%8F"><span class="toc-number">9.</span> <span class="toc-text">生产环境考量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E5%BC%80%E9%94%80"><span class="toc-number">9.1.</span> <span class="toc-text">性能开销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E7%9A%84%E7%BB%93%E5%90%88"><span class="toc-number">9.2.</span> <span class="toc-text">与可观测性的结合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7%E8%80%83%E9%87%8F"><span class="toc-number">9.3.</span> <span class="toc-text">安全性考量</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E6%80%9D%E7%9A%84%E8%BE%B9%E7%95%8C%EF%BC%9A%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%B8%8D%E8%AF%A5%E5%8F%8D%E6%80%9D"><span class="toc-number">10.</span> <span class="toc-text">反思的边界：什么时候不该反思</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E5%B1%95%E6%9C%9B"><span class="toc-number">11.</span> <span class="toc-text">未来展望</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"><img src="https://upyun.goku.top/blog/post_banner_11.jpeg?_r_=0d707f34-b1a2-f151-d46e-370d710b8bbd" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"/></a><div class="content"><a class="title" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台">Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台</a><time datetime="2026-06-24T02:00:00.000Z" title="发表于 2026-06-24 10:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="多文件重构与复杂任务实战"/></a><div class="content"><a class="title" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战">多文件重构与复杂任务实战</a><time datetime="2026-06-24T00:00:00.000Z" title="发表于 2026-06-24 08:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/2327dd63.html" title="CLAUDE.md：项目上下文工程的艺术"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="CLAUDE.md：项目上下文工程的艺术"/></a><div class="content"><a class="title" href="/posts/2327dd63.html" title="CLAUDE.md：项目上下文工程的艺术">CLAUDE.md：项目上下文工程的艺术</a><time datetime="2026-06-23T08:00:00.000Z" title="发表于 2026-06-23 16:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="内置命令全解：从 /compact 到 /doctor 的实战指南"/></a><div class="content"><a class="title" href="/posts/a1b4af21.html" title="内置命令全解：从 /compact 到 /doctor 的实战指南">内置命令全解：从 /compact 到 /doctor 的实战指南</a><time datetime="2026-06-23T04:00:00.000Z" title="发表于 2026-06-23 12:00:00">2026-06-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="日常开发工作流：用 Claude Code 重塑你的编码习惯"/></a><div class="content"><a class="title" href="/posts/7c7b64e9.html" title="日常开发工作流：用 Claude Code 重塑你的编码习惯">日常开发工作流：用 Claude Code 重塑你的编码习惯</a><time datetime="2026-06-23T02:00:00.000Z" title="发表于 2026-06-23 10:00:00">2026-06-23</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">129</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">33</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI-Agent/" style="font-size: 0.88rem;">AI Agent<sup>30</sup></a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" style="font-size: 0.88rem;">AI架构<sup>1</sup></a><a href="/tags/APM/" style="font-size: 0.88rem;">APM<sup>1</sup></a><a href="/tags/Chain-of-Thought/" style="font-size: 0.88rem;">Chain-of-Thought<sup>1</sup></a><a href="/tags/DeepSeek-R1/" style="font-size: 0.88rem;">DeepSeek-R1<sup>1</sup></a><a href="/tags/GPT-4V/" style="font-size: 0.88rem;">GPT-4V<sup>1</sup></a><a href="/tags/Gemini/" style="font-size: 0.88rem;">Gemini<sup>1</sup></a><a href="/tags/Guardrails/" style="font-size: 0.88rem;">Guardrails<sup>1</sup></a><a href="/tags/HITL/" style="font-size: 0.88rem;">HITL<sup>1</sup></a><a href="/tags/Human-in-the-Loop/" style="font-size: 0.88rem;">Human-in-the-Loop<sup>2</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>27</sup></a><a href="/tags/LLM-Security/" style="font-size: 0.88rem;">LLM Security<sup>1</sup></a><a href="/tags/LangChain4j/" style="font-size: 0.88rem;">LangChain4j<sup>19</sup></a><a href="/tags/Multi-Agent/" style="font-size: 0.88rem;">Multi-Agent<sup>1</sup></a><a href="/tags/OpenTelemetry/" style="font-size: 0.88rem;">OpenTelemetry<sup>1</sup></a><a href="/tags/Prompt-Injection/" style="font-size: 0.88rem;">Prompt Injection<sup>1</sup></a><a href="/tags/Spring-AI/" style="font-size: 0.88rem;">Spring AI<sup>22</sup></a><a href="/tags/Spring-Boot/" style="font-size: 0.88rem;">Spring Boot<sup>6</sup></a><a href="/tags/Token%E7%AE%A1%E7%90%86/" style="font-size: 0.88rem;">Token管理<sup>1</sup></a><a href="/tags/Whisper/" style="font-size: 0.88rem;">Whisper<sup>1</sup></a><a href="/tags/blog/" style="font-size: 0.88rem;">blog<sup>3</sup></a><a href="/tags/o1/" style="font-size: 0.88rem;">o1<sup>1</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">上下文工程<sup>2</sup></a><a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" style="font-size: 0.88rem;">人机协作<sup>1</sup></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">分布式系统<sup>2</sup></a><a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 0.88rem;">可观测性<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 0.88rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 0.88rem;">多模态<sup>1</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 0.88rem;">学习路线<sup>1</sup></a><a href="/tags/%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" style="font-size: 0.88rem;">安全防护<sup>1</sup></a><a href="/tags/%E5%AE%B9%E9%94%99/" style="font-size: 0.88rem;">容错<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 0.88rem;">开发者体验<sup>1</sup></a><a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 0.88rem;">成本优化<sup>4</sup></a><a href="/tags/%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9E%8B/" style="font-size: 0.88rem;">推理模型<sup>1</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 0.88rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%96%AD%E8%B7%AF%E5%99%A8/" style="font-size: 0.88rem;">断路器<sup>1</sup></a><a href="/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/" style="font-size: 0.88rem;">渐进式自治<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 0.88rem;">知识图谱<sup>2</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 0.88rem;">终端<sup>1</sup></a><a href="/tags/%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5/" style="font-size: 0.88rem;">重试策略<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
 
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
   }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(() => {
-  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
-  if ($mermaidWrap.length) {
-    window.runMermaid = () => {
-      window.loadMermaid = true
-      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? '' : ''
 
-      Array.from($mermaidWrap).forEach((item, index) => {
-        const mermaidSrc = item.firstElementChild
-        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
-        const mermaidID = 'mermaid-' + index
-        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
-        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
-          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
         })
-      })
-    }
+      }
 
-    const loadMermaid = () => {
-      window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
-    }
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
 
-    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
   }
-})()</script><script>(()=>{
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
   const init = () => {
     twikoo.init(Object.assign({
       el: '#twikoo-wrap',
       envId: 'https://twikoo.goku.top/',
       region: '',
-      onCommentLoaded: function () {
-        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.vemoji)'))
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
       }
     }, null))
   }
 
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
   const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
     twikoo.getCommentsCount({
       envId: 'https://twikoo.goku.top/',
       region: '',
       urls: [window.location.pathname],
       includeReply: false
-    }).then(function (res) {
-      document.getElementById('twikoo-count').innerText = res[0].count
-    }).catch(function (err) {
-      console.error(err);
-    });
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
   }
 
   const runFn = () => {
-    init()
+    init();
     
   }
 
-  const loadTwikoo = () => {
-    if (typeof twikoo === 'object') {
-      setTimeout(runFn,0)
-      return
-    } 
-    getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
-  }
-
   if ('Twikoo' === 'Twikoo' || !true) {
-    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
-    else loadTwikoo()
-  } else {
-    window.loadOtherComment = () => {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
       loadTwikoo()
     }
+  } else {
+    window.loadOtherComment = loadTwikoo
   }
-})()</script></div><script>window.addEventListener('load', () => {
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
   const changeContent = (content) => {
     if (content === '') return content
 
@@ -488,7 +662,7 @@ window.addEventListener('load',preloader.endLoading())</script><div class="js-pj
         generateHtml(twikooArray)
       }).catch(function (err) {
         const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
       })
     }
 
@@ -506,22 +680,22 @@ window.addEventListener('load',preloader.endLoading())</script><div class="js-pj
       for (let i = 0; i < array.length; i++) {
         result += '<div class=\'aside-list-item\'>'
 
-        if (false) {
+        if (true) {
           const name = 'data-lazy-src'
-          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
         }
         
         result += `<div class='content'>
         <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
-        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
-        </div></div>`
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
       }
     } else {
       result += '没有评论'
     }
 
     let $dom = document.querySelector('#card-newest-comments .aside-list')
-    $dom.innerHTML= result
+    $dom && ($dom.innerHTML= result)
     window.lazyLoadInstance && window.lazyLoadInstance.update()
     window.pjax && window.pjax.refresh($dom)
   }
@@ -539,8 +713,8 @@ window.addEventListener('load',preloader.endLoading())</script><div class="js-pj
 
   newestCommentInit()
   document.addEventListener('pjax:complete', newestCommentInit)
-})</script><canvas id="universe"></canvas><script defer src="/html/js/universe.js"></script><script defer src="/html/js/disablef12.js"></script><script src="/html/js/lunar.js"></script><script type="text/javascript" src="https://cdn1.tianli0.top/npm/sweetalert2@8.19.0/dist/sweetalert2.all.js"></script><script async src="/html/js/justlovesmile.js"></script><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,
@@ -550,13 +724,11 @@ var pjax = new Pjax({
 })
 
 document.addEventListener('pjax:send', function () {
-
   // removeEventListener scroll 
-  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
-  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
 
-  typeof preloader === 'object' && preloader.initLoading()
-  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  document.getElementById('rightside').classList.remove('rightside-show')
   
   if (window.aplayers) {
     for (let i = 0; i < window.aplayers.length; i++) {
@@ -571,7 +743,6 @@ document.addEventListener('pjax:send', function () {
   //reset readmode
   const $bodyClassList = document.body.classList
   $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
-
 })
 
 document.addEventListener('pjax:complete', function () {
@@ -587,7 +758,6 @@ document.addEventListener('pjax:complete', function () {
 
   GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  typeof chatBtnFn === 'function' && chatBtnFn()
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
@@ -600,12 +770,10 @@ document.addEventListener('pjax:complete', function () {
 
   // prismjs
   typeof Prism === 'object' && Prism.highlightAll()
-
-  typeof preloader === 'object' && preloader.endLoading()
 })
 
-document.addEventListener('pjax:error', (e) => {
+document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script></div></body></html>
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
