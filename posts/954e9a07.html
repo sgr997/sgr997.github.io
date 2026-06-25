@@ -1,0 +1,1015 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图 | Pei</title><meta name="keywords" content="AI Agent,知识图谱,学习路线,Claude Code,Coding Agent"><meta name="author" content="Pei"><meta name="copyright" content="Pei"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图"><meta name="application-name" content="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图"><meta property="og:url" content="https://blog.goku.top/posts/954e9a07.html"><meta property="og:site_name" content="Pei"><meta property="og:description" content="Claude Code 系列 8 篇文章的全景知识地图：架构总览、学习路线规划、Coding Agent 横评对比，以及从终端 Agent 到 AI 原生开发环境的进化展望。"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg"><meta property="article:author" content="Pei"><meta property="article:tag" content="Java,Blog,ios,Android,玩机技巧"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://upyun.goku.top/blog/post_banner_10.jpeg"><meta name="description" content="Claude Code 系列 8 篇文章的全景知识地图：架构总览、学习路线规划、Coding Agent 横评对比，以及从终端 Agent 到 AI 原生开发环境的进化展望。"><link rel="shortcut icon" href="https://upyun.goku.top/blog/icon.png!cover"><link rel="canonical" href="https://blog.goku.top/posts/954e9a07"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="goku的博客"/><meta name="baidu-site-verification" content="goku的博客"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2023/09/03/125766904/ee23df8517f3c3e3efc4145658269c06_5714860933110284659.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: 'https://twikoo.goku.top/',
+  commentBarrageConfig:{"enable":true,"maxBarrage":1,"barrageTime":8000,"accessToken":"08c2b11fbf834e2aa5af1730f757483e","mailMd5":"061B062512CCACAB05339BA10B9C6B05"},
+  root: '/',
+  preloader: undefined,
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: {"mode":"both","api":"https://img2color-go.vercel.app/api?img=","cover_change":true},
+  authorStatus: {"skills":["🤖️ 数码科技爱好者","🔍 分享与热心帮助","🔨 Java开发小能手","💢 壮汉人狠话不多"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"该文章已发布","messageNext":"天，文章信息部分有效性请以实际为准。"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Pei","link":"链接: ","source":"来源: Pei","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Pei',
+  title: 'Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图',
+  postAI: '',
+  pageFillDescription: '系列文章, 一、为什么需要一篇全景总结, 二、知识架构全景图, 三、学习路线规划, 路线 A：快速上手（2 天）, 路线 B：深度掌握（1 周）, 路线 C：平台化运营（2 周）, 四、核心概念速查表, 五、Coding Agent 横评：Claude Code vs 竞品, 如何选择？, 六、关键技术概念索引, 上下文工程（Context Engineering）, 权限模型（Permission Model）, 工具扩展（Tool Extension）, 无头模式（Headless Mode）, 七、从 Claude Code 到 AI 原生开发环境, 第一阶段：代码补全（2021-2023）, 第二阶段：对话式编程（2024-2025）, 第三阶段：Agent 自主编程（2025-2026）, 第四阶段：AI 原生开发环境（2026+）, 八、系列回顾：每篇文章的一句话总结, 九、下一步：从 Claude Code 到更广阔的 AI Agent 世界, 写在最后系列文章本篇是系列的全景总结以下是系列完整目录建议收藏作为学习索引入门篇是什么从安装到第一次对话日常开发工作流用重塑你的编码习惯核心篇内置命令全解从到的实战指南项目上下文工程的艺术进阶篇多文件重构与复杂任务实战与能力扩展高级篇模式与集成多协作从到全景总结本文一为什么需要一篇全景总结八篇文章写下来我们从一路走到了多编排每篇文章聚焦一个主题解决一个问题但知识不是线性的当你在实际工作中遇到一个复杂场景需要的不是第篇讲了什么而是哪些能力组合能解决我的问题这篇文章就是那张地图它不教新东西而是把已有的八篇文章重新组织让你能从三个维度快速定位所需知识架构维度的能力是如何分层的场景维度我遇到的问题属于哪个层次路径维度我应该按什么顺序学习二知识架构全景图能力架构协作层多协作编排模式集成第篇第篇第篇扩展层协议自定义生命周期钩子外部工具指令第篇第篇第篇能力层多文件重构内置命令复杂任务上下文工程斜杠命令第篇第篇第篇基础层安装配置与第一次对话日常开发工作流第篇第篇每一层都依赖下一层的能力但并非严格的线性依赖你完全可以跳过能力层直接进入扩展层比如一个已经熟悉基本操作的开发者可以直接学习协议接入外部工具三学习路线规划路线快速上手天目标能用完成日常开发任务顺序文章核心收获预计时间第篇安装到第一次对话装好工具跑通第一个任务分钟第篇日常开发工作流把融入编码节奏小时学完能做什么在终端里和对话让它帮你写代码改重构方法日常开发效率提升适合人群想快速体验的开发者路线深度掌握周目标理解的设计哲学能高效处理复杂任务顺序文章核心收获预计时间第篇基础安装与配置分钟第篇工作流融入小时第篇内置命令全解掌握斜杠命令小时第篇上下文工程让理解你的项目小时第篇多文件重构处理跨文件复杂任务小时学完能做什么用完成模块级重构跨文件功能开发代码审查知道如何通过让理解项目上下文不再需要每次重复解释项目结构适合人群想把从尝鲜工具变成生产力武器的开发者路线平台化运营周目标把打造成团队的开发平台融入自动化流水线顺序文章核心收获预计时间路线全部深度掌握周第篇与能力扩展三大扩展机制连接外部工具小时第篇模式与无头模式融入自动化流水线小时第篇多协作多编排处理超大任务小时学完能做什么构建自动化的审查流水线用连接数据库文档系统编排多个并行处理大型重构从个人工具升级为团队基础设施适合人群工程师想推动团队转型的开发者四核心概念速查表遇到具体问题直接定位到对应文章我想查阅关键知识点安装和配置第篇安装配置首次对话把融入日常编码第篇流程工作流代码审查清理上下文控制消耗第篇让理解我的项目结构第篇层次结构上下文注入重构一个跨个文件的模块第篇任务拆解增量验证接入数据库等外部工具第篇协议配置工具注册在中自动审查第篇标志输出多个并行处理任务第篇编排子对比五横评竞品年的赛道已经相当拥挤以下是主流工具的维度对比维度形态终端原生插件终端原生底层模型多模型可选多模型可选上下文窗口多文件编辑原生支持规划支持模式支持支持支持模式工具扩展插件市场预览有限有限集成模式原生支持无无原生支持多编排子无无无编排安全模型权限分级自动接受沙箱沙箱沙箱沙箱审批价格按量计费月订阅月订阅月订阅按量计费开源开源否否否完全开源如何选择选的理由你是终端重度用户不想离开命令行你需要集成自动审查代码生成你需要通过连接内部系统数据库文档你需要多协作处理大型任务你对上下文工程有追求体系选的理由你习惯操作不想切换到终端你需要多模型切换你重视可视化和补全选的理由你的团队已经在生态中你需要最低的学习成本插件即装即用你主要需要代码补全和选的理由你需要完全开源的解决方案你在生态中有额度你需要沙箱执行隔离实际上很多开发者是组合使用的比如用做日常编码体验好用做复杂重构和集成终端能力强工具不是非此即彼的选择而是能力互补的组合六关键技术概念索引系列中反复出现的核心概念在这里做一次集中梳理上下文工程第篇的核心主题不同于关注单次对话的提示词上下文工程关注的是如何让持续理解你的项目是的上下文工程载体它不是一次性配置而是随着项目演进不断维护的项目记忆核心原则分层管理全局项目目录不同粒度的上下文渐进式加载只在需要时注入相关上下文而不是一次性灌入所有信息可维护性是代码的一部分需要和代码一起演进权限模型贯穿整个系列的安全设计的权限分为三级自动接受读取文件搜索代码等无副作用操作需要确认写入文件执行命令等有副作用操作拒绝删除系统文件修改配置等危险操作第篇的机制让你可以在权限检查点插入自定义逻辑比如修改下的文件前先跑一次工具扩展第篇详细拆解的三大扩展机制生命周期钩子在特定事件如触发自定义脚本标准化的工具接入协议让能调用外部数据库文档系统自定义指令模板把常用的工作流封装成可复用的技能这三者的关系控制什么时候做定义能做什么描述怎么做无头模式第篇的核心主题让脱离交互式终端成为可编程的构建块这是集成的基础中的一行命令就能让审查每一个关键参数结构化输出便于程序解析限制可用工具提高安全性指定模型平衡成本和质量七从到原生开发环境代表的是一个更大的趋势开发环境正在从人用工具变成人机协作系统第一阶段代码补全开创的时代看着你写代码实时给出建议本质上是一个更智能的自动补全你仍然是主导者是辅助者第二阶段对话式编程的早期形态你用自然语言描述需求生成代码从辅助你写变成你指导写主导权开始转移第三阶段自主编程的模式多协作不仅写代码还自己跑测试自己修自己提交你从指导者变成审查者第四阶段原生开发环境这是正在发生的事开发环境不再是编辑器终端的组合而是一个以为核心的协作系统不是配置文件而是项目的可执行文档不是工具集成而是的感官系统不是自动化脚本而是的反射弧多不是并行执行而是的团队协作开发者在这个浪潮中有独特的优势生态的依赖注入事件驱动等设计模式天然适合构建系统第篇中提到的编排模式和的异步编程模型有异曲同工之妙八系列回顾每篇文章的一句话总结文章一句话总结安装到第一次对话是一个住在终端的结对编程伙伴装好就能用日常开发工作流把融入工作流让它成为你编码节奏的一部分内置命令全解斜杠命令覆盖会话管理上下文优化并行执行全生命周期上下文工程的核心让持续理解你的项目而不是每次从零开始多文件重构复杂任务的关键是拆解规划执行验证增量推进与能力扩展三大扩展机制让从能用进化到好用模式与无头模式让融入自动化流水线审查从此自动化多协作单有上限多协作是处理复杂工程任务的新范式九下一步从到更广阔的世界是的一个实现如果你想从用写代码扩展到用做任何事推荐阅读我们的系列从理论到生产全景知识图谱与开发者成长路线那个系列从模式讲起一路覆盖系统结构化输出最终落脚到生产级的构建和系列形成互补系列系列如何使用如何构建终端原生面向开发者生态面向架构师工具调用是内置的工具调用需要自己实现上下文靠上下文靠多是编排多是架构两条路线结合你既能高效使用现有的也能构建自己的系统写在最后八篇文章二十多万字从到多编排回头看最让我印象深刻的不是它的技术能力而是它对开发者工作方式的改变以前我们写代码是一个人的战斗遇到复杂问题打开复制粘贴调试再复制粘贴现在你可以和一个理解你项目上下文的结对编程它不会疲倦不会遗漏边界条件不会忘记上周重构时做的架构决策只要你把它们写在里但它也不是万能的它会犯错会生成看似正确但逻辑有缺陷的代码会在你不注意的时候悄悄改变不该改的文件这就是为什么这个系列从第一篇就强调验证跑测试看代码是你的编程伙伴不是你的编程替身感谢你读完这个系列如果其中任何一篇文章帮你节省了哪怕一小时的调试时间这个系列就值了',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-26 06:04:46',
+  postMainColor: '#d97706',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/html/css/summ.css"><link rel="stylesheet" href="/html/css/azy.css"><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">Pei</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://upyun.goku.top/blog/wxpay.jpeg!cover"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://upyun.goku.top/blog/alipay.jpeg!cover"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/AI-Agent/" style="font-size: 1.05rem;">AI Agent<sup>32</sup></a><a href="/tags/AI%E6%9E%B6%E6%9E%84/" style="font-size: 1.05rem;">AI架构<sup>1</sup></a><a href="/tags/DAG/" style="font-size: 1.05rem;">DAG<sup>1</sup></a><a href="/tags/Function-Calling/" style="font-size: 1.05rem;">Function Calling<sup>2</sup></a><a href="/tags/GPT-4V/" style="font-size: 1.05rem;">GPT-4V<sup>1</sup></a><a href="/tags/Gemini/" style="font-size: 1.05rem;">Gemini<sup>1</sup></a><a href="/tags/Guardrails/" style="font-size: 1.05rem;">Guardrails<sup>1</sup></a><a href="/tags/HITL/" style="font-size: 1.05rem;">HITL<sup>1</sup></a><a href="/tags/Human-in-the-Loop/" style="font-size: 1.05rem;">Human-in-the-Loop<sup>2</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>27</sup></a><a href="/tags/LLM-Security/" style="font-size: 1.05rem;">LLM Security<sup>1</sup></a><a href="/tags/LangChain4j/" style="font-size: 1.05rem;">LangChain4j<sup>19</sup></a><a href="/tags/Multi-Agent/" style="font-size: 1.05rem;">Multi-Agent<sup>1</sup></a><a href="/tags/OpenTelemetry/" style="font-size: 1.05rem;">OpenTelemetry<sup>1</sup></a><a href="/tags/Prompt-Injection/" style="font-size: 1.05rem;">Prompt Injection<sup>1</sup></a><a href="/tags/Spring-AI/" style="font-size: 1.05rem;">Spring AI<sup>22</sup></a><a href="/tags/Spring-Boot/" style="font-size: 1.05rem;">Spring Boot<sup>6</sup></a><a href="/tags/Token%E7%AE%A1%E7%90%86/" style="font-size: 1.05rem;">Token管理<sup>1</sup></a><a href="/tags/Tool-Use/" style="font-size: 1.05rem;">Tool Use<sup>1</sup></a><a href="/tags/Whisper/" style="font-size: 1.05rem;">Whisper<sup>1</sup></a><a href="/tags/Workflow/" style="font-size: 1.05rem;">Workflow<sup>1</sup></a><a href="/tags/blog/" style="font-size: 1.05rem;">blog<sup>2</sup></a><a href="/tags/%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">上下文工程<sup>2</sup></a><a href="/tags/%E4%BA%BA%E6%9C%BA%E5%8D%8F%E4%BD%9C/" style="font-size: 1.05rem;">人机协作<sup>1</sup></a><a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">分布式系统<sup>2</sup></a><a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 1.05rem;">可观测性<sup>1</sup></a><a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 1.05rem;">命令行<sup>1</sup></a><a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" style="font-size: 1.05rem;">多模态<sup>1</sup></a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" style="font-size: 1.05rem;">学习路线<sup>2</sup></a><a href="/tags/%E5%AE%89%E5%85%A8%E9%98%B2%E6%8A%A4/" style="font-size: 1.05rem;">安全防护<sup>1</sup></a><a href="/tags/%E5%AE%B9%E9%94%99/" style="font-size: 1.05rem;">容错<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E8%80%85%E4%BD%93%E9%AA%8C/" style="font-size: 1.05rem;">开发者体验<sup>1</sup></a><a href="/tags/%E6%88%90%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 1.05rem;">成本优化<sup>4</sup></a><a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" style="font-size: 1.05rem;">效率工具<sup>1</sup></a><a href="/tags/%E6%96%AD%E8%B7%AF%E5%99%A8/" style="font-size: 1.05rem;">断路器<sup>1</sup></a><a href="/tags/%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%87%AA%E6%B2%BB/" style="font-size: 1.05rem;">渐进式自治<sup>1</sup></a><a href="/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/" style="font-size: 1.05rem;">状态机<sup>1</sup></a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" style="font-size: 1.05rem;">知识图谱<sup>3</sup></a><a href="/tags/%E7%BB%88%E7%AB%AF/" style="font-size: 1.05rem;">终端<sup>1</sup></a><a href="/tags/%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5/" style="font-size: 1.05rem;">重试策略<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/06/"><span class="card-archive-list-date">六月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">41</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/08/"><span class="card-archive-list-date">八月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/11/"><span class="card-archive-list-date">十一月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/10/"><span class="card-archive-list-date">十月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">九月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">二月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Claude-Code/" itemprop="url">Claude Code</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>知识图谱</span></a><a class="article-meta__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>学习路线</span></a><a class="article-meta__tags" href="/tags/Claude-Code/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Claude Code</span></a><a class="article-meta__tags" href="/tags/Coding-Agent/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Coding Agent</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-06-26T00:00:00.000Z" title="发表于 2026-06-26 08:00:00">2026-06-26</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-06-25T22:04:46.067Z" title="更新于 2026-06-26 06:04:46">2026-06-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为杭州"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>杭州</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://upyun.goku.top/blog/post_banner_10.jpeg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://blog.goku.top/posts/954e9a07.html"><header><a class="post-meta-categories" href="/categories/Claude-Code/" itemprop="url">Claude Code</a><a href="/tags/AI-Agent/" tabindex="-1" itemprop="url">AI Agent</a><a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" tabindex="-1" itemprop="url">知识图谱</a><a href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" tabindex="-1" itemprop="url">学习路线</a><a href="/tags/Claude-Code/" tabindex="-1" itemprop="url">Claude Code</a><a href="/tags/Coding-Agent/" tabindex="-1" itemprop="url">Coding Agent</a><h1 id="CrawlerTitle" itemprop="name headline">Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Pei</span><time itemprop="dateCreated datePublished" datetime="2026-06-26T00:00:00.000Z" title="发表于 2026-06-26 08:00:00">2026-06-26</time><time itemprop="dateCreated datePublished" datetime="2026-06-25T22:04:46.067Z" title="更新于 2026-06-26 06:04:46">2026-06-26</time></header><h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><blockquote>
+<p>本篇是 Claude Code 系列的全景总结。以下是系列完整目录，建议收藏作为学习索引。</p>
+</blockquote>
+<p><strong>🚀 入门篇</strong></p>
+<ol>
+<li><a href="/posts/205343cf.html">Claude Code 是什么？从安装到第一次对话</a></li>
+<li><a href="/posts/7c7b64e9.html">日常开发工作流：用 Claude Code 重塑你的编码习惯</a></li>
+</ol>
+<p><strong>🔧 核心篇</strong></p>
+<ol start="3">
+<li><a href="/posts/a1b4af21.html">内置命令全解：从 &#x2F;compact 到 &#x2F;doctor 的实战指南</a></li>
+<li><a href="/posts/2327dd63.html">CLAUDE.md：项目上下文工程的艺术</a></li>
+</ol>
+<p><strong>⚡ 进阶篇</strong></p>
+<ol start="5">
+<li><a href="/posts/bc1dcb9c.html">多文件重构与复杂任务实战</a></li>
+<li><a href="/posts/28571dd7.html">Hooks、MCP 与能力扩展</a></li>
+</ol>
+<p><strong>🏗️ 高级篇</strong></p>
+<ol start="7">
+<li><a href="/posts/c831542b.html">Headless 模式与 CI&#x2F;CD 集成</a></li>
+<li><a href="/posts/38dde7ae.html">多 Agent 协作：从 Claude Code 到 Codex</a></li>
+</ol>
+<p><strong>🧭 全景总结（本文）</strong></p>
+<hr>
+<h2 id="一、为什么需要一篇全景总结"><a href="#一、为什么需要一篇全景总结" class="headerlink" title="一、为什么需要一篇全景总结"></a>一、为什么需要一篇全景总结</h2><p>八篇文章写下来，我们从 <code>npm install -g @anthropic-ai/claude-code</code> 一路走到了多 Agent 编排。每篇文章聚焦一个主题，解决一个问题——但知识不是线性的。当你在实际工作中遇到一个复杂场景，需要的不是”第 5 篇讲了什么”，而是”哪些能力组合能解决我的问题”。</p>
+<p>这篇文章就是那张地图。</p>
+<p>它不教新东西，而是把已有的八篇文章重新组织，让你能从三个维度快速定位所需知识：</p>
+<ul>
+<li><strong>架构维度</strong>：Claude Code 的能力是如何分层的？</li>
+<li><strong>场景维度</strong>：我遇到的问题属于哪个层次？</li>
+<li><strong>路径维度</strong>：我应该按什么顺序学习？</li>
+</ul>
+<hr>
+<h2 id="二、知识架构全景图"><a href="#二、知识架构全景图" class="headerlink" title="二、知识架构全景图"></a>二、知识架构全景图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">┌─────────────────────────────────────────────────────────────────┐</span><br><span class="line">│                    Claude Code 能力架构                          │</span><br><span class="line">├─────────────────────────────────────────────────────────────────┤</span><br><span class="line">│                                                                 │</span><br><span class="line">│  ┌───────────────────────────────────────────────────────────┐  │</span><br><span class="line">│  │                    协作层 (Collaboration)                   │  │</span><br><span class="line">│  │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐  │  │</span><br><span class="line">│  │  │ 多 Agent     │  │ Headless    │  │ CI/CD Pipeline   │  │  │</span><br><span class="line">│  │  │ 协作编排      │  │ 模式        │  │ 集成             │  │  │</span><br><span class="line">│  │  │  [第8篇]     │  │  [第7篇]    │  │  [第7篇]         │  │  │</span><br><span class="line">│  │  └─────────────┘  └─────────────┘  └──────────────────┘  │  │</span><br><span class="line">│  └───────────────────────────────────────────────────────────┘  │</span><br><span class="line">│                              ▲                                  │</span><br><span class="line">│                              │                                  │</span><br><span class="line">│  ┌───────────────────────────────────────────────────────────┐  │</span><br><span class="line">│  │                    扩展层 (Extension)                       │  │</span><br><span class="line">│  │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐  │  │</span><br><span class="line">│  │  │ Hooks        │  │ MCP 协议    │  │ Skills 自定义    │  │  │</span><br><span class="line">│  │  │ 生命周期钩子  │  │ 外部工具    │  │ 指令             │  │  │</span><br><span class="line">│  │  │  [第6篇]     │  │  [第6篇]    │  │  [第6篇]         │  │  │</span><br><span class="line">│  │  └─────────────┘  └─────────────┘  └──────────────────┘  │  │</span><br><span class="line">│  └───────────────────────────────────────────────────────────┘  │</span><br><span class="line">│                              ▲                                  │</span><br><span class="line">│                              │                                  │</span><br><span class="line">│  ┌───────────────────────────────────────────────────────────┐  │</span><br><span class="line">│  │                    能力层 (Capability)                      │  │</span><br><span class="line">│  │  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐  │  │</span><br><span class="line">│  │  │ 多文件重构   │  │ CLAUDE.md   │  │ 内置命令         │  │  │</span><br><span class="line">│  │  │ 复杂任务     │  │ 上下文工程   │  │ 80+ 斜杠命令     │  │  │</span><br><span class="line">│  │  │  [第5篇]     │  │  [第4篇]    │  │  [第3篇]         │  │  │</span><br><span class="line">│  │  └─────────────┘  └─────────────┘  └──────────────────┘  │  │</span><br><span class="line">│  └───────────────────────────────────────────────────────────┘  │</span><br><span class="line">│                              ▲                                  │</span><br><span class="line">│                              │                                  │</span><br><span class="line">│  ┌───────────────────────────────────────────────────────────┐  │</span><br><span class="line">│  │                    基础层 (Foundation)                      │  │</span><br><span class="line">│  │  ┌─────────────────────────┐  ┌─────────────────────────┐ │  │</span><br><span class="line">│  │  │ 安装配置与第一次对话      │  │ 日常开发工作流          │ │  │</span><br><span class="line">│  │  │  [第1篇]                │  │  [第2篇]                │ │  │</span><br><span class="line">│  │  └─────────────────────────┘  └─────────────────────────┘ │  │</span><br><span class="line">│  └───────────────────────────────────────────────────────────┘  │</span><br><span class="line">│                                                                 │</span><br><span class="line">└─────────────────────────────────────────────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<p>每一层都依赖下一层的能力，但并非严格的线性依赖。你完全可以跳过”能力层”直接进入”扩展层”——比如一个已经熟悉 Claude Code 基本操作的开发者，可以直接学习 MCP 协议接入外部工具。</p>
+<hr>
+<h2 id="三、学习路线规划"><a href="#三、学习路线规划" class="headerlink" title="三、学习路线规划"></a>三、学习路线规划</h2><h3 id="路线-A：快速上手（2-天）"><a href="#路线-A：快速上手（2-天）" class="headerlink" title="路线 A：快速上手（2 天）"></a>路线 A：快速上手（2 天）</h3><p><strong>目标</strong>：能用 Claude Code 完成日常开发任务。</p>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>文章</th>
+<th>核心收获</th>
+<th>预计时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="/posts/205343cf.html">第 1 篇：安装到第一次对话</a></td>
+<td>装好工具，跑通第一个任务</td>
+<td>30 分钟</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="/posts/7c7b64e9.html">第 2 篇：日常开发工作流</a></td>
+<td>把 Claude Code 融入编码节奏</td>
+<td>2 小时</td>
+</tr>
+</tbody></table>
+<p><strong>学完能做什么</strong>：在终端里和 Claude Code 对话，让它帮你写代码、改 Bug、重构方法。日常开发效率提升 30-50%。</p>
+<p><strong>适合人群</strong>：想快速体验 Coding Agent 的 Java 开发者。</p>
+<h3 id="路线-B：深度掌握（1-周）"><a href="#路线-B：深度掌握（1-周）" class="headerlink" title="路线 B：深度掌握（1 周）"></a>路线 B：深度掌握（1 周）</h3><p><strong>目标</strong>：理解 Claude Code 的设计哲学，能高效处理复杂任务。</p>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>文章</th>
+<th>核心收获</th>
+<th>预计时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>第 1 篇</td>
+<td>基础安装与配置</td>
+<td>30 分钟</td>
+</tr>
+<tr>
+<td>2</td>
+<td>第 2 篇</td>
+<td>工作流融入</td>
+<td>2 小时</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="/posts/a1b4af21.html">第 3 篇：内置命令全解</a></td>
+<td>掌握 80+ 斜杠命令</td>
+<td>2 小时</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="/posts/2327dd63.html">第 4 篇：CLAUDE.md</a></td>
+<td>上下文工程，让 Agent 理解你的项目</td>
+<td>2 小时</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="/posts/bc1dcb9c.html">第 5 篇：多文件重构</a></td>
+<td>处理跨文件复杂任务</td>
+<td>2 小时</td>
+</tr>
+</tbody></table>
+<p><strong>学完能做什么</strong>：用 Claude Code 完成模块级重构、跨文件功能开发、代码审查。知道如何通过 CLAUDE.md 让 Agent 理解项目上下文，不再需要每次重复解释项目结构。</p>
+<p><strong>适合人群</strong>：想把 Claude Code 从”尝鲜工具”变成”生产力武器”的开发者。</p>
+<h3 id="路线-C：平台化运营（2-周）"><a href="#路线-C：平台化运营（2-周）" class="headerlink" title="路线 C：平台化运营（2 周）"></a>路线 C：平台化运营（2 周）</h3><p><strong>目标</strong>：把 Claude Code 打造成团队的开发平台，融入自动化流水线。</p>
+<table>
+<thead>
+<tr>
+<th>顺序</th>
+<th>文章</th>
+<th>核心收获</th>
+<th>预计时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1-5</td>
+<td>路线 B 全部</td>
+<td>深度掌握</td>
+<td>1 周</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="/posts/28571dd7.html">第 6 篇：Hooks、MCP 与能力扩展</a></td>
+<td>三大扩展机制，连接外部工具</td>
+<td>3 小时</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="/posts/c831542b.html">第 7 篇：Headless 模式与 CI&#x2F;CD</a></td>
+<td>无头模式，融入自动化流水线</td>
+<td>3 小时</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="/posts/38dde7ae.html">第 8 篇：多 Agent 协作</a></td>
+<td>多 Agent 编排，处理超大任务</td>
+<td>3 小时</td>
+</tr>
+</tbody></table>
+<p><strong>学完能做什么</strong>：构建自动化的 PR 审查流水线、用 MCP 连接数据库&#x2F;API&#x2F;文档系统、编排多个 Agent 并行处理大型重构。Claude Code 从个人工具升级为团队基础设施。</p>
+<p><strong>适合人群</strong>：Tech Lead、DevOps 工程师、想推动团队 AI 转型的开发者。</p>
+<hr>
+<h2 id="四、核心概念速查表"><a href="#四、核心概念速查表" class="headerlink" title="四、核心概念速查表"></a>四、核心概念速查表</h2><p>遇到具体问题？直接定位到对应文章：</p>
+<table>
+<thead>
+<tr>
+<th>我想…</th>
+<th>查阅</th>
+<th>关键知识点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安装和配置 Claude Code</td>
+<td><a href="/posts/205343cf.html">第 1 篇</a></td>
+<td>npm 安装、API Key 配置、首次对话</td>
+</tr>
+<tr>
+<td>把 Claude Code 融入日常编码</td>
+<td><a href="/posts/7c7b64e9.html">第 2 篇</a></td>
+<td>TDD 流程、Git 工作流、代码审查</td>
+</tr>
+<tr>
+<td>清理上下文、控制 token 消耗</td>
+<td><a href="/posts/a1b4af21.html">第 3 篇</a></td>
+<td><code>/compact</code>、<code>/clear</code>、<code>/cost</code></td>
+</tr>
+<tr>
+<td>让 Agent 理解我的项目结构</td>
+<td><a href="/posts/2327dd63.html">第 4 篇</a></td>
+<td>CLAUDE.md 层次结构、上下文注入</td>
+</tr>
+<tr>
+<td>重构一个跨 5 个文件的模块</td>
+<td><a href="/posts/bc1dcb9c.html">第 5 篇</a></td>
+<td>任务拆解、TodoWrite、增量验证</td>
+</tr>
+<tr>
+<td>接入数据库&#x2F;API 等外部工具</td>
+<td><a href="/posts/28571dd7.html">第 6 篇</a></td>
+<td>MCP 协议、Server 配置、工具注册</td>
+</tr>
+<tr>
+<td>在 CI&#x2F;CD 中自动审查 PR</td>
+<td><a href="/posts/c831542b.html">第 7 篇</a></td>
+<td><code>-p</code> 标志、JSON 输出、GitHub Actions</td>
+</tr>
+<tr>
+<td>多个 Agent 并行处理任务</td>
+<td><a href="/posts/38dde7ae.html">第 8 篇</a></td>
+<td>SDK 编排、子 Agent、Codex 对比</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、Coding-Agent-横评：Claude-Code-vs-竞品"><a href="#五、Coding-Agent-横评：Claude-Code-vs-竞品" class="headerlink" title="五、Coding Agent 横评：Claude Code vs 竞品"></a>五、Coding Agent 横评：Claude Code vs 竞品</h2><p>2026 年的 Coding Agent 赛道已经相当拥挤。以下是主流工具的维度对比：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Claude Code</th>
+<th>Cursor</th>
+<th>GitHub Copilot</th>
+<th>Windsurf</th>
+<th>OpenAI Codex CLI</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>形态</strong></td>
+<td>终端原生 CLI</td>
+<td>IDE（VS Code fork）</td>
+<td>IDE 插件 + CLI</td>
+<td>IDE（VS Code fork）</td>
+<td>终端原生 CLI</td>
+</tr>
+<tr>
+<td><strong>底层模型</strong></td>
+<td>Claude Opus&#x2F;Sonnet</td>
+<td>多模型可选</td>
+<td>GPT-4o&#x2F;Claude</td>
+<td>多模型可选</td>
+<td>o3&#x2F;o4-mini</td>
+</tr>
+<tr>
+<td><strong>上下文窗口</strong></td>
+<td>200K tokens</td>
+<td>~120K tokens</td>
+<td>~128K tokens</td>
+<td>~120K tokens</td>
+<td>192K tokens</td>
+</tr>
+<tr>
+<td><strong>多文件编辑</strong></td>
+<td>原生支持，TodoWrite 规划</td>
+<td>支持，Composer 模式</td>
+<td>支持，Copilot Edits</td>
+<td>支持，Cascade</td>
+<td>支持，diff 模式</td>
+</tr>
+<tr>
+<td><strong>工具扩展</strong></td>
+<td>MCP + Hooks + Skills</td>
+<td>插件市场</td>
+<td>MCP（预览）</td>
+<td>MCP（有限）</td>
+<td>MCP（有限）</td>
+</tr>
+<tr>
+<td><strong>CI&#x2F;CD 集成</strong></td>
+<td>Headless 模式原生支持</td>
+<td>无</td>
+<td>GitHub Actions</td>
+<td>无</td>
+<td>原生支持</td>
+</tr>
+<tr>
+<td><strong>多 Agent</strong></td>
+<td>SDK 编排 + 子 Agent</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>SDK 编排</td>
+</tr>
+<tr>
+<td><strong>安全模型</strong></td>
+<td>权限分级 + 自动接受</td>
+<td>沙箱</td>
+<td>沙箱</td>
+<td>沙箱</td>
+<td>沙箱 + 审批</td>
+</tr>
+<tr>
+<td><strong>价格</strong></td>
+<td>API 按量计费</td>
+<td>$20&#x2F;月订阅</td>
+<td>$10-39&#x2F;月订阅</td>
+<td>$15&#x2F;月订阅</td>
+<td>API 按量计费</td>
+</tr>
+<tr>
+<td><strong>开源</strong></td>
+<td>CLI 开源</td>
+<td>否</td>
+<td>否</td>
+<td>否</td>
+<td>完全开源</td>
+</tr>
+</tbody></table>
+<h3 id="如何选择？"><a href="#如何选择？" class="headerlink" title="如何选择？"></a>如何选择？</h3><p><strong>选 Claude Code 的理由</strong>：</p>
+<ul>
+<li>你是终端重度用户，不想离开命令行</li>
+<li>你需要 CI&#x2F;CD 集成（自动 PR 审查、代码生成）</li>
+<li>你需要通过 MCP 连接内部系统（数据库、API、文档）</li>
+<li>你需要多 Agent 协作处理大型任务</li>
+<li>你对上下文工程有追求（CLAUDE.md 体系）</li>
+</ul>
+<p><strong>选 Cursor 的理由</strong>：</p>
+<ul>
+<li>你习惯 IDE 操作，不想切换到终端</li>
+<li>你需要多模型切换（GPT-4o、Claude、Gemini）</li>
+<li>你重视可视化 diff 和 inline 补全</li>
+</ul>
+<p><strong>选 GitHub Copilot 的理由</strong>：</p>
+<ul>
+<li>你的团队已经在 GitHub 生态中</li>
+<li>你需要最低的学习成本（IDE 插件，即装即用）</li>
+<li>你主要需要代码补全和 inline suggestion</li>
+</ul>
+<p><strong>选 Codex CLI 的理由</strong>：</p>
+<ul>
+<li>你需要完全开源的解决方案</li>
+<li>你在 OpenAI 生态中，有 API 额度</li>
+<li>你需要沙箱执行（Docker 隔离）</li>
+</ul>
+<p><strong>实际上</strong>，很多开发者是组合使用的。比如用 Cursor 做日常编码（IDE 体验好），用 Claude Code 做复杂重构和 CI&#x2F;CD 集成（终端能力强）。工具不是非此即彼的选择，而是能力互补的组合。</p>
+<hr>
+<h2 id="六、关键技术概念索引"><a href="#六、关键技术概念索引" class="headerlink" title="六、关键技术概念索引"></a>六、关键技术概念索引</h2><p>系列中反复出现的核心概念，在这里做一次集中梳理：</p>
+<h3 id="上下文工程（Context-Engineering）"><a href="#上下文工程（Context-Engineering）" class="headerlink" title="上下文工程（Context Engineering）"></a>上下文工程（Context Engineering）</h3><p>第 4 篇的核心主题。不同于”Prompt Engineering”关注单次对话的提示词，上下文工程关注的是<strong>如何让 AI Agent 持续理解你的项目</strong>。CLAUDE.md 是 Claude Code 的上下文工程载体——它不是一次性配置，而是随着项目演进不断维护的”项目记忆”。</p>
+<p><strong>核心原则</strong>：</p>
+<ul>
+<li><strong>分层管理</strong>：全局 → 项目 → 目录，不同粒度的上下文</li>
+<li><strong>渐进式加载</strong>：只在需要时注入相关上下文，而不是一次性灌入所有信息</li>
+<li><strong>可维护性</strong>：CLAUDE.md 是代码的一部分，需要和代码一起演进</li>
+</ul>
+<h3 id="权限模型（Permission-Model）"><a href="#权限模型（Permission-Model）" class="headerlink" title="权限模型（Permission Model）"></a>权限模型（Permission Model）</h3><p>贯穿整个系列的安全设计。Claude Code 的权限分为三级：</p>
+<ul>
+<li><strong>自动接受</strong>：读取文件、搜索代码等无副作用操作</li>
+<li><strong>需要确认</strong>：写入文件、执行命令等有副作用操作</li>
+<li><strong>拒绝</strong>：删除系统文件、修改配置等危险操作</li>
+</ul>
+<p>第 6 篇的 Hooks 机制让你可以在权限检查点插入自定义逻辑——比如”修改 <code>src/main/java</code> 下的文件前先跑一次 lint”。</p>
+<h3 id="工具扩展（Tool-Extension）"><a href="#工具扩展（Tool-Extension）" class="headerlink" title="工具扩展（Tool Extension）"></a>工具扩展（Tool Extension）</h3><p>第 6 篇详细拆解的三大扩展机制：</p>
+<ul>
+<li><strong>Hooks</strong>：生命周期钩子，在特定事件（如 PreToolUse、PostToolUse）触发自定义脚本</li>
+<li><strong>MCP</strong>：Model Context Protocol，标准化的工具接入协议，让 Claude Code 能调用外部 API、数据库、文档系统</li>
+<li><strong>Skills</strong>：自定义指令模板，把常用的工作流封装成可复用的技能</li>
+</ul>
+<p>这三者的关系：Hooks 控制”什么时候做”，MCP 定义”能做什么”，Skills 描述”怎么做”。</p>
+<h3 id="无头模式（Headless-Mode）"><a href="#无头模式（Headless-Mode）" class="headerlink" title="无头模式（Headless Mode）"></a>无头模式（Headless Mode）</h3><p>第 7 篇的核心主题。<code>claude -p &quot;your prompt&quot;</code> 让 Claude Code 脱离交互式终端，成为可编程的构建块。这是 CI&#x2F;CD 集成的基础——GitHub Actions 中的一行命令，就能让 AI 审查每一个 PR。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>--output-format json</code>：结构化输出，便于程序解析</li>
+<li><code>--allowedTools</code>：限制可用工具，提高安全性</li>
+<li><code>--model</code>：指定模型，平衡成本和质量</li>
+</ul>
+<hr>
+<h2 id="七、从-Claude-Code-到-AI-原生开发环境"><a href="#七、从-Claude-Code-到-AI-原生开发环境" class="headerlink" title="七、从 Claude Code 到 AI 原生开发环境"></a>七、从 Claude Code 到 AI 原生开发环境</h2><p>Claude Code 代表的是一个更大的趋势：**开发环境正在从”人用工具”变成”人机协作系统”**。</p>
+<h3 id="第一阶段：代码补全（2021-2023）"><a href="#第一阶段：代码补全（2021-2023）" class="headerlink" title="第一阶段：代码补全（2021-2023）"></a>第一阶段：代码补全（2021-2023）</h3><p>GitHub Copilot 开创的时代。AI 看着你写代码，实时给出建议。本质上是一个更智能的自动补全——你仍然是主导者，AI 是辅助者。</p>
+<h3 id="第二阶段：对话式编程（2024-2025）"><a href="#第二阶段：对话式编程（2024-2025）" class="headerlink" title="第二阶段：对话式编程（2024-2025）"></a>第二阶段：对话式编程（2024-2025）</h3><p>Cursor、Claude Code 的早期形态。你用自然语言描述需求，AI 生成代码。从”AI 辅助你写”变成”你指导 AI 写”。主导权开始转移。</p>
+<h3 id="第三阶段：Agent-自主编程（2025-2026）"><a href="#第三阶段：Agent-自主编程（2025-2026）" class="headerlink" title="第三阶段：Agent 自主编程（2025-2026）"></a>第三阶段：Agent 自主编程（2025-2026）</h3><p>Claude Code 的 Headless 模式、多 Agent 协作。AI 不仅写代码，还自己跑测试、自己修 Bug、自己提交 PR。你从”指导者”变成”审查者”。</p>
+<h3 id="第四阶段：AI-原生开发环境（2026-）"><a href="#第四阶段：AI-原生开发环境（2026-）" class="headerlink" title="第四阶段：AI 原生开发环境（2026+）"></a>第四阶段：AI 原生开发环境（2026+）</h3><p>这是正在发生的事。开发环境不再是”编辑器 + 终端 + Git”的组合，而是一个以 AI 为核心的协作系统：</p>
+<ul>
+<li><strong>CLAUDE.md</strong> 不是配置文件，而是项目的”可执行文档”</li>
+<li><strong>MCP</strong> 不是工具集成，而是 AI 的”感官系统”</li>
+<li><strong>Hooks</strong> 不是自动化脚本，而是 AI 的”反射弧”</li>
+<li><strong>多 Agent</strong> 不是并行执行，而是 AI 的”团队协作”</li>
+</ul>
+<p>Java 开发者在这个浪潮中有独特的优势：Spring 生态的依赖注入、AOP、事件驱动等设计模式，天然适合构建 Agent 系统。第 8 篇中提到的 Claude Code SDK 编排模式，和 Spring 的 <code>@Async</code> + <code>CompletableFuture</code> 异步编程模型有异曲同工之妙。</p>
+<hr>
+<h2 id="八、系列回顾：每篇文章的一句话总结"><a href="#八、系列回顾：每篇文章的一句话总结" class="headerlink" title="八、系列回顾：每篇文章的一句话总结"></a>八、系列回顾：每篇文章的一句话总结</h2><table>
+<thead>
+<tr>
+<th>#</th>
+<th>文章</th>
+<th>一句话总结</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><a href="/posts/205343cf.html">安装到第一次对话</a></td>
+<td>Claude Code 是一个住在终端的 AI 结对编程伙伴，装好就能用。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="/posts/7c7b64e9.html">日常开发工作流</a></td>
+<td>把 Claude Code 融入 TDD + Git 工作流，让它成为你编码节奏的一部分。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="/posts/a1b4af21.html">内置命令全解</a></td>
+<td>80+ 斜杠命令覆盖会话管理、上下文优化、并行执行全生命周期。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="/posts/2327dd63.html">CLAUDE.md</a></td>
+<td>上下文工程的核心——让 AI 持续理解你的项目，而不是每次从零开始。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="/posts/bc1dcb9c.html">多文件重构</a></td>
+<td>复杂任务的关键是拆解：规划 → 执行 → 验证，增量推进。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="/posts/28571dd7.html">Hooks、MCP 与能力扩展</a></td>
+<td>三大扩展机制让 Claude Code 从”能用”进化到”好用”。</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="/posts/c831542b.html">Headless 模式与 CI&#x2F;CD</a></td>
+<td>无头模式让 AI 融入自动化流水线，PR 审查从此自动化。</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="/posts/38dde7ae.html">多 Agent 协作</a></td>
+<td>单 Agent 有上限，多 Agent 协作是处理复杂工程任务的新范式。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="九、下一步：从-Claude-Code-到更广阔的-AI-Agent-世界"><a href="#九、下一步：从-Claude-Code-到更广阔的-AI-Agent-世界" class="headerlink" title="九、下一步：从 Claude Code 到更广阔的 AI Agent 世界"></a>九、下一步：从 Claude Code 到更广阔的 AI Agent 世界</h2><p>Claude Code 是 Coding Agent 的一个实现。如果你想从”用 Agent 写代码”扩展到”用 Agent 做任何事”，推荐阅读我们的 <strong>AI Agent 系列</strong>：</p>
+<blockquote>
+<p>📚 <a href="/posts/b468c6cc.html">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</a></p>
+</blockquote>
+<p>那个系列从 RAG、Embedding、ReAct 模式讲起，一路覆盖 Spring AI、MCP Server、Memory 系统、结构化输出，最终落脚到生产级 Agent 的构建。和 Claude Code 系列形成互补：</p>
+<table>
+<thead>
+<tr>
+<th>Claude Code 系列</th>
+<th>AI Agent 系列</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>如何<strong>使用</strong> Coding Agent</td>
+<td>如何<strong>构建</strong> AI Agent</td>
+</tr>
+<tr>
+<td>终端原生，面向开发者</td>
+<td>Java&#x2F;Spring 生态，面向架构师</td>
+</tr>
+<tr>
+<td>工具调用是内置的</td>
+<td>工具调用需要自己实现</td>
+</tr>
+<tr>
+<td>上下文靠 CLAUDE.md</td>
+<td>上下文靠 RAG + Memory</td>
+</tr>
+<tr>
+<td>多 Agent 是编排</td>
+<td>多 Agent 是架构</td>
+</tr>
+</tbody></table>
+<p>两条路线结合，你既能高效使用现有的 Coding Agent，也能构建自己的 AI Agent 系统。</p>
+<hr>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>八篇文章，二十多万字，从 <code>npm install</code> 到多 Agent 编排。回头看，Claude Code 最让我印象深刻的不是它的技术能力——而是它对开发者工作方式的改变。</p>
+<p>以前，我们写代码是一个人的战斗。遇到复杂问题，打开 Stack Overflow，复制粘贴，调试，再复制粘贴。现在，你可以和一个理解你项目上下文的 AI 结对编程。它不会疲倦，不会遗漏边界条件，不会忘记上周重构时做的架构决策（只要你把它们写在 CLAUDE.md 里）。</p>
+<p>但它也不是万能的。它会犯错，会生成看似正确但逻辑有缺陷的代码，会在你不注意的时候悄悄改变不该改的文件。这就是为什么这个系列从第一篇就强调”验证”——跑测试、看 diff、review 代码。AI 是你的编程伙伴，不是你的编程替身。</p>
+<p>感谢你读完这个系列。如果其中任何一篇文章帮你节省了哪怕一小时的调试时间，这个系列就值了。</p>
+<p>Happy coding, with your AI partner. 🚀</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"><img class="post-copyright__author_img_front" src="https://upyun.goku.top/white/avatar.JPG" title="头像" alt="头像"></a><div class="post-copyright__author_name">Pei</div><div class="post-copyright__author_desc">花有重开日，人无再少年</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://blog.goku.top/posts/954e9a07.html">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://blog.goku.top/posts/954e9a07.html')">Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://upyun.goku.top/blog/wxpay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/wxpay.jpeg!cover" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://upyun.goku.top/blog/alipay.jpeg!cover" target="_blank"><img class="post-qr-code-img" src="https://upyun.goku.top/blog/alipay.jpeg!cover" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://blog.goku.top/posts/954e9a07.html"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图&amp;url=https://blog.goku.top/posts/954e9a07.html&amp;pic=https://upyun.goku.top/blog/post_banner_10.jpeg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://blog.goku.top" target="_blank">Pei</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/AI-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>AI Agent<span class="tagsPageCount">32</span></a><a class="post-meta__box__tags" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>知识图谱<span class="tagsPageCount">3</span></a><a class="post-meta__box__tags" href="/tags/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>学习路线<span class="tagsPageCount">2</span></a><a class="post-meta__box__tags" href="/tags/Claude-Code/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Claude Code<span class="tagsPageCount">9</span></a><a class="post-meta__box__tags" href="/tags/Coding-Agent/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Coding Agent<span class="tagsPageCount">3</span></a></div></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/posts/38dde7ae.html"><img class="prev-cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="onerror=null;src='https://upyun.goku.top/blog/error.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">多 Agent 协作：从 Claude Code 到 Codex 的全景实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/posts/b468c6cc.html" title="从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线"><img class="cover" src="https://upyun.goku.top/blog/post_banner_9.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-22</div><div class="title">从理论到生产：AI Agent 全景知识图谱与 Java 开发者成长路线</div></div></a></div><div><a href="/posts/205343cf.html" title="Claude Code 是什么？从安装到第一次对话"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-23</div><div class="title">Claude Code 是什么？从安装到第一次对话</div></div></a></div><div><a href="/posts/38dde7ae.html" title="多 Agent 协作：从 Claude Code 到 Codex 的全景实战"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-25</div><div class="title">多 Agent 协作：从 Claude Code 到 Codex 的全景实战</div></div></a></div><div><a href="/posts/2327dd63.html" title="CLAUDE.md：项目上下文工程的艺术"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-23</div><div class="title">CLAUDE.md：项目上下文工程的艺术</div></div></a></div><div><a href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"><img class="cover" src="https://upyun.goku.top/blog/post_banner_4.jpeg?_r_=15911464-b6cf-89a0-31a0-ccfdc065b361" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-24</div><div class="title">Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台</div></div></a></div><div><a href="/posts/a1b4af21.html" title="内置命令全解：从 &#x2F;compact 到 &#x2F;doctor 的实战指南"><img class="cover" src="https://upyun.goku.top/blog/post_banner_10.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2026-06-23</div><div class="title">内置命令全解：从 &#x2F;compact 到 &#x2F;doctor 的实战指南</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="anzhiyufont anzhiyu-icon-comments"></i><span> 评论</span></div><div class="comment-randomInfo"><a onclick="anzhiyu.addRandomCommentInfo()" href="javascript:void(0)">匿名评论</a><a href="/privacy" style="margin-left: 4px">隐私政策</a></div><div class="comment-tips" id="comment-tips"><span>✅ 你无需删除空行，直接评论以获取最佳展示效果</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div><div class="comment-barrage"></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src="https://upyun.goku.top/white/avatar.JPG" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="avatar"/><div class="author-status"><img class="g-status" src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description"><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);"><b style="color:#fff;font-size:25px">感谢</b>你能在茫茫互联网中访问到小小的本站，希望你可以在本站有所收获，enjoy😊!本站域名<b style="color:#fff">goku.top</b>取自我最喜爱的动漫七龙珠中的人物<b style="color:#fff">狗空(孙悟空)</b>的英文名<b style="color:#fff">goku</b>。</div></div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">Pei</h1><div class="author-info__desc">花有重开日，人无再少年</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/sgr997" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/49499302" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0"><span class="toc-number">1.</span> <span class="toc-text">系列文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%B8%80%E7%AF%87%E5%85%A8%E6%99%AF%E6%80%BB%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">一、为什么需要一篇全景总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%9F%A5%E8%AF%86%E6%9E%B6%E6%9E%84%E5%85%A8%E6%99%AF%E5%9B%BE"><span class="toc-number">3.</span> <span class="toc-text">二、知识架构全景图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E8%A7%84%E5%88%92"><span class="toc-number">4.</span> <span class="toc-text">三、学习路线规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%BA%BF-A%EF%BC%9A%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8B%EF%BC%882-%E5%A4%A9%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">路线 A：快速上手（2 天）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%BA%BF-B%EF%BC%9A%E6%B7%B1%E5%BA%A6%E6%8E%8C%E6%8F%A1%EF%BC%881-%E5%91%A8%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">路线 B：深度掌握（1 周）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%BA%BF-C%EF%BC%9A%E5%B9%B3%E5%8F%B0%E5%8C%96%E8%BF%90%E8%90%A5%EF%BC%882-%E5%91%A8%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">路线 C：平台化运营（2 周）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E9%80%9F%E6%9F%A5%E8%A1%A8"><span class="toc-number">5.</span> <span class="toc-text">四、核心概念速查表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81Coding-Agent-%E6%A8%AA%E8%AF%84%EF%BC%9AClaude-Code-vs-%E7%AB%9E%E5%93%81"><span class="toc-number">6.</span> <span class="toc-text">五、Coding Agent 横评：Claude Code vs 竞品</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%89%E6%8B%A9%EF%BC%9F"><span class="toc-number">6.1.</span> <span class="toc-text">如何选择？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E6%A6%82%E5%BF%B5%E7%B4%A2%E5%BC%95"><span class="toc-number">7.</span> <span class="toc-text">六、关键技术概念索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%B7%A5%E7%A8%8B%EF%BC%88Context-Engineering%EF%BC%89"><span class="toc-number">7.1.</span> <span class="toc-text">上下文工程（Context Engineering）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E6%A8%A1%E5%9E%8B%EF%BC%88Permission-Model%EF%BC%89"><span class="toc-number">7.2.</span> <span class="toc-text">权限模型（Permission Model）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E6%89%A9%E5%B1%95%EF%BC%88Tool-Extension%EF%BC%89"><span class="toc-number">7.3.</span> <span class="toc-text">工具扩展（Tool Extension）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%A4%B4%E6%A8%A1%E5%BC%8F%EF%BC%88Headless-Mode%EF%BC%89"><span class="toc-number">7.4.</span> <span class="toc-text">无头模式（Headless Mode）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E4%BB%8E-Claude-Code-%E5%88%B0-AI-%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">8.</span> <span class="toc-text">七、从 Claude Code 到 AI 原生开发环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%EF%BC%882021-2023%EF%BC%89"><span class="toc-number">8.1.</span> <span class="toc-text">第一阶段：代码补全（2021-2023）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%AF%B9%E8%AF%9D%E5%BC%8F%E7%BC%96%E7%A8%8B%EF%BC%882024-2025%EF%BC%89"><span class="toc-number">8.2.</span> <span class="toc-text">第二阶段：对话式编程（2024-2025）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9AAgent-%E8%87%AA%E4%B8%BB%E7%BC%96%E7%A8%8B%EF%BC%882025-2026%EF%BC%89"><span class="toc-number">8.3.</span> <span class="toc-text">第三阶段：Agent 自主编程（2025-2026）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%98%B6%E6%AE%B5%EF%BC%9AAI-%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%882026-%EF%BC%89"><span class="toc-number">8.4.</span> <span class="toc-text">第四阶段：AI 原生开发环境（2026+）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E7%B3%BB%E5%88%97%E5%9B%9E%E9%A1%BE%EF%BC%9A%E6%AF%8F%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93"><span class="toc-number">9.</span> <span class="toc-text">八、系列回顾：每篇文章的一句话总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E4%B8%8B%E4%B8%80%E6%AD%A5%EF%BC%9A%E4%BB%8E-Claude-Code-%E5%88%B0%E6%9B%B4%E5%B9%BF%E9%98%94%E7%9A%84-AI-Agent-%E4%B8%96%E7%95%8C"><span class="toc-number">10.</span> <span class="toc-text">九、下一步：从 Claude Code 到更广阔的 AI Agent 世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">11.</span> <span class="toc-text">写在最后</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/954e9a07.html" title="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图"/></a><div class="content"><a class="title" href="/posts/954e9a07.html" title="Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图">Claude Code 系列全景总结：从入门到多 Agent 协作的知识地图</a><time datetime="2026-06-26T00:00:00.000Z" title="发表于 2026-06-26 08:00:00">2026-06-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/38dde7ae.html" title="多 Agent 协作：从 Claude Code 到 Codex 的全景实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="多 Agent 协作：从 Claude Code 到 Codex 的全景实战"/></a><div class="content"><a class="title" href="/posts/38dde7ae.html" title="多 Agent 协作：从 Claude Code 到 Codex 的全景实战">多 Agent 协作：从 Claude Code 到 Codex 的全景实战</a><time datetime="2026-06-25T00:00:00.000Z" title="发表于 2026-06-25 08:00:00">2026-06-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/c831542b.html" title="Headless 模式与 CI/CD 集成：让 Claude Code 融入自动化流水线"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Headless 模式与 CI/CD 集成：让 Claude Code 融入自动化流水线"/></a><div class="content"><a class="title" href="/posts/c831542b.html" title="Headless 模式与 CI/CD 集成：让 Claude Code 融入自动化流水线">Headless 模式与 CI/CD 集成：让 Claude Code 融入自动化流水线</a><time datetime="2026-06-24T08:00:00.000Z" title="发表于 2026-06-24 16:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"><img src="https://upyun.goku.top/blog/post_banner_4.jpeg?_r_=15911464-b6cf-89a0-31a0-ccfdc065b361" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台"/></a><div class="content"><a class="title" href="/posts/28571dd7.html" title="Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台">Hooks、MCP 与能力扩展：让 Claude Code 成为你的开发平台</a><time datetime="2026-06-24T02:00:00.000Z" title="发表于 2026-06-24 10:00:00">2026-06-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战"><img src="https://upyun.goku.top/blog/post_banner_10.jpeg" onerror="this.onerror=null;this.src='https://upyun.goku.top/blog/error.jpg'" alt="多文件重构与复杂任务实战"/></a><div class="content"><a class="title" href="/posts/bc1dcb9c.html" title="多文件重构与复杂任务实战">多文件重构与复杂任务实战</a><time datetime="2026-06-24T00:00:00.000Z" title="发表于 2026-06-24 08:00:00">2026-06-24</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="footer_deal"><a class="deal_link" href="mailto:1104657149@qq.com" title="email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/sgr997" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><img class="footer_mini_logo" title="返回顶部" alt="返回顶部" onclick="anzhiyu.scrollToDest(0, 500)" src="https://upyun.goku.top/white/avatar.JPG" size="50px"/><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/49499302" title="Bilibili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="deal_link" href="/copyright" title="CC"><i class="anzhiyufont anzhiyu-icon-copyright-line"></i></a></div><div id="workboard"><img class="workSituationImg boardsign" src="https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg" alt="距离月入25k也就还差一个大佬带我~" title="距离月入25k也就还差一个大佬带我~"/><div id="runtimeTextTip"></div></div><div class="footer_custom_text"><div style="display:flex;justify-content:center;"> <span>本网站由</span> <a href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="blank" title="又拍云"> <img height="24px" width="45px" stype="height:24px;display:inline" src="https://static.allasone.cc/source/upyun_logo.png" alt="又拍云"/> </a> <span>提供CDN加速/云存储服务</span> </div></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v5.4.0" title="博客框架为Hexo_v5.4.0"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo_v5.4.0"/></a><a class="github-badge" target="_blank" href="https://blog.anheyu.com/" style="margin-inline:5px" data-title="本站使用AnZhiYu主题" title="本站使用AnZhiYu主题"><img src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg" alt="本站使用AnZhiYu主题"/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title="本站项目由Github托管"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg" alt="本站项目由Github托管"/></a></p></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="Pei" target="_blank">Pei</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="豫ICP备2023023872号">豫ICP备2023023872号</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">134</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">31</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://blog.goku.top/webstack.html" title="网址导航"><img class="back-menu-item-icon" src="https://upyun.goku.top/blog/icon.png!cover" alt="网址导航"/><span class="back-menu-item-text">网址导航</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/comments/"><i class="anzhiyufont anzhiyu-icon-envelope faa-tada" style="font-size: 0.9em;"></i><span> 留言板</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="fa-solid fa-music faa-tada"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于本人</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><svg class="icon faa-tada" aria-hidden="true"><use xlink:href="#icon-lightbulb"></use></svg><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a id="switch-commentBarrage" href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕"><i class="anzhiyufont anzhiyu-icon-danmu"></i></a><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="anzhiyufont anzhiyu-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/instant.page/5.1.0/instantpage.min.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.14/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("12/13/2021 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.12",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 Pei 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("12/13/2021 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg";
+        img.title = "下班了就该开开心心的玩耍，嘿嘿~";
+        img.alt = "下班了就该开开心心的玩耍，嘿嘿~";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaid = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaid.length === 0) return
+  const runMermaid = () => {
+    window.loadMermaid = true
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+    Array.from($mermaid).forEach((item, index) => {
+      const mermaidSrc = item.firstElementChild
+      const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+      const mermaidID = 'mermaid-' + index
+      const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+
+      const renderFn = mermaid.render(mermaidID, mermaidDefinition)
+
+      const renderV10 = () => {
+        renderFn.then(({svg}) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svg)
+        })
+      }
+
+      const renderV9 = svg => {
+        mermaidSrc.insertAdjacentHTML('afterend', svg)
+      }
+
+      typeof renderFn === 'string' ? renderV9(renderFn) : renderV10()
+    })
+  }
+
+  const loadMermaid = () => {
+    window.loadMermaid ? runMermaid() : getScript('https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/mermaid/8.14.0/mermaid.min.js').then(runMermaid)
+  }
+
+  anzhiyu.addGlobalFn('themeChange', runMermaid, 'mermaid')
+
+  window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+})()</script><script>(() => {
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      onCommentLoaded: () => {
+        anzhiyu.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') setTimeout(runFn,0)
+    else getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runFn)
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.goku.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(res => {
+      countELement.textContent = res[0].count
+    }).catch(err => {
+      console.error(err)
+    })
+  }
+
+  const runFn = () => {
+    init();
+    
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) anzhiyu.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else {
+      loadTwikoo()
+    }
+  } else {
+    window.loadOtherComment = loadTwikoo
+  }
+})()</script><input type="hidden" name="page-type" id="page-type" value="post"><script async src="/js/anzhiyu/comment_barrage.js"></script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const getComment = () => {
+    const runTwikoo = () => {
+      twikoo.getRecentComments({
+        envId: 'https://twikoo.goku.top/',
+        region: '',
+        pageSize: 6,
+        includeReply: true
+      }).then(function (res) {
+        const twikooArray = res.map(e => {
+          return {
+            'content': changeContent(e.comment),
+            'avatar': e.avatar,
+            'nick': e.nick,
+            'url': e.url + '#' + e.id,
+            'date': new Date(e.created).toISOString()
+          }
+        })
+
+        saveToLocal.set('twikoo-newest-comments', JSON.stringify(twikooArray), 10/(60*24))
+        generateHtml(twikooArray)
+      }).catch(function (err) {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.textContent= "无法获取评论，请确认相关配置是否正确"
+      })
+    }
+
+    if (typeof twikoo === 'object') {
+      runTwikoo()
+    } else {
+      getScript('https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/twikoo/1.4.18/twikoo.all.min.js').then(runTwikoo)
+    }
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'data-lazy-src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'><div class='name'><span>${array[i].nick} </span></div></a>`
+        }
+        
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}' title='${array[i].content}'>${array[i].content}</a>
+        <time datetime="${array[i].date}">${anzhiyu.diffDate(array[i].date, true)}</time></div>
+        </div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom && ($dom.innerHTML= result)
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('twikoo-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><script>var visitorMail = "visitor@goku.com";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script>let tianliGPT_postSelector = '\#post \#article-container';let tianliGPT_postURL = '\*/posts/\*';let tianliGPT_key = '123';</script><script data-pjax src="/html/js/summ.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","meta[property=\"og:type\"]","meta[property=\"og:site_name\"]","meta[property=\"og:description\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
